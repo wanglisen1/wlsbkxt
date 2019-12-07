@@ -1,0 +1,99 @@
+.big{
+    width: 100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+}
+.center{
+    flex:1;
+    overflow: auto;
+}
+.center::-webkit-scrollbar{
+    width: 0;
+}
+.Bigbox{
+    width: 100%;
+    height: auto;
+    position: relative;
+}
+.top{
+    width: 100%;
+    height: 1rem;
+    display: flex;
+}
+.P_one{
+    flex: 1;
+}
+
+.P_one p{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.27rem;
+    color: #a35a98;
+    font-weight: bold;
+}
+.P_one p img{
+    width:0.6rem;
+    height: auto;
+    padding: 0 0.1rem;
+}
+.P_two{
+    flex: 1;
+}
+.P_two p{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.27rem;
+    color: #bd3462;
+    font-weight: bold;
+}
+.P_two p img{
+    width:0.65rem;
+    height: auto;
+    padding: 0 0.1rem;
+}
+.P_three{
+    width: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.P_three img{
+    width: 0.45rem;
+    height: auto;
+}
+.ding{
+    width: 100%;
+    height: auto;
+    background: #2fa8bd;
+    display: none;
+    position: absolute;
+    top: 1rem;
+    z-index: 999;
+}
+.ding ul{
+    width: 100%;
+    height: auto;
+}
+.ding ul li{
+    padding: 0.2rem 0.15rem;
+    box-sizing: border-box;
+    
+}
+.ding ul li a{
+    font-size: 0.24rem;
+    color: white;
+    font-weight: bold;
+}
+.swiper-container{
+    width: 100%;
+}
+.swiper-container img{
+    width: 100%;
+}

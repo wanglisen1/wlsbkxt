@@ -1013,14 +1013,14 @@ class AdminController extends Controller
             header('Location: /flogin.php');exit;
         }
         $file=$request->file('file')->store('file');
-        $pdf="/hswd/bkxt/storage/app/".$file;
-        $path="/hswd/bkxt/public/tp/images/";
+        $pdf="/home/wwwroot/bkxt/storage/app/".$file;
+        $path="/home/wwwroot/bkxt/public/tp/images/";
         $fileone = realpath($pdf);
         if (!is_readable($fileone)) {
             echo 'file not readable';
         }
         $im = new Imagick();
-        $im->setResolution(160, 160); //设置分辨率 值越大分辨率越高
+        $im->setResolution(100, 100); //设置分辨率 值越大分辨率越高
         $im->setCompressionQuality(100);
         $im->readImage($pdf);
         foreach ($im as $k => $v) {
@@ -1061,14 +1061,14 @@ class AdminController extends Controller
 					         }
 	     $file=$request->file('file')->store('file');
 	     //print_r($file);exit;
-	             $pdf="/hswd/bkxt/storage/app/".$file;
-		     $path="/hswd/bkxt/public/tp/teacher/";
+	             $pdf="/home/wwwroot/bkxt/storage/app/".$file;
+		     $path="/home/wwwroot/bkxt/public/tp/teacher/";
 		     $fileone = realpath($pdf);
 		             if (!is_readable($fileone)) {
 				                 echo 'file not readable';
 						         }
 		             $im = new Imagick();
-		             $im->setResolution(140, 140); //设置分辨率 值越大分辨率越高
+		             $im->setResolution(100, 100); //设置分辨率 值越大分辨率越高
 			     $im->setCompressionQuality(100);
 			     $im->readImage($pdf);
 			     foreach ($im as $k => $v) {
@@ -1095,14 +1095,14 @@ class AdminController extends Controller
 							                               header('Location: /flogin.php');exit;
 										                                                        }
                  $file=$request->file('file')->store('file');
-				                     $pdf="/hswd/bkxt/storage/app/".$file;
-				                     $path="/hswd/bkxt/public/tp/work/";
+				                     $pdf="/home/wwwroot/bkxt/storage/app/".$file;
+				                     $path="/home/wwwroot/bkxt/public/tp/work/";
 						                          $fileone = realpath($pdf);
 						                                  if (!is_readable($fileone)) {
 											                                                   echo 'file not readable';
 																	                                                            }
 						                                  $im = new Imagick();
-						                                  $im->setResolution(160, 160); 
+						                                  $im->setResolution(120, 120); 
 										                               $im->setCompressionQuality(100);
 										                               $im->readImage($pdf);
 													                                    foreach ($im as $k => $v) {

@@ -1458,9 +1458,9 @@ class AdminController extends Controller
  			  exit;															                                                                                }
 		 $id=$request->input('id');
 		  $cha_name=$request->input('cha_name');
-		               $season=$request->input('season');
-		               $sub_name=$request->input('sub_name');
-			                     $grade=$request->input('grade');
+		  $season=$request->input('season');
+		  $sub_name=$request->input('sub_name');
+		  $grade=$request->input('grade');
 		 $res=ChapterModel::where('cha_id',$id)->first();
 		 $list=[
 			 'data' => $res,
@@ -1578,7 +1578,7 @@ class AdminController extends Controller
    	return view('admin.videolist',$list);
    }
    public function pptlist(){
-	   $res=PptModel::get();
+	   $res=PptModel::groupBy('ppt_sub')->get();
              $count=count($res);
 	           $list=[
                   'data' => $res,

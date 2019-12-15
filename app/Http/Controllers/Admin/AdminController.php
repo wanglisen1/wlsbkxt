@@ -1599,9 +1599,12 @@ class AdminController extends Controller
    }
    public function pptlistbox(Request $request){
 	              $ppt_id=$request->input('ppt_id');
+                  $id=$request->input('id');
 		                 $res = PptModel::where('ppt_id',$ppt_id)->first();
+                         $res1 =ChapterModel::where('cha_id',$id)->first();
 		                 $list = [
-			                 'data' => $res
+			                 'data' => $res,
+                             'id' => $id
 			            ];
 				         return view('admin.pptlistbox',$list);
 				    }

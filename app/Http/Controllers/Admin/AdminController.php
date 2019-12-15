@@ -1378,7 +1378,8 @@ class AdminController extends Controller
 		  'cha_name'=>$cha_name,
 		  'season'=>$season,
 		  'grade'=>$grade,
-          'ppt' => $res['ppt']
+          'ppt' => $res['ppt'],
+          'video' => $res['video']
 	   ];
 	       return view('admin.chapter.picture',$list);
      }
@@ -1412,6 +1413,7 @@ class AdminController extends Controller
 			   'cha_name'=>$cha_name,
 			   'season' => $season,
                'ppt' => $res['ppt'],
+               'video' => $res['video'],
 			   'grade' => $grade
 	                       ];
 	                    return view('admin.chapter.picturejs',$list);
@@ -1446,6 +1448,7 @@ class AdminController extends Controller
 							 'cha_name' =>$cha_name,
 							  'season' =>$season,
                               'ppt' => $res['ppt'],
+                              'video' => $res['video'],
 							 'grade' =>$grade,
                             ];
 							 return view('admin.chapter.picturelx',$list);
@@ -1599,13 +1602,9 @@ class AdminController extends Controller
    }
    public function pptlistbox(Request $request){
 	              $ppt_id=$request->input('ppt_id');
-                  $id=$request->input('id');
 		                 $res = PptModel::where('ppt_id',$ppt_id)->first();
-                         $res1 =ChapterModel::where('cha_id',$id)->first();
 		                 $list = [
 			                 'data' => $res,
-                             'id' => $id,
-                             'ppt' => $res1['ppt']
 			            ];
 				         return view('admin.pptlistbox',$list);
 				    }

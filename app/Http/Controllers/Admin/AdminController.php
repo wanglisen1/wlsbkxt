@@ -1574,7 +1574,7 @@ class AdminController extends Controller
 	  
    }
    public function videolist(){
-	   $res=VideoModel::get();
+       $res = VideoModel::orderByRaw('convert(video_sub using gbk)')->get();
 	   $count=count($res);
 	$list=[
 		'data' => $res,
@@ -1583,7 +1583,7 @@ class AdminController extends Controller
    	return view('admin.videolist',$list);
    }
    public function pptlist(){
-	   $res=PptModel::groupBy('ppt_sub')->get();
+       $res = PptModel::orderByRaw('convert(ppt_sub using gbk)')->get();
              $count=count($res);
 	           $list=[
                   'data' => $res,

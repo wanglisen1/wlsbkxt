@@ -1361,7 +1361,6 @@ class AdminController extends Controller
 	      $grade=$request->input('grade');
 	  //$id="2";
 	      $res=ChapterModel::where('cha_id',$id)->first();
-	      
 	  $tp=$res['field_pdf'];
 	  $array=explode(",", $tp);
 	  $str="";
@@ -1378,7 +1377,8 @@ class AdminController extends Controller
 		  'sub_name'=>$res['sub_name'],
 		  'cha_name'=>$cha_name,
 		  'season'=>$season,
-		  'grade'=>$grade
+		  'grade'=>$grade,
+          'ppt' => $res['ppt']
 	   ];
 	       return view('admin.chapter.picture',$list);
      }
@@ -1411,6 +1411,7 @@ class AdminController extends Controller
 			   'sub_name'=>$res['sub_name'],
 			   'cha_name'=>$cha_name,
 			   'season' => $season,
+               'ppt' => $res['ppt'],
 			   'grade' => $grade
 	                       ];
 	                    return view('admin.chapter.picturejs',$list);
@@ -1430,24 +1431,25 @@ class AdminController extends Controller
 			                   $res=ChapterModel::where('cha_id',$id)->first();
 			                     $tp=$res['field_pdflx'];
 			                     $array=explode(",", $tp);
-					                             $str="";
-					                             foreach($array as $k=>$v){
-									                              $str.=strrchr($v,'/');
-												                                   }
-								                              $str1=substr($str,1);
-								                              $arr=explode('/',$str1);
-											                               $count=count($arr);
-											                              $list=[
-															                                 'data' => $arr,
-																			                            'count'=>$count,
-																						                               'id'=>$id,
-																									       'sub_name'=>$res['sub_name'],
-																									       'cha_name' =>$cha_name,
-																									       'season' =>$season,
-																									       'grade' =>$grade
-																													                                 ];
-											                                  return view('admin.chapter.picturelx',$list);
-											                                         }
+					            $str="";
+					           foreach($array as $k=>$v){
+							     $str.=strrchr($v,'/');
+								   }
+								 $str1=substr($str,1);
+								$arr=explode('/',$str1);
+								$count=count($arr);
+								$list=[
+								'data' => $arr,
+								 'count'=>$count,
+								'id'=>$id,
+				               'sub_name'=>$res['sub_name'],
+							 'cha_name' =>$cha_name,
+							  'season' =>$season,
+                              'ppt' => $res['ppt'],
+							 'grade' =>$grade,
+                            ];
+							 return view('admin.chapter.picturelx',$list);
+	        }
 
    
 

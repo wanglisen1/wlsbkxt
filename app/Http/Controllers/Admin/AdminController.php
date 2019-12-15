@@ -1604,7 +1604,8 @@ class AdminController extends Controller
                          $res1 =ChapterModel::where('cha_id',$id)->first();
 		                 $list = [
 			                 'data' => $res,
-                             'id' => $id
+                             'id' => $id,
+                             'ppt' => $res1['ppt']
 			            ];
 				         return view('admin.pptlistbox',$list);
 				    }

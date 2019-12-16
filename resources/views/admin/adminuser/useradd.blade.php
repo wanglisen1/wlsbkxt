@@ -50,29 +50,21 @@
     <select name="role" id="role" lay-verify="">
         <option value="">请赋予一个角色</option>
         @if($role==1)
-        <option value="2">管理员</option>
-        <option value="3">加盟校长</option>
-        <option value="4">语文教师</option>
-        <option value="5">数学教师</option>
-        <option value="6">英语教师</option>
-        @elseif($role==2)
-            <option value="3">加盟校长</option>
-            <option value="4">语文教师</option>
-            <option value="5">数学教师</option>
-            <option value="6">英语教师</option>
+        <option value="2">总部教研</option>
+        <option value="3">投资人</option>
+        <option value="4">校长</option>
+        <option value="5">教学主管</option>
+        <option value="6">语文教师</option>
+        <option value="7">数学教师</option>
+        <option value="8">英语教师</option>
         @elseif($role==3)
-            @if($countyw<3)
-            <option value="4">语文教师</option>
-            @else
-            @endif
-                @if($countsx<3)
-            <option value="5">数学教师</option>
-                @else
-                @endif
-                @if($countyy<3)
-            <option value="6">英语教师</option>
-                @else
-                @endif
+            <option value="4">加盟校长</option>
+            <option value="5">教学主管</option>
+            <option value="6">语文教师</option>
+            <option value="7">数学教师</option>
+            <option value="8">英语教师</option>
+        @else
+           
         @endif
     </select>
 </div></br></br></br></br>

@@ -181,19 +181,12 @@ class AdminController extends Controller
             header('Location: /flogin.php');exit;
         }
         $value = $_SESSION["uid"];
-        $data=AdminuserModel::where('u_id',$value)->first()->toArray();
-        $yw=AdminuserModel::where('alliance',$value)->where('is_del',1)->where('role',4)->get();
-        $sx=AdminuserModel::where('alliance',$value)->where('is_del',1)->where('role',5)->get();
-        $yy=AdminuserModel::where('alliance',$value)->where('is_del',1)->where('role',6)->get();
-        $countyw=count($yw);
-        $countsx=count($sx);
-        $countyy=count($yy);
+        $data=AdminuserModel::where('u_id',$value)->first();
         $role=$data['role'];
+        $xz = AdminuserModel::where('u_id',$value)->where('role',3)->get();
+        //print_r($xz);exit;
         $list=[
             'role' => $role,
-            'countyw'=>$countyw,
-            'countsx'=>$countsx,
-            'countyy'=>$countyy
         ];
         return view('admin.adminuser.useradd',$list);
     }
@@ -1604,7 +1597,7 @@ class AdminController extends Controller
 	              $ppt_id=$request->input('ppt_id');
 		                 $res = PptModel::where('ppt_id',$ppt_id)->first();
 		                 $list = [
-			                 'data' => $res,
+			                 'data' => $res
 			            ];
 				         return view('admin.pptlistbox',$list);
 				    }

@@ -40,46 +40,23 @@
     <select name="role" id="role" lay-verify="" style="width:300px;margin-left:600px;margin-top:-40px;">
         @if($data['role']==1)
         <option value="1" selected = "selected">总管理员</option>
-        <option value="2" >管理员</option>
-        <option value="3">加盟校长</option>
-        <option value="4">语文教师</option>
-            <option value="5">数学教师</option>
-            <option value="6">英语教师</option>
-        @elseif($data['role']==2)
-            <option value="1" >总管理员</option>
-            <option value="2" selected = "selected">管理员</option>
-            <option value="3">加盟校长</option>
-            <option value="4">教师</option>
-            <option value="5">数学教师</option>
-            <option value="6">英语教师</option>
+        <option value="26" >总部教研(语文)</option>
+        <option value="27" >总部教研(数学)</option>
+        <option value="28" >总部教研(英语)</option>
+        <option value="3">投资人</option>
+        <option value="4">校长</option>
+            <option value="5">主管</option>
+            <option value="6">语文教师</option>
+            <option value="7">数学教师</option>
+            <option value="8">英语教师</option>
         @elseif($data['role']==3)
-            <option value="1" >总管理员</option>
-            <option value="2" >管理员</option>
-            <option value="3" selected = "selected">加盟校长</option>
-            <option value="4">教师</option>
-            <option value="5">数学教师</option>
+            <option value="4">校长</option>
+            <option value="5">主管</option>
+            <option value="6">语文教师</option>
+            <option value="6">数学教师</option>
             <option value="6">英语教师</option>
-        @elseif($data['role']==4)
-            <option value="1" >总管理员</option>
-            <option value="2" >管理员</option>
-            <option value="3" >加盟校长</option>
-            <option value="4" selected = "selected">语文教师</option>
-            <option value="5">数学教师</option>
-            <option value="6">英语教师</option>
-        @elseif($data['role']==5)
-            <option value="1" >总管理员</option>
-            <option value="2" >管理员</option>
-            <option value="3" >加盟校长</option>
-            <option value="4">语文教师</option>
-            <option value="5" selected = "selected">数学教师</option>
-            <option value="6">英语教师</option>
-        @elseif($data['role']==6)
-            <option value="1" >总管理员</option>
-            <option value="2" >管理员</option>
-            <option value="3" >加盟校长</option>
-            <option value="4">语文教师</option>
-            <option value="5">数学教师</option>
-            <option value="6"  selected = "selected">英语教师</option>
+        @else
+
         @endif
     </select>
 </div></br></br></br></br>

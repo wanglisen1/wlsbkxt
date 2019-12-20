@@ -12,6 +12,7 @@ use App\Model\ChapterModel;
 use App\Model\CollectModel;
 use App\Model\VideoModel;
 use App\Model\PptModel;
+use App\Model\ChaseaModel;
 use Imagick;
 class AdminController extends Controller
 {
@@ -183,10 +184,28 @@ class AdminController extends Controller
         $value = $_SESSION["uid"];
         $data=AdminuserModel::where('u_id',$value)->first();
         $role=$data['role'];
-        $xz = AdminuserModel::where('u_id',$value)->where('role',3)->get();
-        //print_r($xz);exit;
+        $xz = AdminuserModel::where('alliance',$value)->where('role',4)->get();
+        $countxz = count($xz);
+        $zg = AdminuserModel::where('alliance',$value)->where('role',5)->get();
+        $countzg = count($zg);
+        $ywjs = AdminuserModel::where('alliance',$value)->where('role',6)->get();
+        $sxjs = AdminuserModel::where('alliance',$value)->where('role',7)->get();
+        $yyjs = AdminuserModel::where('alliance',$value)->where('role',8)->get();
+        $countywjs = count($ywjs);
+        $countsxjs = count($sxjs);
+        $countyyjs = count($yyjs);
+        $countjs = $countywjs+$countsxjs+$countyyjs;
+        $addjs = $data['addjs'];
+        $addxz = $data['addxz'];
+        $addzg = $data['addzg'];
         $list=[
             'role' => $role,
+            'countxz' => $countxz,
+            'countjs' => $countjs,
+            'countzg' => $countzg,
+            'addjs' => $addjs,
+            'addxz' => $addxz,
+            'addzg' => $addzg
         ];
         return view('admin.adminuser.useradd',$list);
     }
@@ -203,6 +222,21 @@ class AdminController extends Controller
             $sex = $request->input('sex');
             $password = $request->input('password');
             $role = $request->input('role');
+            if($role==3){
+                $data = [
+                'tel' => $tel,
+                'password' => $password,
+                'username' => $username,
+                'email' => $email,
+                'sex' => $sex,
+                'role' => $role,
+                'addtime' => date("Y-m-d H:i:s"),
+                'alliance' => $_SESSION["uid"],
+                'addjs' => '10',
+                'addxz' => '1',
+                'addzg' =>  '3'
+            ];
+            }else{
             $data = [
                 'tel' => $tel,
                 'password' => $password,
@@ -210,9 +244,10 @@ class AdminController extends Controller
                 'email' => $email,
                 'sex' => $sex,
                 'role' => $role,
-                'addtime' => date('Y-m-d'),
+                'addtime' => date("Y-m-d H:i:s"),
                 'alliance' => $_SESSION["uid"]
             ];
+        }
             $res = AdminuserModel::insert($data);
             if ($res) {
                 return ['code' => 1, 'msg' => '添加成功'];
@@ -227,15 +262,13 @@ class AdminController extends Controller
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
         }
-        $data=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
+        $data=AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role=$data['role'];
 
         if($role===1){
             $res = AdminuserModel::where('is_del',1)->paginate(30);
-        }else if($role===2){
-            $res = AdminuserModel::where('is_del',1)->whereIn('role',['3','4','5','6'])->paginate(30);
         }else if($role===3){
-            $res = AdminuserModel::where('is_del',1)->where('alliance',$_SESSION["uid"])->whereIn('role',['4','5','6'])->paginate(30);
+            $res = AdminuserModel::where('is_del',1)->where('alliance',$_SESSION["uid"])->whereIn('role',['4','5','6','7','8'])->paginate(30);
         }else{
             $res = NULL;
         }
@@ -246,6 +279,21 @@ class AdminController extends Controller
             'count' => $count
         ];
         return view('admin.adminuser.userlist',$list);
+    }
+
+    //投资人展示页面
+    public function usertzrlist(){
+             session_start();
+        if(empty($_SESSION["uid"])){
+            header('Location: /flogin.php');exit;
+        }
+        $res = AdminuserModel::where('is_del',1)->where('role',3)->paginate(30);
+        $count=count($res);
+        $list = [
+            'count' => $count,
+            'data' => $res
+        ];
+        return view('admin.adminuser.usertzrlist',$list);
     }
 
     //管理员修改页面
@@ -292,8 +340,19 @@ class AdminController extends Controller
         $uid=$request->input();
         $id=$uid['u_id'];
         $res=AdminuserModel::where('u_id',$id)->update(['is_del'=>2]);
+        $res2 = AdminuserModel::where('alliance',$id)->get();
         if ($res) {
-            return ['code' => 1, 'msg' => '删除成功'];
+            if(empty($res2)){
+                return ['code' => 1, 'msg' => '删除成功'];
+            }else{
+                 $res1=AdminuserModel::where('alliance',$id)->update(['is_del'=>2]);
+                 if($res1){
+                    return ['code' => 1, 'msg' => '删除成功'];
+                }else{
+                    return ['code' => 0, 'msg' => '删除失败'];
+                }
+            }
+          
         } else {
             return ['code' => 0, 'msg' => '删除失败'];
         }
@@ -331,7 +390,59 @@ class AdminController extends Controller
         }
 
     }
+    //课节发放展示
+    public function chapterseason(){
+        session_start();
+        if(empty($_SESSION["uid"])){
+            header('Location: /flogin.php');exit;
+        }
+        $res = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+        $role = $res['role'];
+        if($role==1){
+            $res1 = ChaseaModel::get();
+        }else if($role==26){
+            $res1 = ChaseaModel::where('chasea_sub',"趣味大语文")->get();
+        }else if($role==27){
+            $res1 = ChaseaModel::where('chasea_sub',"思维培优数学")->get();
+        }
 
+        // $ywsanchun = ChapterModel::where('sub_name',"趣味大语文")->where('grade',"三年级")->where('season',"春")->get();
+        $list = [
+            'role' => $role,
+            'data' => $res1
+        ];
+        return view('admin.chapterseason',$list);
+
+    }
+
+    //课节发放修改
+    public function chapterseasonupd(Request $request){
+            $chasea_id=$request->input('chasea_id');
+            $data = ChaseaModel::where('chasea_id',$chasea_id)->first();
+            if($data['is_show']==1){
+            $res = ChaseaModel::where('chasea_id',$chasea_id)->update(['is_show' => 2]);
+            }else{
+                $res = ChaseaModel::where('chasea_id',$chasea_id)->update(['is_show' => 1]);
+            }
+            $chasea_sub = $data['chasea_sub'];
+            $chasea_season = $data['chasea_season'];
+            if($data['is_show']==1){
+            $res1 = ChapterModel::where('sub_name',$chasea_sub)->where('season',$chasea_season)->update(['is_del'=>2]);
+            }else{
+                $res1 = ChapterModel::where('sub_name',$chasea_sub)->where('season',$chasea_season)->update(['is_del'=>1]);
+            }
+             if ($res) {
+                if($res1){
+                     return ['code' => 1, 'msg' => '修改成功'];
+                }else{
+                    return ['code' => 2, 'msg' => '开放失败,请重新点击2'];
+                }
+              } else {
+                return ['code' => 0, 'msg' => '开放失败,请重新点击1'];
+             }
+        }
+                
+                 
     //清除session
     public function sessiondel(Request $request){
         $qh= $request->input('qh');
@@ -1083,39 +1194,38 @@ class AdminController extends Controller
 
      }
 	public function workbookadd(Request $request){
-		                session_start();
-				                     if(empty($_SESSION["uid"])){
-							                               header('Location: /flogin.php');exit;
-										                                                        }
-                 $file=$request->file('file')->store('file');
-				                     $pdf="/home/wwwroot/bkxt/storage/app/".$file;
-				                     $path="/home/wwwroot/bkxt/public/tp/work/";
-						                          $fileone = realpath($pdf);
-						                                  if (!is_readable($fileone)) {
-											                                                   echo 'file not readable';
-																	                                                            }
-						                                  $im = new Imagick();
-						                                  $im->setResolution(120, 120); 
-										                               $im->setCompressionQuality(100);
-										                               $im->readImage($pdf);
-													                                    foreach ($im as $k => $v) {
-																		                                    $v->setImageFormat('png');
-																						                                    $fileName = $path . md5($k . time()) . '.png';
-																						                                    if ($v->writeImage($fileName) == true) {
-																											                                    $return[] = $fileName;
-																															                                    }
-																										                                 }
-													                                     $str=implode(',',$return);
-													                                    $id=$request->input('ycid');
-													                                    $res=ChapterModel::where('cha_id',$id)->update(['field_pdflx'=>$str]);
+		  session_start();
+				if(empty($_SESSION["uid"])){
+			     header('Location: /flogin.php');exit;
+			             }
+    $file=$request->file('file')->store('file');
+	$pdf="/home/wwwroot/bkxt/storage/app/".$file;
+	$path="/home/wwwroot/bkxt/public/tp/work/";
+	$fileone = realpath($pdf);
+	if (!is_readable($fileone)) {
+					 echo 'file not readable';
+	         }
+		 $im = new Imagick();
+		 $im->setResolution(120, 120); 
+		$im->setCompressionQuality(100);
+		$im->readImage($pdf);
+		foreach ($im as $k => $v) {
+			$v->setImageFormat('png');
+		  $fileName = $path . md5($k . time()) . '.png';
+		  if ($v->writeImage($fileName) == true) {
+	    $return[] = $fileName;
+	      }
+	     }
+	    $str=implode(',',$return);
+      $id=$request->input('ycid');
+	  $res=ChapterModel::where('cha_id',$id)->update(['field_pdflx'=>$str]);
+             if ($res) {
+		    echo"<script>alert('添加成功！');history.go(-2);</script>";
+	        }else{
+            echo"<script>alert('添加失败！');history.go(-1);</script>";
+	        }
 
-																	                                 if ($res) {
-																						                                        echo"<script>alert('添加成功！');history.go(-2);</script>";
-																											                             }else{
-																															                                            echo"<script>alert('添加失败！');history.go(-1);</script>";
-																																				                                    }
-
-																	         }
+	       }
     //教师上传
     public function teacherbook(Request $request){
    	 session_start();
@@ -1161,66 +1271,6 @@ class AdminController extends Controller
         return view('admin.chapter.chapclalist',$list);
     }
 	
-    //全部课节展示
-     public function chapterlist(){
-         session_start();
-         if(empty($_SESSION["uid"])){
-             header('Location: /flogin.php');exit;
-         }
-         $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
-         $role=$res5['role'];
-         if($role==1) {
-		 $res = ChapterModel::where('is_del', 1)->paginate(30);
-             $count = count($res);
-             $list = [
-                 'data' => $res,
-		 'count' => $count,
-		 'role' => $role
-             ];
-         }else if($role==2){
-                 $res = ChapterModel::where('is_del', 1)->paginate(30);
-                 $count = count($res);
-                 $list = [
-                     'data' => $res,
-		     'count' => $count,
-		     'role' =>$role
-                 ];
-         }else if($role==3){
-             $res = ChapterModel::where('is_del', 1)->paginate(30);
-             $count = count($res);
-             $list = [
-                 'data' => $res,
-		 'count' => $count,
-		 'role' =>$role
-             ];
-         }else if($role==4){
-             $res = ChapterModel::where('is_del', 1)->where('sub_name','趣味大语文')->paginate(30);
-             $count = count($res);
-             $list = [
-                 'data' => $res,
-		 'count' => $count,
-		 'role'=>$role
-             ];
-         }else if($role==5){
-             $res = ChapterModel::where('is_del', 1)->where('sub_name','思维培优数学')->paginate(30);
-             $count = count($res);
-             $list = [
-                 'data' => $res,
-		 'count' => $count,
-		 'role' =>$role
-             ];
-         }else if($role==6){
-             $res = ChapterModel::where('is_del', 1)->whereIn('sub_name',['HS英语','Phonics自然拼读'])->paginate(30);
-             $count = count($res);
-             $list = [
-                 'data' => $res,
-		 'count' => $count,
-		 'role' =>$role
-             ];
-         }
-         return view('admin.chapter.chapterlist',$list);
-     }
-
      //课节搜索
 	public function sscha(Request $request){
          session_start();
@@ -1453,7 +1503,8 @@ class AdminController extends Controller
 	    	 session_start();
 	          if (empty($_SESSION["uid"])) {
 			  header('Location: /flogin.php');				                            
- 			  exit;															                                                                                }
+ 			  exit;															                 
+                        }
 		 $id=$request->input('id');
 		  $cha_name=$request->input('cha_name');
 		  $season=$request->input('season');
@@ -1484,8 +1535,10 @@ class AdminController extends Controller
 						                $count = count($res);
 								                $list = [
 										 'data' =>$res,
-							                        'count' =>$count,
-										'role' =>$role,											                        					'sub_name' => $subject,																		  	      'grade' => $grade,
+							             'count' =>$count,
+										  'role' =>$role,
+                                          'sub_name' => $subject,	 
+                                         'grade' => $grade,
 										'ht' => '1',
 										'cha_name' =>'',
 										'season' =>''
@@ -1520,13 +1573,13 @@ class AdminController extends Controller
 	              $role=$res5['role'];
 	             if(!empty($grade)&&!empty($season)){
 			                     if($role==3){           
-						                         $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();                 
-									                 }else{
-												                     $res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
-														                         }          
-					             }else if(empty($grade)){
-							                     if($role==3){                             
-										                         $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
+		$res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();                 
+			 }else{
+		 $res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();												                  
+        }          
+	          }else if(empty($grade)){
+	    if($role==3){                             
+	                 $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
 													                 }else{
 																                   $res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
 																		                      }

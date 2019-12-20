@@ -41,6 +41,8 @@ Route::any('/useradd','Admin\AdminController@useradd');
 Route::any('/useradds','Admin\AdminController@useradds');
 //管理员展示
 Route::any('/userlist','Admin\AdminController@userlist');
+//投资人展示
+Route::any('/usertzrlist','Admin\AdminController@usertzrlist');
 //管理员修改页面
 Route::any('/userlistupdate','Admin\AdminController@userlistupdate');
 //管理员修改
@@ -145,4 +147,6 @@ Route::any('/videolistbox','Admin\AdminController@videolistbox');
 //全部ppt展示
 Route::any('/pptlist','Admin\AdminController@pptlist');
 Route::any('/pptlistbox','Admin\AdminController@pptlistbox');
-
+//课节发放
+Route::any('/chapterseason','Admin\AdminController@chapterseason');
+Route::any('/chapterseasonupd','Admin\AdminController@chapterseasonupd');

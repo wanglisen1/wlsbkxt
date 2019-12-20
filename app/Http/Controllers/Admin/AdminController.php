@@ -982,18 +982,17 @@ class AdminController extends Controller
     }
     //练习册上传
       public function workbook(Request $request){
-	               session_start();
-		                        if(empty($_SESSION["uid"])){
-						                                     header('Location: /flogin.php');exit;
-										                                                  }
-		                        $id =$request->input('id');
-		                $res=ChapterModel::where('is_del',1)->where('cha_id',$id)->first();
-		                $list=[
-					                'data'=>$res
-							        ];
-				        return view('admin.chapter.workbook',$list);
-
-				    }
+	   session_start();
+		if(empty($_SESSION["uid"])){
+			header('Location: /flogin.php');exit;
+	     }
+		  $id =$request->input('id');
+		  $res=ChapterModel::where('is_del',1)->where('cha_id',$id)->first();
+		  $list=[
+			'data'=>$res
+			];
+		return view('admin.chapter.workbook',$list);
+}
 
     //课程对应课节展示
     public function chapclalist(Request $request){
@@ -1018,35 +1017,33 @@ class AdminController extends Controller
              header('Location: /flogin.php');exit;
          }
 	 $cha_name=$request->input('cha_name');
-	 		$role=$request->input('role');
-	         $sub_name=$request->input('sub_name');
-             $res3 = ChaseaModel::where('chasea_sub',$sub_name)->get();
-	         $season=$request->input('season');
-		         $grade=$request->input('grade');
-		         if(!empty($cha_name)&&!empty($season)){
-				              $res=ChapterModel::where('is_del',1)->where('sub_name',$sub_name)->where('grade',$grade)->where('season',$season)->where('cha_name','like','%'.$cha_name.'%')->get();
-					              }else if(empty($season)){
-							                   $res=ChapterModel::where('is_del',1)->where('sub_name',$sub_name)->where('grade',$grade)->where('cha_name','like','%'.$cha_name.'%')->get();
-									           }else if(empty($cha_name)){
-											               $res=ChapterModel::where('is_del',1)->where('sub_name',$sub_name)->where('grade',$grade)->where('season',$season)->get();
-												               }
-			        
-			         $count=count($res);
-			             $list=[
-					                     'data' => $res,
-							                     'role' => $role,
-									                     'sub_name' => $sub_name,
-											                     'count' => $count,
-													     'grade' => $grade,
-													     'ht' => '2',
-													     'cha_name' => $cha_name,
-													     'season' => $season,
-													     'sub_name' => $sub_name,
-													     'grade' => $grade,
-                                                         'res3' => $res3
-															                 ];
-
-			             return view('admin.chapter.sscha',$list);
+	 	$role=$request->input('role');
+	    $sub_name=$request->input('sub_name');
+        $res3 = ChaseaModel::where('chasea_sub',$sub_name)->get();
+	    $season=$request->input('season');
+		$grade=$request->input('grade');
+		 if(!empty($cha_name)&&!empty($season)){
+			$res=ChapterModel::where('is_del',1)->where('sub_name',$sub_name)->where('grade',$grade)->where('season',$season)->where('cha_name','like','%'.$cha_name.'%')->get();
+		}else if(empty($season)){
+			$res=ChapterModel::where('is_del',1)->where('sub_name',$sub_name)->where('grade',$grade)->where('cha_name','like','%'.$cha_name.'%')->get();
+		}else if(empty($cha_name)){
+			$res=ChapterModel::where('is_del',1)->where('sub_name',$sub_name)->where('grade',$grade)->where('season',$season)->get();
+		}        
+		$count=count($res);
+			$list=[
+				'data' => $res,
+				'role' => $role,
+				'sub_name' => $sub_name,
+				'count' => $count,
+				'grade' => $grade,
+				'ht' => '2',
+				'cha_name' => $cha_name,
+				'season' => $season,
+				'sub_name' => $sub_name,
+				'grade' => $grade,
+                'res3' => $res3
+				];
+		return view('admin.chapter.sscha',$list);
 	}
 
     //添加收藏
@@ -1090,26 +1087,26 @@ class AdminController extends Controller
     //收藏展示
     public function collectlist(){
 	    session_start();
-	            if (empty($_SESSION["uid"])) {
-			                header('Location: /flogin.php');
-					            exit;
-					        }
-	            $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
-	            $role=$res5['role'];
-		            $res1 = AdminuserModel::where('is_del',1)->where('u_id',$_SESSION["uid"])->first();
-		            $username=$res1['username'];
-			            if($role==3){
-					                $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
-							        }else{
-									        $res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
-										        }
-			            $count=count($res);
-			            $list=[
-					                'data' => $res,
-							            'count' => $count,
-								                'role' => $role
-										        ];
-				            return view('admin.collect.collectlist',$list);
+	   if (empty($_SESSION["uid"])) {
+			 header('Location: /flogin.php');
+				exit;
+		}
+	   $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
+	   $role=$res5['role'];
+	   $res1 = AdminuserModel::where('is_del',1)->where('u_id',$_SESSION["uid"])->first();
+	   $username=$res1['username'];
+		if($role==3){
+		 $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+		}else{
+			$res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+			 }
+		$count=count($res);
+			$list=[
+			'data' => $res,
+			'count' => $count,
+			'role' => $role
+			  ];
+		return view('admin.collect.collectlist',$list);
     }
 
     //完成收藏

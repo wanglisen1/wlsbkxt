@@ -1403,7 +1403,7 @@ class AdminController extends Controller
 	      $sub_name=$request->input('sub_name');
 	      $grade=$request->input('grade');
 	  //$id="2";
-	      $res=ChapterModel::where('cha_id',$id)->first();
+	  $res=ChapterModel::where('cha_id',$id)->first();
 	  $tp=$res['field_pdf'];
 	  $array=explode(",", $tp);
 	  $str="";
@@ -1422,7 +1422,8 @@ class AdminController extends Controller
 		  'season'=>$season,
 		  'grade'=>$grade,
           'ppt' => $res['ppt'],
-          'video' => $res['video']
+          'video' => $res['video'],
+          'res' => $res
 	   ];
 	       return view('admin.chapter.picture',$list);
      }
@@ -1457,7 +1458,8 @@ class AdminController extends Controller
 			   'season' => $season,
                'ppt' => $res['ppt'],
                'video' => $res['video'],
-			   'grade' => $grade
+			   'grade' => $grade,
+               'res' => $res
 	                       ];
 	                    return view('admin.chapter.picturejs',$list);
 	                           }
@@ -1493,6 +1495,7 @@ class AdminController extends Controller
                               'ppt' => $res['ppt'],
                               'video' => $res['video'],
 							 'grade' =>$grade,
+                             'res' => $res
                             ];
 							 return view('admin.chapter.picturelx',$list);
 	        }

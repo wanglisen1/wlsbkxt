@@ -25,9 +25,9 @@
           <button class="layui-btn" id="ss" type="submit" lay-filter="sreach" style="background-color:#a73870;"><i class="layui-icon">&#xe615;</i></button>
 	</div>
 	-->
-	<div style="float:left;margin-left:50px;">
+	<!-- <div style="float:left;margin-left:50px;">
 	<span class="x-right" style="line-height:40px">本页共有数据：<b style="color:red;">{{$count}}</b>条</span>
-	</div>
+	</div> -->
 </form>
 <table class="layui-table">
     <thead>

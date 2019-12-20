@@ -1280,6 +1280,7 @@ class AdminController extends Controller
 	 $cha_name=$request->input('cha_name');
 	 		$role=$request->input('role');
 	         $sub_name=$request->input('sub_name');
+             $res3 = ChaseaModel::where('chasea_sub',$sub_name)->get();
 	         $season=$request->input('season');
 		         $grade=$request->input('grade');
 		         if(!empty($cha_name)&&!empty($season)){
@@ -1301,7 +1302,8 @@ class AdminController extends Controller
 													     'cha_name' => $cha_name,
 													     'season' => $season,
 													     'sub_name' => $sub_name,
-													     'grade' => $grade
+													     'grade' => $grade,
+                                                         'res3' => $res3
 															                 ];
 
 			             return view('admin.chapter.sscha',$list);
@@ -1525,18 +1527,19 @@ class AdminController extends Controller
 		return view('admin.chapter.hswdppt',$list);
     }
     public function newsousuo(Request $request){
-	                 session_start();
-			             if (empty($_SESSION["uid"])) {
-					                   header('Location: /flogin.php');
-							                exit;
-							               }
-			              $subject=$request->input('subject');
-			              $grade=$request->input('grade');
-				                   $res=ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->get();
-				                   $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
+	       session_start();
+			 if (empty($_SESSION["uid"])) {
+				header('Location: /flogin.php');
+				 exit;
+		}
+		$subject=$request->input('subject');
+        $res3 = ChaseaModel::where('chasea_sub',$subject)->get();
+		$grade=$request->input('grade');
+		$res=ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->get();
+		$res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
 						                $role=$res5['role'];
 						                $count = count($res);
-								                $list = [
+								        $list = [
 										 'data' =>$res,
 							             'count' =>$count,
 										  'role' =>$role,
@@ -1544,7 +1547,8 @@ class AdminController extends Controller
                                          'grade' => $grade,
 										'ht' => '1',
 										'cha_name' =>'',
-										'season' =>''
+										'season' =>'',
+                                        'res3' => $res3
 										   ];
 								            return view('admin.chapter.sscha',$list);         
     }

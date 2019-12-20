@@ -28,10 +28,12 @@
                 @elseif($sub_name=="Phonics自然拼读")
                 <option value="SEASON YEAR">SEASON YEAR</option>
                 @else
-                <option value="春">春</option>
-                <option value="署">署</option>
-                <option value="秋">秋</option>
-                <option value="寒">寒</option>
+                @foreach($res3 as $k=>$v)
+                @if($v['is_show']==1)
+                <option value="{{$v['chasea_season']}}">{{$v['chasea_season']}}</option>
+                @eles
+                @endif
+                @endforeach
                 @endif
            </select>
         </div>

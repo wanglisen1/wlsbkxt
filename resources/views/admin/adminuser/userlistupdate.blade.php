@@ -23,6 +23,34 @@
         <input type="text" name="title" id="email" lay-verify="title" autocomplete="off" placeholder="请输入邮箱" class="layui-input" value="{{$data['email']}}">
     </div>
 </div></br></br>
+@if($tzr==2)
+<div class="layui-form-item" style="width:700px;margin:0 auto">
+    <label class="layui-form-label">课节：</label>
+    <div class="layui-input-block" >
+        <input type="text" name="addjs" id="addjs" lay-verify="title" autocomplete="off"  class="layui-input" value="{{$data['addjs']}}">
+    </div>
+</div></br></br>
+@elseif($tzr==1)
+<div class="layui-form-item" style="width:700px;margin:0 auto">
+    <label class="layui-form-label">校长：</label>
+    <div class="layui-input-block" >
+        <input type="text" name="addxz" id="addxz" lay-verify="title" autocomplete="off"  class="layui-input" value="{{$data['addxz']}}">
+    </div>
+</div></br></br>
+<div class="layui-form-item" style="width:700px;margin:0 auto">
+    <label class="layui-form-label">主管：</label>
+    <div class="layui-input-block" >
+        <input type="text" name="addzg" id="addzg" lay-verify="title" autocomplete="off"  class="layui-input" value="{{$data['addzg']}}">
+    </div>
+</div></br></br>
+<div class="layui-form-item" style="width:700px;margin:0 auto">
+    <label class="layui-form-label">教师：</label>
+    <div class="layui-input-block" >
+        <input type="text" name="addjs" id="addjs" lay-verify="title" autocomplete="off"  class="layui-input" value="{{$data['addjs']}}">
+    </div>
+</div></br></br>
+@else
+@endif
 <div class="layui-card layui-form" lay-filter="component-form-element" style="width:700px;margin:0 auto">
     <div class="layui-col-md12">
         <label class="layui-form-label">性别：</label>
@@ -35,31 +63,32 @@
         @endif
     </div>
 </div></br></br></br></br>
+@if($tzr==2)
 <div class="layui-col-md6" >
     <label class="layui-form-label" style="margin-left:490px;">角色：</label>
     <select name="role" id="role" lay-verify="" style="width:300px;margin-left:600px;margin-top:-40px;">
-        @if($data['role']==1)
-        <option value="1" selected = "selected">总管理员</option>
+        @if($role==1)
         <option value="26" >总部教研(语文)</option>
         <option value="27" >总部教研(数学)</option>
         <option value="28" >总部教研(英语)</option>
         <option value="3">投资人</option>
         <option value="4">校长</option>
-            <option value="5">主管</option>
-            <option value="6">语文教师</option>
-            <option value="7">数学教师</option>
-            <option value="8">英语教师</option>
-        @elseif($data['role']==3)
+        <option value="5">主管</option>
+        <option value="6">语文教师</option>
+        <option value="7">数学教师</option>
+        <option value="8">英语教师</option>
+        @elseif($role==3)
             <option value="4">校长</option>
             <option value="5">主管</option>
-            <option value="6">语文教师</option>
-            <option value="6">数学教师</option>
-            <option value="6">英语教师</option>
+            <option value="26">语文教师</option>
+            <option value="27">数学教师</option>
+            <option value="28">英语教师</option>
         @else
 
         @endif
     </select>
 </div></br></br></br></br>
+@endif
 <input type="hidden" id="uid" value="{{$data['u_id']}}">
 <div class="layui-col-md6" style="margin-left:650px;">
     <div class="layui-btn-container">
@@ -76,7 +105,9 @@
             var sex=$('input[name="sex"]:checked').val();
             var role =$("#role").val();
             var id =$("#uid").val();
-
+            var addjs =$("#addjs").val();
+            var addxz =$("#addxz").val();
+            var addzg =$("#addzg").val();
             if(tel==''){
                 alert('电话号码不能为空');
                 return false;
@@ -86,10 +117,13 @@
             }if(username==''){
                 alert('姓名不能为空');
                 return false;
+            }if(addjs==''){
+                alert('可见课节不能为空');
+                return false;
             }
             $.ajax({
                 type: 'post',
-                data:{tel:tel,username:username,email:email,sex:sex,role:role,id:id},
+                data:{tel:tel,username:username,email:email,sex:sex,role:role,id:id,addjs:addjs,addxz:addxz,addzg:addzg},
                 dateType:'json',
                 url: "/userupdate",
                 success:function(msg){

@@ -352,9 +352,14 @@ class AdminController extends Controller
         }
         $id=$request->input();
         $uid=$id['id'];
+        $tzr=$id['tzr'];
         $res=AdminuserModel::where(['u_id'=>$uid])->first();
+        $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+        $role=$res5['role'];
         $list=[
-            'data'=>$res
+            'data'=>$res,
+            'role' => $role,
+            'tzr' => $tzr
         ];
         return view('admin.adminuser.userlistupdate',$list);
     }
@@ -371,7 +376,10 @@ class AdminController extends Controller
         $sex =$request->input('sex');
         $role =$request->input('role');
         $id =$request->input('id');
-        $res=AdminuserModel::where('u_id',$id)->update(['tel'=>$tel,'username'=>$username,'email'=>$email,'sex'=>$sex,'role'=>$role]);
+        $addjs =$request->input('addjs');
+        $addzg =$request->input('addzg');
+        $addxz =$request->input('addxz');
+        $res=AdminuserModel::where('u_id',$id)->update(['tel'=>$tel,'username'=>$username,'email'=>$email,'sex'=>$sex,'role'=>$role,'addjs'=>$addjs,'addxz'=>$addxz,'addzg'=>$addzg]);
         if ($res) {
             return ['code' => 1, 'msg' => '修改成功'];
         } else {

@@ -60,7 +60,7 @@
         <th>{{$v['addtime']}}</th>
         <td class="td-manage">
 
-            <a title="编辑"  onclick="" href="/userlistupdate?id={{$v['u_id']}}">
+            <a title="编辑"  onclick="" href="/userlistupdate?id={{$v['u_id']}}&tzr=2">
                 <i class="layui-icon">&#xe642;</i>
             </a>
             <a title="删除" class="del" onclick="" href="javascript:;" u_id="{{$v['u_id']}}">

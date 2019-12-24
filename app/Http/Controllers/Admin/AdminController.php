@@ -236,6 +236,54 @@ class AdminController extends Controller
                 'addxz' => '1',
                 'addzg' =>  '3'
             ];
+            }else if($role==5){
+                $data = [
+                'tel' => $tel,
+                'password' => $password,
+                'username' => $username,
+                'email' => $email,
+                'sex' => $sex,
+                'role' => $role,
+                'addtime' => date("Y-m-d H:i:s"),
+                'alliance' => $_SESSION["uid"],
+                'addjs' => '6'
+            ];
+            }else if($role==26){
+                $data = [
+                'tel' => $tel,
+                'password' => $password,
+                'username' => $username,
+                'email' => $email,
+                'sex' => $sex,
+                'role' => $role,
+                'addtime' => date("Y-m-d H:i:s"),
+                'alliance' => $_SESSION["uid"],
+                'addjs' => '3'
+            ];
+            }else if($role==27){
+                $data = [
+                'tel' => $tel,
+                'password' => $password,
+                'username' => $username,
+                'email' => $email,
+                'sex' => $sex,
+                'role' => $role,
+                'addtime' => date("Y-m-d H:i:s"),
+                'alliance' => $_SESSION["uid"],
+                'addjs' => '3'
+            ];
+            }else if($role==28){
+                 $data = [
+                'tel' => $tel,
+                'password' => $password,
+                'username' => $username,
+                'email' => $email,
+                'sex' => $sex,
+                'role' => $role,
+                'addtime' => date("Y-m-d H:i:s"),
+                'alliance' => $_SESSION["uid"],
+                'addjs' => '3'
+            ];
             }else{
             $data = [
                 'tel' => $tel,
@@ -1120,12 +1168,12 @@ class AdminController extends Controller
 	 $id = $request->input('cha_id');
 	        $res1 = AdminuserModel::where('is_del',1)->where('u_id',$_SESSION["uid"])->first();
 	        $username=$res1['username'];
-		        $res=CollectModel::where('uid',$_SESSION["uid"])->where('cha_id',$id)->update(['is_show'=>2,'finish_time'=>date("Y-m-d H:i:s")]);
-		         if ($res) {
-				              return ['code' => 1, 'msg' => '已完成！'];
-					               } else {
-							                    return ['code' => 0, 'msg' => '网络好像不太好~,请重新点击'];
-									             }
+		  $res=CollectModel::where('uid',$_SESSION["uid"])->where('cha_id',$id)->update(['is_show'=>2,'finish_time'=>date("Y-m-d H:i:s")]);
+		  if ($res) {
+			return ['code' => 1, 'msg' => '已完成！'];
+		} else {
+			return ['code' => 0, 'msg' => '网络好像不太好~,请重新点击'];
+			}
     }
     //图片展示
      public function picture(Request $request){
@@ -1204,77 +1252,65 @@ class AdminController extends Controller
 	                           }
     //练习册展示
      public function picturelx(Request $request){
-	                 session_start();
-			             if (empty($_SESSION["uid"])) {
-					                       header('Location: /flogin.php');
-							                        exit;
-							                   }
-			 $id=$request->input('id');
-			 	 $cha_name=$request->input('cha_name');
-			               $season=$request->input('season');
-			               $sub_name=$request->input('sub_name');
-				                     $grade=$request->input('grade');
-			                   $res=ChapterModel::where('cha_id',$id)->first();
-			                     $tp=$res['field_pdflx'];
-			                     $array=explode(",", $tp);
-					            $str="";
-					           foreach($array as $k=>$v){
-							     $str.=strrchr($v,'/');
-								   }
-								 $str1=substr($str,1);
-								$arr=explode('/',$str1);
-								$count=count($arr);
-								$list=[
-								'data' => $arr,
-								 'count'=>$count,
-								'id'=>$id,
-				               'sub_name'=>$res['sub_name'],
-							 'cha_name' =>$cha_name,
-							  'season' =>$season,
-                              'ppt' => $res['ppt'],
-                              'video' => $res['video'],
-							 'grade' =>$grade,
-                             'res' => $res
-                            ];
-							 return view('admin.chapter.picturelx',$list);
-	        }
+	   session_start();
+		if (empty($_SESSION["uid"])) {
+			header('Location: /flogin.php');
+			exit;
+		}
+	$id=$request->input('id');
+	$cha_name=$request->input('cha_name');
+	$season=$request->input('season');
+	$sub_name=$request->input('sub_name');
+	$grade=$request->input('grade');
+	$res=ChapterModel::where('cha_id',$id)->first();
+	$tp=$res['field_pdflx'];
+	$array=explode(",", $tp);
+	$str="";
+	foreach($array as $k=>$v){
+	   $str.=strrchr($v,'/');
+	}
+	$str1=substr($str,1);
+	$arr=explode('/',$str1);
+	$count=count($arr);
+	$list=[
+		'data' => $arr,
+		'count'=>$count,
+		'id'=>$id,
+		'sub_name'=>$res['sub_name'],
+		'cha_name' =>$cha_name,
+		'season' =>$season,
+        'ppt' => $res['ppt'],
+        'video' => $res['video'],
+		'grade' =>$grade,
+        'res' => $res
+        ];
+	return view('admin.chapter.picturelx',$list);
+	}
 
-   
-
-    public function hswdppt(Request $request){
-	    	 session_start();
-	          if (empty($_SESSION["uid"])) {
-			  header('Location: /flogin.php');				                            
- 			  exit;															                 
-                        }
-		 $id=$request->input('id');
-		  $cha_name=$request->input('cha_name');
-		  $season=$request->input('season');
-		  $sub_name=$request->input('sub_name');
-		  $grade=$request->input('grade');
-		 $res=ChapterModel::where('cha_id',$id)->first();
-		 $list=[
-			 'data' => $res,
-			  'id'=>$id,
-			  'sub_name'=>$res['sub_name'],
-			  'cha_name' => $cha_name,
-			  'season' =>$season,
-			  'grade' => $grade
-		 ];
-		return view('admin.chapter.hswdppt',$list);
-    }
     public function newsousuo(Request $request){
 	       session_start();
 			 if (empty($_SESSION["uid"])) {
-				header('Location: /flogin.php');
-				 exit;
+		    header('Location: /flogin.php');
+			exit;
 		}
-		$subject=$request->input('subject');
+        $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
+        $role = $res5['role'];
+        $moren = $res5['addjs'];
+		$subject = $request->input('subject');
         $res3 = ChaseaModel::where('chasea_sub',$subject)->get();
-		$grade=$request->input('grade');
-		$res=ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->get();
-		$res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
-		$role=$res5['role'];
+		$grade = $request->input('grade');
+        if($role==5){
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+        }else if($role==26){
+             $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+         }else if($role==27){
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+        }else if($role==28){
+             $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+         }else{
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->get();
+         }
+		
 		$count = count($res);
 			$list = [
 				'data' =>$res,
@@ -1291,18 +1327,18 @@ class AdminController extends Controller
     }
 
     public function collectxzsc(Request $request){
-	             session_start();
-		             if (empty($_SESSION["uid"])) {
-				                 header('Location: /flogin.php');
-						             exit;
-						         }
-		             $id = $request->input('coll_id');
-		             $res = CollectModel::where('coll_id',$id)->delete();
-			              if ($res) {
-					                   return ['code' => 1, 'msg' => '已删除！'];
-							            } else {
-									                 return ['code' => 0, 'msg' => '网络好像不太好~,请重新点击'];
-											          }
+	   session_start();
+		if (empty($_SESSION["uid"])) {
+			header('Location: /flogin.php');
+			exit;
+		}
+		$id = $request->input('coll_id');
+		$res = CollectModel::where('coll_id',$id)->delete();
+			if ($res) {
+				return ['code' => 1, 'msg' => '已删除！'];
+			} else {
+				return ['code' => 0, 'msg' => '网络好像不太好~,请重新点击'];
+			}
     }
 
     public function sscoll(Request $request){
@@ -1323,24 +1359,24 @@ class AdminController extends Controller
         }          
 	          }else if(empty($grade)){
 	    if($role==3){                             
-	                 $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
-													                 }else{
-																                   $res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
+	       $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
+		}else{
+			$res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
 																		                      }
-									                }else if(empty($season)){
-												                   if($role==3){                                      
-															                       $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
-																	                          }else{
-																					             $res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
-																						                         }
-														                }
-	                  $count=count($res);
-	                     $list=[
-				                         'data' => $res,
-							                     'role' => $role,
-									                         'count' => $count
-												                 ];
-	                  return view('admin.collect.sscoll',$list);
+		}else if(empty($season)){
+			if($role==3){                                      
+			$res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
+			}else{
+			$res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
+		      }
+		  }
+	       $count=count($res);
+	           $list=[
+				'data' => $res,
+				'role' => $role,
+				'count' => $count
+				];
+	   return view('admin.collect.sscoll',$list);
     }
    public function videoaddlist(){
 
@@ -1391,11 +1427,11 @@ class AdminController extends Controller
    	return view('admin.videolistbox',$list);
    }
    public function pptlistbox(Request $request){
-	              $ppt_id=$request->input('ppt_id');
+	        $ppt_id=$request->input('ppt_id');
 		                 $res = PptModel::where('ppt_id',$ppt_id)->first();
 		                 $list = [
 			                 'data' => $res
 			            ];
-				         return view('admin.pptlistbox',$list);
-				    }
+			return view('admin.pptlistbox',$list);
+		}
 }

@@ -339,7 +339,7 @@
 		</li>
 		  <li >
                     <a _href="/chapterseason">
-                        <i class="iconfont">&#xe6da;;</i>
+                        <i class="iconfont">&#xe6da;</i>
                         <cite>课节发放状态</cite>
                     </a>
                 </li>
@@ -782,7 +782,7 @@
             </li>
             <li >
                     <a _href="/chapterseason">
-                        <i class="iconfont">&#xe6da;;</i>
+                        <i class="iconfont">&#xe6da;</i>
                         <cite>课节发放状态</cite>
                     </a>
                 </li>
@@ -838,7 +838,7 @@
             </li>
              <li >
                     <a _href="/chapterseason">
-                        <i class="iconfont">&#xe6da;;</i>
+                        <i class="iconfont">&#xe6da;</i>
                         <cite>课节发放状态</cite>
                     </a>
                 </li>

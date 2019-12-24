@@ -89,26 +89,7 @@
 		<a title="开始备课" class="collect"  onclick="" href="javascript:;" cha_id="{{$v['cha_id']}}">
 		<button class="layui-btn layui-btn-sm" style="background:#a73870;"><i class="iconfont">&#xe7ce;&nbsp;开始备课</i></button>
 		</a>
-		@if($role==1&&2)
-		 @if($v['field_pdfjs']==''&&$v['field_pdflx']=='')
-                <a title="添加教师用书"  onclick="" href="/teacherbook?id={{$v['cha_id']}}">
-                    <i class="iconfont">&#xe6b9;</i>
-                </a>&nbsp;&nbsp;
-                <a title="添加练习册"  onclick="" href="/workbook?id={{$v['cha_id']}}">
-                    <i class="iconfont">&#xe6b9;</i>
-                </a>
-		@elseif($v['field_pdfjs']=='')
-		  <a title="添加教师用书"  onclick="" href="/teacherbook?id={{$v['cha_id']}}">
-                    <i class="iconfont">&#xe6b9;</i>
-		</a>&nbsp;&nbsp;
-		@elseif($v['field_pdflx']=='')
-                <a title="添加练习册"  onclick="" href="/workbook?id={{$v['cha_id']}}">
-                    <i class="iconfont">&#xe6b9;</i>
-                </a>
-		@else
-		@endif
-		@else
-		@endif	
+		
             </td>
         </tr>
     @endforeach

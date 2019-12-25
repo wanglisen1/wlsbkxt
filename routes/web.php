@@ -121,8 +121,10 @@ Route::any('/chapterlist','Admin\AdminController@chapterlist');
 Route::any('/collectadd','Admin\AdminController@collectadd');
 //收藏展示
 Route::any('/collectlist','Admin\AdminController@collectlist');
-//删除收藏
+//完成备课
 Route::any('/collectdel','Admin\AdminController@collectdel');
+//完成审核
+Route::any('/collectsh','Admin\AdminController@collectsh');
 //图片展示
 Route::any('/picture','Admin\AdminController@picture');
 Route::any('/picturejs','Admin\AdminController@picturejs');

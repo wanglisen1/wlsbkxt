@@ -1127,6 +1127,7 @@ class AdminController extends Controller
 				'username' => $res1['username'],
 				'grade' => $grade,
 				'season' => $season,
+                'role' => $res1['role'],
 				'finish_time' => "未完成"
 			          ];
 	            $res = CollectModel::insert($data);
@@ -1151,9 +1152,17 @@ class AdminController extends Controller
 	   $role=$res5['role'];
 	   $res1 = AdminuserModel::where('is_del',1)->where('u_id',$_SESSION["uid"])->first();
 	   $username=$res1['username'];
-		if($role==3){
+		if($role==3||$role==4){
 		 $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
-		}else{
+		}else if($role==26){
+            $res= CollectModel::where('collect.role', 6)->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+        }else if($role==27){
+            $res= CollectModel::where('collect.role', 7)->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+        }else if($role==28){
+            $res= CollectModel::where('collect.role', 8)->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+        }else if($role==1){
+            $res= CollectModel::where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+        }else{
 			$res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
 			 }
 		$count=count($res);
@@ -1178,20 +1187,45 @@ class AdminController extends Controller
 	        $username=$res1['username'];
 		  $res=CollectModel::where('uid',$_SESSION["uid"])->where('cha_id',$id)->update(['is_show'=>2,'finish_time'=>date("Y-m-d H:i:s")]);
 		  if ($res) {
-			return ['code' => 1, 'msg' => '已完成！'];
+			return ['code' => 1, 'msg' => '已完成！请等待审核。'];
 		} else {
 			return ['code' => 0, 'msg' => '网络好像不太好~,请重新点击'];
 			}
     }
+    //完成审核
+    public function collectsh(Request $request){
+        session_start();
+        if (empty($_SESSION["uid"])) {
+            header('Location: /flogin.php');
+            exit;
+    }
+     $id = $request->input('cha_id');
+     $coll_id = $request->input('coll_id');
+            $res1 = AdminuserModel::where('is_del',1)->where('u_id',$_SESSION["uid"])->first();
+            $username=$res1['username'];
+            $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
+            $role=$res5['role'];
+
+            if($role==4||$role==3){
+            $res=CollectModel::where('alliance',$_SESSION["uid"])->where('cha_id',$id)->update(['xzsh'=>2]);
+
+            }else{
+            $res=CollectModel::where('coll_id',$coll_id)->where('cha_id',$id)->update(['jysh'=>2,'is_show'=>3]);
+            }
+          
+          if ($res) {
+            return ['code' => 1, 'msg' => '已完成审核！'];
+        } else {
+            return ['code' => 0, 'msg' => '网络好像不太好~,请重新点击'];
+            }
+    }
     //图片展示
      public function picture(Request $request){
 	      session_start();
-	              if (empty($_SESSION["uid"])) {
-			                  header('Location: /flogin.php');
-					              exit;
-					          }
-
-	     
+	       if (empty($_SESSION["uid"])) {
+			     header('Location: /flogin.php');
+				exit;
+		} 
 	      $id=$request->input('id');
 	      $cha_name=$request->input('cha_name');
 	      $season=$request->input('season');

@@ -19,7 +19,7 @@
     --swiper-pagination-color: #00ff33;/* 两种都可以 */
   }
 	.swiper-slide>div{
-	padding-bottom:140%;
+	padding-bottom:70%;
 }
     </style>
 	<body oncontextmenu="return false" bgcolor="" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onselectstart="return false" style="width:100%;height:3000px;">

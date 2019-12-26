@@ -21,9 +21,15 @@
 	.swiper-slide>div{
 	padding-bottom:140%;
 }
+@if($sub_name=="HS英语")
 	.one{
-	width:120%;
-	height:200%;
+  width:120%;
+  height:100%;
+  @else
+  .one{
+  width:120%;
+  height:200%;
+  @endif
 }
     </style>
 	<body oncontextmenu="return false" bgcolor="" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onselectstart="return false" style="width:100%;height:3000px;">

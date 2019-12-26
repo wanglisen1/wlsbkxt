@@ -21,16 +21,6 @@
 	.swiper-slide>div{
 	padding-bottom:140%;
 }
-@if($sub_name=="HS英语")
-	.one{
-  width:120%;
-  height:100%;
-  @else
-  .one{
-  width:120%;
-  height:200%;
-  @endif
-}
     </style>
 	<body oncontextmenu="return false" bgcolor="" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onselectstart="return false" style="width:100%;height:3000px;">
 	<div style="width:100%;position:fixed;top:0px;z-index:99;">
@@ -67,7 +57,7 @@
                 <div class="swiper-container">
 			<div class="swiper-wrapper">
 				@foreach($data as $k=>$v)
-			    <div class="swiper-slide" style="background:url('/tp/images/{{$v}}') top center no-repeat;background-size:100% 100%;"><div class="one"></div></div>
+			    <div class="swiper-slide" style="background:url('/tp/images/{{$v}}') top center no-repeat;background-size:100% 100%;"><div class="one" style="width:120%;height:100%;"></div></div>
 				@endforeach
                         </div>
                         <!-- 如果需要导航按钮 -->

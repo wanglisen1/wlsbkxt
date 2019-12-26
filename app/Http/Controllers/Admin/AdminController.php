@@ -1210,7 +1210,13 @@ class AdminController extends Controller
             $res=CollectModel::where('alliance',$_SESSION["uid"])->where('cha_id',$id)->update(['xzsh'=>2]);
 
             }else{
-            $res=CollectModel::where('coll_id',$coll_id)->where('cha_id',$id)->update(['jysh'=>2,'is_show'=>3]);
+                $res9=CollectModel::where('coll_id',$coll_id)->where('cha_id',$id)->first();
+                if($res9['xzsh']==1){
+                    return ['code' => 2, 'msg' => '请等校长审核完毕在审核！'];
+                }else{
+                    $res=CollectModel::where('coll_id',$coll_id)->where('cha_id',$id)->update(['jysh'=>2,'is_show'=>3]);
+                }
+                 
             }
           
           if ($res) {

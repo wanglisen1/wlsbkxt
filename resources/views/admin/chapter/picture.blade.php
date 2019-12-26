@@ -18,9 +18,15 @@
     --swiper-theme-color: #ff6600;
     --swiper-pagination-color: #00ff33;/* 两种都可以 */
   }
+  @if($sub_name=='HS英语')
 	.swiper-slide>div{
 	padding-bottom:70%;
 }
+  @else 
+  .swiper-slide>div{
+  padding-bottom:140%;
+}
+  @endif
     </style>
 	<body oncontextmenu="return false" bgcolor="" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" onselectstart="return false" style="width:100%;height:3000px;">
 	<div style="width:100%;position:fixed;top:0px;z-index:99;">

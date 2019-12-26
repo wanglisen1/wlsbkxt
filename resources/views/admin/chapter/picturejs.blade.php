@@ -18,9 +18,15 @@
     --swiper-theme-color: #ff6600;
     --swiper-pagination-color: #00ff33;/* 两种都可以 */
   }
-	.swiper-slide>div{
-        padding-bottom:140%;
+  @if($sub_name=='HS英语')
+  .swiper-slide>div{
+  padding-bottom:70%;
 }
+  @else 
+  .swiper-slide>div{
+  padding-bottom:140%;
+}
+  @endif
         .one{
         width:120%;
         height:200%;

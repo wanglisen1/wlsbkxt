@@ -22,6 +22,10 @@
   .swiper-slide>div{
   padding-bottom:70%;
 }
+  @elseif($sub_name=='Phonics自然拼读')
+   .swiper-slide>div{
+  padding-bottom:120%;
+}
   @else 
   .swiper-slide>div{
   padding-bottom:140%;

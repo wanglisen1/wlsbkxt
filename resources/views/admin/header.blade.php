@@ -553,7 +553,7 @@
                         <cite>精选视频</cite>
                     </a>
                 </li>
-                <li>
+               <!--  <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
                     <cite>教师管理</cite>
@@ -579,7 +579,7 @@
                         </a>
                     </li >
                 </ul>
-            </li>
+            </li> -->
             @elseif($role==6)
              <li>
                 <a href="javascript:;">

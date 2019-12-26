@@ -39,12 +39,24 @@
     <label class="layui-form-label">身份：</label>
     @if($data['role']==1)
         <label class="layui-form-label">总管理员</label>
-    @elseif($data['role']==2)
-        <label class="layui-form-label">管理员</label>
+    @elseif($data['role']==26)
+        <label class="layui-form-label">总部教研(语文)</label>
+        @elseif($data['role']==27)
+        <label class="layui-form-label">总部教研(数学)</label>
+        @elseif($data['role']==28)
+        <label class="layui-form-label">总部教研(英语)</label>
     @elseif($data['role']==3)
-        <label class="layui-form-label">加盟校长</label>
+        <label class="layui-form-label">投资人</label>
     @elseif($data['role']==4)
-        <label class="layui-form-label">教师</label>
+        <label class="layui-form-label">校长</label>
+         @elseif($data['role']==5)
+        <label class="layui-form-label">教学主管</label>
+         @elseif($data['role']==6)
+        <label class="layui-form-label">语文教师</label>
+         @elseif($data['role']==7)
+        <label class="layui-form-label">数学教师</label>
+         @elseif($data['role']==8)
+        <label class="layui-form-label">英语教师</label>
     @endif
 </div></br></br></br>
 

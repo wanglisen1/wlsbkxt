@@ -1216,7 +1216,6 @@ class AdminController extends Controller
                 }else{
                     $res=CollectModel::where('coll_id',$coll_id)->where('cha_id',$id)->update(['jysh'=>2,'is_show'=>3]);
                 }
-                 
             }
           
           if ($res) {

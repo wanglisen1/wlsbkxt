@@ -230,11 +230,11 @@
                 <li >
                     <a href="javascript:;">
                         <i class="iconfont">&#xe7ce;</i>
-                        <cite>我的备课</cite>
+                        <cite>全部备课</cite>
                         <i class="iconfont nav_right">&#xe6a7;</i>
                     </a>
                     <ul class="sub-menu">
-                        <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>我备课的课节</cite></a></li>
+                        <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>全部备课课节</cite></a></li>
                     </ul>
                 </li>
                  <li >
@@ -529,6 +529,55 @@
                         </ul>
                     </li>
                     
+                </ul>
+            </li>
+            <li >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe7ce;</i>
+                        <cite>教师备课</cite>
+                        <i class="iconfont nav_right">&#xe6a7;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>全部教师备课</cite></a></li>
+                    </ul>
+                </li>
+                 <li >
+                    <a _href="/pptlist">
+                        <i class="iconfont">&#xe812;</i>
+                        <cite>ppt</cite>
+                    </a>
+                </li>
+                <li >
+                    <a _href="/videolist">
+                        <i class="iconfont">&#xe820;</i>
+                        <cite>精选视频</cite>
+                    </a>
+                </li>
+                <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe726;</i>
+                    <cite>教师管理</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/userlist">
+                            <i class="iconfont" >&#xe6a7;</i>
+                            <cite>教师列表</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="/useradd">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>教师添加</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="/Administratordel">
+                            <i class="iconfont" >&#xe6a7;</i>
+                            <cite>已删除教师</cite>
+                        </a>
+                    </li >
                 </ul>
             </li>
             @elseif($role==6)

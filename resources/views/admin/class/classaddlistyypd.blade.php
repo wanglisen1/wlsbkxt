@@ -18,7 +18,7 @@
     <label class="layui-form-label" style="margin-left: -100px;margin-bottom:-40px ;">科目：</label>
     <select name="role" id="season" lay-verify="" style="margin-left:10px; ">
         <option value="">--请选择一个季度--</option>
-        <option value="SEASON YEAR">SEASON YEAR</option>
+        <option value="SEASON YEAR">SEASON</option>
     </select></br></br></br>
 </div>
 <input type="hidden" id="subject" value="4">

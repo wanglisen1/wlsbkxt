@@ -24,9 +24,9 @@
            <select name="season" id="season">
                 <option value="">请选择一个季度</option>
                 @if($sub_name=="HS英语")
-                <option value="SEASON YEAR">SEASON YEAR</option>
+                <option value="SEASON YEAR">YEAR</option>
                 @elseif($sub_name=="Phonics自然拼读")
-                <option value="SEASON YEAR">SEASON YEAR</option>
+                <option value="SEASON YEAR">SEASON</option>
                 @else
                 @foreach($res3 as $k=>$v)
                 @if($v['is_show']==1)

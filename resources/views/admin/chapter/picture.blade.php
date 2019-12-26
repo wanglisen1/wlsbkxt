@@ -41,7 +41,13 @@
 <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/picturejs?id={{$id}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe723;&nbsp;</i>教师用书</a></dd>
   @else
   @endif
-            <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/picture?id={{$id}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe724;&nbsp;</i>学生用书</a></dd>
+            <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/picture?id={{$id}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe724;&nbsp;</i>
+            @if($sub_name=='HS英语')
+            KB教学目标
+            @else
+            学生用书
+            @endif
+          </a></dd>
   @if(!empty($res['video']))
             <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="videolistbox?video_id={{$video}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe719;&nbsp;</i>授课视频</a></dd>
   @else

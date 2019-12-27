@@ -1342,20 +1342,59 @@ class AdminController extends Controller
 		    header('Location: /flogin.php');
 			exit;
 		}
-        $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
+        $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role = $res5['role'];
         $moren = $res5['addjs'];
 		$subject = $request->input('subject');
         $res3 = ChaseaModel::where('chasea_sub',$subject)->get();
 		$grade = $request->input('grade');
         if($role==5){
-            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
-        }else if($role==26){
-             $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
-         }else if($role==27){
-            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
-        }else if($role==28){
-             $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            $res6 = CollectModel::where('uid',$_SESSION["uid"])->get();
+            $countres6 = count($res6);
+            if($countres6==$moren){
+                foreach($res6 as $k=>$v){
+                    if($v['is_show']==3){
+                        $morens=$moren+2;
+                        $res7 = AdminuserModel::where('u_id',$_SESSION["uid"])->update(['addjs'=>$morens]);
+                        $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+                    }else{
+                        $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+                    }
+                }
+            }else{
+               $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            }
+            
+        }else if($role==6){
+              $res6 = CollectModel::where('uid',$_SESSION["uid"])->get();
+            $countres6 = count($res6);
+            if($countres6!=$moren){
+                $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            }else{
+                $morens=$moren+2;
+                $res7 = AdminuserModel::where('u_id',$_SESSION["uid"])->update(['addjs'=>$morens]);
+                 $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            }
+         }else if($role==7){
+             $res6 = CollectModel::where('uid',$_SESSION["uid"])->get();
+            $countres6 = count($res6);
+            if($countres6!=$moren){
+                $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            }else{
+                $morens=$moren+2;
+                $res7 = AdminuserModel::where('u_id',$_SESSION["uid"])->update(['addjs'=>$morens]);
+                 $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            }
+        }else if($role==8){
+             $res6 = CollectModel::where('uid',$_SESSION["uid"])->get();
+            $countres6 = count($res6);
+            if($countres6!=$moren){
+                $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            }else{
+                $morens=$moren+2;
+                $res7 = AdminuserModel::where('u_id',$_SESSION["uid"])->update(['addjs'=>$morens]);
+                 $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            }
          }else{
             $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->get();
          }

@@ -566,18 +566,6 @@
                             <cite>教师列表</cite>
                         </a>
                     </li >
-                    <li>
-                        <a _href="/useradd">
-                            <i class="iconfont">&#xe6a7;</i>
-                            <cite>教师添加</cite>
-                        </a>
-                    </li >
-                    <li>
-                        <a _href="/Administratordel">
-                            <i class="iconfont" >&#xe6a7;</i>
-                            <cite>已删除教师</cite>
-                        </a>
-                    </li >
                 </ul>
             </li>
             @elseif($role==6)

@@ -317,8 +317,10 @@ class AdminController extends Controller
             $res = AdminuserModel::where('is_del',1)->paginate(30);
         }else if($role===3){
             $res = AdminuserModel::where('is_del',1)->where('alliance',$_SESSION["uid"])->whereIn('role',['4','5','6','7','8'])->paginate(30);
+        }else if($role===4){
+            $res = AdminuserModel::where('is_del',1)->where('alliance',$data['alliance'])->whereIn('role',['5','6','7','8'])->paginate(30);
         }else{
-            $res = NULL;
+             $res = NULL;
         }
 
         $count=count($res);

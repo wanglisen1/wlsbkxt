@@ -248,7 +248,7 @@ class AdminController extends Controller
                 'alliance' => $_SESSION["uid"],
                 'addjs' => '6'
             ];
-            }else if($role==26){
+            }else if($role==6){
                 $data = [
                 'tel' => $tel,
                 'password' => $password,
@@ -260,7 +260,7 @@ class AdminController extends Controller
                 'alliance' => $_SESSION["uid"],
                 'addjs' => '3'
             ];
-            }else if($role==27){
+            }else if($role==7){
                 $data = [
                 'tel' => $tel,
                 'password' => $password,
@@ -272,7 +272,7 @@ class AdminController extends Controller
                 'alliance' => $_SESSION["uid"],
                 'addjs' => '3'
             ];
-            }else if($role==28){
+            }else if($role==8){
                  $data = [
                 'tel' => $tel,
                 'password' => $password,

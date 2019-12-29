@@ -66,7 +66,7 @@
 @if($tzr==2)
 <div class="layui-col-md6" >
     <label class="layui-form-label" style="margin-left:330px;">角色：</label>
-    <select name="role" id="role" lay-verify="" style="width:300px;margin-left:400px;margin-top:-40px;">
+    <select name="role" id="role" lay-verify="" style="width:300px;margin-left:450px;margin-top:-40px;">
         @if($role==1)
         <option value="26" >总部教研(语文)</option>
         <option value="27" >总部教研(数学)</option>

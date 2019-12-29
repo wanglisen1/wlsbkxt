@@ -1150,13 +1150,15 @@ class AdminController extends Controller
 			 header('Location: /flogin.php');
 				exit;
 		}
-	   $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
+	   $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first();
 	   $role=$res5['role'];
 	   $res1 = AdminuserModel::where('is_del',1)->where('u_id',$_SESSION["uid"])->first();
 	   $username=$res1['username'];
-		if($role==3||$role==4){
+		if($role==3){
 		 $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
-		}else if($role==26){
+		}else if($role==4){
+             $res= CollectModel::where('collect.alliance',$rews5['alliance'])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+        }else if($role==26){
             $res= CollectModel::where('collect.role', 6)->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==27){
             $res= CollectModel::where('collect.role', 7)->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
@@ -1454,7 +1456,7 @@ class AdminController extends Controller
          if (empty($_SESSION["uid"])) {
 	       header('Location: /flogin.php');
 	       exit;
-	 }
+	       }
 	     $grade=$request->input('grade');
 	     $season=$request->input('season');
 	      $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();

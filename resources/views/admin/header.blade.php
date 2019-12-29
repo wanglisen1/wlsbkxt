@@ -581,6 +581,16 @@
                     </ul>
                 </li>
                  <li >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe7ce;</i>
+                        <cite>全部备课</cite>
+                        <i class="iconfont nav_right">&#xe6a7;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>全部教师备课</cite></a></li>
+                    </ul>
+                </li>
+                 <li >
                     <a _href="/pptlist">
                         <i class="iconfont">&#xe812;</i>
                         <cite>ppt</cite>

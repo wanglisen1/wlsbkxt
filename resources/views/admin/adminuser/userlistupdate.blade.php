@@ -80,9 +80,9 @@
         @elseif($role==3)
             <option value="4">校长</option>
             <option value="5">主管</option>
-            <option value="26">语文教师</option>
-            <option value="27">数学教师</option>
-            <option value="28">英语教师</option>
+            <option value="6">语文教师</option>
+            <option value="7">数学教师</option>
+            <option value="8">英语教师</option>
         @else
 
         @endif

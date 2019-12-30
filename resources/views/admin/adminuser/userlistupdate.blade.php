@@ -63,32 +63,6 @@
         @endif
     </div>
 </div></br></br></br></br>
-@if($tzr==2)
-<div class="layui-col-md6" >
-    <label class="layui-form-label" style="margin-left:330px;">角色：</label>
-    <select name="role" id="role" lay-verify="" style="width:300px;margin-left:450px;margin-top:-40px;">
-        @if($role==1)
-        <option value="26" >总部教研(语文)</option>
-        <option value="27" >总部教研(数学)</option>
-        <option value="28" >总部教研(英语)</option>
-        <option value="3">投资人</option>
-        <option value="4">校长</option>
-        <option value="5">主管</option>
-        <option value="6">语文教师</option>
-        <option value="7">数学教师</option>
-        <option value="8">英语教师</option>
-        @elseif($role==3)
-            <option value="4">校长</option>
-            <option value="5">主管</option>
-            <option value="6">语文教师</option>
-            <option value="7">数学教师</option>
-            <option value="8">英语教师</option>
-        @else
-
-        @endif
-    </select>
-</div></br></br></br></br>
-@endif
 <input type="hidden" id="uid" value="{{$data['u_id']}}">
 <div class="layui-col-md6" style="margin-left:650px;">
     <div class="layui-btn-container">

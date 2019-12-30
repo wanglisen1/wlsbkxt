@@ -422,7 +422,13 @@ class AdminController extends Controller
             if(empty($_SESSION["uid"])){
                 header('Location: /flogin.php');exit;
             }
-            $data=AdminuserModel::where('is_del',2)->paginate(30);
+            $res = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+            $role=$res['role'];
+            if($role==3){
+                $data = AdminuserModel::where('alliance',$_SESSION["uid"])->where('is_del',2)->get();
+            }else{
+                $data = AdminuserModel::where('is_del',2)->paginate(30);
+            }
             $count=count($data);
             $list=[
                 'data' => $data,

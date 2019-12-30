@@ -602,21 +602,6 @@
                         <cite>精选视频</cite>
                     </a>
                 </li>
-                <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe726;</i>
-                    <cite>教师管理</cite>
-                    <i class="iconfont nav_right">&#xe6a7;</i>
-                </a>
-                <ul class="sub-menu">
-                    <li>
-                        <a _href="/userlist">
-                            <i class="iconfont" >&#xe6a7;</i>
-                            <cite>教师列表</cite>
-                        </a>
-                    </li >
-                </ul>
-            </li>
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
@@ -893,6 +878,16 @@
                         </ul>     
                 </ul>
             </li>
+             <li >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe7ce;</i>
+                        <cite>全部备课</cite>
+                        <i class="iconfont nav_right">&#xe6a7;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>语文全部备课</cite></a></li>
+                    </ul>
+                </li>
             <li >
                     <a _href="/chapterseason">
                         <i class="iconfont">&#xe6da;</i>
@@ -949,6 +944,16 @@
                     
                 </ul>
             </li>
+            <li >
+                    <a href="javascript:;">
+                        <i class="iconfont">&#xe7ce;</i>
+                        <cite>全部备课</cite>
+                        <i class="iconfont nav_right">&#xe6a7;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>数学全部备课</cite></a></li>
+                    </ul>
+                </li>
              <li >
                     <a _href="/chapterseason">
                         <i class="iconfont">&#xe6da;</i>
@@ -1058,6 +1063,16 @@
                     
                 </ul>
             </li>
+            <li >
+                <a href="javascript:;">
+                        <i class="iconfont">&#xe7ce;</i>
+                        <cite>全部备课</cite>
+                        <i class="iconfont nav_right">&#xe6a7;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>英语全部备课</cite></a></li>
+                    </ul>
+                </li>
                @elseif($role==5)
              <li>
                 <a href="javascript:;">

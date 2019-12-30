@@ -5,6 +5,9 @@
 <script src="/layuiadmin/js/jquery.min.js"></script>
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
+@if($role==5||$role==6||$role==7||$role==8)
+
+@else
 <form class="layui-form layui-col-md12 x-so" style="margin-top:20px;" action="/sscha" method="POST" >
 <div style="float:left;width:300px;height:40px;">
 	 @if($ht==1)
@@ -54,6 +57,7 @@
 	<span class="x-right" style="line-height:40px">本页共有数据：<b style="color:red;">{{$count}}</b>条</span>
 	</div>	
 </form>
+@endif
 <table class="layui-table">
     <thead>
     <tr>

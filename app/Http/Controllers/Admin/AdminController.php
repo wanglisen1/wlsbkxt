@@ -1218,21 +1218,26 @@ class AdminController extends Controller
 
             if($role==4||$role==3){
             $res=CollectModel::where('alliance',$_SESSION["uid"])->where('cha_id',$id)->update(['xzsh'=>2]);
-
+                    if ($res) {
+                return ['code' => 1, 'msg' => '已完成审核！请等待总部审核。'];
+                 } else {
+                return ['code' => 0, 'msg' => '网络好像不太好~,请重新点击'];
+                }
             }else{
                 $res9=CollectModel::where('coll_id',$coll_id)->where('cha_id',$id)->first();
                 if($res9['xzsh']==1){
                     return ['code' => 2, 'msg' => '请等校长审核完毕在审核！'];
                 }else{
                     $res=CollectModel::where('coll_id',$coll_id)->where('cha_id',$id)->update(['jysh'=>2,'is_show'=>3]);
+                    if ($res) {
+                         return ['code' => 1, 'msg' => '已完成审核！'];
+                        } else {
+                        return ['code' => 0, 'msg' => '网络好像不太好~,请重新点击'];
+                }
                 }
             }
           
-          if ($res) {
-            return ['code' => 1, 'msg' => '已完成审核！'];
-        } else {
-            return ['code' => 0, 'msg' => '网络好像不太好~,请重新点击'];
-            }
+          
     }
     //图片展示
      public function picture(Request $request){

@@ -17,7 +17,18 @@
     <tbody>
     @foreach($data as $k=>$v)
         <tr>
-	    <td style="text-align:center;">{{$v['ppt_sub']}}</td>
+	    <td style="text-align:center;">
+             @if($v['ppt_sub']=="趣味大语文")
+    <span style=""><img src="/ywlogo.png" width="25px;"></span>
+    @elseif($v['ppt_sub']=="思维培优数学")
+    <span style=""><img src="/sxlogo.png" width="25px;"></span>
+    @elseif($v['ppt_sub']=="HS英语")
+    <span style=""><img src="/yylogo.png" width="25px;"></span>
+    @elseif($v['ppt_sub']=="Phonics自然拼读")
+    <span style=""><img src="/yypdlogo.png" width="25px;"></span>
+    @endif
+        {{$v['ppt_sub']}}
+    </td>
 	    <td style="text-align:center;">{{$v['ppt_grade']}}</td>
 	   <td style="text-align:center;">{{$v['ppt_season']}}</td>
 	<td style="text-align:center;">{{$v['ppt_title']}}</td>

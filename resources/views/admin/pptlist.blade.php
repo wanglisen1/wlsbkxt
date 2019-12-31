@@ -22,8 +22,8 @@
     <span style=""><img src="/ywlogo.png" width="25px;"></span>
     @elseif($v['ppt_sub']=="思维培优数学")
     <span style=""><img src="/sxlogo.png" width="25px;"></span>
-    @elseif($v['ppt_sub']=="HS英语")
-    <span style=""><img src="/yylogo.png" width="25px;"></span>
+    @elseif($v['ppt_sub']=="KB课程")
+    <span style=""><img src="/kblogo.png" width="25px;"></span>
     @elseif($v['ppt_sub']=="Phonics自然拼读")
     <span style=""><img src="/yypdlogo.png" width="25px;"></span>
     @endif

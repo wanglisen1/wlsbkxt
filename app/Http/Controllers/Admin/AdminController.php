@@ -1520,8 +1520,10 @@ class AdminController extends Controller
 	   }
 	  
    }
-   public function videolist(){
-       $res = VideoModel::orderByRaw('convert(video_sub using gbk)')->get();
+   public function videolist(Request $request){
+     $subject = $request->input('subject');
+    $grade = $request->input('grade');
+       $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->get();
 	   $count=count($res);
 	$list=[
 		'data' => $res,
@@ -1529,8 +1531,10 @@ class AdminController extends Controller
 	];
    	return view('admin.videolist',$list);
    }
-   public function pptlist(){
-       $res = PptModel::orderByRaw('convert(ppt_sub using gbk)')->get();
+   public function pptlist(Request $request){
+    $subject = $request->input('subject');
+    $grade = $request->input('grade');
+       $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->get();
              $count=count($res);
 	           $list=[
                   'data' => $res,

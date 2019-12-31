@@ -33,6 +33,8 @@
     <thead>
     <tr>
         <th style="text-align:center;">视频类别</th>
+        <th style="text-align:center;">年级</th>
+        <th style="text-align:center;">季度</th>
         <th style="text-align:center;">视频名称</th>
         <th style="text-align:center;">操作</th>
     </thead>
@@ -40,6 +42,8 @@
     @foreach($data as $k=>$v)
         <tr>
 	    <td style="text-align:center;">{{$v['video_sub']}}</td>
+        <td style="text-align:center;">{{$v['video_grade']}}</td>
+        <td style="text-align:center;">{{$v['video_season']}}</td>
 	<td style="text-align:center;">{{$v['video_title']}}</td>
             <td class="td-manage" style="text-align:center;">
 		<a href="/videolistbox?video_id={{$v['video_id']}}">

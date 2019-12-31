@@ -48,7 +48,7 @@
     <span style=""><img src="/sxlogo.png" width="25px;"></span>
     @elseif($v['video_sub']=="KB课程")
     <span style=""><img src="/kblogo.png" width="20px;"></span>
-    @elseif($v['ppt_sub']=="资源类")
+    @elseif($v['video_sub']=="资源类")
     <span style=""><img src="/lianglogo.png" width="20px;"></span>
     @elseif($v['video_sub']=="Phonics自然拼读")
     <span style=""><img src="/yypdlogo.png" width="25px;"></span>

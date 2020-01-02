@@ -1163,7 +1163,7 @@ class AdminController extends Controller
 		if($role==3){
 		 $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
 		}else if($role==4){
-             $res= CollectModel::where('collect.alliance',$rews5['alliance'])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+             $res= CollectModel::where('collect.alliance',$res5['alliance'])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==26){
             $res= CollectModel::where('collect.role', 6)->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==27){

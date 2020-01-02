@@ -16,7 +16,7 @@
   <body class="form-wrap" >
     <style id="LAY_layadmin_theme">.layui-side-menu,.layadmin-pagetabs .layui-tab-title li:after,.layadmin-pagetabs .layui-tab-title li.layui-this:after,.layui-layer-admin .layui-layer-title,.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child{background-color:#20222A !important;}.layui-nav-tree .layui-this,.layui-nav-tree .layui-this>a,.layui-nav-tree .layui-nav-child dd.layui-this,.layui-nav-tree .layui-nav-child dd.layui-this a{background-color:#009688 !important;}.layui-layout-admin .layui-logo{background-color:#20222A !important;}
 </style>
-@if($role==5||$role==6||$role==7||$role==8)
+@if($role==3||$role==4||$role==5||$role==6||$role==7||$role==8)
 
 @else
 <form class="layui-form layui-col-md12 x-so" style="margin-top:20px;" action="/sscha" method="POST" >

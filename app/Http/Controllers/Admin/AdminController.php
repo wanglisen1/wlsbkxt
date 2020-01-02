@@ -326,7 +326,8 @@ class AdminController extends Controller
         $count=count($res);
         $list=[
             'data' => $res,
-            'count' => $count
+            'count' => $count,
+            'role' => $role
         ];
         return view('admin.adminuser.userlist',$list);
     }

@@ -1530,7 +1530,12 @@ class AdminController extends Controller
    public function videolist(Request $request){
      $subject = $request->input('subject');
     $grade = $request->input('grade');
-       $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->get();
+      if($subject=='资源类'){
+        $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->get();
+    }else{
+        $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->orderBy('number','asc')->get();
+    }
+       
 	   $count=count($res);
 	$list=[
 		'data' => $res,

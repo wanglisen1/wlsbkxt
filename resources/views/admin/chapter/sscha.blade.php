@@ -36,7 +36,7 @@
 	@if($ht==1)
         @if($sub_name=="KB课程")
 
-        @else($sub_name=="Phonics自然拼读")
+        @elseif($sub_name=="Phonics自然拼读")
 
         @else
          <div class="layui-input-inline" style="float:left;">

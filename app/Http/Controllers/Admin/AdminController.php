@@ -118,7 +118,7 @@ class AdminController extends Controller
         }
             
         }else{
-            return ['code' => 0, 'msg' => '用户不存在'];
+            return ['code' => 0, 'msg' => '电话号码不存在,请重新输入。'];
         }
     }
 

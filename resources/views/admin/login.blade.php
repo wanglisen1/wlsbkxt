@@ -44,13 +44,13 @@
 			var tel =$("#tel").val();
 			var pwd =$("#password").val();
 
-			if(empty(tel)){
+			if(tel==''){
 				alert('电话号码不能为空');
 				return false;
-			}if(empty(pwd)){
+			}if(pwd==''){
 				alert('密码不能为空');
 				return false;
-			}if(empty(uname)){
+			}if(uname==''){
 				alert('用户名不能为空');
 				return false;
 			}

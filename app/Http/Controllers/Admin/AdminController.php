@@ -1541,7 +1541,7 @@ class AdminController extends Controller
    public function pptlist(Request $request){
     $subject = $request->input('subject');
     $grade = $request->input('grade');
-       $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->get();
+       $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->orderBy('number','asc')->get();
              $count=count($res);
 	           $list=[
                   'data' => $res,

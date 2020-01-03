@@ -135,48 +135,48 @@
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
-                            <cite id="kcyy">HS英语</cite>
-                             <input type="hidden" name="" id="kcyys" value="HS英语">
+                            <cite id="kcyy">KB课程</cite>
+                             <input type="hidden" name="" id="kcyys" value="KB课程">
                             <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a _href="/newsousuo?subject=HS英语&grade=K1">
+                                <a _href="/newsousuo?subject=KB课程&grade=K1">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K1</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K2">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K2">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K2</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K3">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K3">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K3</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K4">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K4">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K4</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K5">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K5">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K5</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K6">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K6">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K6</cite>
                                     
@@ -814,48 +814,48 @@
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
-                            <cite id="kcyy">HS英语</cite>
-                             <input type="hidden" name="" id="kcyys" value="HS英语">
+                            <cite id="kcyy">KB课程</cite>
+                             <input type="hidden" name="" id="kcyys" value="KB课程">
                             <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a _href="/newsousuo?subject=HS英语&grade=K1">
+                                <a _href="/newsousuo?subject=KB课程&grade=K1">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K1</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K2">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K2">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K2</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K3">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K3">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K3</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K4">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K4">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K4</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K5">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K5">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K5</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K6">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K6">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K6</cite>
                                     
@@ -1408,48 +1408,48 @@
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
-                            <cite id="kcyy">HS英语</cite>
-                             <input type="hidden" name="" id="kcyys" value="HS英语">
+                            <cite id="kcyy">KB课程</cite>
+                             <input type="hidden" name="" id="kcyys" value="KB课程">
                             <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a _href="/newsousuo?subject=HS英语&grade=K1">
+                                <a _href="/newsousuo?subject=KB课程&grade=K1">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K1</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K2">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K2">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K2</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K3">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K3">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K3</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K4">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K4">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K4</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K5">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K5">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K5</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K6">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K6">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K6</cite>
                                     
@@ -2047,48 +2047,48 @@
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
-                            <cite id="kcyy">HS英语</cite>
-                             <input type="hidden" name="" id="kcyys" value="HS英语">
+                            <cite id="kcyy">KB课程</cite>
+                             <input type="hidden" name="" id="kcyys" value="KB课程">
                             <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a _href="/newsousuo?subject=HS英语&grade=K1">
+                                <a _href="/newsousuo?subject=KB课程&grade=K1">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K1</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K2">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K2">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K2</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K3">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K3">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K3</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K4">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K4">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K4</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K5">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K5">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K5</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K6">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K6">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K6</cite>
                                     
@@ -2290,48 +2290,48 @@
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
-                            <cite id="kcyy">HS英语</cite>
-                             <input type="hidden" name="" id="kcyys" value="HS英语">
+                            <cite id="kcyy">KB课程</cite>
+                             <input type="hidden" name="" id="kcyys" value="KB课程">
                             <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a _href="/newsousuo?subject=HS英语&grade=K1">
+                                <a _href="/newsousuo?subject=KB课程&grade=K1">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K1</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K2">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K2">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K2</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K3">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K3">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K3</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K4">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K4">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K4</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K5">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K5">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K5</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K6">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K6">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K6</cite>
                                     
@@ -2481,48 +2481,48 @@
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
-                            <cite id="kcyy">HS英语</cite>
-                             <input type="hidden" name="" id="kcyys" value="HS英语">
+                            <cite id="kcyy">KB课程</cite>
+                             <input type="hidden" name="" id="kcyys" value="KB课程">
                             <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
                         <ul class="sub-menu">
                             <li>
-                                <a _href="/newsousuo?subject=HS英语&grade=K1">
+                                <a _href="/newsousuo?subject=KB课程&grade=K1">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K1</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K2">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K2">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K2</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K3">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K3">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K3</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K4">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K4">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K4</cite>
                                     
                                 </a>
                             </li>
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K5">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K5">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K5</cite>
                                     
                                 </a>
                             </li >
                             <li>
-                                 <a _href="/newsousuo?subject=HS英语&grade=K6">
+                                 <a _href="/newsousuo?subject=KB课程&grade=K6">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K6</cite>
                                     

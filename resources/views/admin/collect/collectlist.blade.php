@@ -58,19 +58,19 @@
         <option value="">请选择一个季度</option>
         @if($role==4)
                 <option value="春">春</option>
-                <option value="署">署</option>
+                <option value="暑">暑</option>
                 <option value="秋">秋</option>
         <option value="寒">寒</option>
         @elseif($role==5)
         <option value="春">春</option>
-                <option value="署">署</option>
+                <option value="暑">暑</option>
                 <option value="秋">秋</option>
                 <option value="寒">寒</option>
         @elseif($role==6)
         <option value="SEASON YEAR">SEASON YEAR</option>
         @else
          <option value="春">春</option>
-                <option value="署">署</option>
+                <option value="暑">暑</option>
                 <option value="秋">秋</option>
                 <option value="寒">寒</option>
         <option value="SEASON YEAR">SEASON YEAR</option>

@@ -5,6 +5,6 @@
 	<title>ppt播放</title>
 </head>
 <body>
-<embed src="/ppt/{{$data['ppt_content']}}" width="1100" height="600"></embed>
+<embed src="/ppt/{{$data['ppt_content']}}" width="100%" ></embed>
 </body>
 </html>

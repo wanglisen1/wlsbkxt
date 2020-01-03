@@ -10,8 +10,8 @@
 
 <body>
 
-<div class="content" >
-	<div class="login" style="margin-right:10%;">
+<div class="content">
+	<div class="login" style="margin-right:10%;width:20%;margin-top:-2%;height:380px;">
 		<div class="title">欢迎登陆HSKMS备课管理系统</div>
 		<div class="locon">
 			<div class="line">

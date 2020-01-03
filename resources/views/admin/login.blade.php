@@ -11,9 +11,13 @@
 <body>
 
 <div class="content" >
-	<div class="login" style="width: 20%;height: 43%;margin-right:10%;">
+	<div class="login" style="margin-right:10%;">
 		<div class="title">欢迎登陆HSKMS备课管理系统</div>
 		<div class="locon">
+			<div class="line">
+				<img class="smallImg" src="/loginmodel/img/icon3.png" />
+				<input placeholder="请输入用户名" type="text" name="uname" id="uname" />
+			</div>
 			<div class="line">
 				<img class="smallImg" src="/loginmodel/img/icon3.png" />
 				<input placeholder="请输入您的手机号" type="text" name="tel" id="tel" />
@@ -36,19 +40,23 @@
 <script>
 	$(function(){
 		$("#btn").click(function(){
+			var uname =$("#uname").val();
 			var tel =$("#tel").val();
 			var pwd =$("#password").val();
 
-			if(tel==''){
+			if(empty(tel)){
 				alert('电话号码不能为空');
 				return false;
-			}if(pwd==''){
+			}if(empty(pwd)){
 				alert('密码不能为空');
+				return false;
+			}if(empty(uname)){
+				alert('用户名不能为空');
 				return false;
 			}
 			$.ajax({
 				type: 'post',
-				data:{tel:tel,pwd:pwd},
+				data:{tel:tel,pwd:pwd,uname:uname},
 				dateType:'json',
 				url: "/loginadd",
 				success:function(msg){

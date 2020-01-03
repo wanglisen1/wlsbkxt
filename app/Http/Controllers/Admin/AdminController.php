@@ -95,11 +95,13 @@ class AdminController extends Controller
     //登录处理
     public function loginadd(Request $request)
     {
-        $tel= $request->input('tel');
-        $password =$request->input('pwd');
+        $tel = $request->input('tel');
+        $password = $request->input('pwd');
+        $loname = $request->input('uname');
         //$pwd=md5($password);
         $data=AdminuserModel::where('tel',$tel)->where('is_del',1)->first();
         if($data['tel']!=""){
+          if($data['username'] === $loname){
             if($data['password'] === $password) {
                 $id = $data['u_id'];
                 $res=AdminuserModel::where('u_id',$id)->first();
@@ -111,6 +113,10 @@ class AdminController extends Controller
             }else{
                 return ['code' => 2, 'msg' => '密码不正确'];
             }
+        }else{
+            return ['code' => 4, 'msg' => '用户名不正确,请重新输入。'];
+        }
+            
         }else{
             return ['code' => 0, 'msg' => '用户不存在'];
         }

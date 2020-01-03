@@ -34,13 +34,18 @@
 	  </div>
 	</div>
 	@if($ht==1)
+        @if($sub_name=="KB课程")
+
+        @else($sub_name=="Phonics自然拼读")
+
+        @else
          <div class="layui-input-inline" style="float:left;">
            <select name="season" id="season">
                 <option value="">请选择一个季度</option>
-                @if($sub_name=="HS英语")
-                <option value="SEASON YEAR">YEAR</option>
+                @if($sub_name=="KB课程")
+        
                 @elseif($sub_name=="Phonics自然拼读")
-                <option value="SEASON YEAR">SEASON</option>
+    
                 @else
                 @foreach($res3 as $k=>$v)
                 @if($v['is_show']==1)
@@ -51,6 +56,7 @@
                 @endif
            </select>
         </div>
+        @endif
         <div> 
         <input type="text" name="cha_name" id="cha_name"  placeholder="请输入课节名称的关键字" autocomplete="off" class="layui-input" style="width:200px;float:left;margin-left:10px;">
         </div>

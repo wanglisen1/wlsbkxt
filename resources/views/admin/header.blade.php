@@ -29,7 +29,30 @@
 
     <ul class="layui-nav right" lay-filter="">
         <li class="layui-nav-item">
-            <a href="javascript:;">你好！{{$sname}}</a>
+            <a href="javascript:;">你好！{{$sname}}
+            @if($role==1)
+            (总管理员)
+            @elseif($role==3)
+            (投资人)
+            @elseif($role==4)
+            (校长)
+            @elseif($role==5)
+            (教学主管)
+            @elseif($role==6)
+            (语文教师)
+            @elseif($role==7)
+            (数学教师)
+            @elseif($role==8)
+            (英语教师)
+            @elseif($role==26)
+            (总部语文教研)
+            @elseif($role==27)
+            (总部数学教研)
+            @elseif($role==28)
+            (总部英语教研)
+            @else
+            @endif
+            </a>
             <dl class="layui-nav-child"> <!-- 二级菜单 -->
                 <dd><a onClick="x_admin_show('个人信息','/pim')">个人信息</a></dd>
                 <dd><a id="tuichu"  class="tc" value="1">退出</a></dd>

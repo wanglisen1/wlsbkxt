@@ -5,7 +5,7 @@
 <script src="/layuiadmin/js/jquery.min.js"></script>
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
-<form class="layui-form layui-col-md12 x-so" style="margin-top:20px;" action="/sscoll" method="POST" >
+<!-- <form class="layui-form layui-col-md12 x-so" style="margin-top:20px;" action="/sscoll" method="POST" >
 <div style="float:left;width:300px;height:40px;">
           <div style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px;" id="sx" align="center">
           <i class="iconfont" style="color:#fff;">&#xe6aa;&nbsp;&nbsp;刷新</i>
@@ -85,7 +85,7 @@
         <div style="float:left;margin-left:50px;">
         <span class="x-right" style="line-height:40px">本页共有数据：<b style="color:red;">{{$count}}</b>条</span>
         </div>
-</form>
+</form> -->
 @if($role!=4&&$role!=26&&$role!=27&&$role!=28&&$role!=1&&$role!=3)
 <table class="layui-table">
     <thead>

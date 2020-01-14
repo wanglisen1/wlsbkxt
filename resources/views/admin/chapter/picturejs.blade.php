@@ -18,7 +18,7 @@
     --swiper-theme-color: #ff6600;
     --swiper-pagination-color: #00ff33;/* 两种都可以 */
   }
-  @if($sub_name=='HS英语')
+  @if($sub_name=='KB课程')
   .swiper-slide>div{
   padding-bottom:70%;
 }

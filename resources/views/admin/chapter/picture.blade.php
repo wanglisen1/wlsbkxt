@@ -18,7 +18,7 @@
     --swiper-theme-color: #ff6600;
     --swiper-pagination-color: #00ff33;/* 两种都可以 */
   }
-  @if($sub_name=='HS英语')
+  @if($sub_name=='KB课程')
 	.swiper-slide>div{
 	padding-bottom:70%;
 }
@@ -46,7 +46,7 @@
   @else
   @endif
             <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/picture?id={{$id}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe724;&nbsp;</i>
-            @if($sub_name=='HS英语')
+            @if($sub_name=='KB课程')
             <i style="color:red;">KB教学目标</i>
             @else
             <i style="color:red;">学生用书</i>

@@ -41,10 +41,7 @@
 	@else
 	 <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/sscha?cha_name={{$cha_name}}&season={{$season}}&sub_name={{$sub_name}}&grade={{$grade}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe697;&nbsp;</i>返回</a></dd>
 	@endif
-  @if(!empty($res['field_pdfjs']))
-<dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/picturejs?id={{$id}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe723;&nbsp;</i>教师用书</a></dd>
-  @else
-  @endif
+  
             <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/picture?id={{$id}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe724;&nbsp;</i>
             @if($sub_name=='KB课程')
             <i style="color:red;">KB教学目标</i>
@@ -54,18 +51,24 @@
             <i style="color:red;">学生用书</i>
             @endif
           </a></dd>
-  @if(!empty($res['video']))
-            <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="videolistbox?video_id={{$video}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe719;&nbsp;</i>授课视频</a></dd>
+          @if(!empty($res['field_pdfjs']))
+<dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/picturejs?id={{$id}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe723;&nbsp;</i>教师用书</a></dd>
   @else
-  @endif
-  @if(!empty($res['ppt']))
-            <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/pptlistbox?ppt_id={{$ppt}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe74e;&nbsp;</i>PPT课件</a></dd>
- @else
   @endif
   @if(!empty($res['field_pdflx'])) 
             <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/picturelx?id={{$id}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe69e;&nbsp;</i>巩固练习</a></dd>
     @else
   @endif
+    @if(!empty($res['ppt']))
+            <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/pptlistbox?ppt_id={{$ppt}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe74e;&nbsp;</i>PPT课件</a></dd>
+ @else
+  @endif
+  @if(!empty($res['video']))
+            <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="videolistbox?video_id={{$video}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe719;&nbsp;</i>授课视频</a></dd>
+  @else
+  @endif
+
+  
         </dt>
     </dl>
 </div>

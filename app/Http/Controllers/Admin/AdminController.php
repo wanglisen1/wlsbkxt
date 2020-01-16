@@ -1167,6 +1167,7 @@ class AdminController extends Controller
 	   $role=$res5['role'];
 	   $res1 = AdminuserModel::where('is_del',1)->where('u_id',$_SESSION["uid"])->first();
 	   $username=$res1['username'];
+       print_r($_SESSION["uid"]);exit;
 		if($role==3){
 		 $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
 		}else if($role==4){

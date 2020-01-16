@@ -935,7 +935,7 @@ class AdminController extends Controller
             echo 'file not readable';
         }
         $im = new Imagick();
-        $im->setResolution(180, 180); //设置分辨率 值越大分辨率越高
+        $im->setResolution(200, 200); //设置分辨率 值越大分辨率越高
         $im->setCompressionQuality(100);
         $im->readImage($pdf);
         foreach ($im as $k => $v) {
@@ -1017,7 +1017,7 @@ class AdminController extends Controller
 					 echo 'file not readable';
 	         }
 		 $im = new Imagick();
-		 $im->setResolution(180, 180); 
+		 $im->setResolution(200, 200); 
 		$im->setCompressionQuality(100);
 		$im->readImage($pdf);
 		foreach ($im as $k => $v) {

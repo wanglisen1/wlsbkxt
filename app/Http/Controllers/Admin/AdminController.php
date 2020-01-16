@@ -1274,7 +1274,7 @@ class AdminController extends Controller
 		  'count'=>$count,
 		  'id'=>$id,
 		  'sub_name'=>$res['sub_name'],
-		  'cha_name'=>$cha_name,
+		  'cha_name'=>$res['cha_name'],
 		  'season'=>$season,
 		  'grade'=>$grade,
           'ppt' => $res['ppt'],

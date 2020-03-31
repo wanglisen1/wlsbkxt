@@ -228,6 +228,8 @@ class AdminController extends Controller
             $sex = $request->input('sex');
             $password = $request->input('password');
             $role = $request->input('role');
+            // $xsjcbb = $request->input('xsjcbb');
+            //print_r($xsjcbb);exit;
             if($role==3){
                 $data = [
                 'tel' => $tel,
@@ -240,7 +242,8 @@ class AdminController extends Controller
                 'alliance' => $_SESSION["uid"],
                 'addjs' => '10',
                 'addxz' => '1',
-                'addzg' =>  '3'
+                'addzg' =>  '3',
+                // 'xsjcbb' => $xsjcbb
             ];
             }else if($role==5){
                 $data = [
@@ -299,7 +302,8 @@ class AdminController extends Controller
                 'sex' => $sex,
                 'role' => $role,
                 'addtime' => date("Y-m-d H:i:s"),
-                'alliance' => $_SESSION["uid"]
+                'alliance' => $_SESSION["uid"],
+                // 'xsjcbb' => $xsjcbb
             ];
         }
             $res = AdminuserModel::insert($data);
@@ -388,7 +392,7 @@ class AdminController extends Controller
         $addjs =$request->input('addjs');
         $addzg =$request->input('addzg');
         $addxz =$request->input('addxz');
-        $res=AdminuserModel::where('u_id',$id)->update(['tel'=>$tel,'username'=>$username,'email'=>$email,'sex'=>$sex,'role'=>$role,'addjs'=>$addjs,'addxz'=>$addxz,'addzg'=>$addzg]);
+        $res=AdminuserModel::where('u_id',$id)->update(['tel'=>$tel,'username'=>$username,'email'=>$email,'sex'=>$sex,'addjs'=>$addjs,'addxz'=>$addxz,'addzg'=>$addzg]);
         if ($res) {
             return ['code' => 1, 'msg' => '修改成功'];
         } else {
@@ -483,7 +487,6 @@ class AdminController extends Controller
             'data' => $res1
         ];
         return view('admin.chapterseason',$list);
-
     }
 
     //课节发放修改

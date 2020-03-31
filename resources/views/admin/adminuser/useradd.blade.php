@@ -77,7 +77,24 @@
         @endif
     </select>
 </div></br></br></br></br>
-
+<div class="layui-col-md6" style="width: 600px;margin-left: 100px;" id="xsbb">
+    <select name="xsjcbb" id="xsjcbb" lay-verify="">
+        <option value="">请选择数学教材版本</option>
+        <option value="人教版">人教版</option>
+        <option value="冀教版">冀教版</option>
+        <option value="北师大">北师大</option>
+        <option value="苏教版">苏教版</option>
+        <option value="鲁教版">鲁教版</option>
+    </select>
+    </br></br>
+</div>
+<!-- <div class="layui-card layui-form" lay-filter="component-form-element" >
+             <input type="checkbox" name="" title="人教版" checked>
+              <input type="checkbox" name="" title="冀教版"> 
+              <input type="checkbox" name="" title="北师大"> 
+              <input type="checkbox" name="" title="苏教版"> 
+              <input type="checkbox" name="" title="鲁教版"> 
+        </div> -->
 <div class="layui-form-item">
     <div class="layui-input-block">
         <button class="layui-btn" lay-submit lay-filter="component-form-element" id="btn">立即提交</button>
@@ -88,6 +105,18 @@
 <script src="/jquery-3.1.1.min.js"></script>
 <script>
     $(function(){
+        // $('#xsbb').hide();
+        // $('#role').change(function(){
+        //     var tzr = $(this).val();
+        //      if(tzr==3){
+        //          $('#xsbb').show();
+        //          return false;
+        //      }else{
+        //          $('#xsbb').hide();
+        //          return false;
+        //      }
+             
+        //      });
         $("#btn").click(function(){
             var tel =$("#tel").val();
             var email =$("#email").val();
@@ -95,6 +124,7 @@
             var password =$("#password").val();
             var password1 =$("#password1").val();
             var role =$("#role").val();
+            // var xsjcbb =$("#xsjcbb").val();
             var sex=$('input[name="sex"]:checked').val();
             if(tel==''){
                 alert('电话号码不能为空');
@@ -114,10 +144,11 @@
             }if(password1==''){
                 alert('确认密码不能为空');
                 return false;
-            } if(password!=password1) {
+            }if(password!=password1){
                 alert('确认密码与密码不一致');
                 return false;
             }
+
             $.ajax({
                 type: 'post',
                 data:{tel:tel,username:username,email:email,sex:sex,password:password,role:role},

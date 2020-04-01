@@ -17,8 +17,6 @@
 <table class="layui-table">
     <thead>
     <tr>
-
-        <th>ID</th>
         <th>登录名</th>
         <th>手机</th>
         <th>邮箱</th>
@@ -30,7 +28,6 @@
     <tbody>
     @foreach($data as $k=>$v)
     <tr>
-        <td>{{$v['u_id']}}</td>
         <td>{{$v['username']}}</td>
         <td>{{$v['tel']}}</td>
         <td>{{$v['email']}}</td>

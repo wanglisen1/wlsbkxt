@@ -24,8 +24,11 @@
     </div>
 </div></br></br>
 @if($tzr==2)
-    @if($data['role']==5||$data['role']==6||$data['role']==7||$data['role']==8)
+    @if($data['role']==56||$data['role']==57||$data['role']==58||$data['role']==6||$data['role']==7||$data['role']==8)
+    @if($data['role']==56||$data['role']==57||$data['role']==58)
+    @else
     <input type="hidden" id="num" value="{{$num['addjs']}}">
+    @endif
 <div class="layui-form-item" style="width:700px;margin:0 auto">
     <label class="layui-form-label">课节：</label>
     <div class="layui-input-block" >
@@ -68,7 +71,7 @@
     </div>
 </div></br></br></br></br>
 <input type="hidden" id="uid" value="{{$data['u_id']}}">
-<input type="hidden" id="tzr" value="{{$num['addjs']}}">
+<input type="hidden" id="tzr" value="{{$data['addjs']}}">
 <div class="layui-col-md6" style="margin-left:650px;">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-radius" id="btn" >修改信息</button>

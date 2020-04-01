@@ -43,12 +43,16 @@
         <td>{{$v['addjs']}}</td>
         <td class="td-manage">
 
+            <a title="查看所属员工"  onclick="" href="/tzrclassify?id={{$v['u_id']}}">
+                <i class="iconfont">&#xe6e6;&nbsp;</i>
+            </a>
             <a title="编辑"  onclick="" href="/userlistupdate?id={{$v['u_id']}}&tzr=1">
                 <i class="layui-icon">&#xe642;</i>
             </a>
             <a title="删除" class="del" onclick="" href="javascript:;" u_id="{{$v['u_id']}}">
                 <i class="layui-icon">&#xe640;</i>
             </a>
+
         </td>
     </tr>
         @endforeach

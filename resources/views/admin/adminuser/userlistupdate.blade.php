@@ -24,12 +24,15 @@
     </div>
 </div></br></br>
 @if($tzr==2)
+    @if($data['role']==5||$data['role']==6||$data['role']==7||$data['role']==8)
 <div class="layui-form-item" style="width:700px;margin:0 auto">
     <label class="layui-form-label">课节：</label>
     <div class="layui-input-block" >
         <input type="text" name="addjs" id="addjs" lay-verify="title" autocomplete="off"  class="layui-input" value="{{$data['addjs']}}">
     </div>
 </div></br></br>
+    @else
+    @endif
 @elseif($tzr==1)
 <div class="layui-form-item" style="width:700px;margin:0 auto">
     <label class="layui-form-label">校长：</label>
@@ -64,6 +67,7 @@
     </div>
 </div></br></br></br></br>
 <input type="hidden" id="uid" value="{{$data['u_id']}}">
+<input type="hidden" id="tzr" value="{{$tzr}}">
 <div class="layui-col-md6" style="margin-left:650px;">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-radius" id="btn" >修改信息</button>
@@ -82,6 +86,7 @@
             var addjs =$("#addjs").val();
             var addxz =$("#addxz").val();
             var addzg =$("#addzg").val();
+            var tzr = $("#tzr").val();
             if(tel==''){
                 alert('电话号码不能为空');
                 return false;
@@ -103,7 +108,12 @@
                 success:function(msg){
                     alert(msg.msg);
                     if(msg.code==1) {
-                        window.location = '/userlist';
+                        if(tzr==1){
+                            window.location = '/usertzrlist';
+                        }else{
+                            window.location = '/userlist';
+                        }
+                        
                     }
                 }
             });

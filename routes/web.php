@@ -41,6 +41,8 @@ Route::any('/useradd','Admin\AdminController@useradd');
 Route::any('/useradds','Admin\AdminController@useradds');
 //管理员展示
 Route::any('/userlist','Admin\AdminController@userlist');
+//投资人分类展示
+Route::any('/tzrclassify','Admin\AdminController@tzrclassify');
 //投资人展示
 Route::any('/usertzrlist','Admin\AdminController@usertzrlist');
 //管理员修改页面

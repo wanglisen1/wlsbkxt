@@ -109,7 +109,7 @@ class AdminController extends Controller
                 session_start();
                 $_SESSION["uid"]=$id;
                 $_SESSION["username"]=$uname;
-                return ['code' => 1, 'msg' => '登录成功'];
+                return ['code' => 1];
             }else{
                 return ['code' => 2, 'msg' => '密码不正确'];
             }
@@ -324,7 +324,7 @@ class AdminController extends Controller
         $role=$data['role'];
 
         if($role===1){
-            $res = AdminuserModel::where('is_del',1)->paginate(30);
+            $res = AdminuserModel::where('is_del',1)->whereNotIn('role',[3])->whereNotIn('role',[1])->paginate(30);
         }else if($role===3){
             $res = AdminuserModel::where('is_del',1)->where('alliance',$_SESSION["uid"])->whereIn('role',['4','5','6','7','8'])->paginate(30);
         }else if($role===4){
@@ -340,6 +340,29 @@ class AdminController extends Controller
             'role' => $role
         ];
         return view('admin.adminuser.userlist',$list);
+    }
+
+    public function tzrclassify(Request $request){
+         session_start();
+        if(empty($_SESSION["uid"])){
+            header('Location: /flogin.php');exit;
+        }
+        $id = $request->input('id'); 
+        //echo $id;exit;
+        $res = AdminuserModel::where('alliance',$id)->get();
+        //print_r($res);exit;
+        $count=count($res);
+        //echo $count;exit;
+        $data=AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+        $role=$data['role'];
+        //echo $role;exit;
+        $list = [
+            'data' => $res,
+            'count' => $count,
+            'role' => $role
+        ];
+        //print_r($list);exit;
+       return view('admin.adminuser.userlist',$list);
     }
 
     //投资人展示页面

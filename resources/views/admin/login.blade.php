@@ -60,9 +60,10 @@
 				dateType:'json',
 				url: "/loginadd",
 				success:function(msg){
-					alert(msg.msg);
 					if(msg.code==1) {
 						window.location = '/admin';
+					}else{
+						alert(msg.msg);
 					}
 				}
 			});

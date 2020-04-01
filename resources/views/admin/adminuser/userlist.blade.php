@@ -51,8 +51,12 @@
             <td>投资人</td>
         @elseif($v['role']==4)
             <td>校长</td>
-        @elseif($v['role']==5)
-            <td>教学主管</td>
+        @elseif($v['role']==56)
+            <td>语文主管</td>
+            @elseif($v['role']==57)
+            <td>数学主管</td>
+            @elseif($v['role']==58)
+            <td>英语主管</td>
         @elseif($v['role']==6)
             <td>语文教师</td>
         @elseif($v['role']==7)

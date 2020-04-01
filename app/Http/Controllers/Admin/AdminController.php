@@ -351,9 +351,9 @@ class AdminController extends Controller
         if($role===1){
             $res = AdminuserModel::where('is_del',1)->whereNotIn('role',[3])->whereNotIn('role',[1])->paginate(30);
         }else if($role===3){
-            $res = AdminuserModel::where('is_del',1)->where('alliance',$_SESSION["uid"])->whereIn('role',['4','5','6','7','8'])->paginate(30);
+            $res = AdminuserModel::where('is_del',1)->where('alliance',$_SESSION["uid"])->whereIn('role',['4','56','57','58','6','7','8'])->paginate(30);
         }else if($role===4){
-            $res = AdminuserModel::where('is_del',1)->where('alliance',$data['alliance'])->whereIn('role',['5','6','7','8'])->paginate(30);
+            $res = AdminuserModel::where('is_del',1)->where('alliance',$data['alliance'])->whereIn('role',['5','56','57','58','7','8'])->paginate(30);
         }else{
              $res = NULL;
         }
@@ -416,12 +416,41 @@ class AdminController extends Controller
         $tzr=$id['tzr'];
         $res=AdminuserModel::where(['u_id'=>$uid])->first();
         $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+        //print_r($res5['alliance']);exit;
         $role=$res5['role'];
-        $list=[
+        //print_r($res['role']);exit;
+        if($res['role']==6){
+            $res2 = AdminuserModel::where('alliance',$res['alliance'])->where('role',56)->first();
+            $list=[
             'data'=>$res,
             'role' => $role,
-            'tzr' => $tzr
+            'tzr' => $tzr,
+            'num' => $res2
         ];
+        }else if($res['role']==7){
+            $res2 = AdminuserModel::where('alliance',$res['alliance'])->where('role',57)->first();
+             $list=[
+            'data'=>$res,
+            'role' => $role,
+            'tzr' => $tzr,
+            'num' => $res2
+        ];
+        }else if($res['role']==8){
+            $res2 = AdminuserModel::where('alliance',$res['alliance'])->where('role',58)->first(); $list=[
+            'data'=>$res,
+            'role' => $role,
+            'tzr' => $tzr,
+            'num' => $res2
+        ];
+        }else{
+           $list=[
+            'data'=>$res,
+            'role' => $role,
+            'tzr' => $tzr,
+            'num' => $res2['addjs']
+        ];
+        }
+        
         return view('admin.adminuser.userlistupdate',$list);
     }
 

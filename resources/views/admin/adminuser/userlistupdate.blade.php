@@ -25,6 +25,7 @@
 </div></br></br>
 @if($tzr==2)
     @if($data['role']==5||$data['role']==6||$data['role']==7||$data['role']==8)
+    <input type="hidden" id="num" value="{{$num['addjs']}}">
 <div class="layui-form-item" style="width:700px;margin:0 auto">
     <label class="layui-form-label">课节：</label>
     <div class="layui-input-block" >
@@ -67,7 +68,7 @@
     </div>
 </div></br></br></br></br>
 <input type="hidden" id="uid" value="{{$data['u_id']}}">
-<input type="hidden" id="tzr" value="{{$tzr}}">
+<input type="hidden" id="tzr" value="{{$num['addjs']}}">
 <div class="layui-col-md6" style="margin-left:650px;">
     <div class="layui-btn-container">
         <button class="layui-btn layui-btn-radius" id="btn" >修改信息</button>
@@ -87,6 +88,12 @@
             var addxz =$("#addxz").val();
             var addzg =$("#addzg").val();
             var tzr = $("#tzr").val();
+            var num = $("#num").val();
+            if(addjs>=num){
+                alert('教师的课节不能大于等于主管的课节！');
+                return false;
+            }
+            
             if(tel==''){
                 alert('电话号码不能为空');
                 return false;

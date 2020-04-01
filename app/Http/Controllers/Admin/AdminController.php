@@ -349,7 +349,7 @@ class AdminController extends Controller
         }
         $id = $request->input('id'); 
         //echo $id;exit;
-        $res = AdminuserModel::where('alliance',$id)->get();
+        $res = AdminuserModel::where('alliance',$id)->paginate(30);
         //print_r($res);exit;
         $count=count($res);
         //echo $count;exit;

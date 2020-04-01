@@ -446,8 +446,7 @@ class AdminController extends Controller
            $list=[
             'data'=>$res,
             'role' => $role,
-            'tzr' => $tzr,
-            'num' => $res2['addjs']
+            'tzr' => $tzr
         ];
         }
         

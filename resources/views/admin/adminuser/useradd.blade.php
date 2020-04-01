@@ -55,7 +55,9 @@
         <option value="28">总部教研(英语)</option>
         <option value="3">投资人</option>
         <option value="4">校长</option>
-        <option value="5">教学主管</option>
+        <option value="56">语文主管</option>
+        <option value="57">数学主管</option>
+        <option value="58">英语主管</option>
         <option value="6">语文教师</option>
         <option value="7">数学教师</option>
         <option value="8">英语教师</option>
@@ -65,7 +67,9 @@
             @else
             @endif
 
-            <option value="5">教学主管</option>
+            <option value="56">语文主管</option>
+        <option value="57">数学主管</option>
+        <option value="58">英语主管</option>
             @if($countjs<$addjs)
             <option value="6">语文教师</option>
             <option value="7">数学教师</option>
@@ -77,7 +81,7 @@
         @endif
     </select>
 </div></br></br></br></br>
-<div class="layui-col-md6" style="width: 600px;margin-left: 100px;" id="xsbb">
+<!-- <div class="layui-col-md6" style="width: 600px;margin-left: 100px;" id="xsbb">
     <select name="xsjcbb" id="xsjcbb" lay-verify="">
         <option value="">请选择数学教材版本</option>
         <option value="人教版">人教版</option>
@@ -87,7 +91,7 @@
         <option value="鲁教版">鲁教版</option>
     </select>
     </br></br>
-</div>
+</div> -->
 <!-- <div class="layui-card layui-form" lay-filter="component-form-element" >
              <input type="checkbox" name="" title="人教版" checked>
               <input type="checkbox" name="" title="冀教版"> 

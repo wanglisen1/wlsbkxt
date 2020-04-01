@@ -36,8 +36,12 @@
             (投资人)
             @elseif($role==4)
             (校长)
-            @elseif($role==5)
-            (教学主管)
+            @elseif($role==56)
+            (语文主管)
+            @elseif($role==57)
+            (数学主管)
+            @elseif($role==58)
+            (英语主管)
             @elseif($role==6)
             (语文教师)
             @elseif($role==7)
@@ -3039,8 +3043,8 @@
                 </ul>
             </li> 
             <li>
-               @elseif($role==5)
-             <li>
+               @elseif($role==56)
+            <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe6a9;</i>
                     <cite>教师备课</cite>
@@ -3084,8 +3088,27 @@
                                 </a>
                             </li>
                             
-                        </ul>
-                    </li>
+                        </ul>     
+                </ul>
+            </li>
+            <li >
+                <a href="javascript:;">
+                        <i class="iconfont">&#xe7ce;</i>
+                        <cite>我的备课</cite>
+                        <i class="iconfont nav_right">&#xe6a7;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>我的全部备课</cite></a></li>
+                    </ul>
+                </li>
+                @elseif($role==57)
+             <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6a9;</i>
+                    <cite>教师备课</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe6cb;</i>
@@ -3125,6 +3148,27 @@
                             
                         </ul>
                     </li>
+                    
+                </ul>
+            </li>
+            <li >
+                <a href="javascript:;">
+                        <i class="iconfont">&#xe7ce;</i>
+                        <cite>我的备课</cite>
+                        <i class="iconfont nav_right">&#xe6a7;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>我的全部备课</cite></a></li>
+                    </ul>
+                </li>
+                @elseif($role==58)
+                <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe6a9;</i>
+                    <cite>教师备课</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
@@ -3220,10 +3264,10 @@
                     
                 </ul>
             </li>
-             <li >
+            <li >
                 <a href="javascript:;">
                         <i class="iconfont">&#xe7ce;</i>
-                        <cite>我的备课</cite>
+                        <cite>全部备课</cite>
                         <i class="iconfont nav_right">&#xe6a7;</i>
                     </a>
                     <ul class="sub-menu">

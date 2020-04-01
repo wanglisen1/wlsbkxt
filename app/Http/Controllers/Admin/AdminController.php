@@ -222,6 +222,7 @@ class AdminController extends Controller
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
         }
+        date_default_timezone_set('Asia/Shanghai');
             $tel = $request->input('tel');
             $username = $request->input('username');
             $email = $request->input('email');
@@ -1536,30 +1537,37 @@ class AdminController extends Controller
 
 	   return view('admin.videoaddlist');
    }
-   public function videoadd(Request $request){
-	   $file=$request->file('file')->store('video');
-	   $video_sub=$request->input('video_sub');
-	   $video_title=$request->input('video_title');
-	   $data = [
-	   	'video_sub' => $video_sub,
-		'video_title' => $video_title,
-		'video_content' => $file
-	   ];
-	   $res = VideoModel::insert($data);
-	   if($res){
-	   	echo"<script>alert('添加成功！');history.go(-1);</script>";
-	   }else{
-	   	echo"<script>alert('添加失败！');history.go(-1);</script>";
-	   }
+  //  public function videoadd(Request $request){
+	 //   $file=$request->file('file')->store('video');
+	 //   $video_sub=$request->input('video_sub');
+	 //   $video_title=$request->input('video_title');
+	 //   $data = [
+	 //   	'video_sub' => $video_sub,
+		// 'video_title' => $video_title,
+		// 'video_content' => $file
+	 //   ];
+	 //   $res = VideoModel::insert($data);
+	 //   if($res){
+	 //   	echo"<script>alert('添加成功！');history.go(-1);</script>";
+	 //   }else{
+	 //   	echo"<script>alert('添加失败！');history.go(-1);</script>";
+	 //   }
 	  
-   }
+  //  }
    public function videolist(Request $request){
-     $subject = $request->input('subject');
+    $subject = $request->input('subject');
     $grade = $request->input('grade');
+    $res2=ChaseaModel::where('chasea_sub',$subject)->where('is_show',1)->get()->toArray();
+    $arr=array_column($res2,'chasea_season',null);
+        // foreach ($arr as $key => $value) {
+        // $arr2[] = $value['name'];
+        // }
+    // print_r($arr);exit;
       if($subject=='资源类'){
         $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->get();
     }else{
-        $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->orderBy('number','asc')->get();
+        $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->whereIn('video_season',$arr)->orderBy('number','asc')->get();
+        //print_r($res);exit;
     }
        
 	   $count=count($res);
@@ -1572,7 +1580,9 @@ class AdminController extends Controller
    public function pptlist(Request $request){
     $subject = $request->input('subject');
     $grade = $request->input('grade');
-       $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->orderBy('number','asc')->get();
+     $res2=ChaseaModel::where('chasea_sub',$subject)->where('is_show',1)->get()->toArray();
+    $arr=array_column($res2,'chasea_season',null);
+       $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->whereIn('ppt_season',$arr)->orderBy('number','asc')->get();
              $count=count($res);
 	           $list=[
                   'data' => $res,

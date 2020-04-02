@@ -51,7 +51,7 @@
             @endif
             <td>{{$v['addtime']}}</td>
             <td class="td-manage">
-                        <button class="layui-btn upd"  u_id="{{$v['u_id']}}" style="background:#2093bf;">启用</button>
+                <button class="layui-btn upd"  u_id="{{$v['u_id']}}" style="background:#2093bf;">启用</button>
             </td>
         </tr>
     @endforeach
@@ -72,16 +72,25 @@
     $(function(){
         $(".upd").click(function(){
             var u_id =$(this).attr('u_id');
-            $.ajax({
-                type: 'post',
-                data:{u_id:u_id},
-                dateType:'json',
-                url: "/Administratordels",
-                success:function(msg){
-                    //Popup.alert('HSKMS提示',msg.msg);
-                    location.reload();
-                }
-            });
+             function confirmData () {
+                 $.ajax({
+                    type: 'post',
+                    data: {u_id: u_id},
+                    dateType: 'json',
+                    url: "/Administratordels",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                           location.reload();
+                        }else{
+                            Popup.alert('HSKMS提示','启用账户失败');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定启用该账户么？';
+            Popup.confirm(title,text,confirmData);
         })
         $("#sx").click(function(){
             location.reload();

@@ -69,8 +69,11 @@
             <a title="编辑"  onclick="" href="/userlistupdate?id={{$v['u_id']}}&tzr=2">
                 <i class="layui-icon">&#xe642;</i>
             </a>
-            <a title="删除" class="del" onclick="" href="javascript:;" u_id="{{$v['u_id']}}">
+            <a title="删除" class="del"  href="javascript:;" u_id="{{$v['u_id']}}">
                 <i class="layui-icon">&#xe640;</i>
+            </a>
+            <a title="冻结该账户" id="userblock" href="javascript:;" u_id="{{$v['u_id']}}">
+                <i class="iconfont">&nbsp;&#xe82b;</i>
             </a>
         </td>
     </tr>
@@ -90,7 +93,6 @@
 </script>
 <script>
     $(function(){
-
         $(".del").click(function(){
             var u_id =$(this).attr('u_id');
             // alert(u_id);
@@ -128,5 +130,29 @@
         $("#sx").click(function(){
             location.reload();
         })
+        $("#userblock").click(function(){
+            var u_id =$(this).attr('u_id');
+            // alert(u_id);
+            // return false;
+             function confirmData () {
+                 $.ajax({
+                    type: 'post',
+                    data: {u_id: u_id},
+                    dateType: 'json',
+                    url: "/userblock",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                            window.location = '/userlist';
+                        }else{
+                            Popup.alert('HSKMS提示','冻结账户失败');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定冻结该账户么？';
+            Popup.confirm(title,text,confirmData);
     })
+         })
 </script>

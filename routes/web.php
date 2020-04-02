@@ -51,6 +51,8 @@ Route::any('/userlistupdate','Admin\AdminController@userlistupdate');
 Route::any('/userupdate','Admin\AdminController@userupdate');
 //管理员删除
 Route::any('/userdel','Admin\AdminController@userdel');
+//冻结用户
+Route::any('/userblock','Admin\AdminController@userblock');
 //已删除管理员页面
 Route::any('/Administratordel','Admin\AdminController@administratordel');
 //已删除管理员

@@ -690,12 +690,12 @@
                             <cite>管理员添加</cite>
                         </a>
                     </li >
-                   <!--  <li>
+                    <li>
                         <a _href="/Administratordel">
                             <i class="iconfont" >&#xe6a7;</i>
-                            <cite>已删除管理员</cite>
+                            <cite>已冻结管理员</cite>
                         </a>
-                    </li > -->
+                    </li >
                      <li>
                         <a _href="/usertzrlist">
                             <i class="iconfont" >&#xe6a7;</i>

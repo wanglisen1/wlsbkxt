@@ -485,7 +485,6 @@ class AdminController extends Controller
         $uid=$request->input();
         $id=$uid['u_id'];
         $res=AdminuserModel::where('u_id',$id)->update(['is_del'=>2]);
-        $res2 = AdminuserModel::where('alliance',$id)->get();
         if ($res) {
                 return ['code' => 1, 'msg' => '删除成功'];
             }else{
@@ -493,7 +492,23 @@ class AdminController extends Controller
             }
           
     }
-
+    //管理员冻结
+     public function userblock(Request $request){
+        session_start();
+        if(empty($_SESSION["uid"])){
+            header('Location: /flogin.php');exit;
+        }
+        $uid=$request->input();
+        $id=$uid['u_id'];
+        $res=AdminuserModel::where('u_id',$id)->update(['is_del'=>3]);
+        $res2 = AdminuserModel::where('alliance',$id)->get();
+        if ($res) {
+                return ['code' => 1, 'msg' => '冻结成功'];
+            }else{
+                return ['code' => 0, 'msg' => '冻结失败'];
+            }
+          
+    }
     //已删除管理员展示
     public function administratordel(){
             session_start();
@@ -503,9 +518,9 @@ class AdminController extends Controller
             $res = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
             $role=$res['role'];
             if($role==3){
-                $data = AdminuserModel::where('alliance',$_SESSION["uid"])->where('is_del',2)->get();
+                $data = AdminuserModel::where('alliance',$_SESSION["uid"])->where('is_del',3)->paginate(30);
             }else{
-                $data = AdminuserModel::where('is_del',2)->paginate(30);
+                $data = AdminuserModel::where('is_del',3)->paginate(30);
             }
             $count=count($data);
             $list=[
@@ -515,7 +530,7 @@ class AdminController extends Controller
             return view('admin.adminuser.administratordel',$list);
         }
 
-    //已删除管理员
+    //已冻结管理员
     public function administratordels(Request $request){
         session_start();
         if(empty($_SESSION["uid"])){

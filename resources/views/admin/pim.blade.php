@@ -1,10 +1,12 @@
 <link rel="shortcut icon" href="/layuiadmin/favicon.ico" type="/layuiadmin/image/x-icon" />
 <link rel="stylesheet" href="/layuiadmin/css/font.css">
 <link rel="stylesheet" href="/layuiadmin/css/xadmin.css">
+<link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
 
 <script src="/layuiadmin/js/jquery.min.js"></script>
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
+<script type="text/javascript" src="/alerttc/js/popup.js"></script>
 <div class="layui-form-item" style="width:700px;margin:0 auto;margin-top: 50px;">
     <label class="layui-form-label">电话：</label>
     <div class="layui-input-block" >
@@ -67,6 +69,9 @@
         </div>
 <script src="/jquery-3.1.1.min.js"></script>
 <script>
+        var Popup = new Popup();
+</script>
+<script>
     $(function(){
         $("#btn").click(function(){
             var tel =$("#tel").val();
@@ -75,24 +80,34 @@
             var sex=$('input[name="sex"]:checked').val();
 
             if(tel==''){
-                alert('电话号码不能为空');
+                Popup.alert('HSKMS提示','电话号码不能为空！');
                 return false;
             }if(email==''){
-                alert('邮箱不能为空');
+                Popup.alert('HSKMS提示','邮箱不能为空！');
                 return false;
             }if(username==''){
-                alert('姓名不能为空');
+                Popup.alert('HSKMS提示','姓名不能为空！');
                 return false;
             }
-            $.ajax({
-                type: 'post',
-                data:{tel:tel,username:username,email:email,sex:sex},
-                dateType:'json',
-                url: "/pimupdate",
-                success:function(msg){
-                    alert(msg.msg);
-                }
-            });
+             function confirmData () {
+                 $.ajax({
+                    type: 'post',
+                    data: {tel:tel,username:username,email:email,sex:sex},
+                    dateType: 'json',
+                    url: "/pimupdate",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                            location.reload();
+                        }else{
+                            Popup.alert('HSKMS提示','修改失败，您并没有修改信息');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定修改么？';
+            Popup.confirm(title,text,confirmData);
         })
     })
 </script>

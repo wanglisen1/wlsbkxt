@@ -172,12 +172,12 @@ class AdminController extends Controller
         $username =$request->input('username');
         $email =$request->input('email');
         $sex =$request->input('sex');
-        $sid = session('uid');
+        $sid = $_SESSION["uid"];
         $data=AdminuserModel::where('u_id',$sid)->update(['tel'=>$tel,'username'=>$username,'email'=>$email,'sex'=>$sex]);
         if ($data) {
             return ['code' => 1, 'msg' => '修改成功'];
         } else {
-            return ['code' => 0, 'msg' => '修改失败,您并没有修改信息'];
+            return ['code' => 2, 'msg' => '修改失败,您并没有修改信息'];
         }
     }
 

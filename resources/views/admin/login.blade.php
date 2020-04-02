@@ -6,6 +6,8 @@
 	<title>翰师问鼎-备课系统登陆页面</title>
 	<link rel="stylesheet" href="/loginmodel/css/login.css" />
 	<link rel="shortcut icon" href="/layuiadmin/hslogo.ico" type="/layuiadmin/image/x-icon" />
+	<link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
+	
 </head>
 
 <body>
@@ -36,22 +38,27 @@
 </body>
 
 </html>
+<script type="text/javascript" src="/alerttc/js/popup.js"></script>
 <script src="/jquery-3.1.1.min.js"></script>
 <script>
+		var Popup = new Popup();
+</script>
+<script>
 	$(function(){
+		
 		$("#btn").click(function(){
 			var uname =$("#uname").val();
 			var tel =$("#tel").val();
 			var pwd =$("#password").val();
 
 			if(tel==''){
-				alert('电话号码不能为空');
+				Popup.alert('HSKMS提示','手机号不能为空！');
 				return false;
 			}if(pwd==''){
-				alert('密码不能为空');
+				Popup.alert('HSKMS提示','密码不能为空！');
 				return false;
 			}if(uname==''){
-				alert('用户名不能为空');
+				Popup.alert('HSKMS提示','用户名不能为空！');
 				return false;
 			}
 			$.ajax({
@@ -63,7 +70,7 @@
 					if(msg.code==1) {
 						window.location = '/admin';
 					}else{
-						alert(msg.msg);
+						Popup.alert('HSKMS提示',msg.msg);
 					}
 				}
 			});

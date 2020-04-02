@@ -1,10 +1,12 @@
 <link rel="shortcut icon" href="/layuiadmin/favicon.ico" type="/layuiadmin/image/x-icon" />
 <link rel="stylesheet" href="/layuiadmin/css/font.css">
 <link rel="stylesheet" href="/layuiadmin/css/xadmin.css">
+<link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
 
 <script src="/layuiadmin/js/jquery.min.js"></script>
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
+<script type="text/javascript" src="/alerttc/js/popup.js"></script>
 <xblock>
     <button class="layui-btn" id="sx"><i class="iconfont">&#xe6aa;</i>&nbsp;&nbsp;刷新</button>
     <span class="x-right" style="line-height:40px">共有数据：<b style="color:red;">{{$count}}</b> 条</span>
@@ -64,6 +66,9 @@
 </div>
 <script src="/jquery-3.1.1.min.js"></script>
 <script>
+        var Popup = new Popup();
+</script>
+<script>
     $(function(){
         $(".upd").click(function(){
             var u_id =$(this).attr('u_id');
@@ -73,7 +78,7 @@
                 dateType:'json',
                 url: "/Administratordels",
                 success:function(msg){
-                    alert(msg.msg);
+                    //Popup.alert('HSKMS提示',msg.msg);
                     location.reload();
                 }
             });

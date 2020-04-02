@@ -11,10 +11,12 @@
     <link rel="shortcut icon" href="/layuiadmin/hslogo.ico" type="/layuiadmin/image/x-icon" />
     <link rel="stylesheet" href="/layuiadmin/css/font.css">
     <link rel="stylesheet" href="/layuiadmin/css/xadmin.css">
+    <link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
 
     <script src="/layuiadmin/js/jquery.min.js"></script>
     <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
+    <script type="text/javascript" src="/alerttc/js/popup.js"></script>
 
 </head>
 <body>
@@ -3306,6 +3308,9 @@
 <!-- 左侧菜单结束 -->
 <script src="/jquery-3.1.1.min.js"></script>
 <script type="text/javascript">
+        var Popup = new Popup();
+</script>
+<script type="text/javascript">
         $(document).ready(function(){
              $('#qhnr').click(function(event){
                 return false;
@@ -3316,6 +3321,7 @@
             })
     </script>
 <script>
+
     $(function(){
         $("#admingl").hide();
          $("#qhnr").click(function(){
@@ -3327,10 +3333,9 @@
             $("#nr").show();
          })
         $("#tuichu").click(function(){
-            var tc =$(".tc").val();
-            var r = confirm('您确定退出么？');
-            if (r == true) {
-                $.ajax({
+             var tc =$(".tc").val();
+             function confirmData () {
+                 $.ajax({
                     type: 'post',
                     data: {tc: tc},
                     dateType: 'json',
@@ -3340,10 +3345,12 @@
                             window.location = '/';
                         }
                     }
-                });
-            } else {
-
+                });   
             }
+            // var r = confirm('您确定退出么？');
+            var title = 'HSKMS提示',
+            text = '您确定退出么？';
+            Popup.confirm(title,text,confirmData);
         })
     })
 </script>

@@ -487,20 +487,11 @@ class AdminController extends Controller
         $res=AdminuserModel::where('u_id',$id)->update(['is_del'=>2]);
         $res2 = AdminuserModel::where('alliance',$id)->get();
         if ($res) {
-            if(empty($res2)){
                 return ['code' => 1, 'msg' => '删除成功'];
             }else{
-                 $res1=AdminuserModel::where('alliance',$id)->update(['is_del'=>2]);
-                 if($res1){
-                    return ['code' => 1, 'msg' => '删除成功'];
-                }else{
-                    return ['code' => 0, 'msg' => '删除失败'];
-                }
+                return ['code' => 0, 'msg' => '删除失败'];
             }
           
-        } else {
-            return ['code' => 0, 'msg' => '删除失败'];
-        }
     }
 
     //已删除管理员展示

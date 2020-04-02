@@ -1,10 +1,12 @@
 <link rel="shortcut icon" href="/layuiadmin/favicon.ico" type="/layuiadmin/image/x-icon" />
 <link rel="stylesheet" href="/layuiadmin/css/font.css">
 <link rel="stylesheet" href="/layuiadmin/css/xadmin.css">
+<link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
 
 <script src="/layuiadmin/js/jquery.min.js"></script>
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
+<script type="text/javascript" src="/alerttc/js/popup.js"></script>
 <style>
 	.layui-col-md12 input{background-color:#2093bf}
 </style>
@@ -108,6 +110,9 @@
 
 <script src="/jquery-3.1.1.min.js"></script>
 <script>
+        var Popup = new Popup();
+</script>
+<script>
     $(function(){
         // $('#xsbb').hide();
         // $('#role').change(function(){
@@ -131,25 +136,25 @@
             // var xsjcbb =$("#xsjcbb").val();
             var sex=$('input[name="sex"]:checked').val();
             if(tel==''){
-                alert('电话号码不能为空');
+                 Popup.alert('HSKMS提示','电话号码不能为空！');
                 return false;
             }if(email==''){
-                alert('邮箱不能为空');
+                Popup.alert('HSKMS提示','邮箱不能为空！');
                 return false;
             }if(username==''){
-                alert('姓名不能为空');
+                Popup.alert('HSKMS提示','姓名不能为空！');
                 return false;
             }if(role==''){
-                alert('您还没有设置角色');
+                Popup.alert('HSKMS提示','您还没有设置角色！');
                 return false;
             }if(password==''){
-                alert('密码不能为空');
+                Popup.alert('HSKMS提示','密码不能为空！');
                 return false;
             }if(password1==''){
-                alert('确认密码不能为空');
+                Popup.alert('HSKMS提示','确认密码不能为空！');
                 return false;
             }if(password!=password1){
-                alert('确认密码与密码不一致');
+                Popup.alert('HSKMS提示','确认密码与密码不一致！');
                 return false;
             }
 
@@ -159,7 +164,7 @@
                 dateType:'json',
                 url: "/useradds",
                 success:function(msg){
-                    alert(msg.msg);
+                    //Popup.alert('HSKMS提示',msg.msg);
                     if(msg.code==1) {
                         window.location.reload();
                     }

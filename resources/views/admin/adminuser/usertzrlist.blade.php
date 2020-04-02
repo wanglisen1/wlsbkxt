@@ -1,10 +1,12 @@
 <link rel="shortcut icon" href="/layuiadmin/favicon.ico" type="/layuiadmin/image/x-icon" />
 <link rel="stylesheet" href="/layuiadmin/css/font.css">
 <link rel="stylesheet" href="/layuiadmin/css/xadmin.css">
+<link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
 
 <script src="/layuiadmin/js/jquery.min.js"></script>
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
+<script type="text/javascript" src="/alerttc/js/popup.js"></script>
 <xblock>
     <button class="layui-btn" onclick="x_admin_show('添加用户','/useradd')"><i class="layui-icon"></i>添加</button>
     <button class="layui-btn" id="sx"><i class="iconfont">&#xe6aa;</i>&nbsp;&nbsp;刷新</button>
@@ -49,7 +51,7 @@
             <a title="编辑"  onclick="" href="/userlistupdate?id={{$v['u_id']}}&tzr=1">
                 <i class="layui-icon">&#xe642;</i>
             </a>
-            <a title="删除" class="del" onclick="" href="javascript:;" u_id="{{$v['u_id']}}">
+            <a title="删除" class="del"  href="javascript:;" u_id="{{$v['u_id']}}">
                 <i class="layui-icon">&#xe640;</i>
             </a>
 
@@ -67,19 +69,32 @@
 </div>
 <script src="/jquery-3.1.1.min.js"></script>
 <script>
+        var Popup = new Popup();
+</script>
+<script>
     $(function(){
         $(".del").click(function(){
             var u_id =$(this).attr('u_id');
-            $.ajax({
-                type: 'post',
-                data:{u_id:u_id},
-                dateType:'json',
-                url: "/userdel",
-                success:function(msg){
-                    alert(msg.msg);
-                    location.reload();
-                }
-            });
+            //alert(u_id);return false;
+             function confirmData () {
+                 $.ajax({
+                    type: 'post',
+                    data: {u_id:u_id},
+                    dateType: 'json',
+                    url: "/userdel",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                            location.reload();
+                        }else{
+                            Popup.alert('HSKMS提示','删除失败');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定删除么？';
+            Popup.confirm(title,text,confirmData);
         })
         $("#sx").click(function(){
             location.reload();

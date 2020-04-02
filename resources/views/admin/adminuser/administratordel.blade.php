@@ -38,20 +38,32 @@
             @endif
             @if($v['role']==1)
                 <td>总管理员</td>
-            @elseif($v['role']==2)
-                <td>管理员</td>
-            @elseif($v['role']==3)
+                @elseif($v['role']==26)
+                <td>总部教研（语文）</td>
+                @elseif($v['role']==27)
+                <td>总部教研（数学）</td>
+                @elseif($v['role']==28)
+                <td>总部教研（英语）</td>
+                @elseif($v['role']==3)
+                <td>投资人</td>
+                @elseif($v['role']==4)
                 <td>加盟校长</td>
-            @elseif($v['role']==4)
+                @elseif($v['role']==56)
+                <td>语文主管</td>
+                @elseif($v['role']==57)
+                <td>数学主管</td>
+                @elseif($v['role']==58)
+                <td>英语主管</td>
+                @elseif($v['role']==6)
                 <td>语文教师</td>
-            @elseif($v['role']==5)
+                @elseif($v['role']==7)
                 <td>数学教师</td>
-            @elseif($v['role']==6)
+                @elseif($v['role']==8)
                 <td>英语教师</td>
             @endif
             <td>{{$v['addtime']}}</td>
             <td class="td-manage">
-                <button class="layui-btn upd"  u_id="{{$v['u_id']}}" style="background:#2093bf;">启用</button>
+                <button class="layui-btn upd"  u_id="{{$v['u_id']}}">启用</button>
             </td>
         </tr>
     @endforeach

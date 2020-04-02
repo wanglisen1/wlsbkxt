@@ -72,7 +72,7 @@
             <a title="删除" class="del"  href="javascript:;" u_id="{{$v['u_id']}}">
                 <i class="layui-icon">&#xe640;</i>
             </a>
-            <a title="冻结该账户" id="userblock" href="javascript:;" u_id="{{$v['u_id']}}">
+            <a title="冻结该账户" class="userblock" href="javascript:;" u_id="{{$v['u_id']}}">
                 <i class="iconfont">&nbsp;&#xe82b;</i>
             </a>
         </td>
@@ -130,7 +130,7 @@
         $("#sx").click(function(){
             location.reload();
         })
-        $("#userblock").click(function(){
+        $(".userblock").click(function(){
             var u_id =$(this).attr('u_id');
             // alert(u_id);
             // return false;

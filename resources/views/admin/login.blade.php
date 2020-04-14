@@ -9,13 +9,40 @@
 	<link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
 	
 </head>
-
+<style type="text/css">
+	.loading {
+ position: fixed;
+ top: 0;
+ bottom: 0;
+ right: 0;
+ left: 0;
+ background-color: #f6ecec;
+ opacity: 0.4;
+ z-index: 1000;
+}
+ 
+.loading .gif {
+ position: fixed;
+   top :40%;
+  left: 45%;
+ margin-left: -16px;
+ margin-top: -16px;
+ z-index: 1001;
+}
+</style>
 <body>
 
 <div class="content">
+	<div class="loading hide">
+	 <div class="gif" >
+	 	<img src="/loadimg.gif" width="200px;">
+	 </div>
+	</div>
 	<div class="login" style="margin-right:10%;width:20%;margin-top:-2%;height:380px;">
+
 		<div class="title">欢迎登陆HSKMS备课管理系统</div>
 		<div class="locon">
+
 			<div class="line">
 				<img class="smallImg" src="/loginmodel/img/icon3.png" />
 				<input placeholder="请输入用户名" type="text" name="uname" id="uname" />
@@ -45,7 +72,7 @@
 </script>
 <script>
 	$(function(){
-		
+		$('div.loading').hide();
 		$("#btn").click(function(){
 			var uname =$("#uname").val();
 			var tel =$("#tel").val();
@@ -61,6 +88,7 @@
 				Popup.alert('HSKMS提示','用户名不能为空！');
 				return false;
 			}
+			 $('div.loading').show();
 			$.ajax({
 				type: 'post',
 				data:{tel:tel,pwd:pwd,uname:uname},
@@ -68,8 +96,10 @@
 				url: "/loginadd",
 				success:function(msg){
 					if(msg.code==1) {
+						$('div.loading').hide();
 						window.location = '/admin';
 					}else{
+						 $('div.loading').hide();
 						Popup.alert('HSKMS提示',msg.msg);
 					}
 				}

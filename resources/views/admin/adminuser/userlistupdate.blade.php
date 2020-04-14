@@ -7,6 +7,32 @@
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
 <script type="text/javascript" src="/alerttc/js/popup.js"></script>
+<style type="text/css">
+  .loading {
+ position: fixed;
+ top: 0;
+ bottom: 0;
+ right: 0;
+ left: 0;
+ background-color: #f6ecec;
+ opacity: 0.4;
+ z-index: 1000;
+}
+ 
+.loading .gif {
+ position: fixed;
+   top :40%;
+  left: 45%;
+ margin-left: -16px;
+ margin-top: -16px;
+ z-index: 1001;
+}
+</style>
+<div class="loading hide">
+   <div class="gif" >
+    <img src="/loadimg.gif" width="200px;">
+   </div>
+  </div>
 @if($ycrole==3)
     <div class="layui-form-item" style="width:700px;margin:0 auto;margin-top: 50px;">
         <label class="layui-form-label">姓名：</label>
@@ -483,6 +509,7 @@
 </script>
 <script>
     $(function(){  
+      $('div.loading').hide();
         $("#btn").click(function(){
             var tel =$("#tel").val();
             var username =$("#username").val();
@@ -532,6 +559,7 @@
                 Popup.alert('HSKMS提示','教师总额不能为空！');
                 return false;
             }
+            $('div.loading').show();
             $.ajax({
                 type: 'post',
                 data:{school:school,tzr_xz:tzr_xz,role:role,tzr_id:tzr_id,tzr_zg:tzr_zg,tzr_js:tzr_js,chun:chun,shu:shu,qiu:qiu,han:han,phone:phone},
@@ -541,7 +569,7 @@
                     //Popup.toast('HSKMS提示！msg.msg',3);
                    //Popup.alert('HSKMS提示',msg.msg);
                     if(msg.code==1) {
-                            alert(msg.msg);
+                          $('div.loading').hide();
                             window.location = '/usertzrlist';  
                     }
                 }
@@ -582,6 +610,7 @@
                 Popup.alert('HSKMS提示','校区不能为空！');
                 return false;
             }
+            $('div.loading').show();
             $.ajax({
                 type: 'post',
                 data:{school:school,xz_id:xz_id,xzchun:xzchun,xzshu:xzshu,xzqiu:xzqiu,xzhan:xzhan},
@@ -591,8 +620,10 @@
                     //Popup.toast('HSKMS提示！msg.msg',3);
                    //Popup.alert('HSKMS提示',msg.msg);
                     if(msg.code==1) {
-                            alert(msg.msg);
+                        $('div.loading').hide();
                             window.location = '/usertzrlist';  
+                        }else{
+                          $('div.loading').hide();
                         }
                 }
             });
@@ -646,6 +677,7 @@
                 Popup.alert('HSKMS提示','主管可见课节不能为空！');
                 return false;
             }
+            $('div.loading').show();
             $.ajax({
                 type: 'post',
                 data:{school:school,zg_id:zg_id,zgchun:zgchun,zgshu:zgshu,zgqiu:zgqiu,zghan:zghan,zgmoren:zgmoren,zgsx:zgsx,zgyw:zgyw,zgyy:zgyy},
@@ -655,8 +687,10 @@
                     //Popup.toast('HSKMS提示！msg.msg',3);
                    //Popup.alert('HSKMS提示',msg.msg);
                     if(msg.code==1) {
-                            alert(msg.msg);
+                      $('div.loading').hide();
                             window.location = '/usertzrlist';  
+                        }else{
+                          $('div.loading').hide();
                         }
                 }
             });
@@ -720,6 +754,7 @@
                 Popup.alert('HSKMS提示','请选择教师所教科目！');
                 return false;
             }
+            $('div.loading').show();
             $.ajax({
                 type: 'post',
                 data:{school:school,js_id:js_id,jschun:jschun,jsshu:jsshu,jsqiu:jsqiu,jshan:jshan,jsmoren:jsmoren,jssan:jssan,jssi:jssi,jswu:jswu,jsliu:jsliu,subject,subject},
@@ -729,8 +764,10 @@
                     //Popup.toast('HSKMS提示！msg.msg',3);
                    //Popup.alert('HSKMS提示',msg.msg);
                     if(msg.code==1) {
-                            alert(msg.msg);
+                      $('div.loading').hide();
                             window.location = '/usertzrlist';  
+                        }else{
+                          $('div.loading').hide();
                         }
                 }
             });
@@ -758,6 +795,7 @@
                     Popup.alert('HSKMS提示','邮箱不能为空！');
                     return false;
                 }
+                $('div.loading').show();
                 $.ajax({
                     type: 'post',
                     data:{username:username,tel:tel,email:email,jyuid:jyuid,subject,subject},
@@ -767,8 +805,10 @@
                         //Popup.toast('HSKMS提示！msg.msg',3);
                        //Popup.alert('HSKMS提示',msg.msg);
                         if(msg.code==1) {
-                                alert(msg.msg);
+                          $('div.loading').hide();
                                 window.location = '/usertzrlist';  
+                            }else{
+                              $('div.loading').hide();
                             }
                     }
                 });

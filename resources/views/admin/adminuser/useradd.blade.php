@@ -9,7 +9,31 @@
 <script type="text/javascript" src="/alerttc/js/popup.js"></script>
 <style>
 	.layui-col-md12 input{background-color:#2093bf}
+    .loading {
+ position: fixed;
+ top: 0;
+ bottom: 0;
+ right: 0;
+ left: 0;
+ background-color: #f6ecec;
+ opacity: 0.4;
+ z-index: 1000;
+}
+ 
+.loading .gif {
+ position: fixed;
+   top :40%;
+  left: 45%;
+ margin-left: -16px;
+ margin-top: -16px;
+ z-index: 1001;
+}
 </style>
+<div class="loading hide">
+     <div class="gif" >
+        <img src="/loadimg.gif" width="200px;">
+     </div>
+    </div>
 <div class="layui-col-md6" style="width: 600px;margin-left: 100px;margin-top:10px;">
     <select name="role" id="role" lay-verify="">
         <option value="">请选择您开通用户的角色</option>
@@ -201,6 +225,7 @@
 </script>
 <script>
     $(function(){
+        $('div.loading').hide();
           $('#ycschool').hide();
           $('#ycseason').hide();
           $('#ycsubject').hide();
@@ -443,16 +468,19 @@
                 }
                 
             }
+            $('div.loading').show();
             $.ajax({
                 type: 'post',
                 data:{school:school,tel:tel,username:username,email:email,sex:sex,password:password,role:role,spring:spring,heat:heat,autumn:autumn,cold:cold,xztzr:xztzr,yw:yw,sx:sx,yy:yy,subject:subject,sangrade:sangrade,sigrade:sigrade,wugrade:wugrade,liugrade:liugrade,roles:roles},
                 dateType:'json',
                 url: "/useradds",
                 success:function(msg){
-                    alert(msg.msg);
                     //Popup.alert('HSKMS提示',msg.msg);
                     if(msg.code==1) {
+                        $('div.loading').hide();
                         window.location.reload();
+                    }else{
+                        $('div.loading').hide();
                     }
                 }
             });

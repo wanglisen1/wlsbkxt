@@ -18,10 +18,7 @@
     <tr>
         <th>登录名</th>
         <th>手机</th>
-        <th>邮箱</th>
-        <th>性别</th>
-        <th>角色</th>
-        <th>加入时间</th>
+        <th>校区</th>
         <th>校长总额</th>
         <th>主管总额</th>
         <th>教师总额</th>
@@ -30,29 +27,25 @@
     <tbody>
     @foreach($data as $k=>$v)
     <tr>
-        <td>{{$v['username']}}</td>
-        <td>{{$v['tel']}}</td>
-        <td>{{$v['email']}}</td>
-        @if($v['sex']==2)
-        <td>男</td>
-        @elseif($v['sex']==1)
-            <td>女</td>
-        @endif
-        <td>投资人</td>
-        <td>{{$v['addtime']}}</td>
-        <td>{{$v['addxz']}}</td>
-        <td>{{$v['addzg']}}</td>
-        <td>{{$v['addjs']}}</td>
+        <td>{{$v['tzr_name']}}</td>
+        <td>{{$v['tzr_phone']}}</td>
+        <td>{{$v['tzr_school']}}</td>
+        <td>{{$v['tzr_xz']}}</td>
+        <td>{{$v['tzr_zg']}}</td>
+        <td>{{$v['tzr_js']}}</td>
         <td class="td-manage">
 
-            <a title="查看所属员工"  onclick="" href="/tzrclassify?id={{$v['u_id']}}">
+            <a title="查看所属员工"  onclick="" href="/tzrclassify?id={{$v['tzr_id']}}">
                 <i class="iconfont">&#xe6e6;&nbsp;</i>
             </a>
-            <a title="编辑"  onclick="" href="/userlistupdate?id={{$v['u_id']}}&tzr=1">
+            <a title="编辑"  onclick="" href="/userlistupdate?tzr_id={{$v['tzr_id']}}">
                 <i class="layui-icon">&#xe642;</i>
             </a>
-            <a title="删除" class="del"  href="javascript:;" u_id="{{$v['u_id']}}">
+            <a title="删除" class="del"  href="javascript:;" tzr_id="{{$v['tzr_id']}}">
                 <i class="layui-icon">&#xe640;</i>
+            </a>
+            <a title="冻结" class="userblock"  href="javascript:;" tzr_id="{{$v['tzr_id']}}">
+                <i class="iconfont">&nbsp;&#xe82b;</i>
             </a>
 
         </td>
@@ -74,12 +67,12 @@
 <script>
     $(function(){
         $(".del").click(function(){
-            var u_id =$(this).attr('u_id');
+            var tzr_id =$(this).attr('tzr_id');
             //alert(u_id);return false;
              function confirmData () {
                  $.ajax({
                     type: 'post',
-                    data: {u_id:u_id},
+                    data: {tzr_id:tzr_id},
                     dateType: 'json',
                     url: "/userdel",
                     success: function (msg) {
@@ -93,7 +86,30 @@
                 });   
             }
             var title = 'HSKMS提示',
-            text = '您确定删除么？';
+            text = '您确定删除该投资人么？删除之后所属账户都将删除';
+            Popup.confirm(title,text,confirmData);
+        })
+        $(".userblock").click(function(){
+            var tzr_id =$(this).attr('tzr_id');
+            //alert(u_id);return false;
+             function confirmData () {
+                 $.ajax({
+                    type: 'post',
+                    data: {tzr_id:tzr_id},
+                    dateType: 'json',
+                    url: "/userblock",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                            location.reload();
+                        }else{
+                            Popup.alert('HSKMS提示','删除失败');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定冻结该投资人么？冻结之后所属账户都将冻结';
             Popup.confirm(title,text,confirmData);
         })
         $("#sx").click(function(){

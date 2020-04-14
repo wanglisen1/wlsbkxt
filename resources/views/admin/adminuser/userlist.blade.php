@@ -8,7 +8,7 @@
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
 <script type="text/javascript" src="/alerttc/js/popup.js"></script>
 <xblock>
-    @if($role==1||$role==3)
+    @if($role==1||$role==2||$role==3)
     <button class="layui-btn" onclick="x_admin_show('添加用户','/useradd')"><i class="layui-icon"></i>添加</button>
     @else
     @endif
@@ -17,74 +17,148 @@
     <span class="x-right" style="line-height:40px">本页共有数据：<b style="color:red;">{{$count}}</b> 条</span>
 </xblock>
 <table class="layui-table">
+     @if($role==9)
     <thead>
-    <tr>
-        <th>登录名</th>
-        <th>手机</th>
+      <tr>
+        <th>用户名</th>
+        <th>电话</th>
         <th>邮箱</th>
-        <th>性别</th>
-        <th>角色</th>
         <th>加入时间</th>
+        <th>角色</th>
         <th>操作</th>
-    </thead>
-    <tbody>
-    @foreach($data as $k=>$v)
+    </tr>
+    @else
     <tr>
+        <th>用户名</th>
+        <th>校区</th>
+        <th>电话</th>
+        <th>角色</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+        @endif
+
+    
+@if($role==9)
+     @foreach($data as $k=>$v)
+     <tbody>
         <td>{{$v['username']}}</td>
         <td>{{$v['tel']}}</td>
         <td>{{$v['email']}}</td>
-        @if($v['sex']==2)
-        <td>男</td>
-        @elseif($v['sex']==1)
-            <td>女</td>
+        <td>{{$v['addtime']}}</td>
+        @if($v['role']==26)
+        <td>语文教研</td>
+        @elseif($v['role']==27)
+        <td>数学教研</td>
+        @elseif($v['role']==28)
+        <td>英语教研</td>
         @endif
-        @if($v['role']==1)
-        <td>总管理员</td>
-        @elseif($v['role']==26)
-            <td>总部教研(语文)</td>
-             @elseif($v['role']==27)
-            <td>总部教研(数学)</td>
-             @elseif($v['role']==28)
-            <td>总部教研(英语)</td>
-        @elseif($v['role']==3)
-            <td>投资人</td>
-        @elseif($v['role']==4)
-            <td>校长</td>
-        @elseif($v['role']==56)
-            <td>语文主管</td>
-            @elseif($v['role']==57)
-            <td>数学主管</td>
-            @elseif($v['role']==58)
-            <td>英语主管</td>
-        @elseif($v['role']==6)
-            <td>语文教师</td>
-        @elseif($v['role']==7)
-            <td>数学教师</td>
-         @elseif($v['role']==8)
-            <td>英语教师</td>
-        @endif
-        <th>{{$v['addtime']}}</th>
         <td class="td-manage">
 
-            <a title="编辑"  onclick="" href="/userlistupdate?id={{$v['u_id']}}&tzr=2">
+            <a title="编辑"  onclick="" href="/userlistupdate?jy_id={{$v['u_id']}}">
                 <i class="layui-icon">&#xe642;</i>
             </a>
-            <a title="删除" class="del"  href="javascript:;" u_id="{{$v['u_id']}}">
+            <a title="删除" class="jydel"  href="javascript:;" jy_id="{{$v['u_id']}}">
                 <i class="layui-icon">&#xe640;</i>
             </a>
-            <a title="冻结该账户" class="userblock" href="javascript:;" u_id="{{$v['u_id']}}">
+            <a title="冻结该账户" class="jyuserblock" href="javascript:;" jy_id="{{$v['u_id']}}">
+                <i class="iconfont">&nbsp;&#xe82b;</i>
+            </a>
+        </td>
+         </tbody>
+        @endforeach
+@else
+@endif
+@if($role==1||$role==2||$role==3)
+    @foreach($data1 as $k=>$v)
+    <tr>
+        <td>{{$v['xz_name']}}</td>
+        <td>{{$v['xz_school']}}</td>
+        <td>{{$v['xz_phone']}}</td>
+        <td>校长</td>
+        <td class="td-manage">
+
+            <a title="编辑"  onclick="" href="/userlistupdate?xz_id={{$v['xz_id']}}">
+                <i class="layui-icon">&#xe642;</i>
+            </a>
+            <a title="删除" class="xzdel"  href="javascript:;" xz_id="{{$v['xz_id']}}">
+                <i class="layui-icon">&#xe640;</i>
+            </a>
+            <a title="冻结该账户" class="xzuserblock" href="javascript:;" xz_id="{{$v['xz_id']}}">
                 <i class="iconfont">&nbsp;&#xe82b;</i>
             </a>
         </td>
     </tr>
         @endforeach
+@endif
+@if($role==1||$role==2||$role==3||$role==4)
+        @foreach($data2 as $k=>$v)
+    <tr>
+        <td>{{$v['zg_name']}}</td>
+        <td>{{$v['zg_school']}}</td>
+        <td>{{$v['zg_phone']}}</td>
+        <td>主管</td>
+        <td class="td-manage">
+
+            <a title="编辑"  onclick="" href="/userlistupdate?zg_id={{$v['zg_id']}}">
+                <i class="layui-icon">&#xe642;</i>
+            </a>
+            <a title="删除" class="zgdel"  href="javascript:;" zg_id="{{$v['zg_id']}}">
+                <i class="layui-icon">&#xe640;</i>
+            </a>
+            <a title="冻结该账户" class="zguserblock" href="javascript:;" zg_id="{{$v['zg_id']}}">
+                <i class="iconfont">&nbsp;&#xe82b;</i>
+            </a>
+        </td>
+    </tr>
+        @endforeach
+@endif
+@if($role==1||$role==2||$role==3||$role==4||$role==5)
+         @foreach($data3 as $k=>$v)
+    <tr>
+        <td>{{$v['js_name']}}</td>
+        <td>{{$v['js_school']}}</td>
+        <td>{{$v['js_phone']}}</td>
+        <td>教师</td>
+        <td class="td-manage">
+
+            <a title="编辑"  onclick="" href="/userlistupdate?js_id={{$v['js_id']}}">
+                <i class="layui-icon">&#xe642;</i>
+            </a>
+            <a title="删除" class="jsdel"  href="javascript:;" js_id="{{$v['js_id']}}">
+                <i class="layui-icon">&#xe640;</i>
+            </a>
+            <a title="冻结该账户" class="jsuserblock" href="javascript:;" js_id="{{$v['js_id']}}">
+                <i class="iconfont">&nbsp;&#xe82b;</i>
+            </a>
+        </td>
+    </tr>
+        @endforeach
+    @endif
+@if($role==26||$role==27||$role==28)
+     @foreach($data4 as $k=>$v)
+      <tr>
+        <td>{{$v['js_name']}}</td>
+        <td>{{$v['js_school']}}</td>
+        <td>{{$v['js_phone']}}</td>
+        <td>教师</td>
+        <td class="td-manage">
+
+            <a title="编辑"  onclick="" href="/userlistupdate?js_id={{$v['js_id']}}">
+                <i class="layui-icon">&#xe642;</i>
+            </a>
+            <a title="删除" class="jsdel"  href="javascript:;" js_id="{{$v['js_id']}}">
+                <i class="layui-icon">&#xe640;</i>
+            </a>
+            <a title="冻结该账户" class="userblock" href="javascript:;" js_id="{{$v['js_id']}}">
+                <i class="iconfont">&nbsp;&#xe82b;</i>
+            </a>
+        </td>
+    </tr>
+     @endforeach
+@endif
     </tbody>
 </table>
-<div class="page">
-   <span class="pagejump" >
-            {{$data->links()}}
-    </span>
-</div>
 
 </div>
 <script src="/jquery-3.1.1.min.js"></script>
@@ -93,19 +167,17 @@
 </script>
 <script>
     $(function(){
-        $(".del").click(function(){
-            var u_id =$(this).attr('u_id');
-            // alert(u_id);
-            // return false;
+        $(".jydel").click(function(){
+            var jy_id =$(this).attr('jy_id');
              function confirmData () {
                  $.ajax({
                     type: 'post',
-                    data: {u_id: u_id},
+                    data: {jy_id: jy_id},
                     dateType: 'json',
                     url: "/userdel",
                     success: function (msg) {
                         if (msg.code == 1) {
-                            window.location = '/userlist';
+                           window.location.reload()
                         }else{
                             Popup.alert('HSKMS提示','删除失败');
                             return false;
@@ -116,35 +188,90 @@
             var title = 'HSKMS提示',
             text = '您确定删除么？';
             Popup.confirm(title,text,confirmData);
-            // $.ajax({
-            //     type: 'post',
-            //     data:{u_id:u_id},
-            //     dateType:'json',
-            //     url: "/userdel",
-            //     success:function(msg){
-            //         Popup.alert('HSKMS提示',msg.msg);
-            //         location.reload();
-            //     }
-            // });
         })
-        $("#sx").click(function(){
-            location.reload();
-        })
-        $(".userblock").click(function(){
-            var u_id =$(this).attr('u_id');
-            // alert(u_id);
-            // return false;
+        $(".xzdel").click(function(){
+            var xz_id =$(this).attr('xz_id');
              function confirmData () {
                  $.ajax({
                     type: 'post',
-                    data: {u_id: u_id},
+                    data: {xz_id: xz_id},
+                    dateType: 'json',
+                    url: "/userdel",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                            window.location.reload()
+                        }else{
+                            Popup.alert('HSKMS提示','删除失败');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定删除么？';
+            Popup.confirm(title,text,confirmData);
+        })
+        $(".zgdel").click(function(){
+            var zg_id =$(this).attr('zg_id');
+             function confirmData () {
+                 $.ajax({
+                    type: 'post',
+                    data: {zg_id: zg_id},
+                    dateType: 'json',
+                    url: "/userdel",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                            window.location.reload()
+                        }else{
+                            Popup.alert('HSKMS提示','删除失败');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定删除么？';
+            Popup.confirm(title,text,confirmData);
+        })
+        $(".jsdel").click(function(){
+            var js_id =$(this).attr('js_id');
+             function confirmData () {
+                 $.ajax({
+                    type: 'post',
+                    data: {js_id: js_id},
+                    dateType: 'json',
+                    url: "/userdel",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                            window.location.reload()
+                        }else{
+                            Popup.alert('HSKMS提示','删除失败');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定删除么？';
+            Popup.confirm(title,text,confirmData);
+        })
+
+        $("#sx").click(function(){
+            location.reload();
+        })
+        $(".jyuserblock").click(function(){
+           var jy_id =$(this).attr('jy_id');
+             function confirmData () {
+                 $.ajax({
+                    type: 'post',
+                    data: {jy_id: jy_id},
                     dateType: 'json',
                     url: "/userblock",
                     success: function (msg) {
                         if (msg.code == 1) {
-                            window.location = '/userlist';
+                            window.location.reload()
                         }else{
-                            Popup.alert('HSKMS提示','冻结账户失败');
+                            Popup.alert('HSKMS提示','冻结失败');
                             return false;
                         }
                     }
@@ -153,6 +280,72 @@
             var title = 'HSKMS提示',
             text = '您确定冻结该账户么？';
             Popup.confirm(title,text,confirmData);
-    })
+        })
+        $(".xzuserblock").click(function(){
+           var xz_id =$(this).attr('xz_id');
+             function confirmData () {
+                 $.ajax({
+                    type: 'post',
+                    data: {xz_id: xz_id},
+                    dateType: 'json',
+                    url: "/userblock",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                            window.location.reload()
+                        }else{
+                            Popup.alert('HSKMS提示','冻结失败');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定冻结该账户么？';
+            Popup.confirm(title,text,confirmData);
+        })
+        $(".zguserblock").click(function(){
+           var zg_id =$(this).attr('zg_id');
+             function confirmData () {
+                 $.ajax({
+                    type: 'post',
+                    data: {zg_id: zg_id},
+                    dateType: 'json',
+                    url: "/userblock",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                            window.location.reload()
+                        }else{
+                            Popup.alert('HSKMS提示','冻结失败');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定冻结该账户么？';
+            Popup.confirm(title,text,confirmData);
+        })
+        $(".jsuserblock").click(function(){
+           var js_id =$(this).attr('js_id');
+             function confirmData () {
+                 $.ajax({
+                    type: 'post',
+                    data: {js_id: js_id},
+                    dateType: 'json',
+                    url: "/userblock",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                            window.location.reload()
+                        }else{
+                            Popup.alert('HSKMS提示','冻结失败');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定冻结该账户么？';
+            Popup.confirm(title,text,confirmData);
+        })
          })
 </script>

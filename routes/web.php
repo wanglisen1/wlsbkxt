@@ -53,10 +53,10 @@ Route::any('/userupdate','Admin\AdminController@userupdate');
 Route::any('/userdel','Admin\AdminController@userdel');
 //冻结用户
 Route::any('/userblock','Admin\AdminController@userblock');
-//已删除管理员页面
+//已冻结管理员页面
 Route::any('/Administratordel','Admin\AdminController@administratordel');
 //已删除管理员
-Route::any('/Administratordels','Admin\AdminController@administratordels');
+Route::any('/administratordels','Admin\AdminController@administratordels');
 //清除session
 Route::any('/sessiondel','Admin\AdminController@sessiondel');
 //年级添加页面

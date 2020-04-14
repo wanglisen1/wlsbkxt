@@ -15,7 +15,6 @@
     <thead>
     <tr>
 
-        <th>ID</th>
         <th>登录名</th>
         <th>手机</th>
         <th>邮箱</th>
@@ -27,7 +26,6 @@
     <tbody>
     @foreach($data as $k=>$v)
         <tr>
-            <td >{{$v['u_id']}}</td>
             <td>{{$v['username']}}</td>
             <td>{{$v['tel']}}</td>
             <td>{{$v['email']}}</td>
@@ -48,32 +46,21 @@
                 <td>投资人</td>
                 @elseif($v['role']==4)
                 <td>加盟校长</td>
-                @elseif($v['role']==56)
-                <td>语文主管</td>
-                @elseif($v['role']==57)
-                <td>数学主管</td>
-                @elseif($v['role']==58)
-                <td>英语主管</td>
+                @elseif($v['role']==5)
+                <td>主管</td>
                 @elseif($v['role']==6)
-                <td>语文教师</td>
-                @elseif($v['role']==7)
-                <td>数学教师</td>
-                @elseif($v['role']==8)
-                <td>英语教师</td>
+                <td>教师</td>
             @endif
             <td>{{$v['addtime']}}</td>
             <td class="td-manage">
-                <button class="layui-btn upd"  u_id="{{$v['u_id']}}">启用</button>
+                <a title="启用该账户" class="userblockupd" href="javascript:;" u_id="{{$v['u_id']}}">
+                <i class="iconfont" style="font-size:25px;">&nbsp;&#xe6b1;</i>
+            </a>
             </td>
         </tr>
     @endforeach
     </tbody>
 </table>
-<div class="page">
-   <span class="pagejump" >
-            {{$data->links()}}
-    </span>
-</div>
 
 </div>
 <script src="/jquery-3.1.1.min.js"></script>
@@ -82,26 +69,26 @@
 </script>
 <script>
     $(function(){
-        $(".upd").click(function(){
+        $(".userblockupd").click(function(){
             var u_id =$(this).attr('u_id');
              function confirmData () {
                  $.ajax({
                     type: 'post',
                     data: {u_id: u_id},
                     dateType: 'json',
-                    url: "/Administratordels",
+                    url: "/administratordels",
                     success: function (msg) {
                         if (msg.code == 1) {
-                           location.reload();
+                            window.location.reload()
                         }else{
-                            Popup.alert('HSKMS提示','启用账户失败');
+                            Popup.alert('HSKMS提示','解除冻结失败');
                             return false;
                         }
                     }
                 });   
             }
             var title = 'HSKMS提示',
-            text = '您确定启用该账户么？';
+            text = '您确定解除冻结该账户么？';
             Popup.confirm(title,text,confirmData);
         })
         $("#sx").click(function(){

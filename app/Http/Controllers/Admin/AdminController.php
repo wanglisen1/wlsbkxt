@@ -13,6 +13,10 @@ use App\Model\CollectModel;
 use App\Model\VideoModel;
 use App\Model\PptModel;
 use App\Model\ChaseaModel;
+use App\Model\TzruserModel;
+use App\Model\XzuserModel;
+use App\Model\ZguserModel;
+use App\Model\JsuserModel;
 use Imagick;
 class AdminController extends Controller
 {
@@ -54,21 +58,31 @@ class AdminController extends Controller
         $uid=$_SESSION["uid"];
         $uname=$_SESSION["username"];
         $res=AdminuserModel::where('u_id',$uid)->first()->toArray();
-        $yw=AdminuserModel::where('alliance',$uid)->where('is_del',1)->where('role',4)->get();
-        $sx=AdminuserModel::where('alliance',$uid)->where('is_del',1)->where('role',5)->get();
-        $yy=AdminuserModel::where('alliance',$uid)->where('is_del',1)->where('role',6)->get();
-        $countyw=count($yw);
-        $countsx=count($sx);
-        $countyy=count($yy);
         $role=$res['role'];
-        $list=[
+        if($role==5){
+            $res1 = ZguserModel::where('zg_phone',$res['tel'])->first();
+             $list=[
             'sid'=>$uid,
             'sname'=>$uname,
             'role'=>$role,
-            'countyw'=>$countyw,
-            'countsx'=>$countsx,
-            'countyy'=>$countyy
-        ];
+            'data'=>$res1
+            ];
+        }else if($role==6){
+             $res1 = JsuserModel::where('js_phone',$res['tel'])->first();
+             $list=[
+            'sid'=>$uid,
+            'sname'=>$uname,
+            'role'=>$role,
+            'data'=>$res1
+            ];
+        }else{
+            $list=[
+            'sid'=>$uid,
+            'sname'=>$uname,
+            'role'=>$role
+            ];
+        }
+       
         return view('admin.admin',$list);
     }
 
@@ -189,48 +203,68 @@ class AdminController extends Controller
         }
         $value = $_SESSION["uid"];
         $data=AdminuserModel::where('u_id',$value)->first();
-        $role=$data['role'];
-        $xz = AdminuserModel::where('alliance',$value)->where('role',4)->get();
-        $countxz = count($xz);
-        $zg = AdminuserModel::where('alliance',$value)->where('role',5)->get();
-        $countzg = count($zg);
-        $ywjs = AdminuserModel::where('alliance',$value)->where('role',6)->get();
-        $sxjs = AdminuserModel::where('alliance',$value)->where('role',7)->get();
-        $yyjs = AdminuserModel::where('alliance',$value)->where('role',8)->get();
-        $countywjs = count($ywjs);
-        $countsxjs = count($sxjs);
-        $countyyjs = count($yyjs);
-        $countjs = $countywjs+$countsxjs+$countyyjs;
-        $addjs = $data['addjs'];
-        $addxz = $data['addxz'];
-        $addzg = $data['addzg'];
+        $res = TzruserModel::get();
+        $roles=$data['role'];
         $list=[
-            'role' => $role,
-            'countxz' => $countxz,
-            'countjs' => $countjs,
-            'countzg' => $countzg,
-            'addjs' => $addjs,
-            'addxz' => $addxz,
-            'addzg' => $addzg
+            'roles' => $roles,
+            'res' => $res
         ];
         return view('admin.adminuser.useradd',$list);
     }
 
     //管理员添加
     public function useradds(Request $request){
+        date_default_timezone_set('Asia/Shanghai');
         session_start();
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
         }
-        date_default_timezone_set('Asia/Shanghai');
+        
+            $school = $request->input('school');
+            //print_r($school);exit;
             $tel = $request->input('tel');
+            $res4 = AdminuserModel::where('tel',$tel)->first();
+            if(!empty($res4)){
+                return ['code' => 0, 'msg' => '该手机号已经注册过了'];
+            }
             $username = $request->input('username');
             $email = $request->input('email');
             $sex = $request->input('sex');
             $password = $request->input('password');
             $role = $request->input('role');
+            $roles = $request->input('roles');
+            $spring = $request->input('spring');
+            $heat = $request->input('heat');
+            $autumn = $request->input('autumn');
+            $cold = $request->input('cold');
+            $xztzr = $request->input('xztzr');
+            $yw = $request->input('yw');
+            $sx = $request->input('sx');
+            $yy = $request->input('yy');
+            $subject = $request->input('subject');
+            $sangrade = $request->input('sangrade');
+            $sigrade = $request->input('sigrade');
+            $wugrade = $request->input('wugrade');
+            $liugrade = $request->input('liugrade');
             // $xsjcbb = $request->input('xsjcbb');
             //print_r($xsjcbb);exit;
+            if($role==26||$role==27||$role==28){
+                $data = [
+                'tel' => $tel,
+                'password' => $password,
+                'username' => $username,
+                'email' => $email,
+                'sex' => $sex,
+                'role' => $role,
+                'addtime' => date("Y-m-d H:i:s"),
+            ];
+             $res = AdminuserModel::insert($data);
+              if ($res) {
+                return ['code' => 1, 'msg' => '添加成功'];
+              }else{
+                return ['code' => 0, 'msg' => '添加失败,请重新添加1'];
+              }
+            }
             if($role==3){
                 $data = [
                 'tel' => $tel,
@@ -240,102 +274,377 @@ class AdminController extends Controller
                 'sex' => $sex,
                 'role' => $role,
                 'addtime' => date("Y-m-d H:i:s"),
-                'alliance' => $_SESSION["uid"],
-                'addjs' => '10',
-                'addxz' => '1',
-                'addzg' =>  '3',
-                // 'xsjcbb' => $xsjcbb
-            ];
-            }else if($role==56){
-                $data = [
-                'tel' => $tel,
-                'password' => $password,
-                'username' => $username,
-                'email' => $email,
-                'sex' => $sex,
-                'role' => $role,
-                'addtime' => date("Y-m-d H:i:s"),
-                'alliance' => $_SESSION["uid"],
-                'addjs' => '6'
-            ];
-             }else if($role==57){
-                $data = [
-                'tel' => $tel,
-                'password' => $password,
-                'username' => $username,
-                'email' => $email,
-                'sex' => $sex,
-                'role' => $role,
-                'addtime' => date("Y-m-d H:i:s"),
-                'alliance' => $_SESSION["uid"],
-                'addjs' => '6'
-            ];
-             }else if($role==58){
-                $data = [
-                'tel' => $tel,
-                'password' => $password,
-                'username' => $username,
-                'email' => $email,
-                'sex' => $sex,
-                'role' => $role,
-                'addtime' => date("Y-m-d H:i:s"),
-                'alliance' => $_SESSION["uid"],
-                'addjs' => '6'
-            ];
-            }else if($role==6){
-                $data = [
-                'tel' => $tel,
-                'password' => $password,
-                'username' => $username,
-                'email' => $email,
-                'sex' => $sex,
-                'role' => $role,
-                'addtime' => date("Y-m-d H:i:s"),
-                'alliance' => $_SESSION["uid"],
-                'addjs' => '3'
-            ];
-            }else if($role==7){
-                $data = [
-                'tel' => $tel,
-                'password' => $password,
-                'username' => $username,
-                'email' => $email,
-                'sex' => $sex,
-                'role' => $role,
-                'addtime' => date("Y-m-d H:i:s"),
-                'alliance' => $_SESSION["uid"],
-                'addjs' => '3'
-            ];
-            }else if($role==8){
-                 $data = [
-                'tel' => $tel,
-                'password' => $password,
-                'username' => $username,
-                'email' => $email,
-                'sex' => $sex,
-                'role' => $role,
-                'addtime' => date("Y-m-d H:i:s"),
-                'alliance' => $_SESSION["uid"],
-                'addjs' => '3'
-            ];
-            }else{
-            $data = [
-                'tel' => $tel,
-                'password' => $password,
-                'username' => $username,
-                'email' => $email,
-                'sex' => $sex,
-                'role' => $role,
-                'addtime' => date("Y-m-d H:i:s"),
-                'alliance' => $_SESSION["uid"],
-                // 'xsjcbb' => $xsjcbb
-            ];
-        }
-            $res = AdminuserModel::insert($data);
-            if ($res) {
-                return ['code' => 1, 'msg' => '添加成功'];
-            } else {
-                return ['code' => 0, 'msg' => '添加失败,请重新添加'];
+                ];
+             $res = AdminuserModel::insert($data);
+              if ($res) {
+                $qwe = AdminuserModel::where('tel',$tel)->first();
+                $data1 = [
+                'tzr_school' => $school,
+                'tzr_name' => $username,
+                'tzr_chun' => $spring,
+                'tzr_shu' => $heat,
+                'tzr_qiu' => $autumn,
+                'tzr_han' => $cold,
+                'tzr_role' => $role,
+                'u_id' => $qwe['u_id'],
+                'tzr_phone' => $tel,
+                ];
+                $res1 = TzruserModel::insert($data1);
+                if($res1){
+                     return ['code' => 1, 'msg' => '添加成功'];
+                }else{
+                    return ['code' => 2, 'msg' => '添加失败,请重新添加2'];
+                }   
+              }else{
+                return ['code' => 0, 'msg' => '添加失败,请重新添加1'];
+              }
+            }
+
+            if($role==4){
+                $arr = TzruserModel::where('tzr_id',$xztzr)->first();
+                //print_r($arr['tzr_chun']);exit;
+                if(empty($xztzr)){
+                     $data = [
+                        'tel' => $tel,
+                        'password' => $password,
+                        'username' => $username,
+                        'email' => $email,
+                        'sex' => $sex,
+                        'role' => $role,
+                        'addtime' => date("Y-m-d H:i:s"),
+                        'tzr' => $_SESSION["uid"]
+                    ];
+                }else{
+                     $data = [
+                        'tel' => $tel,
+                        'password' => $password,
+                        'username' => $username,
+                        'email' => $email,
+                        'sex' => $sex,
+                        'role' => $role,
+                        'addtime' => date("Y-m-d H:i:s"),
+                        'tzr' => $arr['u_id']
+                    ];
+                }
+               
+                $res = AdminuserModel::insert($data);
+                if($res){
+                    
+                    $chun = $arr['tzr_chun'];
+                    $shu = $arr['tzr_shu'];
+                    $qiu = $arr['tzr_qiu'];
+                    $han = $arr['tzr_han'];
+                     if(empty($xztzr)){
+                        $res3 = TzruserModel::where('u_id',$_SESSION["uid"])->first();
+                             $data1 = [
+                        'xz_school' => $res3['tzr_school'],
+                        'xz_name' => $username,
+                        'xz_chun' => $res3['tzr_chun'],
+                        'xz_shu' => $res3['tzr_shu'],
+                        'xz_qiu' => $res3['tzr_qiu'],
+                        'xz_han' => $res3['tzr_han'],
+                        'xz_role' => $role,
+                            'xz_tzr' => $res3['tzr_id'],
+                            'xz_phone' => $tel
+                        ];
+                        }else{
+                             $data1 = [
+                        'xz_school' => $arr['tzr_school'],
+                        'xz_name' => $username,
+                        'xz_chun' => $chun,
+                        'xz_shu' => $shu,
+                        'xz_qiu' => $qiu,
+                        'xz_han' => $han,
+                        'xz_role' => $role,
+                            'xz_tzr' => $xztzr,
+                            'xz_phone' => $tel
+
+                        ]; 
+                        }
+                    $res1=XzuserModel::insert($data1);
+
+                      if($res1){
+                     return ['code' => 1, 'msg' => '添加成功'];
+                    }else{
+                        return ['code' => 2, 'msg' => '添加失败,请重新添加2'];
+                    }   
+                }else{
+                    return ['code' => 0, 'msg' => '添加失败,请重新添加1'];
+                }
+            
+            }
+
+            if($role==5){
+                $arr = TzruserModel::where('tzr_id',$xztzr)->first();
+                if(empty($xztzr)){
+                    if($roles==3){
+                        $data = [
+                                'tel' => $tel,
+                                'password' => $password,
+                                'username' => $username,
+                                'email' => $email,
+                                'sex' => $sex,
+                                'role' => $role,
+                                'addtime' => date("Y-m-d H:i:s"),
+                                'tzr' => $_SESSION["uid"],
+                            ];
+                        }else if($roles==4){
+                                $resxz = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+                                $resxz2 = XzuserModel::where('xz_phone',$resxz['tel'])->first();
+                                $res4 = TzruserModel::where('tzr_id',$resxz2['xz_tzr'])->first();
+                            $data = [
+                                 'tel' => $tel,
+                                'password' => $password,
+                                'username' => $username,
+                                'email' => $email,
+                                'sex' => $sex,
+                                'role' => $role,
+                                'addtime' => date("Y-m-d H:i:s"),
+                                'tzr' => $res4['u_id'],
+                            ];
+                        }
+                        
+                    }else{
+                             $data = [
+                                 'tel' => $tel,
+                                'password' => $password,
+                                'username' => $username,
+                                'email' => $email,
+                                'sex' => $sex,
+                                'role' => $role,
+                                'addtime' => date("Y-m-d H:i:s"),
+                                'tzr' => $arr['u_id'],
+                            ];
+                    }
+                
+                //print_r($data);exit;
+                $res = AdminuserModel::insert($data);
+                if($res){
+                    $chun = $arr['tzr_chun'];
+                    // print_r($chun);exit;
+                    $shu = $arr['tzr_shu'];
+                    $qiu = $arr['tzr_qiu'];
+                    $han = $arr['tzr_han'];
+                    if(empty($xztzr)){
+                        if($roles==3){
+                            $res3 = TzruserModel::where('u_id',$_SESSION["uid"])->first();
+                                 $data1 = [
+                        'zg_school' => $res3['tzr_school'],
+                        'zg_name' => $username,
+                        'zg_chun' => $res3['tzr_chun'],
+                        'zg_shu' => $res3['tzr_shu'],
+                        'zg_qiu' => $res3['tzr_qiu'],
+                        'zg_han' => $res3['tzr_han'],
+                        'zg_role' => $role,
+                        'zg_tzr' => $res3['tzr_id'],
+                        'zg_yw' => $yw,
+                        'zg_sx' => $sx,
+                        'zg_yy' => $yy,
+                        'zg_phone' => $tel
+                        ];
+                        }else if($roles==4){
+                               $resxz = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+                                $resxz2 = XzuserModel::where('xz_phone',$resxz['tel'])->first();
+                                $data1 = [
+                        'zg_school' =>  $resxz2['xz_school'],
+                        'zg_name' => $username,
+                        'zg_chun' =>  $resxz2['xz_chun'],
+                        'zg_shu' =>  $resxz2['xz_shu'],
+                        'zg_qiu' =>  $resxz2['xz_qiu'],
+                        'zg_han' =>  $resxz2['xz_han'],
+                        'zg_role' => $role,
+                       'zg_tzr' =>  $resxz2['xz_tzr'],
+                        'zg_yw' => $yw,
+                        'zg_sx' => $sx,
+                        'zg_yy' => $yy,
+                        'zg_phone' => $tel
+                        ];
+                           }
+                        }else{
+                             $data1 = [
+                        'zg_school' => $arr['tzr_school'],
+                        'zg_name' => $username,
+                        'zg_chun' => $chun,
+                        'zg_shu' => $shu,
+                        'zg_qiu' => $qiu,
+                        'zg_han' => $han,
+                        'zg_role' => $role,
+                        'zg_tzr' => $xztzr,
+                        'zg_yw' => $yw,
+                        'zg_sx' => $sx,
+                        'zg_yy' => $yy,
+                        'zg_phone' => $tel,
+                        ];
+                        //print_r($data1);exit;
+                    }
+                    //print_r($data1);exit;
+                    $res1=ZguserModel::insert($data1);
+                    if($res1){
+                     return ['code' => 1, 'msg' => '添加成功'];
+                    }else{
+                        return ['code' => 2, 'msg' => '添加失败,请重新添加2'];
+                    }   
+                    }else{
+                    return ['code' => 0, 'msg' => '添加失败,请重新添加1'];
+                 }
+            }
+
+            if($role==6){
+            //print_r(12356);exit;
+                $arr = TzruserModel::where('tzr_id',$xztzr)->first();
+                //print_r($arr['tzr_chun']);exit;
+                if(empty($xztzr)){
+                    if($roles==3){
+                        $res3 = TzruserModel::where('u_id',$_SESSION["uid"])->first();
+                             $data = [
+                            'tel' => $tel,
+                            'password' => $password,
+                            'username' => $username,
+                            'email' => $email,
+                            'sex' => $sex,
+                            'role' => $role,
+                            'addtime' => date("Y-m-d H:i:s"),
+                            'tzr' => $_SESSION["uid"]
+                        ];
+                    }else if($roles==4){
+                                $resxz = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+                                $resxz2 = XzuserModel::where('xz_phone',$resxz['tel'])->first();
+                                $res4 = TzruserModel::where('tzr_id',$resxz2['xz_tzr'])->first();
+                                 $data = [
+                               'tel' => $tel,
+                                'password' => $password,
+                                'username' => $username,
+                                'email' => $email,
+                                'sex' => $sex,
+                                'role' => $role,
+                                'addtime' => date("Y-m-d H:i:s"),
+                                'tzr' => $res4['u_id']
+                                ];
+                    }else if($roles==5){
+                            $resxz = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+                            $resxz2 = ZguserModel::where('zg_phone',$resxz['tel'])->first();
+                            $res4 = TzruserModel::where('tzr_id',$resxz2['zg_tzr'])->first();
+                            $data = [
+                             'tel' => $tel,
+                             'password' => $password,
+                             'username' => $username,
+                             'email' => $email,
+                             'sex' => $sex,
+                             'role' => $role,
+                             'addtime' => date("Y-m-d H:i:s"),
+                             'tzr' => $res4['u_id']
+                            ];
+                        }
+                     
+                }else{
+                    $data = [
+                        'tel' => $tel,
+                        'password' => $password,
+                        'username' => $username,
+                        'email' => $email,
+                        'sex' => $sex,
+                        'role' => $role,
+                        'addtime' => date("Y-m-d H:i:s"),
+                        'tzr' => $arr["u_id"]
+                    ];
+                }
+               // print_r($data);exit;
+                $res = AdminuserModel::insert($data);
+                //var_dump($res);exit;
+                if($res){  
+                    $chun = $arr['tzr_chun'];
+                    $shu = $arr['tzr_shu'];
+                    $qiu = $arr['tzr_qiu'];
+                    $han = $arr['tzr_han'];
+                    if(empty($xztzr)){
+                      if($roles==3){
+                        $res3 = TzruserModel::where('u_id',$_SESSION["uid"])->first();
+                         $data1 = [
+                        'js_school' => $res3['tzr_school'],
+                        'js_name' => $username,
+                        'js_chun' => $res3['tzr_chun'],
+                        'js_shu' => $res3['tzr_shu'],
+                        'js_qiu' => $res3['tzr_qiu'],
+                        'js_han' => $res3['tzr_han'],
+                        'js_role' => $role,
+                         'js_tzr' => $res3['tzr_id'],
+                        'js_subject' => $subject,
+                        'js_san' => $sangrade,
+                        'js_si' => $sigrade,
+                        'js_wu' => $wugrade,
+                        'js_liu' => $liugrade,
+                        'js_phone' => $tel
+                        ];
+                    }else if($roles==4){
+                                $resxz = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+                                $resxz2 = XzuserModel::where('xz_phone',$resxz['tel'])->first();
+                                 $data1 = [
+                                'js_school' => $resxz2['xz_school'],
+                                'js_name' => $username,
+                                'js_chun' => $resxz2['xz_chun'],
+                                'js_shu' => $resxz2['xz_shu'],
+                                'js_qiu' => $resxz2['xz_qiu'],
+                                'js_han' => $resxz2['xz_han'],
+                                'js_role' => $role,
+                                'js_tzr' => $resxz2['xz_tzr'],
+                                'js_subject' => $subject,
+                                'js_san' => $sangrade,
+                                'js_si' => $sigrade,
+                                'js_wu' => $wugrade,
+                                'js_liu' => $liugrade,
+                                'js_phone' => $tel
+                                ];
+                    }else if($roles==5){
+                                $reszg = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+                                $reszg2 = ZguserModel::where('zg_phone',$reszg['tel'])->first();
+                                $data1 = [
+                                'js_school' => $reszg2['zg_school'],
+                                'js_name' => $username,
+                                'js_chun' => $reszg2['zg_chun'],
+                                'js_shu' => $reszg2['zg_shu'],
+                                'js_qiu' => $reszg2['zg_qiu'],
+                                'js_han' => $reszg2['zg_han'],
+                                'js_role' => $role,
+                                 'js_tzr' => $reszg2['zg_tzr'],
+                                'js_subject' => $subject,
+                                'js_san' => $sangrade,
+                                'js_si' => $sigrade,
+                                'js_wu' => $wugrade,
+                                'js_liu' => $liugrade,
+                                'js_phone' => $tel
+                                ];
+                            }
+                     }else{
+                             $data1 = [
+                        'js_school' => $arr['tzr_school'],
+                        'js_name' => $username,
+                        'js_chun' => $chun,
+                        'js_shu' => $shu,
+                        'js_qiu' => $qiu,
+                        'js_han' => $han,
+                        'js_role' => $role,
+                          'js_tzr' => $xztzr,
+                        'js_subject' => $subject,
+                        'js_san' => $sangrade,
+                        'js_si' => $sigrade,
+                        'js_wu' => $wugrade,
+                        'js_liu' => $liugrade,
+                        'js_phone' => $tel
+                        ];
+                     }
+                
+                   
+                        //print_r($data1);exit;
+                        $res1=JsuserModel::insert($data1);
+                          if($res1){
+                         return ['code' => 1, 'msg' => '添加成功'];
+                        }else{
+                            return ['code' => 2, 'msg' => '添加失败,请重新添加2'];
+                        }   
+                }else{
+                    return ['code' => 0, 'msg' => '添加失败,请重新添加1'];
+                }
+            
             }
         }
 
@@ -348,22 +657,74 @@ class AdminController extends Controller
         $data=AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role=$data['role'];
 
-        if($role===1){
-            $res = AdminuserModel::where('is_del',1)->whereNotIn('role',[3])->whereNotIn('role',[1])->paginate(30);
-        }else if($role===3){
-            $res = AdminuserModel::where('is_del',1)->where('alliance',$_SESSION["uid"])->whereIn('role',['4','56','57','58','6','7','8'])->paginate(30);
-        }else if($role===4){
-            $res = AdminuserModel::where('is_del',1)->where('alliance',$data['alliance'])->whereIn('role',['5','56','57','58','7','8'])->paginate(30);
-        }else{
-             $res = NULL;
-        }
-
-        $count=count($res);
-        $list=[
+        if($role==1||$role==2){
+            $res = AdminuserModel::where('is_del',1)->whereIn('role',[26,27,28])->get();
+            $count= count($res);
+            $list = [
             'data' => $res,
             'count' => $count,
+            'role' => 9,
+            ];
+        }else if($role==3){
+            $res = TzruserModel::where('u_id',$_SESSION["uid"])->first();
+            $res1 = XzuserModel::where('is_del',1)->where('xz_tzr',$res['tzr_id'])->get();
+            $res2 = ZguserModel::where('is_del',1)->where('zg_tzr',$res['tzr_id'])->get();
+            $res3 = JsuserModel::where('is_del',1)->where('js_tzr',$res['tzr_id'])->get();
+            $count=count($res1)+count($res2)+count($res3);
+            $list=[
+            'data1' => $res1,
+            'data2' => $res2,
+            'data3' => $res3,
+            'count' => $count,
             'role' => $role
-        ];
+           ];
+        }else if($role==4){
+            $res = XzuserModel::where('xz_phone',$data['tel'])->first();
+            $res2 = ZguserModel::where('is_del',1)->where('zg_tzr',$res['xz_tzr'])->get();
+            $res3 = JsuserModel::where('is_del',1)->where('js_tzr',$res['xz_tzr'])->get();
+            $count=count($res2)+count($res3);
+            $list=[
+            'data2' => $res2,
+            'data3' => $res3,
+            'count' => $count,
+            'role' => $role
+           ];
+        }else if($role==5){
+            $res = ZguserModel::where('zg_phone',$data['tel'])->first();
+            $res3 = JsuserModel::where('is_del',1)->where('js_tzr',$res['zg_tzr'])->get();
+            $count=count($res3);
+            $list=[
+            'data3' => $res3,
+            'count' => $count,
+            'role' => $role
+           ];
+        }else if($role==26){
+            $res4 = JsuserModel::where('is_del',1)->where('js_subject','趣味大语文')->get();
+             $count=count($res4);
+              $list=[
+            'data4' => $res4,
+            'count' => $count,
+            'role' => $role
+           ];
+        }else if($role==27){
+             $res4 = JsuserModel::where('is_del',1)->where('js_subject','思维培优数学')->get();
+             $count=count($res4);
+              $list=[
+            'data4' => $res4,
+            'count' => $count,
+            'role' => $role
+           ];
+        }else if($role==28){
+             $res4 = JsuserModel::where('is_del',1)->where('js_subject','HS英语')->get();
+             $count=count($res4);
+              $list=[
+            'data4' => $res4,
+            'count' => $count,
+            'role' => $role
+           ];
+        }
+       
+        
         return view('admin.adminuser.userlist',$list);
     }
 
@@ -374,15 +735,18 @@ class AdminController extends Controller
         }
         $id = $request->input('id'); 
         //echo $id;exit;
-        $res = AdminuserModel::where('alliance',$id)->paginate(30);
+        $res1 = XzuserModel::where('xz_tzr',$id)->where('is_del',1)->get();
+        $res2 = ZguserModel::where('zg_tzr',$id)->where('is_del',1)->get();
+        $res3 = JsuserModel::where('js_tzr',$id)->where('is_del',1)->get();
+        $count = count($res1)+count($res2)+count($res3);
         //print_r($res);exit;
-        $count=count($res);
-        //echo $count;exit;
         $data=AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role=$data['role'];
         //echo $role;exit;
         $list = [
-            'data' => $res,
+            'data1' => $res1,
+            'data2' => $res2,
+            'data3' => $res3,
             'count' => $count,
             'role' => $role
         ];
@@ -396,7 +760,7 @@ class AdminController extends Controller
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
         }
-        $res = AdminuserModel::where('is_del',1)->where('role',3)->paginate(30);
+        $res = TzruserModel::where('is_del',1)->paginate(30);
         $count=count($res);
         $list = [
             'count' => $count,
@@ -411,44 +775,52 @@ class AdminController extends Controller
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
         }
-        $id=$request->input();
-        $uid=$id['id'];
-        $tzr=$id['tzr'];
-        $res=AdminuserModel::where(['u_id'=>$uid])->first();
+        
         $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
-        //print_r($res5['alliance']);exit;
         $role=$res5['role'];
-        //print_r($res['role']);exit;
-        if($res['role']==6){
-            $res2 = AdminuserModel::where('alliance',$res['alliance'])->where('role',56)->first();
+
+        $tzr_id = $request->input('tzr_id'); 
+        $xz_id = $request->input('xz_id'); 
+        $zg_id = $request->input('zg_id'); 
+        $js_id = $request->input('js_id'); 
+        $jy_id = $request->input('jy_id'); 
+        if(!empty($tzr_id)){
+            $res=TzruserModel::where('tzr_id',$tzr_id)->first();
             $list=[
             'data'=>$res,
             'role' => $role,
-            'tzr' => $tzr,
-            'num' => $res2
-        ];
-        }else if($res['role']==7){
-            $res2 = AdminuserModel::where('alliance',$res['alliance'])->where('role',57)->first();
-             $list=[
+            'ycrole' => $res['tzr_role'],
+            ];
+        }else if(!empty($xz_id)){
+            $res=XzuserModel::where('xz_id',$xz_id)->first();
+            $list=[
             'data'=>$res,
             'role' => $role,
-            'tzr' => $tzr,
-            'num' => $res2
-        ];
-        }else if($res['role']==8){
-            $res2 = AdminuserModel::where('alliance',$res['alliance'])->where('role',58)->first(); $list=[
+            'ycrole' => $res['xz_role'],
+            ];
+        }else if(!empty($zg_id)){
+            $res=ZguserModel::where('zg_id',$zg_id)->first();
+            $list=[
             'data'=>$res,
             'role' => $role,
-            'tzr' => $tzr,
-            'num' => $res2
-        ];
-        }else{
-           $list=[
+            'ycrole' => $res['zg_role'],
+            ];
+        }else if(!empty($js_id)){
+             $res=JsuserModel::where('js_id',$js_id)->first();
+            $list=[
             'data'=>$res,
             'role' => $role,
-            'tzr' => $tzr
-        ];
+            'ycrole' => $res['js_role'],
+            ];
+        }else if(!empty($jy_id)){
+            $res = AdminuserModel::where('u_id',$jy_id)->first();
+            $list = [
+              'data' =>$res,
+              'role' => $role,
+              'ycrole' => $res['role'],
+            ];
         }
+        
         
         return view('admin.adminuser.userlistupdate',$list);
     }
@@ -459,21 +831,91 @@ class AdminController extends Controller
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
         }
-        $tel= $request->input('tel');
-        $username =$request->input('username');
-        $email =$request->input('email');
-        $sex =$request->input('sex');
+        $school =$request->input('school');
+         $tzr_id =$request->input('tzr_id');
+         $xz_id =$request->input('xz_id');
+         $zg_id = $request->input('zg_id');
+         $js_id = $request->input('js_id');
+         $jy_id = $request->input('jyuid');
+
+         if(!empty($tzr_id)){
+        $tzr_xz =$request->input('tzr_xz');
+        $tzr_zg =$request->input('tzr_zg');
+        $tzr_js =$request->input('tzr_js');
         $role =$request->input('role');
-        $id =$request->input('id');
-        $addjs =$request->input('addjs');
-        $addzg =$request->input('addzg');
-        $addxz =$request->input('addxz');
-        $res=AdminuserModel::where('u_id',$id)->update(['tel'=>$tel,'username'=>$username,'email'=>$email,'sex'=>$sex,'addjs'=>$addjs,'addxz'=>$addxz,'addzg'=>$addzg]);
+        $chun =$request->input('chun');
+        $shu =$request->input('shu');
+        $qiu =$request->input('qiu');
+        $han =$request->input('han');
+        $res=TzruserModel::where('tzr_id',$tzr_id)->update(['tzr_school'=>$school,'tzr_xz'=>$tzr_xz,'tzr_zg'=>$tzr_zg,'tzr_js'=>$tzr_js,'tzr_chun'=>$chun,'tzr_shu'=>$shu,'tzr_qiu'=>$qiu,'tzr_han'=>$han]);
+         //$res1=AdminModel::where('tel',$phone)->update(['tel'=>$tel,'username'=>$username]);
+         $res2=XzuserModel::where('xz_tzr',$tzr_id)->update(['xz_chun'=>$chun,'xz_shu'=>$shu,'xz_qiu'=>$qiu,'xz_han'=>$han]);
+         $res3=ZguserModel::where('zg_tzr',$tzr_id)->update(['zg_chun'=>$chun,'zg_shu'=>$shu,'zg_qiu'=>$qiu,'zg_han'=>$han]);
+         $res4=JsuserModel::where('js_tzr',$tzr_id)->update(['js_chun'=>$chun,'js_shu'=>$shu,'js_qiu'=>$qiu,'js_han'=>$han]);
+        if ($res||$res2||$res3||$res4) {
+            return ['code' => 1, 'msg' => '修改成功'];
+        } else {
+            return ['code' => 0, 'msg' => '修改失败,您并没有改动信息'];
+        }
+      }else if(!empty($xz_id)){
+          $chun =$request->input('xzchun');
+          $shu =$request->input('xzshu');
+          $qiu =$request->input('xzqiu');
+          $han =$request->input('xzhan');
+          $restzr = XzuserModel::where('xz_id',$xz_id)->first();
+
+          $res = XzuserModel::where('xz_id',$xz_id)->update(['xz_school'=>$school,'xz_chun'=>$chun,'xz_shu'=>$shu,'xz_qiu'=>$qiu,'xz_han'=>$han]);
+         $res3=ZguserModel::where('zg_tzr',$restzr['xz_tzr'])->update(['zg_chun'=>$chun,'zg_shu'=>$shu,'zg_qiu'=>$qiu,'zg_han'=>$han]);
+         $res4=JsuserModel::where('js_tzr',$restzr['xz_tzr'])->update(['js_chun'=>$chun,'js_shu'=>$shu,'js_qiu'=>$qiu,'js_han'=>$han]);
+          if ($res||$res3||$res4) {
+            return ['code' => 1, 'msg' => '修改成功'];
+        } else {
+            return ['code' => 0, 'msg' => '修改失败,您并没有改动信息'];
+        }
+      }else if(!empty($zg_id)){
+          $chun =$request->input('zgchun');
+          $shu =$request->input('zgshu');
+          $qiu =$request->input('zgqiu');
+          $han =$request->input('zghan');
+          $sx =$request->input('zgsx');
+          $yw =$request->input('zgyw');
+          $yy =$request->input('zgyy');
+          $zgmoren =$request->input('zgmoren');
+           $res = ZguserModel::where('zg_id',$zg_id)->update(['zg_school'=>$school,'zg_chun'=>$chun,'zg_shu'=>$shu,'zg_qiu'=>$qiu,'zg_han'=>$han,'zg_sx'=>$sx,'zg_yw'=>$yw,'zg_yy'=>$yy,'zg_moren'=>$zgmoren]);
+           if ($res) {
+            return ['code' => 1, 'msg' => '修改成功'];
+        } else {
+            return ['code' => 0, 'msg' => '修改失败,您并没有改动信息'];
+        }
+      }else if(!empty($js_id)){
+        $chun =$request->input('jschun');
+          $shu =$request->input('jsshu');
+          $qiu =$request->input('jsqiu');
+          $han =$request->input('jshan');
+          $san =$request->input('jssan');
+          $si =$request->input('jssi');
+          $wu =$request->input('jswu');
+          $liu =$request->input('jsliu');
+          $jsmoren =$request->input('jsmoren');
+          $subject =$request->input('subject');
+          $res = JsuserModel::where('js_id',$js_id)->update(['js_school'=>$school,'js_chun'=>$chun,'js_shu'=>$shu,'js_qiu'=>$qiu,'js_han'=>$han,'js_san'=>$san,'js_si'=>$si,'js_wu'=>$wu,'js_liu'=>$liu,'js_moren'=>$jsmoren]);
+           if ($res) {
+            return ['code' => 1, 'msg' => '修改成功'];
+        } else {
+            return ['code' => 0, 'msg' => '修改失败,您并没有改动信息'];
+        }
+      }else if(!empty($jy_id)){
+        $username =$request->input('username');
+        $tel =$request->input('tel');
+        $email =$request->input('email');
+        $subject = $request->input('subject');
+        $res = AdminuserModel::where('u_id',$jy_id)->update(['username'=>$username,'tel'=>$tel,'email'=>$email,'role'=>$subject]);
         if ($res) {
             return ['code' => 1, 'msg' => '修改成功'];
         } else {
             return ['code' => 0, 'msg' => '修改失败,您并没有改动信息'];
         }
+      }
     }
 
     //管理员删除
@@ -482,14 +924,61 @@ class AdminController extends Controller
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
         }
-        $uid=$request->input();
-        $id=$uid['u_id'];
-        $res=AdminuserModel::where('u_id',$id)->update(['is_del'=>2]);
-        if ($res) {
+       
+        $jy_id=$request->input('jy_id');
+        $xz_id=$request->input('xz_id');
+        $zg_id=$request->input('zg_id');
+        $js_id=$request->input('js_id');
+        $tzr_id=$request->input('tzr_id');
+        if(!empty($jy_id)){
+            $res = AdminuserModel::where('u_id',$jy_id)->update(['is_del'=>2]);
+             if ($res) {
                 return ['code' => 1, 'msg' => '删除成功'];
             }else{
                 return ['code' => 0, 'msg' => '删除失败'];
             }
+        }
+        if(!empty($xz_id)){
+            $res1 = XzuserModel::where('xz_id',$xz_id)->first();
+            $res = AdminuserModel::where('tel',$res1['xz_phone'])->update(['is_del'=>2]); 
+            $res2 = XzuserModel::where('xz_id',$xz_id)->update(['is_del'=>2]);
+            if ($res2) {
+                return ['code' => 1, 'msg' => '删除成功'];
+            }else{
+                return ['code' => 0, 'msg' => '删除失败'];
+            }
+        }
+         if(!empty($zg_id)){
+            $res1 = ZguserModel::where('zg_id',$zg_id)->first();
+            $res = AdminuserModel::where('tel',$res1['zg_phone'])->update(['is_del'=>2]); 
+             $res2 = ZguserModel::where('zg_id',$zg_id)->update(['is_del'=>2]);
+            if ($res2) {
+                return ['code' => 1, 'msg' => '删除成功'];
+            }else{
+                return ['code' => 0, 'msg' => '删除失败'];
+            }
+         }
+          if(!empty($js_id)){
+            $res1 = JsuserModel::where('js_id',$js_id)->first();
+            $res = AdminuserModel::where('tel',$res1['js_phone'])->update(['is_del'=>2]); 
+             $res2 = JsuserModel::where('js_id',$js_id)->update(['is_del'=>2]);
+            if ($res2) {
+                return ['code' => 1, 'msg' => '删除成功'];
+            }else{
+                return ['code' => 0, 'msg' => '删除失败'];
+            }
+         }
+         if(!empty($tzr_id)){
+             $res2 = TzruserModel::where('tzr_id',$tzr_id)->first();
+             $res3 = TzruserModel::where('tzr_id',$tzr_id)->update(['is_del'=>2]);
+             $res1 = AdminuserModel::where('u_id',$res2['u_id'])->update(['is_del'=>2]);
+             $res = AdminuserModel::where('tzr',$res2['u_id'])->update(['is_del'=>2]);
+             if ($res) {
+                return ['code' => 1, 'msg' => '删除成功'];
+            }else{
+                return ['code' => 0, 'msg' => '删除失败'];
+            }
+         }
           
     }
     //管理员冻结
@@ -498,18 +987,63 @@ class AdminController extends Controller
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
         }
-        $uid=$request->input();
-        $id=$uid['u_id'];
-        $res=AdminuserModel::where('u_id',$id)->update(['is_del'=>3]);
-        $res2 = AdminuserModel::where('alliance',$id)->get();
-        if ($res) {
+        $jy_id=$request->input('jy_id');
+        $xz_id=$request->input('xz_id');
+        $zg_id=$request->input('zg_id');
+        $js_id=$request->input('js_id');
+        $tzr_id=$request->input('tzr_id');
+        if(!empty($jy_id)){
+            $res = AdminuserModel::where('u_id',$jy_id)->update(['is_del'=>3]);
+             if ($res) {
                 return ['code' => 1, 'msg' => '冻结成功'];
             }else{
                 return ['code' => 0, 'msg' => '冻结失败'];
             }
+        }
+        if(!empty($xz_id)){
+            $res1 = XzuserModel::where('xz_id',$xz_id)->first();
+            $res = AdminuserModel::where('tel',$res1['xz_phone'])->update(['is_del'=>3]); 
+            $res2 = XzuserModel::where('xz_id',$xz_id)->update(['is_del'=>3]);
+            if ($res2) {
+                return ['code' => 1, 'msg' => '冻结成功'];
+            }else{
+                return ['code' => 0, 'msg' => '冻结失败'];
+            }
+        }
+         if(!empty($zg_id)){
+            $res1 = ZguserModel::where('zg_id',$zg_id)->first();
+            $res = AdminuserModel::where('tel',$res1['zg_phone'])->update(['is_del'=>3]); 
+             $res2 = ZguserModel::where('zg_id',$zg_id)->update(['is_del'=>3]);
+            if ($res2) {
+                return ['code' => 1, 'msg' => '冻结成功'];
+            }else{
+                return ['code' => 0, 'msg' => '冻结失败'];
+            }
+         }
+          if(!empty($js_id)){
+            $res1 = JsuserModel::where('js_id',$js_id)->first();
+            $res = AdminuserModel::where('tel',$res1['js_phone'])->update(['is_del'=>3]); 
+             $res2 = JsuserModel::where('js_id',$js_id)->update(['is_del'=>3]);
+            if ($res2) {
+                return ['code' => 1, 'msg' => '冻结成功'];
+            }else{
+                return ['code' => 0, 'msg' => '冻结失败'];
+            }
+         }
+         if(!empty($tzr_id)){
+             $res2 = TzruserModel::where('tzr_id',$tzr_id)->first();
+             $res3 = TzruserModel::where('tzr_id',$tzr_id)->update(['is_del'=>3]);
+             $res1 = AdminuserModel::where('u_id',$res2['u_id'])->update(['is_del'=>3]);
+             $res = AdminuserModel::where('tzr',$res2['u_id'])->update(['is_del'=>3]);
+             if ($res) {
+                return ['code' => 1, 'msg' => '冻结成功'];
+            }else{
+                return ['code' => 0, 'msg' => '冻结失败'];
+            }
+         }
           
     }
-    //已删除管理员展示
+    //已冻结管理员展示
     public function administratordel(){
             session_start();
             if(empty($_SESSION["uid"])){
@@ -517,10 +1051,16 @@ class AdminController extends Controller
             }
             $res = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
             $role=$res['role'];
-            if($role==3){
-                $data = AdminuserModel::where('alliance',$_SESSION["uid"])->where('is_del',3)->paginate(30);
-            }else{
-                $data = AdminuserModel::where('is_del',3)->paginate(30);
+            if($role==1||$role==2){
+                $data = AdminuserModel::where('is_del',3)->get();
+            }else if($role==3){
+                $data = AdminuserModel::where('tzr',$_SESSION["uid"])->where('is_del',3)->get();
+            }else if($role==4){
+                $res1 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+                $data = AdminuserModel::where('tzr',$res1['tzr'])->where('is_del',3)->whereIn('role',[5,6])->get();
+            }else if($role==5){
+                $res1 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+                $data = AdminuserModel::where('tzr',$res1['tzr'])->where('is_del',3)->where('role',6)->get();
             }
             $count=count($data);
             $list=[
@@ -530,17 +1070,40 @@ class AdminController extends Controller
             return view('admin.adminuser.administratordel',$list);
         }
 
-    //已冻结管理员
+    //启用冻结管理员
     public function administratordels(Request $request){
         session_start();
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
         }
-        $uid=$request->input();
-        $id=$uid['u_id'];
-        $res=AdminuserModel::where('u_id',$id)->update(['is_del'=>1]);
+        $uid=$request->input('u_id');
+        //print_r($uid);exit;
+        $res = AdminuserModel::where('u_id',$uid)->first();
+        if($res['role']==26||$res['role']==27||$res['role']==28){
+             $res1=AdminuserModel::where('u_id',$uid)->update(['is_del'=>1]);
+        }
+       
+        if($res['role']==3){
+            $res2=AdminuserModel::where('u_id',$uid)->update(['is_del'=>1]);
+            //dump($res2);exit;
+            $res3=AdminuserModel::where('tzr',$uid)->update(['is_del'=>1]);
+            $res4=TzruserModel::where('u_id',$uid)->update(['is_del'=>1]);
+            $res5= TzruserModel::where('u_id',$uid)->first();
+            $res6= XzuserModel::where('xz_tzr',$res5['tzr_id'])->update(['is_del'=>1]);
+            $res7= ZguserModel::where('zg_tzr',$res5['tzr_id'])->update(['is_del'=>1]);
+            $res1 = JsuserModel::where('js_tzr',$res5['tzr_id'])->update(['is_del'=>1]);
 
-        if ($res) {
+        }else if($res['role']==4){
+             $res2=AdminuserModel::where('u_id',$uid)->update(['is_del'=>1]);
+             $res1= XzuserModel::where('xz_phone',$res['tel'])->update(['is_del'=>1]);
+        }else if($res['role']==5){
+             $res2=AdminuserModel::where('u_id',$uid)->update(['is_del'=>1]);
+             $res1= ZguserModel::where('zg_phone',$res['tel'])->update(['is_del'=>1]);
+        }else if($res['role']==6){
+             $res2=AdminuserModel::where('u_id',$uid)->update(['is_del'=>1]);
+             $res1= JsuserModel::where('js_phone',$res['tel'])->update(['is_del'=>1]);
+        }
+        if ($res1||$res2) {
             return ['code' => 1, 'msg' => '启用成功'];
         } else {
             return ['code' => 0, 'msg' => '启用失败'];
@@ -1216,23 +1779,42 @@ class AdminController extends Controller
 	        if (empty($kong)) {
 			$res1 = AdminuserModel::where('is_del',1)->where('u_id',$_SESSION["uid"])->first();
 			$res2 = ChapterModel::where('cha_id',$id)->first();
-			$alliance=$res1['alliance'];
 			$grade = $res2['grade'];
 			$season = $res2['season'];
             $subject = $res2['sub_name'];
-	                $data = [
-		                'uid' => $_SESSION["uid"],
-		                'cha_id' => $id,
-		                'collect_time' => date("Y-m-d H:i:s"),
-		                'alliance' => $alliance,
-        				'username' => $res1['username'],
-        				'grade' => $grade,
-        				'season' => $season,
+            if($res1['role']==5){
+                $res3 = ZguserModel::where('zg_phone',$res1['tel'])->first();
+                $res4 = TzruserModel::where('tzr_id',$res3['zg_tzr'])->first();
+                    $data = [
+                        'uid' => $_SESSION["uid"],
+                        'cha_id' => $id,
+                        'collect_time' => date("Y-m-d H:i:s"),
+                        'alliance' => $res4['u_id'],
+                        'username' => $res1['username'],
+                        'grade' => $grade,
+                        'season' => $season,
                         'role' => $res1['role'],
-        				'finish_time' => "未完成",
+                        'finish_time' => "未完成",
                         'subject' => $subject
-			          ];
-	            $res = CollectModel::insert($data);
+                      ];
+            }else if($res1['role']==6){
+                 $res3 = JsuserModel::where('js_phone',$res1['tel'])->first();
+                  $res4 = TzruserModel::where('tzr_id',$res3['js_tzr'])->first();
+                    $data = [
+                        'uid' => $_SESSION["uid"],
+                        'cha_id' => $id,
+                        'collect_time' => date("Y-m-d H:i:s"),
+                        'alliance' => $res4['u_id'],
+                        'username' => $res1['username'],
+                        'grade' => $grade,
+                        'season' => $season,
+                        'role' => $res1['role'],
+                        'finish_time' => "未完成",
+                        'subject' => $subject
+                      ];
+            }
+	                
+	           $res = CollectModel::insert($data);
 		            if ($res) {
 		                    return ['code' => 1, 'msg' => '备课成功'];
 		                } else {
@@ -1257,14 +1839,16 @@ class AdminController extends Controller
 		if($role==3){
 		 $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
 		}else if($role==4){
-             $res= CollectModel::where('collect.alliance',$res5['alliance'])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+             $res= CollectModel::where('collect.alliance',$res5['tzr'])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+        }else if($role==5){
+             $res = CollectModel::where('collect.alliance',$res5['tzr'])->where('collect.role',6)->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==26){
-            $res= CollectModel::where('collect.role', 6)->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+            $res= CollectModel::where('collect.role', 6)->where('collect.subject','趣味大语文')->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==27){
-            $res= CollectModel::where('collect.role', 7)->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+            $res= CollectModel::where('collect.role', 6)->where('collect.subject','思维培优数学')->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==28){
-            $res= CollectModel::where('collect.role', 8)->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
-        }else if($role==1){
+            $res= CollectModel::where('collect.role', 6)->whereIn('collect.subject',['Phonics自然拼读','KB课程'])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+        }else if($role==1||$role==2){
             $res= CollectModel::where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else{
 			$res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
@@ -1310,8 +1894,15 @@ class AdminController extends Controller
             $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
             $role=$res5['role'];
 
-            if($role==4||$role==3){
+            if($role==3){
             $res=CollectModel::where('alliance',$_SESSION["uid"])->where('cha_id',$id)->update(['xzsh'=>2]);
+                    if ($res) {
+                return ['code' => 1, 'msg' => '已完成审核！请等待总部审核。'];
+                 } else {
+                return ['code' => 0, 'msg' => '网络好像不太好~,请重新点击'];
+                }
+            }else if($role==4){
+                $res=CollectModel::where('alliance',$res1['tzr'])->where('cha_id',$id)->update(['xzsh'=>2]);
                     if ($res) {
                 return ['code' => 1, 'msg' => '已完成审核！请等待总部审核。'];
                  } else {
@@ -1323,7 +1914,28 @@ class AdminController extends Controller
                     return ['code' => 2, 'msg' => '请等校长审核完毕在审核！'];
                 }else{
                     $res=CollectModel::where('coll_id',$coll_id)->where('cha_id',$id)->update(['jysh'=>2,'is_show'=>3]);
-                    if ($res) {
+                    $res1 = CollectModel::where('coll_id',$coll_id)->first();
+                    $res2 = AdminuserModel::where('u_id',$res1['uid'])->first();
+                    $res3 = JsuserModel::where('js_phone',$res2['tel'])->first();
+                    $moren = $res3['js_moren'];
+                    $morens = $moren+1;
+                    $res4 = JsuserModel::where('js_phone',$res2['tel'])->update(['js_moren'=>$morens]);
+                    if($res3['js_subject']=='趣味大语文'){
+                            $res5 = ZguserModel::where('zg_tzr',$res3['js_tzr'])->where('zg_yw',1)->first();
+                            $zgmoren = $res5['zg_moren']+1;
+                            $res6 = ZguserModel::where('zg_tzr',$res3['js_tzr'])->where('zg_yw',1)->update(['zg_moren'=>$zgmoren]);
+                            
+                    }else if($res3['js_subject']=='思维培优数学'){
+                        $res5 = ZguserModel::where('zg_tzr',$res3['js_tzr'])->where('zg_sx',1)->first();
+                            $zgmoren = $res5['zg_moren']+1;
+                            $res6 = ZguserModel::where('zg_tzr',$res3['js_tzr'])->where('zg_sx',1)->update(['zg_moren'=>$zgmoren]);
+                    }else if($res3['js_subject']=='HS英语'){
+                         $res5 = ZguserModel::where('zg_tzr',$res3['js_tzr'])->where('zg_yy',1)->first();
+                            $zgmoren = $res5['zg_moren']+1;
+                            $res6 = ZguserModel::where('zg_tzr',$res3['js_tzr'])->where('zg_yy',1)->update(['zg_moren'=>$zgmoren]);
+                    }
+                   
+                    if ($res6) {
                          return ['code' => 1, 'msg' => '已完成审核！'];
                         } else {
                         return ['code' => 0, 'msg' => '网络好像不太好~,请重新点击'];
@@ -1455,66 +2067,32 @@ class AdminController extends Controller
 		$subject = $request->input('subject');
         $res3 = ChaseaModel::where('chasea_sub',$subject)->get();
 		$grade = $request->input('grade');
-        if($role==56){
-           $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
-        }else if($role==57){
-            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
-        }else if($role==58){
-            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+        if($role==5){
+            $res1 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+            $res2 = ZguserModel::where('zg_phone',$res1['tel'])->first();
+            $moren = $res2['zg_moren'];
+            if($res2['zg_chun']==1){
+                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+             }else if($res2['zg_shu']==1){
+                $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+               }else if($res2['zg_qiu']==1){
+                $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            }else if($res2['zg_han']==1){
+                $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            }
         }else if($role==6){
-              $res6 = CollectModel::where('uid',$_SESSION["uid"])->where('addkj',1)->first();
-            if($res6['is_show']==3){
-                try{
-                    $morens=$moren+1;
-                 $res7 = AdminuserModel::where('u_id',$_SESSION["uid"])->update(['addjs'=>$morens]);
-                 $res8 = AdminuserModel::where('alliance',$res5['alliance'])->where('role',56)->first();
-                 $zgmoren=$res8['addjs']+1;
-                 $res9 = AdminuserModel::where('u_id',$res8['u_id'])->update(['addjs'=>$zgmoren]);
-                 $res10 = CollectModel::where('uid',$_SESSION["uid"])->update(['addkj'=>2]);
-                  $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
-              }catch(\Exception $e){
-                   Log::info($e);
-              }
-                
-                }else{
-                    $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
-                }
-               
-         }else if($role==7){
-             $res6 = CollectModel::where('uid',$_SESSION["uid"])->where('addkj',1)->first();
-            if($res6['is_show']==3){
-                try{
-                    $morens=$moren+1;
-                 $res7 = AdminuserModel::where('u_id',$_SESSION["uid"])->update(['addjs'=>$morens]);
-                 $res8 = AdminuserModel::where('alliance',$res5['alliance'])->where('role',57)->first();
-                 $zgmoren=$res8['addjs']+1;
-                 $res9 = AdminuserModel::where('u_id',$res8['u_id'])->update(['addjs'=>$zgmoren]);
-                 $res10 = CollectModel::where('uid',$_SESSION["uid"])->update(['addkj'=>2]);
-                  $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
-              }catch(\Exception $e){
-                   Log::info($e);
-              }
-                }else{
-                    $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
-                }
-            
-        }else if($role==8){
-              $res6 = CollectModel::where('uid',$_SESSION["uid"])->where('addkj',1)->first();
-            if($res6['is_show']==3){
-                try{
-                    $morens=$moren+1;
-                 $res7 = AdminuserModel::where('u_id',$_SESSION["uid"])->update(['addjs'=>$morens]);
-                 $res8 = AdminuserModel::where('alliance',$res5['alliance'])->where('role',58)->first();
-                 $zgmoren=$res8['addjs']+1;
-                 $res9 = AdminuserModel::where('u_id',$res8['u_id'])->update(['addjs'=>$zgmoren]);
-                 $res10 = CollectModel::where('uid',$_SESSION["uid"])->update(['addkj'=>2]);
-                  $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
-              }catch(\Exception $e){
-                    Log::info($e);
-              }
-                }else{
-                    $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
-                }
+            $res1 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+            $res2 = JsuserModel::where('js_phone',$res1['tel'])->first();
+            $moren = $res2['js_moren'];
+            if($res2['js_chun']==1){
+                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+             }else if($res2['js_shu']==1){
+                $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+               }else if($res2['js_qiu']==1){
+                $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            }else if($res2['js_han']==1){
+                $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($moren)->get();
+            }
          }else{
             $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->get();
          }

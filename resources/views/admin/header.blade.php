@@ -2881,7 +2881,27 @@
                     </li>
                 </ul>
             </li> 
-            <li>
+              <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe726;</i>
+                    <cite>教师管理</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/useradd">
+                            <i class="iconfont" >&#xe6a7;</i>
+                            <cite>教师添加</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="/userlist">
+                            <i class="iconfont" >&#xe6a7;</i>
+                            <cite>教师列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
              @elseif($role==27)
              <li>
                 <a href="javascript:;">
@@ -2932,6 +2952,7 @@
                     
                 </ul>
             </li>
+
             <li >
                     <a href="javascript:;">
                         <i class="iconfont">&#xe7ce;</i>
@@ -3149,7 +3170,28 @@
                     </li>
                 </ul>
             </li> 
-            <li>
+              <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe726;</i>
+                    <cite>教师管理</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/useradd">
+                            <i class="iconfont" >&#xe6a7;</i>
+                            <cite>教师添加</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="/userlist">
+                            <i class="iconfont" >&#xe6a7;</i>
+                            <cite>教师列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
+
             @elseif($role==28)
              <li>
                 <a href="javascript:;">
@@ -3470,7 +3512,27 @@
                     </li>
                 </ul>
             </li> 
-            <li>
+              <li>
+                <a href="javascript:;">
+                    <i class="iconfont">&#xe726;</i>
+                    <cite>教师管理</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a _href="/useradd">
+                            <i class="iconfont" >&#xe6a7;</i>
+                            <cite>教师添加</cite>
+                        </a>
+                    </li >
+                    <li>
+                        <a _href="/userlist">
+                            <i class="iconfont" >&#xe6a7;</i>
+                            <cite>教师列表</cite>
+                        </a>
+                    </li >
+                </ul>
+            </li>
                @elseif($role==5)
             <div id="nr">
              <li>

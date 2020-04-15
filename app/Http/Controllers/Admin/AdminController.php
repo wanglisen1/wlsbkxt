@@ -2131,7 +2131,55 @@ class AdminController extends Controller
 		$subject = $request->input('subject');
         $res3 = ChaseaModel::where('chasea_sub',$subject)->get();
 		$grade = $request->input('grade');
-        if($role==5){
+        if($role==3){
+            $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+            if($res1['tzr_chun']==1){
+               $tzrchun='春';
+            }else{
+                $tzrchun='';
+            }
+            if($res1['tzr_shu']==1){
+                $tzrshu='暑';
+            }else{
+                $tzrshu='';
+            }
+            if($res1['tzr_qiu']==1){
+                $tzrqiu='秋';
+            }else{
+                $tzrqiu='';
+            }
+            if($res1['tzr_han']==1){
+                $tzrhan='寒';
+            }else{
+                $tzrhan='';
+            }
+            $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->whereIn('season',$arr)->where('grade',$grade)->get();
+        }else if($role==4){
+             $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+            if($res1['xz_chun']==1){
+               $tzrchun='春';
+            }else{
+                $tzrchun='';
+            }
+            if($res1['xz_shu']==1){
+                $tzrshu='暑';
+            }else{
+                $tzrshu='';
+            }
+            if($res1['xz_qiu']==1){
+                $tzrqiu='秋';
+            }else{
+                $tzrqiu='';
+            }
+            if($res1['xz_han']==1){
+                $tzrhan='寒';
+            }else{
+                $tzrhan='';
+            }
+            $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->whereIn('season',$arr)->where('grade',$grade)->get();
+        }else if($role==5){
             $res1 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
             $res2 = ZguserModel::where('zg_phone',$res1['tel'])->first();
           if($grade=='三年级'){

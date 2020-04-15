@@ -28,11 +28,7 @@
  z-index: 1001;
 }
 </style>
-<div class="loading hide">
-   <div class="gif" >
-    <img src="/loadimg.gif" width="200px;">
-   </div>
-  </div>
+
 @if($ycrole==3)
     <div class="layui-form-item" style="width:700px;margin:0 auto;margin-top: 50px;">
         <label class="layui-form-label">姓名：</label>
@@ -226,9 +222,27 @@
     </div>
 </div></br></br>
 <div class="layui-form-item" style="width:700px;margin:0 auto">
-    <label class="layui-form-label">课节：</label>
+    <label class="layui-form-label">三年级课节：</label>
     <div class="layui-input-block" >
-        <input type="text" name="title" id="zgmoren" lay-verify="title" autocomplete="off" placeholder="请输入开放课节数量" class="layui-input" value="{{$data['zg_moren']}}">
+        <input type="text" name="title" id="zgsanmoren" lay-verify="title" autocomplete="off" placeholder="请输入开放课节数量" class="layui-input" value="{{$data['zg_sanmoren']}}">
+    </div>
+</div></br></br>
+<div class="layui-form-item" style="width:700px;margin:0 auto">
+    <label class="layui-form-label">四年级课节：</label>
+    <div class="layui-input-block" >
+        <input type="text" name="title" id="zgsimoren" lay-verify="title" autocomplete="off" placeholder="请输入开放课节数量" class="layui-input" value="{{$data['zg_simoren']}}">
+    </div>
+</div></br></br>
+<div class="layui-form-item" style="width:700px;margin:0 auto">
+    <label class="layui-form-label">五年级课节：</label>
+    <div class="layui-input-block" >
+        <input type="text" name="title" id="zgwumoren" lay-verify="title" autocomplete="off" placeholder="请输入开放课节数量" class="layui-input" value="{{$data['zg_wumoren']}}">
+    </div>
+</div></br></br>
+<div class="layui-form-item" style="width:700px;margin:0 auto">
+    <label class="layui-form-label">六年级课节：</label>
+    <div class="layui-input-block" >
+        <input type="text" name="title" id="zgliumoren" lay-verify="title" autocomplete="off" placeholder="请输入开放课节数量" class="layui-input" value="{{$data['zg_liumoren']}}">
     </div>
 </div></br></br>
     @if($data['zg_chun']==1)
@@ -337,12 +351,46 @@
         <input type="text" name="title" id="tel" lay-verify="title" autocomplete="off" placeholder="请输入邮箱" class="layui-input" value="{{$data['js_phone']}}" disabled>
     </div>
 </div></br></br>
+@if($data['js_san']==1)
 <div class="layui-form-item" style="width:700px;margin:0 auto">
-    <label class="layui-form-label">课节：</label>
+    <label class="layui-form-label">三年级课节：</label>
     <div class="layui-input-block" >
-        <input type="text" name="title" id="jsmoren" lay-verify="title" autocomplete="off" placeholder="请输入开放课节数量" class="layui-input" value="{{$data['js_moren']}}">
+        <input type="text" name="title" id="jssanmoren" lay-verify="title" autocomplete="off" placeholder="请输入开放课节数量" class="layui-input" value="{{$data['js_sanmoren']}}">
     </div>
 </div></br></br>
+@else
+<input type="hidden" id="jssanmoren" value="{{$data['js_sanmoren']}}">
+@endif
+@if($data['js_si']==1)
+<div class="layui-form-item" style="width:700px;margin:0 auto">
+    <label class="layui-form-label">四年级课节：</label>
+    <div class="layui-input-block" >
+        <input type="text" name="title" id="jssimoren" lay-verify="title" autocomplete="off" placeholder="请输入开放课节数量" class="layui-input" value="{{$data['js_simoren']}}">
+    </div>
+</div></br></br>
+@else
+<input type="hidden" id="jssimoren" value="{{$data['js_simoren']}}">
+@endif
+@if($data['js_wu']==1)
+<div class="layui-form-item" style="width:700px;margin:0 auto">
+    <label class="layui-form-label">五年级课节：</label>
+    <div class="layui-input-block" >
+        <input type="text" name="title" id="jswumoren" lay-verify="title" autocomplete="off" placeholder="请输入开放课节数量" class="layui-input" value="{{$data['js_wumoren']}}">
+    </div>
+</div></br></br>
+@else
+<input type="hidden" id="jswumoren" value="{{$data['js_wumoren']}}">
+@endif
+@if($data['js_liu']==1)
+<div class="layui-form-item" style="width:700px;margin:0 auto">
+    <label class="layui-form-label">六年级课节：</label>
+    <div class="layui-input-block" >
+        <input type="text" name="title" id="jsliumoren" lay-verify="title" autocomplete="off" placeholder="请输入开放课节数量" class="layui-input" value="{{$data['js_liumoren']}}">
+    </div>
+</div></br></br>
+@else
+<input type="hidden" id="jsliumoren" value="{{$data['js_liumoren']}}">
+@endif
 <!-- <input type="hidden" id="jssubject" value="{{$data['js_subject']}}"> -->
 <div class="layui-col-md6" style="width:600px;margin-left:430px;" >
     <select name="subject" id="subject" lay-verify="">
@@ -500,6 +548,11 @@
 <input type="hidden" id="jsuid" value="{{$data['js_id']}}">
 <input type="hidden" id="jyuid" value="{{$data['u_id']}}">
 <input type="hidden" id="jysubject" value="{{$data['role']}}">
+<!-- <div class="loading hide">
+   <div class="gif" >
+    <img src="/loadimg.gif" width="200px;">
+   </div>
+</div> -->
 <!-- <input type="hidden" id="phone" value="{{$data['tzr_phone']}}"> -->
 
 
@@ -509,310 +562,307 @@
 </script>
 <script>
     $(function(){  
-      $('div.loading').hide();
-        $("#btn").click(function(){
-            var tel =$("#tel").val();
-            var username =$("#username").val();
-            var role =$("#role").val();
-            var school =$("#school").val();
-            var tzr_id =$("#uid").val();
-            var tzr_xz =$("#tzr_xz").val();
-            var tzr_zg =$("#tzr_zg").val();
-            var tzr_js =$("#tzr_js").val();
-            var phone =$("#phone").val();
-              if($('#chun').is(':checked')) {
-                        var chun = 1;
-                    }else{
-                        var chun = 2;
-                    }
-                    if($('#shu').is(':checked')) {
-                        var shu = 1;
-                    }else{
-                        var shu = 2;
-                    }
-                    if($('#qiu').is(':checked')) {
-                        var qiu = 1;
-                    }else{
-                        var qiu = 2;
-                    }
-                    if($('#han').is(':checked')) {
-                        var han = 1;
-                    }else{
-                        var han = 2;
-                    }
-            if(tel==''){
-                Popup.alert('HSKMS提示','电话号码不能为空！');
-                return false;
-            }if(username==''){
-                Popup.alert('HSKMS提示','姓名不能为空！');
-                return false;
-            }if(school==''){
-                Popup.alert('HSKMS提示','校区不能为空！');
-                return false;
-            }if(tzr_xz==''){
-                Popup.alert('HSKMS提示','校长总额不能为空！');
-                return false;
-            }if(tzr_zg==''){
-                Popup.alert('HSKMS提示','主管总额不能为空！');
-                return false;
-            }if(tzr_js==''){
-                Popup.alert('HSKMS提示','教师总额不能为空！');
-                return false;
-            }
-            $('div.loading').show();
-            $.ajax({
-                type: 'post',
-                data:{school:school,tzr_xz:tzr_xz,role:role,tzr_id:tzr_id,tzr_zg:tzr_zg,tzr_js:tzr_js,chun:chun,shu:shu,qiu:qiu,han:han,phone:phone},
-                dateType:'json',
-                url: "/userupdate",
-                success:function(msg){
-                    //Popup.toast('HSKMS提示！msg.msg',3);
-                   //Popup.alert('HSKMS提示',msg.msg);
-                    if(msg.code==1) {
-                          $('div.loading').hide();
-                            window.location = '/usertzrlist';  
-                    }
-                }
-            });
-        })
-        $("#xzbtn").click(function(){
-            var tel =$("#tel").val();
-            var username =$("#username").val();
-            var school =$("#school").val();
-            var xz_id =$("#xzuid").val();
-              if($('#xzchun').is(':checked')) {
-                        var xzchun = 1;
-                    }else{
-                        var xzchun = 2;
-                    }
-                    if($('#xzshu').is(':checked')) {
-                        var xzshu = 1;
-                    }else{
-                        var xzshu = 2;
-                    }
-                    if($('#xzqiu').is(':checked')) {
-                        var xzqiu = 1;
-                    }else{
-                        var xzqiu = 2;
-                    }
-                    if($('#xzhan').is(':checked')) {
-                        var xzhan = 1;
-                    }else{
-                        var xzhan = 2;
-                    }
-            if(tel==''){
-                Popup.alert('HSKMS提示','电话号码不能为空！');
-                return false;
-            }if(username==''){
-                Popup.alert('HSKMS提示','姓名不能为空！');
-                return false;
-            }if(school==''){
-                Popup.alert('HSKMS提示','校区不能为空！');
-                return false;
-            }
-            $('div.loading').show();
-            $.ajax({
-                type: 'post',
-                data:{school:school,xz_id:xz_id,xzchun:xzchun,xzshu:xzshu,xzqiu:xzqiu,xzhan:xzhan},
-                dateType:'json',
-                url: "/userupdate",
-                success:function(msg){
-                    //Popup.toast('HSKMS提示！msg.msg',3);
-                   //Popup.alert('HSKMS提示',msg.msg);
-                    if(msg.code==1) {
-                        $('div.loading').hide();
-                            window.location = '/usertzrlist';  
-                        }else{
-                          $('div.loading').hide();
-                        }
-                }
-            });
-        })
-        $("#zgbtn").click(function(){
-            var tel =$("#tel").val();
-            var username =$("#username").val();
-            var school =$("#school").val();
-            var zgmoren = $("#zgmoren").val();
-            var zg_id =$("#zguid").val();
-              if($('#zgchun').is(':checked')) {
-                        var zgchun = 1;
-                    }else{
-                        var zgchun = 2;
-                    }
-                    if($('#zgshu').is(':checked')) {
-                        var zgshu = 1;
-                    }else{
-                        var zgshu = 2;
-                    }
-                    if($('#zgqiu').is(':checked')) {
-                        var zgqiu = 1;
-                    }else{
-                        var zgqiu = 2;
-                    }
-                    if($('#zghan').is(':checked')) {
-                        var zghan = 1;
-                    }else{
-                        var zghan = 2;
-                    }
-                if($('#zgsx').is(':checked')) {
-                        var zgsx = 1;
-                    }else{
-                        var zgsx = 2;
-                    }
-                     if($('#zgyw').is(':checked')) {
-                        var zgyw = 1;
-                    }else{
-                        var zgyw = 2;
-                    }
-                     if($('#zgyy').is(':checked')) {
-                        var zgyy = 1;
-                    }else{
-                        var zgyy = 2;
-                    }
-           if(school==''){
-                Popup.alert('HSKMS提示','校区不能为空！');
-                return false;
-            }
-            if(zgmoren==''){
-                Popup.alert('HSKMS提示','主管可见课节不能为空！');
-                return false;
-            }
-            $('div.loading').show();
-            $.ajax({
-                type: 'post',
-                data:{school:school,zg_id:zg_id,zgchun:zgchun,zgshu:zgshu,zgqiu:zgqiu,zghan:zghan,zgmoren:zgmoren,zgsx:zgsx,zgyw:zgyw,zgyy:zgyy},
-                dateType:'json',
-                url: "/userupdate",
-                success:function(msg){
-                    //Popup.toast('HSKMS提示！msg.msg',3);
-                   //Popup.alert('HSKMS提示',msg.msg);
-                    if(msg.code==1) {
-                      $('div.loading').hide();
-                            window.location = '/usertzrlist';  
-                        }else{
-                          $('div.loading').hide();
-                        }
-                }
-            });
-        })
-        $("#jsbtn").click(function(){
-            var tel =$("#tel").val();
-            var username =$("#username").val();
-            var school =$("#school").val();
-            var jsmoren = $("#jsmoren").val();
-            var subject = $("#subject").val();
-            var js_id =$("#jsuid").val();
-              if($('#jschun').is(':checked')) {
-                        var jschun = 1;
-                    }else{
-                        var jschun = 2;
-                    }
-                    if($('#jsshu').is(':checked')) {
-                        var jsshu = 1;
-                    }else{
-                        var jsshu = 2;
-                    }
-                    if($('#jsqiu').is(':checked')) {
-                        var jsqiu = 1;
-                    }else{
-                        var jsqiu = 2;
-                    }
-                    if($('#jshan').is(':checked')) {
-                        var jshan = 1;
-                    }else{
-                        var jshan = 2;
-                    }
-                if($('#jssan').is(':checked')) {
-                        var jssan = 1;
-                    }else{
-                        var jssan = 2;
-                    }
-                     if($('#jssi').is(':checked')) {
-                        var jssi = 1;
-                    }else{
-                        var jssi = 2;
-                    }
-                     if($('#jswu').is(':checked')) {
-                        var jswu = 1;
-                    }else{
-                        var jswu = 2;
-                    }
-                    if($('#jsliu').is(':checked')) {
-                        var jsliu = 1;
-                    }else{
-                        var jsliu = 2;
-                    }
-           if(school==''){
-                Popup.alert('HSKMS提示','校区不能为空！');
-                return false;
-            }
-            if(jsmoren==''){
-                Popup.alert('HSKMS提示','教师可见课节不能为空！');
-                return false;
-            }
-            if(subject==''){
-                Popup.alert('HSKMS提示','请选择教师所教科目！');
-                return false;
-            }
-            $('div.loading').show();
-            $.ajax({
-                type: 'post',
-                data:{school:school,js_id:js_id,jschun:jschun,jsshu:jsshu,jsqiu:jsqiu,jshan:jshan,jsmoren:jsmoren,jssan:jssan,jssi:jssi,jswu:jswu,jsliu:jsliu,subject,subject},
-                dateType:'json',
-                url: "/userupdate",
-                success:function(msg){
-                    //Popup.toast('HSKMS提示！msg.msg',3);
-                   //Popup.alert('HSKMS提示',msg.msg);
-                    if(msg.code==1) {
-                      $('div.loading').hide();
-                            window.location = '/usertzrlist';  
-                        }else{
-                          $('div.loading').hide();
-                        }
-                }
-            });
-        })
-        $("#jybtn").click(function(){
-             var jyuid =$("#jyuid").val();
-             var username =$("#username").val();
-             var tel =$("#tel").val();
-             var email =$("#email").val();
-             var subject = $("#subject").val();
-             var jysubject = $("#jysubject").val();
-              if(subject==''){
-                  var subject =  $("#jysubject").val();
+          $("#btn").click(function(){
+              var tel =$("#tel").val();
+              var username =$("#username").val();
+              var role =$("#role").val();
+              var school =$("#school").val();
+              var tzr_id =$("#uid").val();
+              var tzr_xz =$("#tzr_xz").val();
+              var tzr_zg =$("#tzr_zg").val();
+              var tzr_js =$("#tzr_js").val();
+              var phone =$("#phone").val();
+                if($('#chun').is(':checked')) {
+                          var chun = 1;
+                      }else{
+                          var chun = 2;
+                      }
+                      if($('#shu').is(':checked')) {
+                          var shu = 1;
+                      }else{
+                          var shu = 2;
+                      }
+                      if($('#qiu').is(':checked')) {
+                          var qiu = 1;
+                      }else{
+                          var qiu = 2;
+                      }
+                      if($('#han').is(':checked')) {
+                          var han = 1;
+                      }else{
+                          var han = 2;
+                      }
+              if(tel==''){
+                  Popup.alert('HSKMS提示','电话号码不能为空！');
+                  return false;
+              }if(username==''){
+                  Popup.alert('HSKMS提示','姓名不能为空！');
+                  return false;
+              }if(school==''){
+                  Popup.alert('HSKMS提示','校区不能为空！');
+                  return false;
+              }if(tzr_xz==''){
+                  Popup.alert('HSKMS提示','校长总额不能为空！');
+                  return false;
+              }if(tzr_zg==''){
+                  Popup.alert('HSKMS提示','主管总额不能为空！');
+                  return false;
+              }if(tzr_js==''){
+                  Popup.alert('HSKMS提示','教师总额不能为空！');
+                  return false;
               }
-              if(username==''){
-                Popup.alert('HSKMS提示','用户名不能为空！');
-                return false;
+             //$('div.loading').show();
+              $.ajax({
+                  type: 'post',
+                  data:{school:school,tzr_xz:tzr_xz,role:role,tzr_id:tzr_id,tzr_zg:tzr_zg,tzr_js:tzr_js,chun:chun,shu:shu,qiu:qiu,han:han,phone:phone},
+                  dateType:'json',
+                  url: "/userupdate",
+                  success:function(msg){
+                      //Popup.toast('HSKMS提示！msg.msg',3);
+                     //Popup.alert('HSKMS提示',msg.msg);
+                      if(msg.code==1) {
+                            //$('div.loading').hide();
+                              window.location = '/usertzrlist';  
+                      }
+                  }
+              });
+          })
+          $("#xzbtn").click(function(){
+              var tel =$("#tel").val();
+              var username =$("#username").val();
+              var school =$("#school").val();
+              var xz_id =$("#xzuid").val();
+                if($('#xzchun').is(':checked')) {
+                          var xzchun = 1;
+                      }else{
+                          var xzchun = 2;
+                      }
+                      if($('#xzshu').is(':checked')) {
+                          var xzshu = 1;
+                      }else{
+                          var xzshu = 2;
+                      }
+                      if($('#xzqiu').is(':checked')) {
+                          var xzqiu = 1;
+                      }else{
+                          var xzqiu = 2;
+                      }
+                      if($('#xzhan').is(':checked')) {
+                          var xzhan = 1;
+                      }else{
+                          var xzhan = 2;
+                      }
+              if(tel==''){
+                  Popup.alert('HSKMS提示','电话号码不能为空！');
+                  return false;
+              }if(username==''){
+                  Popup.alert('HSKMS提示','姓名不能为空！');
+                  return false;
+              }if(school==''){
+                  Popup.alert('HSKMS提示','校区不能为空！');
+                  return false;
+              }
+              //$('div.loading').show();
+              $.ajax({
+                  type: 'post',
+                  data:{school:school,xz_id:xz_id,xzchun:xzchun,xzshu:xzshu,xzqiu:xzqiu,xzhan:xzhan},
+                  dateType:'json',
+                  url: "/userupdate",
+                  success:function(msg){
+                      //Popup.toast('HSKMS提示！msg.msg',3);
+                     //Popup.alert('HSKMS提示',msg.msg);
+                      if(msg.code==1) {
+                         // $('div.loading').hide();
+                              window.location = '/usertzrlist';  
+                          }else{
+                           // $('div.loading').hide();
+                          }
+                  }
+              });
+          })
+          $("#zgbtn").click(function(){
+              var tel =$("#tel").val();
+              var username =$("#username").val();
+              var school =$("#school").val();
+              var zgsanmoren = $("#zgsanmoren").val();
+              var zgsimoren = $("#zgsimoren").val();
+              var zgwumoren = $("#zgwumoren").val();
+              var zgliumoren = $("#zgliumoren").val();
+              var zg_id =$("#zguid").val();
+                if($('#zgchun').is(':checked')) {
+                          var zgchun = 1;
+                      }else{
+                          var zgchun = 2;
+                      }
+                      if($('#zgshu').is(':checked')) {
+                          var zgshu = 1;
+                      }else{
+                          var zgshu = 2;
+                      }
+                      if($('#zgqiu').is(':checked')) {
+                          var zgqiu = 1;
+                      }else{
+                          var zgqiu = 2;
+                      }
+                      if($('#zghan').is(':checked')) {
+                          var zghan = 1;
+                      }else{
+                          var zghan = 2;
+                      }
+                  if($('#zgsx').is(':checked')) {
+                          var zgsx = 1;
+                      }else{
+                          var zgsx = 2;
+                      }
+                       if($('#zgyw').is(':checked')) {
+                          var zgyw = 1;
+                      }else{
+                          var zgyw = 2;
+                      }
+                       if($('#zgyy').is(':checked')) {
+                          var zgyy = 1;
+                      }else{
+                          var zgyy = 2;
+                      }
+             if(school==''){
+                  Popup.alert('HSKMS提示','校区不能为空！');
+                  return false;
+              }
+              //$('div.loading').show();
+              $.ajax({
+                  type: 'post',
+                  data:{school:school,zg_id:zg_id,zgchun:zgchun,zgshu:zgshu,zgqiu:zgqiu,zghan:zghan,zgsanmoren:zgsanmoren,zgsx:zgsx,zgyw:zgyw,zgyy:zgyy,zgsimoren:zgsimoren,zgwumoren:zgwumoren,zgliumoren:zgliumoren},
+                  dateType:'json',
+                  url: "/userupdate",
+                  success:function(msg){
+                      //Popup.toast('HSKMS提示！msg.msg',3);
+                     //Popup.alert('HSKMS提示',msg.msg);
+                      if(msg.code==1) {
+                        //$('div.loading').hide();
+                              window.location = '/usertzrlist';  
+                          }else{
+                           // $('div.loading').hide();
+                          }
+                  }
+              });
+          })
+          $("#jsbtn").click(function(){
+              var tel =$("#tel").val();
+              var username =$("#username").val();
+              var school =$("#school").val();
+              var jssanmoren = $("#jssanmoren").val();
+              var jssimoren = $("#jssimoren").val();
+              var jswumoren = $("#jswumoren").val();
+              var jsliumoren = $("#jsliumoren").val();
+              var subject = $("#subject").val();
+              var js_id =$("#jsuid").val();
+                if($('#jschun').is(':checked')) {
+                          var jschun = 1;
+                      }else{
+                          var jschun = 2;
+                      }
+                      if($('#jsshu').is(':checked')) {
+                          var jsshu = 1;
+                      }else{
+                          var jsshu = 2;
+                      }
+                      if($('#jsqiu').is(':checked')) {
+                          var jsqiu = 1;
+                      }else{
+                          var jsqiu = 2;
+                      }
+                      if($('#jshan').is(':checked')) {
+                          var jshan = 1;
+                      }else{
+                          var jshan = 2;
+                      }
+                  if($('#jssan').is(':checked')) {
+                          var jssan = 1;
+                      }else{
+                          var jssan = 2;
+                      }
+                       if($('#jssi').is(':checked')) {
+                          var jssi = 1;
+                      }else{
+                          var jssi = 2;
+                      }
+                       if($('#jswu').is(':checked')) {
+                          var jswu = 1;
+                      }else{
+                          var jswu = 2;
+                      }
+                      if($('#jsliu').is(':checked')) {
+                          var jsliu = 1;
+                      }else{
+                          var jsliu = 2;
+                      }
+             if(school==''){
+                  Popup.alert('HSKMS提示','校区不能为空！');
+                  return false;
+              }
+              if(subject==''){
+                  Popup.alert('HSKMS提示','请选择教师所教科目！');
+                  return false;
+              }
+             // $('div.loading').show();
+              $.ajax({
+                  type: 'post',
+                  data:{school:school,js_id:js_id,jschun:jschun,jsshu:jsshu,jsqiu:jsqiu,jshan:jshan,jssanmoren:jssanmoren,jssan:jssan,jssi:jssi,jswu:jswu,jsliu:jsliu,subject,subject,jssimoren:jssimoren,jswumoren:jswumoren,jsliumoren:jsliumoren},
+                  dateType:'json',
+                  url: "/userupdate",
+                  success:function(msg){
+                      //Popup.toast('HSKMS提示！msg.msg',3);
+                     //Popup.alert('HSKMS提示',msg.msg);
+                      if(msg.code==1) {
+                        //$('div.loading').hide();
+                              window.location = '/usertzrlist';  
+                          }else{
+                            //$('div.loading').hide();
+                          }
+                  }
+              });
+          })
+          $("#jybtn").click(function(){
+               var jyuid =$("#jyuid").val();
+               var username =$("#username").val();
+               var tel =$("#tel").val();
+               var email =$("#email").val();
+               var subject = $("#subject").val();
+               var jysubject = $("#jysubject").val();
+                if(subject==''){
+                    var subject =  $("#jysubject").val();
                 }
-                if(tel==''){
-                    Popup.alert('HSKMS提示','电话号码不能为空！');
-                    return false;
-                }
-        
-                if(email==''){
-                    Popup.alert('HSKMS提示','邮箱不能为空！');
-                    return false;
-                }
-                $('div.loading').show();
-                $.ajax({
-                    type: 'post',
-                    data:{username:username,tel:tel,email:email,jyuid:jyuid,subject,subject},
-                    dateType:'json',
-                    url: "/userupdate",
-                    success:function(msg){
-                        //Popup.toast('HSKMS提示！msg.msg',3);
-                       //Popup.alert('HSKMS提示',msg.msg);
-                        if(msg.code==1) {
-                          $('div.loading').hide();
-                                window.location = '/usertzrlist';  
-                            }else{
-                              $('div.loading').hide();
-                            }
-                    }
-                });
+                if(username==''){
+                  Popup.alert('HSKMS提示','用户名不能为空！');
+                  return false;
+                  }
+                  if(tel==''){
+                      Popup.alert('HSKMS提示','电话号码不能为空！');
+                      return false;
+                  }
+          
+                  if(email==''){
+                      Popup.alert('HSKMS提示','邮箱不能为空！');
+                      return false;
+                  }
+                  $('div.loading').show();
+                  $.ajax({
+                      type: 'post',
+                      data:{username:username,tel:tel,email:email,jyuid:jyuid,subject,subject},
+                      dateType:'json',
+                      url: "/userupdate",
+                      success:function(msg){
+                          //Popup.toast('HSKMS提示！msg.msg',3);
+                         //Popup.alert('HSKMS提示',msg.msg);
+                          if(msg.code==1) {
+                          //  $('div.loading').hide();
+                                  window.location = '/usertzrlist';  
+                              }else{
+                               // $('div.loading').hide();
+                              }
+                      }
+                  });
 
-        })
-})
+          })
+  })
 </script>

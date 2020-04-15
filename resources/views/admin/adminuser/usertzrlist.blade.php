@@ -92,6 +92,7 @@
 </script>
 <script>
     $(function(){
+        $('div.loading').hide();
         $(".del").click(function(){
             var tzr_id =$(this).attr('tzr_id');
             //alert(u_id);return false;

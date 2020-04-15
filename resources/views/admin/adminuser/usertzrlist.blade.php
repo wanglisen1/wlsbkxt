@@ -7,6 +7,32 @@
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
 <script type="text/javascript" src="/alerttc/js/popup.js"></script>
+<style type="text/css">
+    .loading {
+ position: fixed;
+ top: 0;
+ bottom: 0;
+ right: 0;
+ left: 0;
+ background-color: #f6ecec;
+ opacity: 0.4;
+ z-index: 1000;
+}
+ 
+.loading .gif {
+ position: fixed;
+   top :40%;
+  left: 45%;
+ margin-left: -16px;
+ margin-top: -16px;
+ z-index: 1001;
+}
+</style>
+<div class="loading hide">
+     <div class="gif" >
+        <img src="/loadimg.gif" width="200px;">
+     </div>
+    </div>
 <xblock>
     <button class="layui-btn" onclick="x_admin_show('添加用户','/useradd')"><i class="layui-icon"></i>添加</button>
     <button class="layui-btn" id="sx"><i class="iconfont">&#xe6aa;</i>&nbsp;&nbsp;刷新</button>
@@ -70,6 +96,7 @@
             var tzr_id =$(this).attr('tzr_id');
             //alert(u_id);return false;
              function confirmData () {
+                $('div.loading').show();
                  $.ajax({
                     type: 'post',
                     data: {tzr_id:tzr_id},
@@ -77,8 +104,10 @@
                     url: "/userdel",
                     success: function (msg) {
                         if (msg.code == 1) {
+                            $('div.loading').hide();
                             location.reload();
                         }else{
+                            $('div.loading').hide();
                             Popup.alert('HSKMS提示','删除失败');
                             return false;
                         }
@@ -93,6 +122,7 @@
             var tzr_id =$(this).attr('tzr_id');
             //alert(u_id);return false;
              function confirmData () {
+                $('div.loading').show();
                  $.ajax({
                     type: 'post',
                     data: {tzr_id:tzr_id},
@@ -100,8 +130,10 @@
                     url: "/userblock",
                     success: function (msg) {
                         if (msg.code == 1) {
+                            $('div.loading').hide();
                             location.reload();
                         }else{
+                            $('div.loading').hide();
                             Popup.alert('HSKMS提示','删除失败');
                             return false;
                         }

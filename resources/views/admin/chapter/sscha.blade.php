@@ -9,13 +9,38 @@
 <link rel="shortcut icon" href="/layuiadmin/favicon.ico" type="/layuiadmin/image/x-icon" />
 <link rel="stylesheet" href="/layuiadmin/css/font.css">
 <link rel="stylesheet" href="/layuiadmin/css/xadmin.css">
+<link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
 <script src="/layuiadmin/js/jquery.min.js"></script>
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
   </head>
   <body class="form-wrap" >
-    <style id="LAY_layadmin_theme">.layui-side-menu,.layadmin-pagetabs .layui-tab-title li:after,.layadmin-pagetabs .layui-tab-title li.layui-this:after,.layui-layer-admin .layui-layer-title,.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child{background-color:#20222A !important;}.layui-nav-tree .layui-this,.layui-nav-tree .layui-this>a,.layui-nav-tree .layui-nav-child dd.layui-this,.layui-nav-tree .layui-nav-child dd.layui-this a{background-color:#009688 !important;}.layui-layout-admin .layui-logo{background-color:#20222A !important;}
+<style id="LAY_layadmin_theme">.layui-side-menu,.layadmin-pagetabs .layui-tab-title li:after,.layadmin-pagetabs .layui-tab-title li.layui-this:after,.layui-layer-admin .layui-layer-title,.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child{background-color:#20222A !important;}.layui-nav-tree .layui-this,.layui-nav-tree .layui-this>a,.layui-nav-tree .layui-nav-child dd.layui-this,.layui-nav-tree .layui-nav-child dd.layui-this a{background-color:#009688 !important;}.layui-layout-admin .layui-logo{background-color:#20222A !important;}
+        .loading {
+             position: fixed;
+             top: 0;
+             bottom: 0;
+             right: 0;
+             left: 0;
+             background-color: #f6ecec;
+             opacity: 0.4;
+             z-index: 1000;
+            }
+             
+            .loading .gif {
+             position: fixed;
+               top :40%;
+              left: 45%;
+             margin-left: -16px;
+             margin-top: -16px;
+             z-index: 1001;
+            }
 </style>
+<div class="loading hide">
+     <div class="gif" >
+        <img src="/loadimg.gif" width="200px;">
+     </div>
+    </div>
 @if($role==3||$role==4||$role==5||$role==6||$role==7||$role==8)
 
 @else
@@ -110,7 +135,7 @@
 		<a title="开始备课" class="collect"  onclick="" href="javascript:;" cha_id="{{$v['cha_id']}}">
 		<button class="layui-btn layui-btn-sm" style="background:#a73870;"><i class="iconfont">&#xe7ce;&nbsp;开始备课</i></button>
 		</a>
-        @if($role==1&&2)
+        @if($role==1)
          @if($v['field_pdfjs']==''&&$v['field_pdflx']=='')
                 <a title="添加教师用书"  onclick="" href="/teacherbook?id={{$v['cha_id']}}">
                     <i class="iconfont">&#xe6b9;</i>
@@ -138,20 +163,38 @@
 
 </div>
 </body>
+<script type="text/javascript" src="/alerttc/js/popup.js"></script>
 <script src="/jquery-3.1.1.min.js"></script>
 <script>
+        var Popup = new Popup();
+</script>
+<script>
  $(function(){
+    $('div.loading').hide();
 	   $(".collect").click(function(){
 	       var cha_id =$(this).attr('cha_id');
-			$.ajax({
-			type: 'post',
-			data:{cha_id:cha_id},
-		       	dateType:'json',
-	                url: "/collectadd",
-	               success:function(msg){
-	               alert(msg.msg);
-		          }
-			   });
+            function confirmData () {
+                $('div.loading').show();
+                 $.ajax({
+                    type: 'post',
+                    data: {cha_id: cha_id},
+                    dateType: 'json',
+                    url: "/collectadd",
+                    success: function (msg) {
+                        if (msg.code == 1) {
+                            $('div.loading').hide();
+                            window.location.reload()
+                        }else{
+                            $('div.loading').hide();
+                            Popup.alert('HSKMS提示','备课失败');
+                            return false;
+                        }
+                    }
+                });   
+            }
+            var title = 'HSKMS提示',
+            text = '您确定开始备课吗？';
+            Popup.confirm(title,text,confirmData);
 		     })
 	            $("#ss").click(function(){
 		            var cha_name = $("#cha_name").val();

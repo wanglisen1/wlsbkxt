@@ -7,10 +7,36 @@
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
 <script type="text/javascript" src="/alerttc/js/popup.js"></script>
+<style type="text/css">
+    .loading {
+ position: fixed;
+ top: 0;
+ bottom: 0;
+ right: 0;
+ left: 0;
+ background-color: #f6ecec;
+ opacity: 0.4;
+ z-index: 1000;
+}
+ 
+.loading .gif {
+ position: fixed;
+   top :40%;
+  left: 45%;
+ margin-left: -16px;
+ margin-top: -16px;
+ z-index: 1001;
+}
+</style>
 <xblock>
     <button class="layui-btn" id="sx"><i class="iconfont">&#xe6aa;</i>&nbsp;&nbsp;刷新</button>
     <span class="x-right" style="line-height:40px">共有数据：<b style="color:red;">{{$count}}</b> 条</span>
 </xblock>
+<div class="loading hide">
+     <div class="gif" >
+        <img src="/loadimg.gif" width="200px;">
+     </div>
+    </div>
 <table class="layui-table">
     <thead>
     <tr>
@@ -69,9 +95,11 @@
 </script>
 <script>
     $(function(){
+        $('div.loading').hide();
         $(".userblockupd").click(function(){
             var u_id =$(this).attr('u_id');
              function confirmData () {
+                $('div.loading').show();
                  $.ajax({
                     type: 'post',
                     data: {u_id: u_id},
@@ -79,8 +107,10 @@
                     url: "/administratordels",
                     success: function (msg) {
                         if (msg.code == 1) {
+                            $('div.loading').hide();
                             window.location.reload()
                         }else{
+                            $('div.loading').hide();
                             Popup.alert('HSKMS提示','解除冻结失败');
                             return false;
                         }

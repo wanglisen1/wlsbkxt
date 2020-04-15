@@ -7,6 +7,32 @@
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
 <script type="text/javascript" src="/alerttc/js/popup.js"></script>
+<style type="text/css">
+    .loading {
+ position: fixed;
+ top: 0;
+ bottom: 0;
+ right: 0;
+ left: 0;
+ background-color: #f6ecec;
+ opacity: 0.4;
+ z-index: 1000;
+}
+ 
+.loading .gif {
+ position: fixed;
+   top :40%;
+  left: 45%;
+ margin-left: -16px;
+ margin-top: -16px;
+ z-index: 1001;
+}
+</style>
+<div class="loading hide">
+     <div class="gif" >
+        <img src="/loadimg.gif" width="200px;">
+     </div>
+    </div>
 <xblock>
     @if($role==1||$role==2||$role==3)
     <button class="layui-btn" onclick="x_admin_show('添加用户','/useradd')"><i class="layui-icon"></i>添加</button>
@@ -167,9 +193,11 @@
 </script>
 <script>
     $(function(){
+        $('div.loading').hide();
         $(".jydel").click(function(){
             var jy_id =$(this).attr('jy_id');
              function confirmData () {
+                $('div.loading').show();
                  $.ajax({
                     type: 'post',
                     data: {jy_id: jy_id},
@@ -177,8 +205,10 @@
                     url: "/userdel",
                     success: function (msg) {
                         if (msg.code == 1) {
+                            $('div.loading').hide();
                            window.location.reload()
                         }else{
+                            $('div.loading').hide();
                             Popup.alert('HSKMS提示','删除失败');
                             return false;
                         }
@@ -192,6 +222,7 @@
         $(".xzdel").click(function(){
             var xz_id =$(this).attr('xz_id');
              function confirmData () {
+                $('div.loading').show();
                  $.ajax({
                     type: 'post',
                     data: {xz_id: xz_id},
@@ -199,8 +230,10 @@
                     url: "/userdel",
                     success: function (msg) {
                         if (msg.code == 1) {
+                            $('div.loading').hide();
                             window.location.reload()
                         }else{
+                            $('div.loading').hide();
                             Popup.alert('HSKMS提示','删除失败');
                             return false;
                         }
@@ -214,6 +247,7 @@
         $(".zgdel").click(function(){
             var zg_id =$(this).attr('zg_id');
              function confirmData () {
+                $('div.loading').show();
                  $.ajax({
                     type: 'post',
                     data: {zg_id: zg_id},
@@ -221,8 +255,10 @@
                     url: "/userdel",
                     success: function (msg) {
                         if (msg.code == 1) {
+                            $('div.loading').hide();
                             window.location.reload()
                         }else{
+                            $('div.loading').hide();
                             Popup.alert('HSKMS提示','删除失败');
                             return false;
                         }
@@ -236,6 +272,7 @@
         $(".jsdel").click(function(){
             var js_id =$(this).attr('js_id');
              function confirmData () {
+                $('div.loading').show();
                  $.ajax({
                     type: 'post',
                     data: {js_id: js_id},
@@ -243,8 +280,10 @@
                     url: "/userdel",
                     success: function (msg) {
                         if (msg.code == 1) {
+                            $('div.loading').hide();
                             window.location.reload()
                         }else{
+                            $('div.loading').hide();
                             Popup.alert('HSKMS提示','删除失败');
                             return false;
                         }
@@ -262,6 +301,7 @@
         $(".jyuserblock").click(function(){
            var jy_id =$(this).attr('jy_id');
              function confirmData () {
+                $('div.loading').show();
                  $.ajax({
                     type: 'post',
                     data: {jy_id: jy_id},
@@ -269,8 +309,10 @@
                     url: "/userblock",
                     success: function (msg) {
                         if (msg.code == 1) {
+                            $('div.loading').hide();
                             window.location.reload()
                         }else{
+                            $('div.loading').hide();
                             Popup.alert('HSKMS提示','冻结失败');
                             return false;
                         }
@@ -284,6 +326,7 @@
         $(".xzuserblock").click(function(){
            var xz_id =$(this).attr('xz_id');
              function confirmData () {
+                $('div.loading').show();
                  $.ajax({
                     type: 'post',
                     data: {xz_id: xz_id},
@@ -291,8 +334,10 @@
                     url: "/userblock",
                     success: function (msg) {
                         if (msg.code == 1) {
+                            $('div.loading').hide();
                             window.location.reload()
                         }else{
+                            $('div.loading').hide();
                             Popup.alert('HSKMS提示','冻结失败');
                             return false;
                         }
@@ -306,6 +351,7 @@
         $(".zguserblock").click(function(){
            var zg_id =$(this).attr('zg_id');
              function confirmData () {
+                $('div.loading').show();
                  $.ajax({
                     type: 'post',
                     data: {zg_id: zg_id},
@@ -313,8 +359,10 @@
                     url: "/userblock",
                     success: function (msg) {
                         if (msg.code == 1) {
+                            $('div.loading').hide();
                             window.location.reload()
                         }else{
+                            $('div.loading').hide();
                             Popup.alert('HSKMS提示','冻结失败');
                             return false;
                         }
@@ -328,6 +376,7 @@
         $(".jsuserblock").click(function(){
            var js_id =$(this).attr('js_id');
              function confirmData () {
+                $('div.loading').show();
                  $.ajax({
                     type: 'post',
                     data: {js_id: js_id},
@@ -335,8 +384,10 @@
                     url: "/userblock",
                     success: function (msg) {
                         if (msg.code == 1) {
+                            $('div.loading').hide();
                             window.location.reload()
                         }else{
+                            $('div.loading').hide();
                             Popup.alert('HSKMS提示','冻结失败');
                             return false;
                         }

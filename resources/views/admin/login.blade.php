@@ -96,11 +96,13 @@
 				url: "/loginadd",
 				success:function(msg){
 					if(msg.code==1) {
-						$('div.loading').hide();
 						window.location = '/admin';
+						$('div.loading').hide();
 					}else{
 						 $('div.loading').hide();
 						Popup.alert('HSKMS提示',msg.msg);
+						return false;
+
 					}
 				}
 			});

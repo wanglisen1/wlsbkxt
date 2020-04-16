@@ -90,6 +90,7 @@
 <table class="layui-table">
     <thead>
     <tr>
+        <th style="text-align:center;">姓名</th>
         <th style="text-align:center;">课程类别</th>
     <th style="text-align:center;">课程阶段</th>
     <th style="text-align:center;">课程季度</th>
@@ -100,6 +101,7 @@
     <tbody>
     @foreach($data as $k=>$v)
         <tr>
+            <td style="text-align:center;">{{$v['username']}}</td>
             <td style="text-align:center;">{{$v['sub_name']}}</td>
         <td style="text-align:center;">{{$v['grade']}}</td>
          <td style="text-align:center;">{{$v['season']}}</td>

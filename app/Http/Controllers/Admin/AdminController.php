@@ -1847,7 +1847,7 @@ class AdminController extends Controller
 		}else if($role==4){
              $res= CollectModel::where('collect.alliance',$res5['tzr'])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==5){
-             $res = CollectModel::where('collect.alliance',$res5['tzr'])->where('collect.role',6)->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+             $res = CollectModel::where('collect.alliance',$res5['tzr'])->whereIn('collect.role',[5,6])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==26){
             $res= CollectModel::where('collect.role', 6)->where('collect.subject','趣味大语文')->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==27){
@@ -2303,43 +2303,43 @@ class AdminController extends Controller
 			}
     }
 
-    public function sscoll(Request $request){
-	     session_start();
-         if (empty($_SESSION["uid"])) {
-	       header('Location: /flogin.php');
-	       exit;
-	       }
-	     $grade=$request->input('grade');
-	     $season=$request->input('season');
-	      $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
-	              $role=$res5['role'];
-	             if(!empty($grade)&&!empty($season)){
-			                     if($role==3){           
-		$res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();                 
-			 }else{
-		 $res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();												                  
-        }          
-	          }else if(empty($grade)){
-	    if($role==3){                             
-	       $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
-		}else{
-			$res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
-																		                      }
-		}else if(empty($season)){
-			if($role==3){                                      
-			$res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
-			}else{
-			$res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
-		      }
-		  }
-	       $count=count($res);
-	           $list=[
-				'data' => $res,
-				'role' => $role,
-				'count' => $count
-				];
-	   return view('admin.collect.sscoll',$list);
-    }
+  //   public function sscoll(Request $request){
+	 //     session_start();
+  //        if (empty($_SESSION["uid"])) {
+	 //       header('Location: /flogin.php');
+	 //       exit;
+	 //       }
+	 //     $grade=$request->input('grade');
+	 //     $season=$request->input('season');
+	 //      $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
+	 //              $role=$res5['role'];
+	 //             if(!empty($grade)&&!empty($season)){
+		// 	                     if($role==3){           
+		// $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();                 
+		// 	 }else{
+		//  $res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();												                  
+  //       }          
+	 //          }else if(empty($grade)){
+	 //    if($role==3){                             
+	 //       $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
+		// }else{
+		// 	$res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
+		// 																                      }
+		// }else if(empty($season)){
+		// 	if($role==3){                                      
+		// 	$res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
+		// 	}else{
+		// 	$res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
+		//       }
+		//   }
+	 //       $count=count($res);
+	 //           $list=[
+		// 		'data' => $res,
+		// 		'role' => $role,
+		// 		'count' => $count
+		// 		];
+	 //   return view('admin.collect.sscoll',$list);
+  //   }
    public function videoaddlist(){
 
 	   return view('admin.videoaddlist');

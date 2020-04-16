@@ -129,12 +129,15 @@
             <td style="text-align:center;">{{$v['cla_name']}}</td>
             <td style="text-align:center;">{{$v['cha_name']}}</td>
             <td class="td-manage" style="text-align:center;">
-		<a href="/picture?id={{$v['cha_id']}}&cha_name={{$cha_name}}&season={{$season}}&sub_name={{$sub_name}}&grade={{$grade}}">
+		<a href="/picturejs?id={{$v['cha_id']}}&cha_name={{$cha_name}}&season={{$season}}&sub_name={{$sub_name}}&grade={{$grade}}">
 		<button class="layui-btn layui-btn-sm" style="background:#2093bf"><i class="iconfont">&#xe74e;&nbsp;查看</i></button>
 		</a>&nbsp;
+    @if($role==5||$role==6)
 		<a title="开始备课" class="collect"  onclick="" href="javascript:;" cha_id="{{$v['cha_id']}}">
 		<button class="layui-btn layui-btn-sm" style="background:#a73870;"><i class="iconfont">&#xe7ce;&nbsp;开始备课</i></button>
 		</a>
+    @else
+    @endif
         @if($role==1)
          @if($v['field_pdfjs']==''&&$v['field_pdflx']=='')
                 <a title="添加教师用书"  onclick="" href="/teacherbook?id={{$v['cha_id']}}">

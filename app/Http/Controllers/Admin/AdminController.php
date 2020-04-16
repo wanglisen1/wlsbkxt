@@ -520,21 +520,7 @@ class AdminController extends Controller
                                 'addtime' => date("Y-m-d H:i:s"),
                                 'tzr' => $res4['u_id']
                                 ];
-                    }else if($roles==5){
-                            $resxz = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
-                            $resxz2 = ZguserModel::where('zg_phone',$resxz['tel'])->first();
-                            $res4 = TzruserModel::where('tzr_id',$resxz2['zg_tzr'])->first();
-                            $data = [
-                             'tel' => $tel,
-                             'password' => $password,
-                             'username' => $username,
-                             'email' => $email,
-                             'sex' => $sex,
-                             'role' => $role,
-                             'addtime' => date("Y-m-d H:i:s"),
-                             'tzr' => $res4['u_id']
-                            ];
-                        }
+                    }
                      
                 }else{
                     $data = [
@@ -1849,11 +1835,11 @@ class AdminController extends Controller
         }else if($role==5){
              $res = CollectModel::where('collect.alliance',$res5['tzr'])->whereIn('collect.role',[5,6])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==26){
-            $res= CollectModel::where('collect.role', 6)->where('collect.subject','趣味大语文')->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+            $res= CollectModel::whereIn('collect.role', [5,6])->where('collect.subject','趣味大语文')->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==27){
-            $res= CollectModel::where('collect.role', 6)->where('collect.subject','思维培优数学')->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+            $res= CollectModel::whereIn('collect.role', [5,6])->where('collect.subject','思维培优数学')->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==28){
-            $res= CollectModel::where('collect.role', 6)->whereIn('collect.subject',['Phonics自然拼读','KB课程'])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
+            $res= CollectModel::whereIn('collect.role', [5,6])->whereIn('collect.subject',['Phonics自然拼读','KB课程'])->where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else if($role==1||$role==2){
             $res= CollectModel::where('chapter.is_del',1)->join('chapter','chapter.cha_id','=','collect.cha_id')->paginate(30);
         }else{

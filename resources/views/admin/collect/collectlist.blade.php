@@ -115,10 +115,14 @@
          <a title="未完成" class="del"  onclick="" href="javascript:;" cha_id="{{$v['cha_id']}}">
                 <button class="layui-btn layui-btn-xs" style="background:#C34A72;"><i class="iconfont">&#xe6b7;&nbsp;&nbsp;未完成</i></button>
                 </a>&nbsp;&nbsp;
-        @elseif($v['is_show']==2)
-        <a title="待审核"  href="javascript:;">
+        @elseif($v['is_show']==2&&$v['xzsh']==1)
+        <a title="待校长审核"  href="javascript:;">
                 <button class="layui-btn layui-btn-xs" style="background-color:#FFCC33;"><i class="iconfont">&#xe6b1;&nbsp;&nbsp;待审核</i></button>
                 </a>&nbsp;&nbsp;
+                  @elseif($v['is_show']==2&&$v['xzsh']==2)
+        <a title="待总部审核">
+                <button class="layui-btn layui-btn-xs" style="background:#FF0066;"><i class="iconfont">&#xe6b7;&nbsp;&nbsp;待审核</i></button>
+                </a>&nbsp;
         @elseif($v['is_show']==3)
         <a title="已完成"  href="javascript:;">
                 <button class="layui-btn layui-btn-xs" style=""><i class="iconfont">&#xe6b1;&nbsp;&nbsp;已完成</i></button>
@@ -168,7 +172,7 @@
                 <button class="layui-btn layui-btn-xs" style="background:#FFCC33;"><i class="iconfont">&#xe6b7;&nbsp;待审核</i></button>
                 </a>&nbsp;
         @elseif($v['is_show']==2&&$v['xzsh']==2)
-             <a title="待总部审核">
+             <a title="待总部审核" class="sh"  onclick="" href="javascript:;" cha_id="{{$v['cha_id']}}" coll_id="{{$v['coll_id']}}">
                 <button class="layui-btn layui-btn-xs" style="background:#FF0066;"><i class="iconfont">&#xe6b7;&nbsp;待审核</i></button>
                 </a>&nbsp;
         @elseif($v['is_show']==3)

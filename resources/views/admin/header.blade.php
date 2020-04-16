@@ -1540,7 +1540,7 @@
             <li >
                     <a href="javascript:;">
                         <i class="iconfont">&#xe7ce;</i>
-                        <cite>查看课程</cite>
+                        <cite>教师备课</cite>
                         <i class="iconfont nav_right">&#xe6a7;</i>
                     </a>
                     <ul class="sub-menu">

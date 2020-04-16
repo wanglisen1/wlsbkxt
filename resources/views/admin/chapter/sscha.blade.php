@@ -46,14 +46,6 @@
 @else
 <form class="layui-form layui-col-md12 x-so" style="margin-top:20px;" action="/sscha" method="POST" >
 <div style="float:left;width:300px;height:40px;">
-	 @if($ht==1)
-	@elseif($ht==2)
-	<div style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px;" align="center">
-	<a href="/newsousuo?subject={{$sub_name}}&grade={{$grade}}">
-	  <i class="iconfont" style="color:#fff;">&#xe697;&nbsp;&nbsp;返回</i>
-	</a>
-          </div>
-	@endif
           <div style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px;" id="sx" align="center">  
 	<i class="iconfont" style="color:#fff;">&#xe6aa;&nbsp;&nbsp;刷新</i>
 	  </div>
@@ -188,7 +180,7 @@
                             $('div.loading').hide();
                             window.location.reload()
                         }else{
-                            $('div.loading').hide();
+                           $('div.loading').hide();
                             Popup.alert('HSKMS提示','备课失败');
                             return false;
                         }

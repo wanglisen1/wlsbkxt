@@ -47,7 +47,12 @@
              @else
             @endif
             @if(!empty($res['field_pdflx'])) 
-            <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/picturelx?id={{$id}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe69e;&nbsp;</i>巩固练习</a></dd>
+            <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/picturelx?id={{$id}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe69e;&nbsp;</i> 
+              @if($sub_name=='思维培优数学')
+              教材答案
+              @else
+              巩固练习
+              @endif</a></dd>
              @else
   @endif
   @if(!empty($res['ppt']))

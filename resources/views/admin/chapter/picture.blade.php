@@ -36,11 +36,6 @@
 	<div style="width:100%;position:fixed;top:0px;z-index:99;">
     <dl style="display:flex;">
 	<dt>
-	@if($cha_name==''&&$season=='')
-	<dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="javascript:;"  onclick="window.history.go(-1)"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe697;&nbsp;</i>返回</a></dd>
-	@else
-	 <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/sscha?cha_name={{$cha_name}}&season={{$season}}&sub_name={{$sub_name}}&grade={{$grade}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe697;&nbsp;</i>返回</a></dd>
-	@endif
   
             <dd style="flex:1;text-align:center;border:1px solid #e6e6e6;border-right:0;height:40px;line-height:40px;font-size:19px;background-color:#efeef0;"><a href="/picture?id={{$id}}"><i class="iconfont" style="font-size:19px;color:#4dacbb;">&#xe724;&nbsp;</i>
             @if($sub_name=='KB课程')

@@ -121,7 +121,7 @@
             <td style="text-align:center;">{{$v['cla_name']}}</td>
             <td style="text-align:center;">{{$v['cha_name']}}</td>
             <td class="td-manage" style="text-align:center;">
-		<a href="/picturejs?id={{$v['cha_id']}}&cha_name={{$cha_name}}&season={{$season}}&sub_name={{$sub_name}}&grade={{$grade}}">
+		<a href="/picture?id={{$v['cha_id']}}&cha_name={{$cha_name}}&season={{$season}}&sub_name={{$sub_name}}&grade={{$grade}}">
 		<button class="layui-btn layui-btn-sm" style="background:#2093bf"><i class="iconfont">&#xe74e;&nbsp;查看</i></button>
 		</a>&nbsp;
     @if($role==5||$role==6)

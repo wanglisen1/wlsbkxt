@@ -2116,7 +2116,7 @@ class AdminController extends Controller
 		$grade = $request->input('grade');
         if($role==3){ 
             if($subject=='KB课程'||$subject=='Phonics自然拼读'){
-                $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->get();
+                $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('number','asc')->get();
             }else{
                  $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
                 if($res1['tzr_chun']==1){
@@ -2140,7 +2140,7 @@ class AdminController extends Controller
                     $tzrhan='';
                 }
             $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
-            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->whereIn('season',$arr)->where('grade',$grade)->get();
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->whereIn('season',$arr)->where('grade',$grade)->orderBy('number','asc')->get();
             }
         }else if($role==4){
              if($subject=='KB课程'||$subject=='Phonics自然拼读'){
@@ -2168,50 +2168,50 @@ class AdminController extends Controller
                 $tzrhan='';
             }
             $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
-            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->whereIn('season',$arr)->where('grade',$grade)->get();
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->whereIn('season',$arr)->where('grade',$grade)->orderBy('number','asc')->get();
         }
         }else if($role==5){
             $res1 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
             $res2 = ZguserModel::where('zg_phone',$res1['tel'])->first();
           if($grade=='三年级'){
             if($res2['zg_chun']==1){
-                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_sanmoren'])->get();
+                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_sanmoren'])->orderBy('number','asc')->get();
              }else if($res2['zg_shu']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_sanmoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_sanmoren'])->orderBy('number','asc')->get();
                }else if($res2['zg_qiu']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_sanmoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_sanmoren'])->orderBy('number','asc')->get();
             }else if($res2['zg_han']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_sanmoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_sanmoren'])->orderBy('number','asc')->get();
             }
         }else if($grade=='四年级'){
              if($res2['zg_chun']==1){
-                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_simoren'])->get();
+                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_simoren'])->orderBy('number','asc')->get();
              }else if($res2['zg_shu']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_simoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_simoren'])->orderBy('number','asc')->get();
                }else if($res2['zg_qiu']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_simoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_simoren'])->orderBy('number','asc')->get();
             }else if($res2['zg_han']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_simoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_simoren'])->orderBy('number','asc')->get();
             }
         }else if($grade=='五年级'){
              if($res2['zg_chun']==1){
-                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_wumoren'])->get();
+                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_wumoren'])->orderBy('number','asc')->get();
              }else if($res2['zg_shu']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_wumoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_wumoren'])->orderBy('number','asc')->get();
                }else if($res2['zg_qiu']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_wumoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_wumoren'])->orderBy('number','asc')->get();
             }else if($res2['zg_han']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_wumoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_wumoren'])->orderBy('number','asc')->get();
             }
         }else if($grade=='六年级'){
              if($res2['zg_chun']==1){
-                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_liumoren'])->get();
+                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_liumoren'])->orderBy('number','asc')->get();
              }else if($res2['zg_shu']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_liumoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_liumoren'])->orderBy('number','asc')->get();
                }else if($res2['zg_qiu']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_liumoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_liumoren'])->orderBy('number','asc')->get();
             }else if($res2['zg_han']==1){
-                $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_liumoren'])->get();
+                $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['zg_liumoren'])->orderBy('number','asc')->get();
             }
         }
             
@@ -2220,48 +2220,48 @@ class AdminController extends Controller
             $res2 = JsuserModel::where('js_phone',$res1['tel'])->first();
             if($grade=='三年级'){
                  if($res2['js_chun']==1){
-                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_sanmoren'])->get();
+                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_sanmoren'])->orderBy('number','asc')->get();
                  }else if($res2['js_shu']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_sanmoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_sanmoren'])->orderBy('number','asc')->get();
                    }else if($res2['js_qiu']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_sanmoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_sanmoren'])->orderBy('number','asc')->get();
                 }else if($res2['js_han']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_sanmoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_sanmoren'])->orderBy('number','asc')->get();
                 }
             }else if($grade=='四年级'){
                 if($res2['js_chun']==1){
-                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_simoren'])->get();
+                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_simoren'])->orderBy('number','asc')->get();
                  }else if($res2['js_shu']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_simoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_simoren'])->orderBy('number','asc')->get();
                    }else if($res2['js_qiu']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_simoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_simoren'])->orderBy('number','asc')->get();
                 }else if($res2['js_han']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_simoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_simoren'])->orderBy('number','asc')->get();
                 }
             }else if($grade=='五年级'){
                 if($res2['js_chun']==1){
-                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_wumoren'])->get();
+                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_wumoren'])->orderBy('number','asc')->get();
                  }else if($res2['js_shu']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_wumoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_wumoren'])->orderBy('number','asc')->get();
                    }else if($res2['js_qiu']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_wumoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_wumoren'])->orderBy('number','asc')->get();
                 }else if($res2['js_han']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_wumoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_wumoren'])->orderBy('number','asc')->get();
                 }
             }else if($grade=='六年级'){
                 if($res2['js_chun']==1){
-                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_liumoren'])->get();
+                 $res = ChapterModel::where('is_del',1)->where('season','春')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_liumoren'])->orderBy('number','asc')->get();
                  }else if($res2['js_shu']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_liumoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','暑')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_liumoren'])->orderBy('number','asc')->get();
                    }else if($res2['js_qiu']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_liumoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','秋')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_liumoren'])->orderBy('number','asc')->get();
                 }else if($res2['js_han']==1){
-                    $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_liumoren'])->get();
+                    $res = ChapterModel::where('is_del',1)->where('season','寒')->where('sub_name',$subject)->where('grade',$grade)->orderBy('cha_id','asc')->take($res2['js_liumoren'])->orderBy('number','asc')->get();
                 }
             }
            
          }else{
-             $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->whereIn('season',['春','暑','秋','寒'])->get();
+             $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('number','asc')->get();
            // $res = ChapterModel::select('sub_name','grade','season','cla_name','cha_name')->where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->GroupBy('season')->get();
          }
 		

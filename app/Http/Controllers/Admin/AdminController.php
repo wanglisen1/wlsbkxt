@@ -1568,8 +1568,8 @@ class AdminController extends Controller
             header('Location: /flogin.php');exit;
         }
         $file=$request->file('file')->store('file');
-        $pdf="/home/wwwroot/bkxt/storage/app/".$file;
-        $path="/home/wwwroot/bkxt/public/tp/images/";
+        $pdf="/mnt/bkxt/storage/app/".$file;
+        $path="/mnt/bkxt/public/tp/images/";
         $fileone = realpath($pdf);
         if (!is_readable($fileone)) {
             echo 'file not readable';
@@ -1616,8 +1616,8 @@ class AdminController extends Controller
 					         }
 	     $file=$request->file('file')->store('file');
 	     //print_r($file);exit;
-	             $pdf="/home/wwwroot/bkxt/storage/app/".$file;
-		     $path="/home/wwwroot/bkxt/public/tp/teacher/";
+	             $pdf="/mnt/bkxt/storage/app/".$file;
+		     $path="/mnt/bkxt/public/tp/teacher/";
 		     $fileone = realpath($pdf);
 		             if (!is_readable($fileone)) {
 				                 echo 'file not readable';
@@ -1650,8 +1650,8 @@ class AdminController extends Controller
 			     header('Location: /flogin.php');exit;
 			             }
     $file=$request->file('file')->store('file');
-	$pdf="/home/wwwroot/bkxt/storage/app/".$file;
-	$path="/home/wwwroot/bkxt/public/tp/work/";
+	$pdf="/mnt/bkxt/storage/app/".$file;
+	$path="/mnt/bkxt/public/tp/work/";
 	$fileone = realpath($pdf);
 	if (!is_readable($fileone)) {
 					 echo 'file not readable';

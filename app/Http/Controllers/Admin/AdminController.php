@@ -2261,7 +2261,7 @@ class AdminController extends Controller
             }
            
          }else{
-            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->get();
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->whereIn('season',['春','暑','秋','寒'])->get();
          }
 		
 		$count = count($res);

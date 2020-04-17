@@ -50,43 +50,6 @@
 	<i class="iconfont" style="color:#fff;">&#xe6aa;&nbsp;&nbsp;刷新</i>
 	  </div>
 	</div>
-	@if($ht==1)
-        @if($sub_name=="KB课程")
-
-        @elseif($sub_name=="Phonics自然拼读")
-
-        @else
-         <div class="layui-input-inline" style="float:left;">
-           <select name="season" id="season">
-                <option value="">请选择一个季度</option>
-                @if($sub_name=="KB课程")
-        
-                @elseif($sub_name=="Phonics自然拼读")
-    
-                @else
-                @foreach($res3 as $k=>$v)
-                @if($v['is_show']==1)
-                <option value="{{$v['chasea_season']}}">{{$v['chasea_season']}}</option>
-                @eles
-                @endif
-                @endforeach
-                @endif
-           </select>
-        </div>
-        @endif
-        <div> 
-        <input type="text" name="cha_name" id="cha_name"  placeholder="请输入课节名称的关键字" autocomplete="off" class="layui-input" style="width:200px;float:left;margin-left:10px;">
-        </div>
-        
-	<input type="hidden" id="role" name="role" value="{{$role}}">
-  <input type="hidden" id="sub_name" name="sub_name" value="{{$sub_name}}">
-  <input type="hidden" id="grade" name="grade" value="{{$grade}}">
-        <div style="float:left;margin-left:10px;`">
-          <button class="layui-btn" id="ss" type="submit" lay-filter="sreach" style="background-color:#a73870;"><i class="layui-icon">&#xe615;</i></button>
-	</div>
-	</div>
-	@else
-	@endif
 	<div style="float:left;margin-left:50px;">
 	<span class="x-right" style="line-height:40px">本页共有数据：<b style="color:red;">{{$count}}</b>条</span>
 	</div>	

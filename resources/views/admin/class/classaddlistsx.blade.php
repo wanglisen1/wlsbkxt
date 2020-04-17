@@ -19,7 +19,7 @@
     <select name="role" id="season" lay-verify="" style="margin-left:10px; ">
         <option value="">--请选择一个季度--</option>
         <option value="春">春</option>
-        <option value="署">署</option>
+        <option value="暑">暑</option>
         <option value="秋">秋</option>
         <option value="寒">寒</option>
 

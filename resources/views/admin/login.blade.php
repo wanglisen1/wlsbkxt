@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset="utf-8" />
-	<title>翰师问鼎-备课系统登陆页面</title>
+	<title>翰师问鼎-备课平台登陆页面</title>
 	<link rel="stylesheet" href="/loginmodel/css/login.css" />
 	<link rel="shortcut icon" href="/layuiadmin/hslogo.ico" type="/layuiadmin/image/x-icon" />
 	<link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
@@ -40,7 +40,7 @@
 	</div>
 	<div class="login" style="margin-right:10%;width:20%;margin-top:-2%;height:380px;">
 
-		<div class="title">欢迎登陆HSKMS备课管理系统</div>
+		<div class="title">欢迎登陆HSKMS备课管理平台</div>
 		<div class="locon">
 
 			<div class="line">

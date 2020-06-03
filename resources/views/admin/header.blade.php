@@ -17,6 +17,7 @@
     <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
     <script type="text/javascript" src="/alerttc/js/popup.js"></script>
+    <script type="text/javascript" src="/time.js"></script>
     <style>
     .container {
     background-color: #001529;
@@ -43,7 +44,10 @@
         <i title="展开左侧栏" class="iconfont">&#xe699;</i>
     </div>
 
-    <ul class="layui-nav right" lay-filter="">
+    <ul class="layui-nav right" lay-filter="" >
+        <li class="layui-nav-item" style="margin-right:50px;">
+            <p id="showtime" style="font-family:FZShuTi;font-size:20px;"></p>
+        </li>
         <li class="layui-nav-item">
             <a href="javascript:;">你好！{{$sname}}
             @if($role==1)
@@ -3850,6 +3854,12 @@
 <!-- <div class="x-slide_left"></div> -->
 <!-- 左侧菜单结束 -->
 <script src="/jquery-3.1.1.min.js"></script>
+ <script type="text/javascript" src="/time.js"></script>
+ <script type="text/javascript">
+     setInterval(function() {
+        $("#showtime").showCurrentTime();
+         }, 1000)
+ </script>
 <script type="text/javascript">
         var Popup = new Popup();
 </script>
@@ -3894,5 +3904,6 @@
             text = '您确定退出么？';
             Popup.confirm(title,text,confirmData);
         })
+       
     })
 </script>

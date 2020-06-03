@@ -53,13 +53,13 @@
 @else
 <form class="layui-form layui-col-md12 x-so" style="margin-top:20px;" action="/sscha" method="POST" >
 
-<div style="float:left;width:300px;height:40px;">
-          <div style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px;" id="sx" align="center">  
+<div style="float:left;width:120px;height:40px;">
+          <div style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px; margin-top:2px" id="sx" align="center">  
 	<i class="iconfont" style="color:#fff;">&#xe6aa;&nbsp;&nbsp;刷新</i>
 	  </div>
 	</div>
     
-            <div class="layui-col-md6" style="width:150px">
+            <div class="layui-col-md6" style="width:150px;margin-right:90px">
             <select id="mySelect" lay-filter="demo">
                     <option value="">请选择一个季度</option>
                     <option value="春">春</option>
@@ -68,6 +68,12 @@
                    <option value="寒">寒</option>
               </select>
             </div>
+            <div class="layui-col-md6" style="width:150px">
+              <input type="text" name="title" placeholder="搜索关键字"  class="layui-input" id="sou">
+            </div>
+            <div id="soubtu" style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px; margin-top:2px"  align="center">  
+	<i class="iconfont" style="color:#fff;">&#xe6ac;&nbsp;&nbsp;搜索</i>
+	  </div>
           <input type="hidden" name="" id="adminsubject" value="{{$sub_name}}"> 
         <input type="hidden" name="" id="admingrade" value="{{$grade}}">     
             
@@ -149,6 +155,8 @@
 </script>
 <script>
  $(function(){
+  var adminsubject = $("#adminsubject").val();
+ var admingrade = $("#admingrade").val();
     $('div.loading').hide();
 	   $(".collect").click(function(){
 	       var cha_id =$(this).attr('cha_id');
@@ -205,8 +213,6 @@
                   //        console.log(response);
                   //     }
                   // });
-              var adminsubject = $("#adminsubject").val();
-              var admingrade = $("#admingrade").val();
              if(data.value=="春"){
               window.location="/adminsousuo?adminseason=春&adminsubject="+adminsubject+"&admingrade="+admingrade
              }else if(data.value=="暑"){
@@ -217,9 +223,13 @@
               window.location="/adminsousuo?adminseason=寒&adminsubject="+adminsubject+"&admingrade="+admingrade
              }
 			});
+
 		});
 
-
+$("#soubtu").click(function(){
+  var sou=$("#sou").val()
+  window.location="/adminsousuo?adminseason="+sou+"&adminsubject="+adminsubject+"&admingrade="+admingrade
+})
 
 		 })
 

@@ -17,6 +17,21 @@
     <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
     <script type="text/javascript" src="/alerttc/js/popup.js"></script>
+    <style>
+    .container {
+    background-color: #001529;
+   }
+   .left-nav {
+    background-color: #001529;
+     }
+     .left-nav #nav li a cite {
+     font-weight:600;
+     }
+
+    /* .sub-menu .menu-current{
+         background-color:#2fb9d4 !important;
+     } */
+    </style>
 </head>
 <body>
 <!-- 顶部开始 -->

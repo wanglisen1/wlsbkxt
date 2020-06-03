@@ -89,7 +89,7 @@
 				return false;
 			}
 			 if (!reg.test(tel)){
-                Popup.alert("请输入正确格式的手机号码！");
+                Popup.alert('HSKMS提示','请输入正确格式的手机号码！');
                 return false;
             }
 			 $('div.loading').show();

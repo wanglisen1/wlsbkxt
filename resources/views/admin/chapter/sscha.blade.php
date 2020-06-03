@@ -51,7 +51,7 @@
 @if($role==5||$role==6||$role==7||$role==8)
 
 @else
-<form class="layui-form layui-col-md12 x-so" style="margin-top:20px;" action="/sscha" method="POST" >
+<form class="layui-form layui-col-md12 x-so"  action="/sscha" method="POST" >
 
 <div style="float:left;width:240px;height:40px;">
   @if($souxl=='')

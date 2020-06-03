@@ -146,7 +146,7 @@ xblock{
 .x-so{
     /*text-align: center;*/
     /*background: #f2f2f2 url() 0 0 no-repeat;*/
-    margin-bottom: 20px;
+    margin-bottom: 8px;
 }
 .x-so input.layui-input{
     width: 150px;

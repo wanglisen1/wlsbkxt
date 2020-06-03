@@ -59,7 +59,7 @@
 	  </div>
 	</div>
     
-            <div class="layui-col-md6" style="width:12%">
+            <div class="layui-col-md6" style="width:150px">
             <select id="mySelect" lay-filter="demo">
                     <option value="春">春</option>
                     <option value="暑">暑</option>
@@ -67,7 +67,8 @@
                    <option value="寒">寒</option>
               </select>
             </div>
-              
+          <input type="hidden" name="" id="adminsubject" value="{{$sub_name}}"> 
+        <input type="hidden" name="" id="admingrade" value="{{$grade}}">     
             
 	<div style="float:left;margin-left:50px;">
 	<span class="x-right" style="line-height:40px">本页共有数据：<b style="color:red;">{{$count}}</b>条</span>
@@ -103,7 +104,7 @@
             <td style="text-align:center;">{{$v['cla_name']}}</td>
             <td style="text-align:center;">{{$v['cha_name']}}</td>
             <td class="td-manage" style="text-align:center;">
-		<a href="/picture?id={{$v['cha_id']}}&cha_name={{$cha_name}}&season={{$season}}&sub_name={{$sub_name}}&grade={{$grade}}">
+		<a href="/picture?id={{$v['cha_id']}}">
 		<button class="layui-btn layui-btn-sm" style="background:#2093bf"><i class="iconfont">&#xe74e;&nbsp;查看</i></button>
 		</a>&nbsp;
     @if($role==5||$role==6)
@@ -195,14 +196,25 @@
 			form.on('select(demo)', function(data){
 		      	console.log(data.value)
 
-                  $.ajax({
-                      type: "post",
-                      url: "/newsousuo",
-                      data: {season:data.value},
-                      success: function (response) {
-                         
-                      }
-                  });
+                  // $.ajax({
+                  //     type: "post",
+                  //     url: "/newsousuo",
+                  //     data: {season:data.value},
+                  //     success: function (response) {
+                  //        console.log(response);
+                  //     }
+                  // });
+              var adminsubject = $("#adminsubject").val();
+              var admingrade = $("#admingrade").val();
+             if(data.value=="春"){
+              window.location="/adminsousuo?adminseason=春&adminsubject="+adminsubject+"&admingrade="+admingrade
+             }else if(data.value=="暑"){
+              window.location="/adminsousuo?adminseason=暑&adminsubject="+adminsubject+"&admingrade="+admingrade
+             }else if(data.value=="秋"){
+              window.location="/adminsousuo?adminseason=秋&adminsubject="+adminsubject+"&admingrade="+admingrade
+             }else if(data.value=="寒"){
+              window.location="/adminsousuo?adminseason=寒&adminsubject="+adminsubject+"&admingrade="+admingrade
+             }
 			});
 		});
 

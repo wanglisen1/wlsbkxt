@@ -2262,6 +2262,7 @@ class AdminController extends Controller
            
          }else{
              $res = ChapterModel::where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->orderBy('number','asc')->get();
+
            // $res = ChapterModel::select('sub_name','grade','season','cla_name','cha_name')->where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->GroupBy('season')->get();
          }
 		
@@ -2272,12 +2273,33 @@ class AdminController extends Controller
 				'role' =>$role,
                 'sub_name' => $subject,	 
                 'grade' => $grade,
-				'ht' => '1',
-				'cha_name' =>'',
-				'season' =>'',
                 'res3' => $res3
 						];
 			return view('admin.chapter.sscha',$list);         
+    }
+    public function adminsousuo(Request $request){
+         session_start();
+             if (empty($_SESSION["uid"])) {
+            header('Location: /flogin.php');
+            exit;
+        }
+        $adminseason = $request->input('adminseason');
+        $adminsubject = $request->input('adminsubject');
+        $admingrade = $request->input('admingrade');
+        $res3 = ChaseaModel::where('chasea_sub',$adminsubject)->get();
+        $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+        $role = $res5['role'];
+        $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->where('season',$adminseason)->orderBy('number','asc')->get()->toArray();
+             $count = count($res);
+                $list = [
+                'data' =>$res,
+                'count' =>$count,
+                'role' =>$role,
+                'sub_name' => $adminsubject,  
+                'grade' => $admingrade,
+                'res3' => $res3
+                        ];
+        return view('admin.chapter.sscha',$list);  
     }
 
     public function collectxzsc(Request $request){

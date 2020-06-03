@@ -156,3 +156,4 @@ Route::any('/pptlistbox','Admin\AdminController@pptlistbox');
 //课节发放
 Route::any('/chapterseason','Admin\AdminController@chapterseason');
 Route::any('/chapterseasonupd','Admin\AdminController@chapterseasonupd');
+Route::any('/adminsousuo','Admin\AdminController@adminsousuo');

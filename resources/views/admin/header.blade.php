@@ -17,7 +17,6 @@
     <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
     <script type="text/javascript" src="/alerttc/js/popup.js"></script>
-
 </head>
 <body>
 <!-- 顶部开始 -->

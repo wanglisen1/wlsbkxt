@@ -2265,17 +2265,46 @@ class AdminController extends Controller
 
            // $res = ChapterModel::select('sub_name','grade','season','cla_name','cha_name')->where('is_del',1)->where('sub_name',$subject)->where('grade',$grade)->GroupBy('season')->get();
          }
-		
-		$count = count($res);
-			$list = [
-				'data' =>$res,
-				'count' =>$count,
-				'role' =>$role,
-                'sub_name' => $subject,	 
+         $count = count($res);
+		if($role==3){
+            $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+             $list = [
+                'data' =>$res,
+                'count' =>$count,
+                'role' =>$role,
+                'sub_name' => $subject,  
                 'grade' => $grade,
-                'res3' => $res3
-						];
-			return view('admin.chapter.sscha',$list);         
+                'res3' => $res3,
+                'souxl' => '',
+                'res1' => $res1,
+                        ];
+            return view('admin.chapter.sscha',$list); 
+        }else if($role==4){
+            $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+             $list = [
+                'data' =>$res,
+                'count' =>$count,
+                'role' =>$role,
+                'sub_name' => $subject,  
+                'grade' => $grade,
+                'res3' => $res3,
+                'souxl' => '',
+                'res1' => $res1,
+                        ];
+            return view('admin.chapter.sscha',$list); 
+        }else{
+            $list = [
+                'data' =>$res,
+                'count' =>$count,
+                'role' =>$role,
+                'sub_name' => $subject,  
+                'grade' => $grade,
+                'res3' => $res3,
+                'souxl' => '',
+                        ];
+            return view('admin.chapter.sscha',$list);  
+        }
+		       
     }
     public function adminsousuo(Request $request){
          session_start();
@@ -2286,19 +2315,105 @@ class AdminController extends Controller
         $adminseason = $request->input('adminseason');
         $adminsubject = $request->input('adminsubject');
         $admingrade = $request->input('admingrade');
+        $sou = $request->input('sou');
         $res3 = ChaseaModel::where('chasea_sub',$adminsubject)->get();
         $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role = $res5['role'];
-        $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->where('season',$adminseason)->orderBy('number','asc')->get()->toArray();
-             $count = count($res);
+       if(empty($adminseason)&!empty($sou)){
+            if($role==3){
+                 $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+                if($res1['tzr_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['tzr_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['tzr_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['tzr_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+            $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->whereIn('season',$arr)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
+            }else if($role==4){
+                 $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                    if($res1['xz_chun']==1){
+                       $tzrchun='春';
+                    }else{
+                        $tzrchun='';
+                    }
+                    if($res1['xz_shu']==1){
+                        $tzrshu='暑';
+                    }else{
+                        $tzrshu='';
+                    }
+                    if($res1['xz_qiu']==1){
+                        $tzrqiu='秋';
+                    }else{
+                        $tzrqiu='';
+                    }
+                    if($res1['xz_han']==1){
+                        $tzrhan='寒';
+                    }else{
+                        $tzrhan='';
+                    }
+            $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+             $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->whereIn('season',$arr)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
+            }else{
+                $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
+            }
+            
+        }else if(!empty($adminseason)&!empty($sou)){
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->where('season',$adminseason)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
+        }else{
+             $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->where('season',$adminseason)->orderBy('number','asc')->get();
+        }
+        $count = count($res);
+        if($role==3){    
+             $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
                 $list = [
                 'data' =>$res,
                 'count' =>$count,
                 'role' =>$role,
                 'sub_name' => $adminsubject,  
                 'grade' => $admingrade,
-                'res3' => $res3
-                        ];
+                'res3' => $res3,
+                'souxl' => $adminseason,
+                'res1' => $res1,
+                    ];
+        }else if($role==4){
+             $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                $list = [
+                'data' =>$res,
+                'count' =>$count,
+                'role' =>$role,
+                'sub_name' => $adminsubject,  
+                'grade' => $admingrade,
+                'res3' => $res3,
+                'souxl' => $adminseason,
+                'res1' => $res1,
+                    ];
+        }else{
+                $list = [
+                'data' =>$res,
+                'count' =>$count,
+                'role' =>$role,
+                'sub_name' => $adminsubject,  
+                'grade' => $admingrade,
+                'res3' => $res3,
+                'souxl' => $adminseason,
+                    ];
+        }
+             
         return view('admin.chapter.sscha',$list);  
     }
 

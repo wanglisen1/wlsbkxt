@@ -1946,16 +1946,14 @@
                             </li >
                         </ul>
                     </li> -->
-                </ul>
-            </li> 
-                <li>
+                     <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
                     <cite>教师管理</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li>
+                   <li>
                         <a _href="/useradd">
                             <i class="iconfont" >&#xe6a7;</i>
                             <cite>教师添加</cite>
@@ -1969,6 +1967,9 @@
                     </li >
                 </ul>
             </li>
+                </ul>
+            </li> 
+                
             @elseif($role==3)
             <div id="nr">
              <li>

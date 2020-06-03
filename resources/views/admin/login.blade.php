@@ -77,7 +77,7 @@
 			var uname =$("#uname").val();
 			var tel =$("#tel").val();
 			var pwd =$("#password").val();
-
+			var reg = /(1[3-9]\d{9}$)/;
 			if(tel==''){
 				Popup.alert('HSKMS提示','手机号不能为空！');
 				return false;
@@ -88,6 +88,10 @@
 				Popup.alert('HSKMS提示','用户名不能为空！');
 				return false;
 			}
+			 if (!reg.test(tel)){
+                alert("请输入正确格式的手机号码！");
+                return false;
+            }
 			 $('div.loading').show();
 			$.ajax({
 				type: 'post',

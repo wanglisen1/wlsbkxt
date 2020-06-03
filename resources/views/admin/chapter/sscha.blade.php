@@ -35,6 +35,13 @@
              margin-top: -16px;
              z-index: 1001;
             }
+            .layui-form-select dl dd.layui-this {
+    background-color: #2093bf;
+    color: #fff;
+}
+.layui-input:focus, .layui-textarea:focus {
+    border-color: #2093bf!important;
+}
 </style>
 <div class="loading hide">
      <div class="gif" >
@@ -45,11 +52,23 @@
 
 @else
 <form class="layui-form layui-col-md12 x-so" style="margin-top:20px;" action="/sscha" method="POST" >
+
 <div style="float:left;width:300px;height:40px;">
           <div style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px;" id="sx" align="center">  
 	<i class="iconfont" style="color:#fff;">&#xe6aa;&nbsp;&nbsp;刷新</i>
 	  </div>
 	</div>
+    
+            <div class="layui-col-md6" style="width:12%">
+            <select id="mySelect" lay-filter="demo">
+                    <option value="春">春</option>
+                    <option value="暑">暑</option>
+                   <option value="秋">秋</option>
+                   <option value="寒">寒</option>
+              </select>
+            </div>
+              
+            
 	<div style="float:left;margin-left:50px;">
 	<span class="x-right" style="line-height:40px">本页共有数据：<b style="color:red;">{{$count}}</b>条</span>
 	</div>	
@@ -168,12 +187,24 @@
                   window.location.reload()
                 })
                 
-                // $("#ht").click(function(){
-                //    // history.back();=history.go(-1);
-                //  })
-                //  $("#qj").click(function(){
-                //    // history.forward();=history.go(1);
-                //  })
+                layui.use(['layer', 'jquery', 'form'], function () {
+			        var layer = layui.layer,
+					$ = layui.jquery,
+					form = layui.form;
+ 
+			form.on('select(demo)', function(data){
+		      	console.log(data.value)
+
+                  $.ajax({
+                      type: "post",
+                      url: "/newsousuo",
+                      data: {season:data.value},
+                      success: function (response) {
+                         
+                      }
+                  });
+			});
+		});
 
 
 

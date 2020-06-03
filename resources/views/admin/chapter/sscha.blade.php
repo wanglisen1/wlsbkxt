@@ -61,6 +61,7 @@
     
             <div class="layui-col-md6" style="width:150px">
             <select id="mySelect" lay-filter="demo">
+                    <option value="">请选择一个季度</option>
                     <option value="春">春</option>
                     <option value="暑">暑</option>
                    <option value="秋">秋</option>

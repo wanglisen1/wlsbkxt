@@ -103,7 +103,7 @@ class AdminController extends Controller
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
         }
-         $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+        $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role = $res5['role'];
         $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
         if($role==3){
@@ -2739,6 +2739,10 @@ class AdminController extends Controller
     // print_r($arr);exit;
       if($subject=='资源类'){
         $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->get();
+    }else if($subject=='KB课程'){
+        $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->orderBy('number','asc')->get();
+    }else if($subject=='Phonics自然拼读'){
+        $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->orderBy('number','asc')->get();
     }else{
         $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->whereIn('video_season',$arr)->orderBy('number','asc')->get();
         //print_r($res);exit;

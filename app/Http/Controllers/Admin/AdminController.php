@@ -2773,8 +2773,6 @@ class AdminController extends Controller
 		           ];
 	           return view('admin.pptlist',$list);
     }
-   	return view('admin.pptlist');
-   }
    public function videolistbox(Request $request){
 	   $video_id=$request->input('video_id');
 	   $res = VideoModel::where('video_id',$video_id)->first();

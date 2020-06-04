@@ -2765,7 +2765,7 @@ class AdminController extends Controller
     }else{
          $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->whereIn('ppt_season',$arr)->orderBy('number','asc')->get();
     }
-      
+
              $count=count($res);
 	           $list=[
                   'data' => $res,

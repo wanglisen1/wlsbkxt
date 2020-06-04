@@ -21,7 +21,7 @@
 </head>
 
 <body>
-@if($role==26||$role==27||$role==28)
+<!-- @if($role==26||$role==27||$role==28)
 
 @else
 <div >
@@ -100,7 +100,7 @@
 
 </div>
 
-@endif
+@endif -->
 <p class="ex1" style="color:#30A9BD;">Welcome to</p>
 <p class="ex2" style="color:#30A9BD;">HSKMS</p>
 <p class="desc" style="color:#111111">- 翰师问鼎备课系统 -</p>

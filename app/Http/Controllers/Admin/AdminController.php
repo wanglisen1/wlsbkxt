@@ -103,7 +103,28 @@ class AdminController extends Controller
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
         }
-        return view('admin.adminwindow');
+         $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+        $role = $res5['role'];
+        $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+        if($role==3){
+            $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+            $list=[
+            'role' => $role,
+            'res1' => $res
+        ];
+        }else if($role==4){
+             $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+            $list=[
+            'role' => $role,
+            'res1' => $res
+        ];
+    }else{
+        $list=[
+            'role' => $role
+        ];
+    }
+        
+        return view('admin.adminwindow',$list);
     }
 
     //登录处理
@@ -2319,7 +2340,221 @@ class AdminController extends Controller
         $res3 = ChaseaModel::where('chasea_sub',$adminsubject)->get();
         $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role = $res5['role'];
-       if(empty($adminseason)&!empty($sou)){
+       if(empty($adminseason)&empty($sou)&empty($admingrade)&!empty($adminsubject)){
+             if($role==3){
+                 $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+                if($res1['tzr_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['tzr_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['tzr_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['tzr_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+            $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->whereIn('season',$arr)->orderBy('number','asc')->get();
+            }else if($role==4){
+                 $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                    if($res1['xz_chun']==1){
+                       $tzrchun='春';
+                    }else{
+                        $tzrchun='';
+                    }
+                    if($res1['xz_shu']==1){
+                        $tzrshu='暑';
+                    }else{
+                        $tzrshu='';
+                    }
+                    if($res1['xz_qiu']==1){
+                        $tzrqiu='秋';
+                    }else{
+                        $tzrqiu='';
+                    }
+                    if($res1['xz_han']==1){
+                        $tzrhan='寒';
+                    }else{
+                        $tzrhan='';
+                    }
+                    $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+                    $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->whereIn('season',$arr)->orderBy('number','asc')->get();
+                }else{
+                     $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->orderBy('number','asc')->get();
+                }
+            
+            
+       }else if(empty($adminseason)&empty($sou)&!empty($admingrade)&!empty($adminsubject)){
+                if($role==3){
+                 $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+                if($res1['tzr_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['tzr_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['tzr_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['tzr_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+            $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->whereIn('season',$arr)->orderBy('number','asc')->get();
+            }else if($role==4){
+                 $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                    if($res1['xz_chun']==1){
+                       $tzrchun='春';
+                    }else{
+                        $tzrchun='';
+                    }
+                    if($res1['xz_shu']==1){
+                        $tzrshu='暑';
+                    }else{
+                        $tzrshu='';
+                    }
+                    if($res1['xz_qiu']==1){
+                        $tzrqiu='秋';
+                    }else{
+                        $tzrqiu='';
+                    }
+                    if($res1['xz_han']==1){
+                        $tzrhan='寒';
+                    }else{
+                        $tzrhan='';
+                    }
+                    $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+                    $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->whereIn('season',$arr)->orderBy('number','asc')->get();
+                }else{
+                    $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->orderBy('number','asc')->get();
+                }
+            
+             
+       }else if(empty($adminseason)&!empty($sou)&empty($admingrade)&!empty($adminsubject)){
+             if($role==3){
+                 $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+                if($res1['tzr_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['tzr_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['tzr_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['tzr_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+            $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->whereIn('season',$arr)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
+            }else if($role==4){
+                 $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                    if($res1['xz_chun']==1){
+                       $tzrchun='春';
+                    }else{
+                        $tzrchun='';
+                    }
+                    if($res1['xz_shu']==1){
+                        $tzrshu='暑';
+                    }else{
+                        $tzrshu='';
+                    }
+                    if($res1['xz_qiu']==1){
+                        $tzrqiu='秋';
+                    }else{
+                        $tzrqiu='';
+                    }
+                    if($res1['xz_han']==1){
+                        $tzrhan='寒';
+                    }else{
+                        $tzrhan='';
+                    }
+                    $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+                    $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->whereIn('season',$arr)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
+                }else{
+                    $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
+                }
+              
+       }else if(empty($adminsubject)&!empty($sou)&empty($admingrade)&empty($adminsubject)){
+                if($role==3){
+                 $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+                if($res1['tzr_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['tzr_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['tzr_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['tzr_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+            $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+            $res = ChapterModel::where('is_del',1)->where('cha_name','like','%'.$sou.'%')->whereIn('season',$arr)->orderBy('number','asc')->get();
+            }else if($role==4){
+                 $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                    if($res1['xz_chun']==1){
+                       $tzrchun='春';
+                    }else{
+                        $tzrchun='';
+                    }
+                    if($res1['xz_shu']==1){
+                        $tzrshu='暑';
+                    }else{
+                        $tzrshu='';
+                    }
+                    if($res1['xz_qiu']==1){
+                        $tzrqiu='秋';
+                    }else{
+                        $tzrqiu='';
+                    }
+                    if($res1['xz_han']==1){
+                        $tzrhan='寒';
+                    }else{
+                        $tzrhan='';
+                    }
+                    $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+                    $res = ChapterModel::where('is_del',1)->where('cha_name','like','%'.$sou.'%')->whereIn('season',$arr)->orderBy('number','asc')->get();
+                }else{
+                    $res = ChapterModel::where('is_del',1)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
+                }
+                
+       }else if(empty($adminseason)&!empty($sou)&!empty($adminsubject)&!empty($admingrade)){
             if($role==3){
                  $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
                 if($res1['tzr_chun']==1){
@@ -2372,8 +2607,10 @@ class AdminController extends Controller
                 $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
             }
             
-        }else if(!empty($adminseason)&!empty($sou)){
-            $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->where('season',$adminseason)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
+        }else if(!empty($adminseason)&!empty($sou)&!empty($adminsubject)&empty($admingrade)){
+            $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('season',$adminseason)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
+        }else if(!empty($adminseason)&!empty($sou)&!empty($adminsubject)&!empty($admingrade)){
+             $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->where('season',$adminseason)->where('cha_name','like','%'.$sou.'%')->orderBy('number','asc')->get();
         }else{
              $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->where('season',$adminseason)->orderBy('number','asc')->get();
         }
@@ -2416,6 +2653,7 @@ class AdminController extends Controller
              
         return view('admin.chapter.sscha',$list);  
     }
+
 
     public function collectxzsc(Request $request){
 	   session_start();

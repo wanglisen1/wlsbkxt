@@ -66,7 +66,8 @@
 	  </div>
     
 	</div>
-    
+            @if($sub_name=="KB课程"||$sub_name=="Phonics自然拼读")
+            @else
             <div class="layui-col-md6" style="width:150px;margin-right:24px">
             <select id="mySelect" lay-filter="demo">
                 @if($souxl=='')
@@ -116,6 +117,7 @@
                    @endif
               </select>
             </div>
+            @endif
             <div class="layui-col-md6" style="width:150px">
               <input type="text" name="title" placeholder="搜索关键字"  class="layui-input" id="sou">
             </div>

@@ -2760,13 +2760,20 @@ class AdminController extends Controller
     $grade = $request->input('grade');
      $res2=ChaseaModel::where('chasea_sub',$subject)->where('is_show',1)->get()->toArray();
     $arr=array_column($res2,'chasea_season',null);
-       $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->whereIn('ppt_season',$arr)->orderBy('number','asc')->get();
+    if($subject=='KB课程'||$subject=='Phonics自然拼读'){
+         $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->orderBy('number','asc')->get();
+    }else{
+         $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->whereIn('ppt_season',$arr)->orderBy('number','asc')->get();
+    }
+      
              $count=count($res);
 	           $list=[
                   'data' => $res,
                   'count' => $count
 		           ];
 	           return view('admin.pptlist',$list);
+    }
+    }
    	return view('admin.pptlist');
    }
    public function videolistbox(Request $request){

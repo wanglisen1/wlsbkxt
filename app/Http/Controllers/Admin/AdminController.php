@@ -2773,7 +2773,6 @@ class AdminController extends Controller
 		           ];
 	           return view('admin.pptlist',$list);
     }
-    }
    	return view('admin.pptlist');
    }
    public function videolistbox(Request $request){

@@ -121,9 +121,9 @@
             <div class="layui-col-md6" style="width:150px">
               <input type="text" name="title" placeholder="搜索关键字"  class="layui-input" id="sou">
             </div>
-            <div id="soubtu" style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px; margin-top:2px"  align="center">  
-	<i class="iconfont" style="color:#fff;">&#xe6ac;&nbsp;&nbsp;搜索</i>
-	  </div>
+            
+    <div  id="soubtu" class="layui-btn layui-btn-sm" style="background:#2093bf;height:38px;margin-left:5px;line-height:38px;"><i class="iconfont">&#xe6ac;&nbsp;搜索</i></div>
+            </div>
           <input type="hidden" name="" id="adminsubject" value="{{$sub_name}}"> 
         <input type="hidden" name="" id="admingrade" value="{{$grade}}"> 
         <input type="hidden" name="" id="qwe" value="{{$souxl}}">     

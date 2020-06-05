@@ -36,10 +36,21 @@
             <div class="layui-col-md2" style="margin-right:24px">
             <select  lay-filter="demo" id="subject">
                 <option value="">请选择科目</option>
+                @if($role==26)
+                <option value="趣味大语文">趣味大语文</option>
+                @else if($role==27)
+                <option value="思维培优数学">思维培优数学</option>
+                @else if($role==28)
+                <option value="KB课程">KB课程</option>
+               	<option value="Phonics自然拼读">Phonics自然拼读</option>
+                @else
                 <option value="趣味大语文">趣味大语文</option>
                 <option value="思维培优数学">思维培优数学</option>
                 <option value="KB课程">KB课程</option>
-               <option value="Phonics自然拼读">Phonics自然拼读</option>
+               	<option value="Phonics自然拼读">Phonics自然拼读</option>
+                @endif
+
+               
               </select>
             </div>
             <div class="layui-col-md2" style="margin-right:24px">

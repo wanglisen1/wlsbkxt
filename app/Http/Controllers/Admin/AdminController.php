@@ -110,13 +110,13 @@ class AdminController extends Controller
             $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
             $list=[
             'role' => $role,
-            'res1' => $res
+            'res1' => $res1
         ];
         }else if($role==4){
              $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
             $list=[
             'role' => $role,
-            'res1' => $res
+            'res1' => $res1
         ];
     }else{
         $list=[

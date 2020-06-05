@@ -48,7 +48,6 @@
            setting.callback.call(this);
          });
        } else {
-         console.error('Textyle.js: `setting.callback` must be a function.');
        }
      });
    });

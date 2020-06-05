@@ -21,11 +21,11 @@
 </head>
 
 <body>
-<!-- @if($role==26||$role==27||$role==28)
+@if($role==26||$role==27||$role==28)
 
 @else
-<div >
-<form class="layui-form layui-col-md12" >
+<div style="padding-left: 158px;height: 79px;margin-top: -200px;}">
+<form class="layui-form layui-col-md12 layui-form-item layui-inline" >
             <div class="layui-col-md2" style="margin-right:24px">
             <select  lay-filter="demo" id="subject">
                 <option value="">请选择科目</option>
@@ -100,10 +100,13 @@
 
 </div>
 
-@endif -->
-<p class="ex1" style="color:#30A9BD;">Welcome to</p>
-<p class="ex2" style="color:#30A9BD;">HSKMS</p>
-<p class="desc" style="color:#111111">- 翰师问鼎备课系统 -</p>
+@endif
+<div style="text-align:center;">
+	<p class="ex1" style="color:#30A9BD;">Welcome to</p>
+	<p class="ex2" style="color:#30A9BD;">HSKMS</p>
+	<p class="desc" style="color:#111111">- 翰师问鼎备课系统 -</p>
+</div>
+
 
 <script src='/jqwindow/js/jquery.min.js'></script>
 <script type="text/javascript" src="/alerttc/js/popup.js"></script>

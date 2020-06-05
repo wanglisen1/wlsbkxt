@@ -21,7 +21,7 @@ p {
   font-size: 7rem;
   line-height: 1;
   letter-spacing: .3rem;
-  color: #972d6c;
+  font-weight:600;
 }
 p.desc {
   padding: 1rem;

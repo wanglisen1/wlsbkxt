@@ -21,7 +21,7 @@
 </head>
 
 <body>
-@if($role==26||$role==27||$role==28)
+@if($role==6||$role==7||$role==8||$role==5)
 
 @else
 <div style="padding-left: 158px;height: 79px;margin-top: -100px;}">
@@ -113,7 +113,6 @@
         var Popup = new Popup();
 </script>
 <script type="text/javascript">
-		     		$('#kb').hide();
 		 layui.use(['layer', 'jquery', 'form'], function () {
 			        var layer = layui.layer,
 					$ = layui.jquery,

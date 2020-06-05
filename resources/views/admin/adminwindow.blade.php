@@ -17,9 +17,16 @@
     <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
     <script type="text/javascript" src="/alerttc/js/popup.js"></script>
     <script type="text/javascript" src="/time.js"></script>
-
+<style type="text/css">
+ .layui-form-select dl dd.layui-this {
+    background-color: #2093bf;
+    color: #fff;
+}
+.layui-input:focus, .layui-textarea:focus {
+    border-color: #2093bf!important;
+}
+</style>
 </head>
-
 <body>
 @if($role==6||$role==7||$role==8||$role==5)
 

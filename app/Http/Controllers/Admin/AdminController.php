@@ -135,8 +135,9 @@ class AdminController extends Controller
         $loname = $request->input('uname');
         //$pwd=md5($password);
         $data=AdminuserModel::where('tel',$tel)->where('is_del',1)->first();
-        if($data['tel']!=""){
-          if($data['username'] === $loname){
+        $data1=AdminuserModel::where('tel',$tel)->where('is_del',3)->first();
+        if(!empty($data['tel'])){
+            if($data['username'] === $loname){
             if($data['password'] === $password) {
                 $id = $data['u_id'];
                 $res=AdminuserModel::where('u_id',$id)->first();
@@ -151,7 +152,9 @@ class AdminController extends Controller
         }else{
             return ['code' => 4, 'msg' => '用户名不正确,请重新输入。'];
         }
-            
+                 
+        }else if(!empty($data1['tel'])){
+            return ['code' => 5, 'msg' => '该账户已被冻结。'];
         }else{
             return ['code' => 0, 'msg' => '电话号码不存在,请重新输入。'];
         }
@@ -2343,6 +2346,7 @@ class AdminController extends Controller
        if(empty($adminseason)&empty($sou)&empty($admingrade)&!empty($adminsubject)){
                      $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->orderBy('number','asc')->get();  
        }else if(empty($adminseason)&empty($sou)&!empty($admingrade)&!empty($adminsubject)){
+               
                     $res = ChapterModel::where('is_del',1)->where('sub_name',$adminsubject)->where('grade',$admingrade)->orderBy('number','asc')->get();   
        }else if(empty($adminseason)&!empty($sou)&empty($admingrade)&!empty($adminsubject)){
              if($role==3){

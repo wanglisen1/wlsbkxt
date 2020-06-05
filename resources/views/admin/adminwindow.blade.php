@@ -24,7 +24,7 @@
 @if($role==26||$role==27||$role==28)
 
 @else
-<div style="padding-left: 158px;height: 79px;margin-top: -200px;}">
+<div style="padding-left: 158px;height: 79px;margin-top: -100px;}">
 <form class="layui-form layui-col-md12 layui-form-item layui-inline" >
             <div class="layui-col-md2" style="margin-right:24px">
             <select  lay-filter="demo" id="subject">
@@ -91,9 +91,10 @@
             </div>
             <div class="layui-col-md3" style="margin-right:24px;display: flex;">
               <input type="text" name="title" placeholder="搜索关键字"  class="layui-input" id="sou" style="width:80%">
-              <div id="soubtu" style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px; margin-top:2px"  align="center">  
+    <!--           <div id="soubtu" style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px; margin-top:2px"  align="center">  
           <i class="iconfont" style="color:#fff;">&#xe6ac;&nbsp;&nbsp;搜索</i>
-       </div>  
+       </div>  --> 
+       <div  id="soubtu" class="layui-btn layui-btn-sm" style="background:#2093bf;height:38px;margin-left:5px;line-height:38px;"><i class="iconfont">&#xe6ac;&nbsp;搜索</i></div>
             </div>
            
 </form>
@@ -101,7 +102,7 @@
 </div>
 
 @endif
-<div style="text-align:center;">
+<div style="text-align:center;margin-top:50px;">
 	<p class="ex1" style="color:#30A9BD;">Welcome to</p>
 	<p class="ex2" style="color:#30A9BD;">HSKMS</p>
 	<p class="desc" style="color:#111111">- 翰师问鼎备课系统 -</p>

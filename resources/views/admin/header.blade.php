@@ -44,7 +44,7 @@
 
     <ul class="layui-nav right" lay-filter="" >
         <li class="layui-nav-item" style="margin-right:50px;">
-            <p id="showtime" style="font-family:FZShuTi;font-size:20px;"></p>
+            <p id="showtime" style="font-family:Microsoft YaHei;font-size:20px;"></p>
         </li>
         <li class="layui-nav-item">
             <a href="javascript:;">你好！{{$sname}}

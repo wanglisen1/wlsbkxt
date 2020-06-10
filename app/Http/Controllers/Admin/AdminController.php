@@ -26,7 +26,7 @@ class AdminController extends Controller
             header('Location: /flogin.php');exit;
             }
         if($_SESSION["username"]=='测试账号'){
-            $pd_time=$_SESSION["cs_time"]+5;
+            $pd_time=$_SESSION["cs_time"]+3600;
             $dq_time=time();
             if($dq_time>$pd_time){
                  if(isset($_SESSION['uid'])){

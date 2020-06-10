@@ -157,3 +157,7 @@ Route::any('/pptlistbox','Admin\AdminController@pptlistbox');
 Route::any('/chapterseason','Admin\AdminController@chapterseason');
 Route::any('/chapterseasonupd','Admin\AdminController@chapterseasonupd');
 Route::any('/adminsousuo','Admin\AdminController@adminsousuo');
+
+
+//ppt搜索
+Route::any('/sspptlist','Admin\AdminController@sspptlist');

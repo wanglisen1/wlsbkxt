@@ -26,11 +26,12 @@ class AdminController extends Controller
             header('Location: /flogin.php');exit;
             }
         if($_SESSION["username"]=='测试账号'){
-            $pd_time=$_SESSION["cs_time"]+3600;
+            $pd_time=$_SESSION["cs_time"]+5;
             $dq_time=time();
             if($dq_time>$pd_time){
                  if(isset($_SESSION['uid'])){
                     $res=AdminuserModel::where('u_id',$_SESSION['uid'])->update(['is_del'=>3]);
+                    $res=AdminuserModel::where('tzr',$_SESSION['uid'])->update(['is_del'=>3]);
                     unset($_SESSION['uid']);
                     echo "<script>alert('试用时间已到，谢谢使用！');location.href= '/';</script>";
                 }
@@ -2400,83 +2401,73 @@ class AdminController extends Controller
 			}
     }
 
-  //   public function sscoll(Request $request){
-	 //     session_start();
-  //        if (empty($_SESSION["uid"])) {
-	 //       header('Location: /flogin.php');
-	 //       exit;
-	 //       }
-	 //     $grade=$request->input('grade');
-	 //     $season=$request->input('season');
-	 //      $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first()->toArray();
-	 //              $role=$res5['role'];
-	 //             if(!empty($grade)&&!empty($season)){
-		// 	                     if($role==3){           
-		// $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();                 
-		// 	 }else{
-		//  $res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();												                  
-  //       }          
-	 //          }else if(empty($grade)){
-	 //    if($role==3){                             
-	 //       $res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
-		// }else{
-		// 	$res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.season',$season)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
-		// 																                      }
-		// }else if(empty($season)){
-		// 	if($role==3){                                      
-		// 	$res= CollectModel::where('collect.alliance', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->join('chapter','chapter.cha_id','=','collect.cha_id')->get(); 
-		// 	}else{
-		// 	$res= CollectModel::where('collect.uid', $_SESSION["uid"])->where('chapter.is_del',1)->where('collect.grade',$grade)->join('chapter','chapter.cha_id','=','collect.cha_id')->get();
-		//       }
-		//   }
-	 //       $count=count($res);
-	 //           $list=[
-		// 		'data' => $res,
-		// 		'role' => $role,
-		// 		'count' => $count
-		// 		];
-	 //   return view('admin.collect.sscoll',$list);
-  //   }
+  
    public function videoaddlist(){
 
 	   return view('admin.videoaddlist');
    }
-  //  public function videoadd(Request $request){
-	 //   $file=$request->file('file')->store('video');
-	 //   $video_sub=$request->input('video_sub');
-	 //   $video_title=$request->input('video_title');
-	 //   $data = [
-	 //   	'video_sub' => $video_sub,
-		// 'video_title' => $video_title,
-		// 'video_content' => $file
-	 //   ];
-	 //   $res = VideoModel::insert($data);
-	 //   if($res){
-	 //   	echo"<script>alert('添加成功！');history.go(-1);</script>";
-	 //   }else{
-	 //   	echo"<script>alert('添加失败！');history.go(-1);</script>";
-	 //   }
-	  
-  //  }
+  
    public function videolist(Request $request){
     $this->dysession();
     $subject = $request->input('subject');
     $grade = $request->input('grade');
-    $res2=ChaseaModel::where('chasea_sub',$subject)->where('is_show',1)->get()->toArray();
-    $arr=array_column($res2,'chasea_season',null);
-        // foreach ($arr as $key => $value) {
-        // $arr2[] = $value['name'];
-        // }
-    // print_r($arr);exit;
-      if($subject=='资源类'){
-        $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->get();
-    }else if($subject=='KB课程'){
-        $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->orderBy('number','asc')->get();
-    }else if($subject=='Phonics自然拼读'){
+    $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+    $role = $res5['role'];
+     if($subject=='KB课程'||$subject=='Phonics自然拼读'){
         $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->orderBy('number','asc')->get();
     }else{
-        $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->whereIn('video_season',$arr)->orderBy('number','asc')->get();
-        //print_r($res);exit;
+        if($role==3){
+             $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+                if($res1['tzr_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['tzr_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['tzr_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['tzr_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+                 $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+                 $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->whereIn('video_season',$arr)->orderBy('number','asc')->get();
+        }else if($role==4){
+            $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                if($res1['xz_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['xz_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['xz_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['xz_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+                 $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+                 $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->whereIn('video_season',$arr)->orderBy('number','asc')->get();
+        }else{
+            $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->whereIn('video_season',$arr)->orderBy('number','asc')->get();
+        }
+        
     }
        
 	   $count=count($res);
@@ -2488,22 +2479,214 @@ class AdminController extends Controller
    }
    public function pptlist(Request $request){
     $this->dysession();
+    $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+    $role = $res5['role'];
     $subject = $request->input('subject');
     $grade = $request->input('grade');
-     $res2=ChaseaModel::where('chasea_sub',$subject)->where('is_show',1)->get()->toArray();
-    $arr=array_column($res2,'chasea_season',null);
     if($subject=='KB课程'||$subject=='Phonics自然拼读'){
          $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->orderBy('number','asc')->get();
-    }else{
+        }else{
+            if($role==3){
+            $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+                if($res1['tzr_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['tzr_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['tzr_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['tzr_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+                 $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
          $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->whereIn('ppt_season',$arr)->orderBy('number','asc')->get();
+            }else if($role==4){
+                 $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                if($res1['xz_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['xz_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['xz_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['xz_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+                 $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+                $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->whereIn('ppt_season',$arr)->orderBy('number','asc')->get();
+            }else{
+                $res = PptModel::where('ppt_sub',$subject)->where('ppt_grade',$grade)->orderBy('number','asc')->get();
+            }
+           
     }
 
              $count=count($res);
-	           $list=[
+             if($role==3){
+                 $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+                 $list=[
                   'data' => $res,
-                  'count' => $count
-		           ];
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $subject,
+                  'grade' => $grade,
+                  'souxl' => '',
+                  'res1' => $res1
+                   ];
+             }else if($role==4){
+                 $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                 $list=[
+                  'data' => $res,
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $subject,
+                  'grade' => $grade,
+                  'souxl' => '',
+                  'res1' => $res1
+                   ];
+             }else{
+                 $list=[
+                  'data' => $res,
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $subject,
+                  'grade' => $grade,
+                  'souxl' => ''
+                   ];
+             }
+	          
 	           return view('admin.pptlist',$list);
+    }
+    public function sspptlist(Request $request){
+         $this->dysession();
+        $adminseason = $request->input('adminseason');
+        $adminsubject = $request->input('adminsubject');
+        $admingrade = $request->input('admingrade');
+        $sou = $request->input('sou');
+        $res3 = ChaseaModel::where('chasea_sub',$adminsubject)->get();
+        $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+        $role = $res5['role'];
+        if(empty($adminseason)){
+             if($role==3){
+                $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+                if($res1['tzr_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['tzr_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['tzr_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['tzr_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+                 $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+                 if($adminsubject=='KB课程'||$adminsubject=='Phonics自然拼读'){
+                     $res = PptModel::where('ppt_sub',$adminsubject)->where('ppt_grade',$admingrade)->where('ppt_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+                 }else{
+                    $res = PptModel::where('ppt_sub',$adminsubject)->where('ppt_grade',$admingrade)->whereIn('ppt_season',$arr)->where('ppt_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+                 }
+                 
+             }else if($role==4){
+                  $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                if($res1['xz_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['xz_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['xz_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['xz_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+                 $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+                 if($adminsubject=='KB课程'||$adminsubject=='Phonics自然拼读'){
+                     $res = PptModel::where('ppt_sub',$adminsubject)->where('ppt_grade',$admingrade)->where('ppt_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+                 }else{
+                    $res = PptModel::where('ppt_sub',$adminsubject)->where('ppt_grade',$admingrade)->whereIn('ppt_season',$arr)->where('ppt_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+                 } 
+             }else{
+                $res = PptModel::where('ppt_sub',$adminsubject)->where('ppt_grade',$admingrade)->where('ppt_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+             }
+             
+        }else if(empty($sou)){
+            $res = PptModel::where('ppt_sub',$adminsubject)->where('ppt_grade',$admingrade)->where('ppt_season',$adminseason)->orderBy('number','asc')->get();
+        }else{
+            $res = PptModel::where('ppt_sub',$adminsubject)->where('ppt_grade',$admingrade)->where('ppt_season',$adminseason)->where('ppt_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+        }
+         $count=count($res);
+         if($role==3){
+            $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+             $list=[
+                  'data' => $res,
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $adminsubject,
+                  'grade' => $admingrade,
+                  'souxl' => $adminseason,
+                  'res1' => $res1
+                   ];
+         }else if($role==4){
+             $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+             $list=[
+                  'data' => $res,
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $adminsubject,
+                  'grade' => $admingrade,
+                  'souxl' => $adminseason,
+                  'res1' => $res1
+                   ];
+         }else{
+             $list=[
+                  'data' => $res,
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $adminsubject,
+                  'grade' => $admingrade,
+                  'souxl' => $adminseason
+                   ];
+         }
+              
+               return view('admin.pptlist',$list);
     }
    public function videolistbox(Request $request){
     $this->dysession();

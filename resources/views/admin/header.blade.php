@@ -1567,7 +1567,7 @@
                     </ul>
                 </li>
                 <li>
-              <!--   <a href="javascript:;">
+              <a href="javascript:;">
                     <i class="iconfont">&#xe820;</i>
                     <cite>PPT</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
@@ -1920,7 +1920,7 @@
                             </li>
                             
                         </ul>
-                    </li> -->
+                    </li> 
                    <!--  <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe828;</i>
@@ -2168,7 +2168,7 @@
                     </ul>
                 </li>
                 <li>
-               <!--  <a href="javascript:;">
+                 <a href="javascript:;">
                     <i class="iconfont">&#xe820;</i>
                     <cite>PPT</cite>
                     <i class="iconfont nav_right">&#xe6a7;</i>
@@ -2523,7 +2523,7 @@
                         </ul>
                     </li>
                 </ul>
-            </li>  -->
+            </li> 
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>

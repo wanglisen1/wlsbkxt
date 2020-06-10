@@ -15,7 +15,10 @@
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
   </head>
   <body class="form-wrap" >
-<style id="LAY_layadmin_theme">.layui-side-menu,.layadmin-pagetabs .layui-tab-title li:after,.layadmin-pagetabs .layui-tab-title li.layui-this:after,.layui-layer-admin .layui-layer-title,.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child{background-color:#20222A !important;}.layui-nav-tree .layui-this,.layui-nav-tree .layui-this>a,.layui-nav-tree .layui-nav-child dd.layui-this,.layui-nav-tree .layui-nav-child dd.layui-this a{background-color:#009688 !important;}.layui-layout-admin .layui-logo{background-color:#20222A !important;}
+<style id="LAY_layadmin_theme">
+.layui-side-menu,.layadmin-pagetabs .layui-tab-title li:after,.layadmin-pagetabs .layui-tab-title li.layui-this:after,.layui-layer-admin .layui-layer-title,.layadmin-side-shrink .layui-side-menu .layui-nav>.layui-nav-item>.layui-nav-child{background-color:#20222A !important;}
+.layui-nav-tree .layui-this,.layui-nav-tree .layui-this>a,.layui-nav-tree .layui-nav-child dd.layui-this,.layui-nav-tree .layui-nav-child dd.layui-this a{background-color:#009688 !important;}
+.layui-layout-admin .layui-logo{background-color:#20222A !important;}
         .loading {
              position: fixed;
              top: 0;
@@ -234,16 +237,7 @@
             text = '您确定开始备课吗？';
             Popup.confirm(title,text,confirmData);
 		     })
-	            $("#ss").click(function(){
-		            var cha_name = $("#cha_name").val();
-                    var season = $("#season").val();
-                if(cha_name==''&&season==''){
-                alert('您并没有输入搜索信息哦！');
-                return false;
-              }else{
-
-              }
-		    })
+	           
                $("#sx").click(function(){
                   window.location.reload()
                 })
@@ -259,14 +253,7 @@
 			form.on('select(demo)', function(data){
 		      	console.log(data.value)
             season = data.value;
-                  // $.ajax({
-                  //     type: "post",
-                  //     url: "/newsousuo",
-                  //     data: {season:data.value},
-                  //     success: function (response) {
-                  //        console.log(response);
-                  //     }
-                  // });
+                  
              if(data.value=="春"){
               window.location="/adminsousuo?adminseason=春&adminsubject="+adminsubject+"&admingrade="+admingrade
              }else if(data.value=="暑"){

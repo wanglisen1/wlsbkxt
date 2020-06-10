@@ -12,9 +12,14 @@
 <script src="/jquery-3.1.1.min.js"></script>
 <script>
    function delayer(){
- window.location = "/login";
+   	location.reload();
+location.href= "/login";
 }
 jQuery(document).ready(function(){
  setTimeout('delayer()', 2000);
 });
+</script>
+<script language="JavaScript"> 
+  if (window != top) 
+    top.location.href = location.href; 
 </script>

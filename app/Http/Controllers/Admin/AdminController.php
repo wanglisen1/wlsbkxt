@@ -20,9 +20,26 @@ use App\Model\JsuserModel;
 use Imagick;
 class AdminController extends Controller
 {
+     public function dysession(){
+        session_start();
+        if(empty($_SESSION["uid"])){
+            header('Location: /flogin.php');exit;
+            }
+        if($_SESSION["username"]=='测试账号'){
+            $pd_time=$_SESSION["cs_time"]+3600;
+            $dq_time=time();
+            if($dq_time>$pd_time){
+                 if(isset($_SESSION['uid'])){
+                    $res=AdminuserModel::where('u_id',$_SESSION['uid'])->update(['is_del'=>3]);
+                    unset($_SESSION['uid']);
+                    echo "<script>alert('试用时间已到，谢谢使用！');location.href= '/';</script>";
+                }
+            }
+        }
+    }
     //头部引用
     public function header(){
-        require '/pdsession';
+        $this->dysession();
         $uid=$_SESSION["uid"];
         $uname=$_SESSION["username"];
         $res=AdminuserModel::where('u_id',$uid)->first()->toArray();
@@ -47,11 +64,8 @@ class AdminController extends Controller
     //后台首页
     public function admin()
     {
-        session_start();
-
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+        $this->dysession();
+             
         $uid=$_SESSION["uid"];
         $uname=$_SESSION["username"];
         $res=AdminuserModel::where('u_id',$uid)->first()->toArray();
@@ -96,10 +110,7 @@ class AdminController extends Controller
 
     //后台首页窗口
     public function adminwindow(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role = $res5['role'];
         $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
@@ -139,19 +150,10 @@ class AdminController extends Controller
                 $id = $data['u_id'];
                 $res=AdminuserModel::where('u_id',$id)->first();
                 $uname=$res->username;
-                if($data['tel']=='13888888888'){
-                    ini_set('session.gc_maxlifetime', "5");  
-  
-                    ini_set("session.cookie_lifetime","5"); 
                     session_start();
                     $_SESSION["uid"]=$id;
-                    $_SESSION["username"]=$uname;   
-                }else{
-                     session_start();
-                    $_SESSION["uid"]=$id;
-                    $_SESSION["username"]=$uname;   
-                }
-                    
+                    $_SESSION["username"]=$uname;
+                    $_SESSION["cs_time"]=time();   
                 return ['code' => 1];
             }else{
                 return ['code' => 2, 'msg' => '密码不正确'];
@@ -173,6 +175,7 @@ class AdminController extends Controller
     }
 
     public function updatepwds(Request $request){
+        $this->dysession();
         $tel= $request->input('tel');
         $password =$request->input('pwd');
         $oldpassword =$request->input('oldpassword');
@@ -194,12 +197,9 @@ class AdminController extends Controller
     }
 
     //个人信息展示
-    public function pim(){
-        session_start();
-        $value = $_SESSION["uid"];
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+    public function pim(){  
+       $this->dysession();
+       $value = $_SESSION["uid"];
         $data=AdminuserModel::where('u_id',$value)->first()->toArray();
         $list=[
             'data' => $data,
@@ -209,10 +209,7 @@ class AdminController extends Controller
 
     //个人信息修改
     public function pimupdate(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $tel= $request->input('tel');
         $username =$request->input('username');
         $email =$request->input('email');
@@ -228,10 +225,7 @@ class AdminController extends Controller
 
     //管理员添加展示
     public function useradd(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $value = $_SESSION["uid"];
         $data=AdminuserModel::where('u_id',$value)->first();
         $res = TzruserModel::get();
@@ -246,11 +240,7 @@ class AdminController extends Controller
     //管理员添加
     public function useradds(Request $request){
         date_default_timezone_set('Asia/Shanghai');
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
-        
+       $this->dysession();
             $school = $request->input('school');
             //print_r($school);exit;
             $tel = $request->input('tel');
@@ -667,10 +657,7 @@ class AdminController extends Controller
 
     //管理员展示
     public function userlist(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $data=AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role=$data['role'];
 
@@ -746,10 +733,7 @@ class AdminController extends Controller
     }
 
     public function tzrclassify(Request $request){
-         session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+         $this->dysession();
         $id = $request->input('id'); 
         //echo $id;exit;
         $res1 = XzuserModel::where('xz_tzr',$id)->where('is_del',1)->get();
@@ -773,10 +757,7 @@ class AdminController extends Controller
 
     //投资人展示页面
     public function usertzrlist(){
-             session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+          $this->dysession();
         $res = TzruserModel::where('is_del',1)->paginate(30);
         $count=count($res);
         $list = [
@@ -788,10 +769,7 @@ class AdminController extends Controller
 
     //管理员修改页面
     public function userlistupdate(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         
         $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role=$res5['role'];
@@ -844,10 +822,7 @@ class AdminController extends Controller
 
     //管理员修改
     public function userupdate(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+        $this->dysession();
         $school =$request->input('school');
          $tzr_id =$request->input('tzr_id');
          $xz_id =$request->input('xz_id');
@@ -943,10 +918,7 @@ class AdminController extends Controller
 
     //管理员删除
     public function userdel(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
        
         $jy_id=$request->input('jy_id');
         $xz_id=$request->input('xz_id');
@@ -1006,10 +978,7 @@ class AdminController extends Controller
     }
     //管理员冻结
      public function userblock(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $jy_id=$request->input('jy_id');
         $xz_id=$request->input('xz_id');
         $zg_id=$request->input('zg_id');
@@ -1068,10 +1037,7 @@ class AdminController extends Controller
     }
     //已冻结管理员展示
     public function administratordel(){
-            session_start();
-            if(empty($_SESSION["uid"])){
-                header('Location: /flogin.php');exit;
-            }
+            $this->dysession();
             $res = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
             $role=$res['role'];
             if($role==1||$role==2){
@@ -1095,10 +1061,7 @@ class AdminController extends Controller
 
     //启用冻结管理员
     public function administratordels(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $uid=$request->input('u_id');
         //print_r($uid);exit;
         $res = AdminuserModel::where('u_id',$uid)->first();
@@ -1135,10 +1098,7 @@ class AdminController extends Controller
     }
     //课节发放展示
     public function chapterseason(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $res = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role = $res['role'];
         if($role==1){
@@ -1196,17 +1156,11 @@ class AdminController extends Controller
             return ['code' => 0];
         }
 
-
-
-
     }
 
     //添加年级页面
     public function gradeaddlist(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+        $this->dysession();
         $res = SubjectModel::where('is_del',1)->get();
         $list=[
             'data'=>$res
@@ -1216,10 +1170,7 @@ class AdminController extends Controller
 
     //添加年级
     public function gradeadd(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+      $this->dysession();
         $grade = $request->input('grade');
 	$subject = $request->input('subject');
         $data = [
@@ -1237,10 +1188,7 @@ class AdminController extends Controller
 
     //年级展示
     public function gradelist(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $res = GradeModel::where('grade.is_del',1)->join('subject','subject.s_id','=','grade.s_id')->paginate(30);
         $count=count($res);
         $list=[
@@ -1252,10 +1200,7 @@ class AdminController extends Controller
 
     //年级修改页面
     public function gradelistupdate(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $id=$request->input();
         $gid=$id['id'];
         $res=GradeModel::where(['g_id'=>$gid])->join('subject','subject.s_id','=','grade.s_id')->first();
@@ -1269,10 +1214,7 @@ class AdminController extends Controller
 
     //年级修改
     public function gradeupdate(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $grade= $request->input('grade');
         $add_time =$request->input('add_time');
         $id =$request->input('id');
@@ -1287,10 +1229,7 @@ class AdminController extends Controller
 
     //年级删除
     public function gradedel(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+        $this->dysession();
         $uid=$request->input();
         $id=$uid['g_id'];
         $res=GradeModel::where('g_id',$id)->update(['is_del'=>2]);
@@ -1303,10 +1242,7 @@ class AdminController extends Controller
 
     //禁用年级展示
     public function gradedellist(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+        $this->dysession();
         $data=GradeModel::where('is_del',2)->get();
         $count=count($data);
         $list=[
@@ -1318,10 +1254,7 @@ class AdminController extends Controller
 
     //禁用年级启用
     public function gradedellistqy(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $uid=$request->input();
         $id=$uid['g_id'];
         $res=GradeModel::where('g_id',$id)->update(['is_del'=>1]);
@@ -1336,19 +1269,13 @@ class AdminController extends Controller
 
     //添加科目展示
     public function subjectaddlist(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+      $this->dysession();
         return view('admin.subject.subjectaddlist');
     }
 
     //添加科目
     public function subjectadd(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+      $this->dysession();
         $subject = $request->input('subject');
         $data = [
             'sub_name' => $subject,
@@ -1364,10 +1291,7 @@ class AdminController extends Controller
 
     //科目展示
     public function subjectlist(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+      $this->dysession();
         $res = SubjectModel::where('is_del',1)->get();
         $count=count($res);
         $list=[
@@ -1379,10 +1303,7 @@ class AdminController extends Controller
 
     //科目修改页面
     public function subjectlistupdate(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $id=$request->input();
         $sid=$id['id'];
         $res=SubjectModel::where(['s_id'=>$sid])->first();
@@ -1394,10 +1315,7 @@ class AdminController extends Controller
 
     //科目修改
     public function subjectupdate(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $subject= $request->input('subject');
         $add_time =$request->input('add_time');
         $id =$request->input('id');
@@ -1411,10 +1329,7 @@ class AdminController extends Controller
 
     //科目删除
     public function subjectdel(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $uid=$request->input();
         $id=$uid['s_id'];
         $res=SubjectModel::where('s_id',$id)->update(['is_del'=>2]);
@@ -1427,10 +1342,7 @@ class AdminController extends Controller
 
     //语文课程添加展示
     public function classaddlistyw(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+      $this->dysession();
             $res = SubjectModel::where('is_del',1)->get();
 	$resyw = GradeModel::where('is_del', 1)->where('s_id', 1)->get();
 
@@ -1442,10 +1354,7 @@ class AdminController extends Controller
     }
     //数学课程添加展示
     public function classaddlistsx(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $res = SubjectModel::where('is_del',1)->get();
         $resyw = GradeModel::where('is_del', 1)->where('s_id', 2)->get();
         $list=[
@@ -1456,10 +1365,7 @@ class AdminController extends Controller
     }
     //英语课程添加展示
     public function classaddlistyy(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $res = SubjectModel::where('is_del',1)->get();
         $resyw = GradeModel::where('is_del', 1)->where('s_id', 3)->get();
         $list=[
@@ -1470,10 +1376,7 @@ class AdminController extends Controller
     }
     //英语口语课程添加展示
     public function classaddlistyypd(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+      $this->dysession();
         $res = SubjectModel::where('is_del',1)->get();
         $resyw = GradeModel::where('is_del', 1)->where('s_id', 4)->get();
         $list=[
@@ -1485,10 +1388,7 @@ class AdminController extends Controller
 
     //课程添加
     public function classadd(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $grade = $request->input('grade');
         $cla_name = $request->input('cla_name');
 	$subject = $request->input('subject');
@@ -1510,10 +1410,7 @@ class AdminController extends Controller
 
     //课程展示
     public function classlist(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+      $this->dysession();
         $res = ClassModel::where('class.is_del',1)->join('grade','grade.g_id','=','class.g_id')->join('subject','subject.s_id','=','class.s_id')->paginate(30);
         $count=count($res);
         $list=[
@@ -1527,11 +1424,7 @@ class AdminController extends Controller
     //课程修改页面
     public function classupdatelist(Request $request)
     {
-        session_start();
-        if (empty($_SESSION["uid"])) {
-            header('Location: /flogin.php');
-            exit;
-        }
+       $this->dysession();
         $id = $request->input();
         $cla_id = $id['id'];
         $res = ClassModel::where(['cla_id' => $cla_id])->join('grade', 'grade.g_id', '=', 'class.g_id')->first();
@@ -1545,10 +1438,7 @@ class AdminController extends Controller
 
     //课程修改
     public function classupdate(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+        $this->dysession();
         $grade= $request->input('grade');
         $add_time =$request->input('add_time');
         $id =$request->input('id');
@@ -1563,10 +1453,7 @@ class AdminController extends Controller
 
     //课程删除
     public function classdel(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $uid=$request->input();
         $id=$uid['cla_id'];
         $res=ClassModel::where('cla_id',$id)->update(['is_del'=>2]);
@@ -1579,10 +1466,7 @@ class AdminController extends Controller
 
     //添加课节页面
     public function chapteraddlist(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $cla_id = $request->input();
         $res = ClassModel::where('class.cla_id',$cla_id)->join('grade','grade.g_id','=','class.g_id')->join('subject','subject.s_id','=','class.s_id')->first()->toArray();
         //print_r($res);exit;
@@ -1594,10 +1478,7 @@ class AdminController extends Controller
                                                                                                             
 
     public function chapteradd(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+       $this->dysession();
         $file=$request->file('file')->store('file');
         $pdf="/mnt/bkxt/storage/app/".$file;
         $path="/mnt/bkxt/public/tp/images/";
@@ -1641,10 +1522,7 @@ class AdminController extends Controller
         }
     }
      public function teacherbookadd(Request $request){
-	     session_start();
-	             if(empty($_SESSION["uid"])){
-			  header('Location: /flogin.php');exit;
-					         }
+	    $this->dysession();
 	     $file=$request->file('file')->store('file');
 	     //print_r($file);exit;
 	             $pdf="/mnt/bkxt/storage/app/".$file;
@@ -1676,10 +1554,7 @@ class AdminController extends Controller
 
      }
 	public function workbookadd(Request $request){
-		  session_start();
-				if(empty($_SESSION["uid"])){
-			     header('Location: /flogin.php');exit;
-			             }
+		$this->dysession();
     $file=$request->file('file')->store('file');
 	$pdf="/mnt/bkxt/storage/app/".$file;
 	$path="/mnt/bkxt/public/tp/work/";
@@ -1710,10 +1585,7 @@ class AdminController extends Controller
 	       }
     //教师上传
     public function teacherbook(Request $request){
-   	 session_start();
-	         if(empty($_SESSION["uid"])){
-			             header('Location: /flogin.php');exit;
-				             }
+   	 $this->dysession();
 	         $id =$request->input('id');
 	 $res=ChapterModel::where('is_del',1)->where('cha_id',$id)->first();
 	 $list=[
@@ -1724,10 +1596,7 @@ class AdminController extends Controller
     }
     //练习册上传
       public function workbook(Request $request){
-	   session_start();
-		if(empty($_SESSION["uid"])){
-			header('Location: /flogin.php');exit;
-	     }
+	 $this->dysession();
 		  $id =$request->input('id');
 		  $res=ChapterModel::where('is_del',1)->where('cha_id',$id)->first();
 		  $list=[
@@ -1738,10 +1607,7 @@ class AdminController extends Controller
 
     //课程对应课节展示
     public function chapclalist(Request $request){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+        $this->dysession();
         $id =$request->input('id');
         $res=ChapterModel::where('is_del',1)->where('cla_id',$id)->paginate(30);
         $count=count($res);
@@ -1754,10 +1620,7 @@ class AdminController extends Controller
 	
      //课节搜索
 	public function sscha(Request $request){
-         session_start();
-         if(empty($_SESSION["uid"])){
-             header('Location: /flogin.php');exit;
-         }
+        $this->dysession();
 	 $cha_name=$request->input('cha_name');
 	 	$role=$request->input('role');
 	    $sub_name=$request->input('sub_name');
@@ -1791,11 +1654,7 @@ class AdminController extends Controller
     //添加收藏
     public function collectadd(Request $request)
     {
-        session_start();
-        if (empty($_SESSION["uid"])) {
-            header('Location: /flogin.php');
-            exit;
-	       }
+       $this->dysession();
 	date_default_timezone_set('Asia/Shanghai');
 	       $id = $request->input('cha_id');
 	        $kong = CollectModel::where('uid', $_SESSION["uid"])->where('cha_id', $id)->first();
@@ -1847,11 +1706,7 @@ class AdminController extends Controller
 
     //收藏展示
     public function collectlist(){
-	    session_start();
-	   if (empty($_SESSION["uid"])) {
-			 header('Location: /flogin.php');
-				exit;
-		}
+	   $this->dysession();
 	   $res5=AdminuserModel::where('u_id',$_SESSION["uid"])->first();
 	   $role=$res5['role'];
 	   $res1 = AdminuserModel::where('is_del',1)->where('u_id',$_SESSION["uid"])->first();
@@ -1884,11 +1739,7 @@ class AdminController extends Controller
 
     //完成收藏
     public function collectdel(Request $request){
-        session_start();
-        if (empty($_SESSION["uid"])) {
-            header('Location: /flogin.php');
-            exit;
-	}
+      $this->dysession();
 	date_default_timezone_set('Asia/Shanghai');
 	 $id = $request->input('cha_id');
 	        $res1 = AdminuserModel::where('is_del',1)->where('u_id',$_SESSION["uid"])->first();
@@ -1902,11 +1753,7 @@ class AdminController extends Controller
     }
     //完成审核
     public function collectsh(Request $request){
-        session_start();
-        if (empty($_SESSION["uid"])) {
-            header('Location: /flogin.php');
-            exit;
-    }
+      $this->dysession();
      $id = $request->input('cha_id');
      $coll_id = $request->input('coll_id');
             $res1 = AdminuserModel::where('is_del',1)->where('u_id',$_SESSION["uid"])->first();
@@ -2025,11 +1872,7 @@ class AdminController extends Controller
     }
     //图片展示
      public function picture(Request $request){
-	      session_start();
-	       if (empty($_SESSION["uid"])) {
-			     header('Location: /flogin.php');
-				exit;
-		} 
+	     $this->dysession();
 	      $id=$request->input('id');
 	      $cha_name=$request->input('cha_name');
 	      $season=$request->input('season');
@@ -2062,11 +1905,7 @@ class AdminController extends Controller
      }
     //教师图片展示
     public function picturejs(Request $request){
-	    session_start();
-	    if (empty($_SESSION["uid"])) {
-		  header('Location: /flogin.php');
-		 exit;
-	    }
+	   $this->dysession();
 	    $id=$request->input('id');
 	    	 $cha_name=$request->input('cha_name');
 	                  $season=$request->input('season');
@@ -2098,11 +1937,7 @@ class AdminController extends Controller
 	                           }
     //练习册展示
      public function picturelx(Request $request){
-	   session_start();
-		if (empty($_SESSION["uid"])) {
-			header('Location: /flogin.php');
-			exit;
-		}
+	  $this->dysession();
 	$id=$request->input('id');
 	$cha_name=$request->input('cha_name');
 	$season=$request->input('season');
@@ -2134,11 +1969,7 @@ class AdminController extends Controller
 	}
 
     public function newsousuo(Request $request){
-	       session_start();
-			 if (empty($_SESSION["uid"])) {
-		    header('Location: /flogin.php');
-			exit;
-		}
+	      $this->dysession();
         $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
         $role = $res5['role'];
         $moren = $res5['addjs'];
@@ -2338,11 +2169,7 @@ class AdminController extends Controller
 		       
     }
     public function adminsousuo(Request $request){
-         session_start();
-             if (empty($_SESSION["uid"])) {
-            header('Location: /flogin.php');
-            exit;
-        }
+         $this->dysession();
         $adminseason = $request->input('adminseason');
         $adminsubject = $request->input('adminsubject');
         $admingrade = $request->input('admingrade');
@@ -2563,11 +2390,7 @@ class AdminController extends Controller
 
 
     public function collectxzsc(Request $request){
-	   session_start();
-		if (empty($_SESSION["uid"])) {
-			header('Location: /flogin.php');
-			exit;
-		}
+	  $this->dysession();
 		$id = $request->input('coll_id');
 		$res = CollectModel::where('coll_id',$id)->delete();
 			if ($res) {
@@ -2636,6 +2459,7 @@ class AdminController extends Controller
 	  
   //  }
    public function videolist(Request $request){
+    $this->dysession();
     $subject = $request->input('subject');
     $grade = $request->input('grade');
     $res2=ChaseaModel::where('chasea_sub',$subject)->where('is_show',1)->get()->toArray();
@@ -2663,6 +2487,7 @@ class AdminController extends Controller
    	return view('admin.videolist',$list);
    }
    public function pptlist(Request $request){
+    $this->dysession();
     $subject = $request->input('subject');
     $grade = $request->input('grade');
      $res2=ChaseaModel::where('chasea_sub',$subject)->where('is_show',1)->get()->toArray();
@@ -2681,6 +2506,7 @@ class AdminController extends Controller
 	           return view('admin.pptlist',$list);
     }
    public function videolistbox(Request $request){
+    $this->dysession();
 	   $video_id=$request->input('video_id');
 	   $res = VideoModel::where('video_id',$video_id)->first();
 	   $list = [
@@ -2689,6 +2515,7 @@ class AdminController extends Controller
    	return view('admin.videolistbox',$list);
    }
    public function pptlistbox(Request $request){
+    $this->dysession();
 	        $ppt_id=$request->input('ppt_id');
 		                 $res = PptModel::where('ppt_id',$ppt_id)->first();
 		                 $list = [

@@ -1,0 +1,15 @@
+<?php
+	session_start();
+		if($_SESSION["uid"]==3){
+			$pd_time=$_SESSION["cs_time"]+5;
+			$dq_time=time();
+			if($dq_time>$pd_time){
+				echo '会话已过期'；exit;
+			}
+		}else{
+			 if(empty($_SESSION["uid"])){
+            header('Location: /flogin.php');exit;
+        	}
+		}
+       
+?>

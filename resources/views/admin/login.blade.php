@@ -70,6 +70,10 @@
 <script>
 		var Popup = new Popup();
 </script>
+<script language="JavaScript"> 
+  if (window != top) 
+    top.location.href = location.href; 
+</script>
 <script>
 	$(function(){
 		$('div.loading').hide();

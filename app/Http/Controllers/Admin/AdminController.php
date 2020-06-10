@@ -22,10 +22,7 @@ class AdminController extends Controller
 {
     //头部引用
     public function header(){
-        session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-        }
+        require '/pdsession';
         $uid=$_SESSION["uid"];
         $uname=$_SESSION["username"];
         $res=AdminuserModel::where('u_id',$uid)->first()->toArray();
@@ -142,9 +139,19 @@ class AdminController extends Controller
                 $id = $data['u_id'];
                 $res=AdminuserModel::where('u_id',$id)->first();
                 $uname=$res->username;
-                session_start();
-                $_SESSION["uid"]=$id;
-                $_SESSION["username"]=$uname;
+                if($data['tel']=='13888888888'){
+                    ini_set('session.gc_maxlifetime', "5");  
+  
+                    ini_set("session.cookie_lifetime","5"); 
+                    session_start();
+                    $_SESSION["uid"]=$id;
+                    $_SESSION["username"]=$uname;   
+                }else{
+                     session_start();
+                    $_SESSION["uid"]=$id;
+                    $_SESSION["username"]=$uname;   
+                }
+                    
                 return ['code' => 1];
             }else{
                 return ['code' => 2, 'msg' => '密码不正确'];

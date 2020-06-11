@@ -30,8 +30,8 @@ class AdminController extends Controller
             $dq_time=time();
             if($dq_time>$pd_time){
                  if(isset($_SESSION['uid'])){
-                    $res=AdminuserModel::where('u_id',$_SESSION['uid'])->update(['is_del'=>3]);
-                    $res=AdminuserModel::where('tzr',$_SESSION['uid'])->update(['is_del'=>3]);
+                    $res=AdminuserModel::where('u_id',$_SESSION['uid'])->update(['is_del'=>4]);
+                    $res1=AdminuserModel::where('tzr',$_SESSION['uid'])->update(['is_del'=>4]);
                     unset($_SESSION['uid']);
                     echo "<script>alert('试用时间已到，谢谢使用！');location.href= '/';</script>";
                 }
@@ -145,6 +145,7 @@ class AdminController extends Controller
         //$pwd=md5($password);
         $data=AdminuserModel::where('tel',$tel)->where('is_del',1)->first();
         $data1=AdminuserModel::where('tel',$tel)->where('is_del',3)->first();
+        $data2=AdminuserModel::where('tel',$tel)->where('is_del',4)->first();
         if(!empty($data['tel'])){
             if($data['username'] === $loname){
             if($data['password'] === $password) {
@@ -165,6 +166,8 @@ class AdminController extends Controller
                  
         }else if(!empty($data1['tel'])){
             return ['code' => 5, 'msg' => '该账户已被冻结。'];
+        }else if(!empty($data2['tel'])){
+             return ['code' => 6, 'msg' => '您的试用时间已到期,请练习管理员。'];
         }else{
             return ['code' => 0, 'msg' => '电话号码不存在,请重新输入。'];
         }
@@ -2465,18 +2468,160 @@ class AdminController extends Controller
                  $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
                  $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->whereIn('video_season',$arr)->orderBy('number','asc')->get();
         }else{
-            $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->whereIn('video_season',$arr)->orderBy('number','asc')->get();
+            $res = VideoModel::where('video_sub',$subject)->where('video_grade',$grade)->orderBy('number','asc')->get();
         }
         
     }
        
 	   $count=count($res);
-	$list=[
-		'data' => $res,
-		'count' => $count
-	];
+	 if($role==3){
+                 $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+                 $list=[
+                  'data' => $res,
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $subject,
+                  'grade' => $grade,
+                  'souxl' => '',
+                  'res1' => $res1
+                   ];
+             }else if($role==4){
+                 $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                 $list=[
+                  'data' => $res,
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $subject,
+                  'grade' => $grade,
+                  'souxl' => '',
+                  'res1' => $res1
+                   ];
+             }else{
+                 $list=[
+                  'data' => $res,
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $subject,
+                  'grade' => $grade,
+                  'souxl' => ''
+                   ];
+             }
    	return view('admin.videolist',$list);
    }
+
+    public function ssvideolist(Request $request){
+         $this->dysession();
+        $adminseason = $request->input('adminseason');
+        $adminsubject = $request->input('adminsubject');
+        $admingrade = $request->input('admingrade');
+        $sou = $request->input('sou');
+        $res3 = ChaseaModel::where('chasea_sub',$adminsubject)->get();
+        $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+        $role = $res5['role'];
+        if(empty($adminseason)){
+             if($role==3){
+                $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+                if($res1['tzr_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['tzr_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['tzr_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['tzr_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+                 $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+                 if($adminsubject=='KB课程'||$adminsubject=='Phonics自然拼读'){
+                     $res = VideoModel::where('video_sub',$adminsubject)->where('video_grade',$admingrade)->where('video_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+                 }else{
+                    $res = VideoModel::where('video_sub',$adminsubject)->where('video_grade',$admingrade)->whereIn('video_season',$arr)->where('video_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+                 }
+                 
+             }else if($role==4){
+                  $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+                if($res1['xz_chun']==1){
+                   $tzrchun='春';
+                }else{
+                    $tzrchun='';
+                }
+                if($res1['xz_shu']==1){
+                    $tzrshu='暑';
+                }else{
+                    $tzrshu='';
+                }
+                if($res1['xz_qiu']==1){
+                    $tzrqiu='秋';
+                }else{
+                    $tzrqiu='';
+                }
+                if($res1['xz_han']==1){
+                    $tzrhan='寒';
+                }else{
+                    $tzrhan='';
+                }
+                 $arr=array($tzrchun,$tzrshu,$tzrqiu,$tzrhan);
+                 if($adminsubject=='KB课程'||$adminsubject=='Phonics自然拼读'){
+                     $res = VideoModel::where('video_sub',$adminsubject)->where('video_grade',$admingrade)->where('video_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+                 }else{
+                    $res = VideoModel::where('video_sub',$adminsubject)->where('video_grade',$admingrade)->whereIn('video_season',$arr)->where('video_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+                 } 
+             }else{
+                $res = VideoModel::where('video_sub',$adminsubject)->where('video_grade',$admingrade)->where('video_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+             }
+             
+        }else if(empty($sou)){
+            $res = VideoModel::where('video_sub',$adminsubject)->where('video_grade',$admingrade)->where('video_season',$adminseason)->orderBy('number','asc')->get();
+        }else{
+            $res = VideoModel::where('video_sub',$adminsubject)->where('video_grade',$admingrade)->where('video_season',$adminseason)->where('video_title','like','%'.$sou.'%')->orderBy('number','asc')->get();
+        }
+         $count=count($res);
+         if($role==3){
+            $res1 = TzruserModel::where('tzr_phone',$res5['tel'])->first();
+             $list=[
+                  'data' => $res,
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $adminsubject,
+                  'grade' => $admingrade,
+                  'souxl' => $adminseason,
+                  'res1' => $res1
+                   ];
+         }else if($role==4){
+             $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
+             $list=[
+                  'data' => $res,
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $adminsubject,
+                  'grade' => $admingrade,
+                  'souxl' => $adminseason,
+                  'res1' => $res1
+                   ];
+         }else{
+             $list=[
+                  'data' => $res,
+                  'count' => $count,
+                  'role' => $role,
+                  'subject' => $adminsubject,
+                  'grade' => $admingrade,
+                  'souxl' => $adminseason
+                   ];
+         }
+              
+               return view('admin.videolist',$list);
+    }
+
    public function pptlist(Request $request){
     $this->dysession();
     $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();

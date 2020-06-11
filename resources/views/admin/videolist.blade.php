@@ -1,33 +1,93 @@
 <link rel="shortcut icon" href="/layuiadmin/favicon.ico" type="/layuiadmin/image/x-icon" />
 <link rel="stylesheet" href="/layuiadmin/css/font.css">
 <link rel="stylesheet" href="/layuiadmin/css/xadmin.css">
+<link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
 
 <script src="/layuiadmin/js/jquery.min.js"></script>
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
-<form class="layui-form layui-col-md12 x-so" style="margin-top:20px;" action="/sscha" method="POST" >
-          <div style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px;" id="sx" align="center">  
-	<i class="iconfont" style="color:#fff;">&#xe6aa;&nbsp;&nbsp;刷新</i>
-	  </div>
-	<!--
-         <div class="layui-input-inline" style="float:left;">
-           <select name="subject" id="subject">
-                <option value="">请选择一个科目</option>
-                <option value="趣味大语文">趣味大语文</option>
-                <option value="思维培优数学">思维培优数学</option>
-                <option value="春">HS戏剧英语</option>
-                <option value="署">自然拼读</option>
-                <option value="秋">秋</option>
-                <option value="寒">寒</option>
-           </select>
-        </div>
-        <div style="float:left;margin-left:10px;`">
-          <button class="layui-btn" id="ss" type="submit" lay-filter="sreach" style="background-color:#a73870;"><i class="layui-icon">&#xe615;</i></button>
-	</div>
-	-->
-	<!-- <div style="float:left;margin-left:50px;">
-	<span class="x-right" style="line-height:40px">本页共有数据：<b style="color:red;">{{$count}}</b>条</span>
-	</div> -->
+<style type="text/css">
+    .layui-form-select dl dd.layui-this {
+    background-color: #2093bf;
+    color: #fff;
+}
+.layui-input:focus, .layui-textarea:focus {
+    border-color: #2093bf!important;
+}
+</style>
+<form class="layui-form layui-col-md12 x-so"  action="/sscha" method="POST" >
+<div style="float:left;height:40px;">
+    @if($souxl=='')
+     
+    @else
+<div  id="fh" class="layui-btn layui-btn-sm" style="background:#2093bf;height:38px;line-height:38px;float:left;margin-right:5px;"><i class="iconfont">&#xe697;&nbsp;返回</i></div>
+    @endif
+    <div  id="sx" class="layui-btn layui-btn-sm" style="background:#2093bf;height:38px;line-height:38px;float:left"><i class="iconfont">&#xe6aa;&nbsp;刷新</i></div>
+</div>    
+   @if($subject=="KB课程"||$subject=="Phonics自然拼读")
+            @else
+            <div class="layui-col-md6" style="width:150px;margin-right:24px;margin-left:100px;">
+            <select id="mySelect" lay-filter="demo1">
+                @if($souxl=='')
+                    <option value="">请选择一个季度</option>
+                @else
+                  <option value="{{$souxl}}">{{$souxl}}</option>
+                @endif
+                @if($role==3)
+                  @if($res1['tzr_chun']==1)
+                    <option value="春">春</option>
+                  @else
+                  @endif
+                  @if($res1['tzr_shu']==1)
+                    <option value="暑">暑</option>
+                  @else
+                  @endif
+                  @if($res1['tzr_qiu']==1)
+                   <option value="秋">秋</option>
+                  @else
+                  @endif
+                  @if($res1['tzr_han']==1)
+                   <option value="寒">寒</option>
+                  @else
+                  @endif
+                @elseif($role==4)
+                 @if($res1['xz_chun']==1)
+                    <option value="春">春</option>
+                  @else
+                  @endif
+                  @if($res1['xz_shu']==1)
+                    <option value="暑">暑</option>
+                  @else
+                  @endif
+                  @if($res1['xz_qiu']==1)
+                   <option value="秋">秋</option>
+                   @else
+                  @endif
+                  @if($res1['xz_han']==1)
+                   <option value="寒">寒</option>
+                   @else
+                  @endif
+                @else
+                <option value="春">春</option>
+                    <option value="暑">暑</option>
+                   <option value="秋">秋</option>
+                   <option value="寒">寒</option>
+                   @endif
+              </select>
+            </div>
+            @endif
+             <div class="layui-col-md6" style="width:150px">
+              <input type="text" name="title" placeholder="搜索关键字"  class="layui-input" id="sou">
+            </div>
+    <div  id="soubtu" class="layui-btn layui-btn-sm" style="background:#2093bf;height:38px;margin-left:5px;line-height:38px;float:left;"><i class="iconfont">&#xe6ac;&nbsp;搜索</i></div>
+            </div>
+          <input type="hidden" name="" id="adminsubject" value="{{$subject}}"> 
+        <input type="hidden" name="" id="admingrade" value="{{$grade}}"> 
+        <input type="hidden" name="" id="qwe" value="{{$souxl}}"> 
+            
+    <div style="float:left;margin-left:50px;">
+    <span class="x-right" style="line-height:40px">本页共有数据：<b style="color:red;">{{$count}}</b>条</span>
+    </div>
 </form>
 <table class="layui-table">
     <thead>
@@ -67,5 +127,54 @@
     @endforeach
     </tbody>
 </table>
+<script type="text/javascript" src="/alerttc/js/popup.js"></script>
+<script>
+        var Popup = new Popup();
+</script>
+<script type="text/javascript">
+  var adminsubject = $("#adminsubject").val();
+  var admingrade = $("#admingrade").val();
+   var seasons = ''; 
+  layui.use(['layer', 'jquery', 'form'], function () {
+          var layer = layui.layer,
+          $ = layui.jquery,
+          form = layui.form;
+ 
+      form.on('select(demo1)', function(data){
+            console.log(data.value)
+            season = data.value;
+             if(data.value=="春"){
+              window.location="/ssvideolist?adminseason=春&adminsubject="+adminsubject+"&admingrade="+admingrade
+             }else if(data.value=="暑"){
+              window.location="/ssvideolist?adminseason=暑&adminsubject="+adminsubject+"&admingrade="+admingrade
+             }else if(data.value=="秋"){
+              window.location="/ssvideolist?adminseason=秋&adminsubject="+adminsubject+"&admingrade="+admingrade
+             }else if(data.value=="寒"){
+              window.location="/ssvideolist?adminseason=寒&adminsubject="+adminsubject+"&admingrade="+admingrade
+             }
+      });
+
+    });
+  $("#soubtu").click(function(){
+  var sou=$("#sou").val();
+  var qwe=$("#qwe").val();
+  if(sou==''){
+    Popup.alert('HSKMS提示','搜索条件不能为空！');
+  }else{
+    if(qwe==''){
+      window.location="/ssvideolist?sou="+sou+"&adminsubject="+adminsubject+"&admingrade="+admingrade+"&adminseason="+seasons
+    }else{
+      window.location="/ssvideolist?sou="+sou+"&adminsubject="+adminsubject+"&admingrade="+admingrade+"&adminseason="+qwe
+    }
+    
+  }
+  })
+   $("#sx").click(function(){
+                  window.location.reload()
+                })
+               $("#fh").click(function(){
+                  window.history.back();
+                })
+</script>
 
 

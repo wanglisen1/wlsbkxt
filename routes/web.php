@@ -161,3 +161,5 @@ Route::any('/adminsousuo','Admin\AdminController@adminsousuo');
 
 //ppt搜索
 Route::any('/sspptlist','Admin\AdminController@sspptlist');
+//视频搜索
+Route::any('/ssvideolist','Admin\AdminController@ssvideolist');

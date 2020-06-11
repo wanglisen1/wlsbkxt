@@ -48,7 +48,7 @@
 				<input placeholder="请输入用户名" type="text" name="uname" id="uname" />
 			</div>
 			<div class="line">
-				<img class="smallImg" src="/loginmodel/img/icon3.png" />
+				<img class="smallImg" src="/loginmodel/img/icon2.png" />
 				<input placeholder="请输入您的手机号" type="text" name="tel" id="tel" />
 			</div>
 			<div class="line">

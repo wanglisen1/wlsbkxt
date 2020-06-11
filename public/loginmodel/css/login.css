@@ -20,7 +20,7 @@ body {
 }
 
 .login {
-    background: #00000075;
+    background: rgba(0,0,0,0.5);
     width: 40%;
     text-align: center;
     padding: 40px 2%;
@@ -28,6 +28,7 @@ body {
     position: absolute;
     top: 26%;
     right: 5%;
+
 }
 
 .title {
@@ -40,7 +41,7 @@ body {
 .line {
 	margin: 32px 1%;
 	width: 92%;
-	background: #ffffffe8;
+	background: #ffffff;
 	padding: 5px 2%;
 }
 
@@ -53,6 +54,7 @@ body {
 	font-size: 16px;
 	line-height: 30px;
 	outline: none;
+	height:30px;
 }
 
 .line .smallImg {

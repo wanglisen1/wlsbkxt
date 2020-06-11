@@ -56,19 +56,14 @@
 @else
 <form class="layui-form layui-col-md12 x-so"  action="/sscha" method="POST" >
 
-<div style="float:left;width:240px;height:40px;">
-  @if($souxl=='')
+<div style="float:left;height:40px;">
+    @if($souxl=='')
      
     @else
-<div style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px; margin-top:2px" id="fh" align="center">  
-       <i class="iconfont" style="color:#fff;">&#xe697;&nbsp;返回</i>
-    </div>
+<div  id="fh" class="layui-btn layui-btn-sm" style="background:#2093bf;height:38px;line-height:38px;float:left;margin-right:5px;"><i class="iconfont">&#xe697;&nbsp;返回</i></div>
     @endif
-    <div style="width:70px;height:35px;background-color:#2093bf;line-height:35px;border-radius:2px;float:left;margin-left:5px; margin-top:2px" id="sx" align="center">  
-	     <i class="iconfont" style="color:#fff;">&#xe6aa;&nbsp;&nbsp;刷新</i>
-	  </div>
-    
-	</div>
+    <div  id="sx" class="layui-btn layui-btn-sm" style="background:#2093bf;height:38px;line-height:38px;float:left"><i class="iconfont">&#xe6aa;&nbsp;刷新</i></div>
+</div>   
             @if($sub_name=="KB课程"||$sub_name=="Phonics自然拼读")
             @else
             <div class="layui-col-md6" style="width:150px;margin-right:24px">

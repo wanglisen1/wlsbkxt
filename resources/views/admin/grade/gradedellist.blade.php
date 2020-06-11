@@ -5,6 +5,11 @@
 <script src="/layuiadmin/js/jquery.min.js"></script>
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
+<style type="text/css">
+    .layui-btn {
+         background-color: #F43B5F;
+    }
+</style>
 <xblock>
     <button class="layui-btn" id="sx"><i class="iconfont">&#xe6aa;</i>&nbsp;&nbsp;刷新</button>
     <span class="x-right" style="line-height:40px">共有数据：<b style="color:red;">{{$count}}</b> 条</span>

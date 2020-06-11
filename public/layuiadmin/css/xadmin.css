@@ -301,11 +301,10 @@ xblock{
     padding-top: 10px;
     background-color: #222324;
     width: 220px;
-    max-width: 220px;
-    overflow: hidden;
+  
     border-right: 1px solid #131e26;
 
-    /*width: 0px;*/
+
 }
 .left-nav #nav > li{
 	line-height:30px;

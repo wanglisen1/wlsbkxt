@@ -5,6 +5,11 @@
 <script src="/layuiadmin/js/jquery.min.js"></script>
 <script src="/layuiadmin/lib/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="/layuiadmin/js/xadmin.js"></script>
+<style type="text/css">
+    .layui-btn {
+         background-color: #F43B5F;
+    }
+</style>
 <div class="layui-form-item" style="width:700px;margin:0 auto;margin-top: 50px;">
     <label class="layui-form-label">课程：</label>
     <div class="layui-input-block" >

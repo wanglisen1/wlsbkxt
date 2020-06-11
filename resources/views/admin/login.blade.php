@@ -56,9 +56,9 @@
 				<input placeholder="请输入您的密码" type="password"  name="pass" id="password"/>
 			</div>
 			<button type="button" class="logBut" id="btn">登&nbsp;&nbsp;录</button></br></br>
-			<a class="txt2" href="/updatepwd" style="color:#00BFFF;margin-left:-10px;">
+			<!-- <a class="txt2" href="/updatepwd" style="color:#00BFFF;margin-left:-10px;">
 				修改密码
-			</a>
+			</a> -->
 		</div>
 	</div>
 </div>

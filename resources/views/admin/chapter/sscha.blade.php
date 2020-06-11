@@ -164,7 +164,7 @@
 		</a>&nbsp;
     @if($role==5||$role==6)
 		<a title="开始备课" class="collect"  onclick="" href="javascript:;" cha_id="{{$v['cha_id']}}">
-		<button class="layui-btn layui-btn-sm" style="background:#a73870;"><i class="iconfont">&#xe7ce;&nbsp;开始备课</i></button>
+		<button class="layui-btn layui-btn-sm" style="background:#F43B5F;"><i class="iconfont">&#xe7ce;&nbsp;开始备课</i></button>
 		</a>
     @else
     @endif

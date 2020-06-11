@@ -33,6 +33,11 @@
     /* .sub-menu .menu-current{
          background-color:#2fb9d4 !important;
      } */
+       .layui-side::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width : 10px;  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 1px;
+  }
     </style>
 </head>
 <body>
@@ -54,7 +59,11 @@
             @if($role==1)
             (总管理员)
             @elseif($role==2)
-            (教研总监)
+                @if($sname=='刘培')
+                (品牌总监)
+                @else
+                (教研总监)
+                @endif
             @elseif($role==3)
             (投资人)
             @elseif($role==4)
@@ -84,8 +93,8 @@
 <!-- 顶部结束 -->
 <!-- 中部开始 -->
 <!-- 左侧菜单开始 -->
-<div class="left-nav">
-    <div id="side-nav">
+<div class="layui-side left-nav">
+    <div id="side-nav layui-side-scroll">
         <ul id="nav">
      @if($role==1)
             <div id="nr">
@@ -646,12 +655,6 @@
                         <li><a _href="/gxhlist"><i class="iconfont">&#xe6a7;</i><cite>查看个性化方案</cite></a></li>
                     </ul>
                 </li>
-                <li >
-                    <a href="javascript:;" id="qhnr">
-                        <i class="iconfont">&#xe82a;</i>
-                        <cite>管理员管理</cite>
-                    </a>
-                </li>
             </div>
             <div id="admingl">
             <li>
@@ -723,12 +726,6 @@
                         <li><a _href="/classaddlistyypd"><i class="iconfont">&#xe6a7;</i><cite>添加英语（自然拼读） </cite></a></li>
 			<li><a _href="/classlist"><i class="iconfont">&#xe6a7;</i><cite>课程列表</cite></a></li>
                     </ul>
-		</li>
-                <li >
-                    <a href="javascript:;" id="fh">
-                        <i class="iconfont">&#xe6f3;</i>
-                        <cite>返回</cite>
-                    </a>
 		</li>
                </div>
     @elseif($role==2)
@@ -3877,15 +3874,6 @@
 <script>
 
     $(function(){
-        $("#admingl").hide();
-         $("#qhnr").click(function(){
-            $("#admingl").show();
-            $("#nr").hide();
-         })
-         $("#fh").click(function(){
-            $("#admingl").hide();
-            $("#nr").show();
-         })
         $("#tuichu").click(function(){
              var tc =$(".tc").val();
              function confirmData () {

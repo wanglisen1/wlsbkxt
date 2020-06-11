@@ -27,6 +27,10 @@
  margin-top: -16px;
  z-index: 1001;
 }
+.layui-btn {
+         background-color: #F43B5F;
+    }
+    
 </style>
 <div class="loading hide">
      <div class="gif" >

@@ -28,6 +28,20 @@
  margin-top: -16px;
  z-index: 1001;
 }
+.layui-form-radio>i:hover, .layui-form-radioed>i {
+    color: #F43B5F;
+}
+.layui-btn {
+         background-color: #F43B5F;
+    }
+    .layui-form-onswitch {
+    border-color: #F43B5F;
+    background-color: #F43B5F;
+}
+.layui-form-select dl dd.layui-this {
+    background-color: #2093bf;
+    color: #fff;
+}
 </style>
 <div class="loading hide">
      <div class="gif" >
@@ -35,7 +49,8 @@
      </div>
     </div>
 <div class="layui-col-md6" style="width: 600px;margin-left: 100px;margin-top:10px;">
-    <select name="role" id="role" lay-verify="">
+
+    <select name="role" id="role" lay-filter="demo">
         <option value="">请选择您开通用户的角色</option>
         @if($roles==1)
         <option value="26">总部教研(语文)</option>
@@ -215,13 +230,20 @@
 <div class="layui-form-item">
     <div class="layui-input-block">
         <button class="layui-btn" lay-submit lay-filter="component-form-element" id="btn">立即提交</button>
-        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        <button type="reset" class="layui-btn layui-btn-primary" style="background-color:#fff;">重置</button>
     </div>
 </div>
 
 <script src="/jquery-3.1.1.min.js"></script>
 <script>
         var Popup = new Popup();
+</script>
+<script type="text/javascript">
+    layui.use(['layer', 'jquery', 'form'], function () {
+                    var layer = layui.layer,
+                    $ = layui.jquery,
+                    form = layui.form;
+        });
 </script>
 <script>
     $(function(){

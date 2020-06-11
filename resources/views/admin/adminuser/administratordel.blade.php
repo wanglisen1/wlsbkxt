@@ -27,6 +27,9 @@
  margin-top: -16px;
  z-index: 1001;
 }
+.layui-btn {
+         background-color: #F43B5F;
+    }
 </style>
 <xblock>
     <button class="layui-btn" id="sx"><i class="iconfont">&#xe6aa;</i>&nbsp;&nbsp;刷新</button>

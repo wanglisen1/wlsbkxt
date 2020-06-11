@@ -27,6 +27,16 @@
  margin-top: -16px;
  z-index: 1001;
 }
+.layui-btn {
+         background-color: #F43B5F;
+    }
+    .layui-form-radio>i:hover, .layui-form-radioed>i {
+    color: #F43B5F;
+}
+.layui-form-onswitch {
+    border-color: #F43B5F;
+    background-color: #F43B5F;
+}
 </style>
 
 @if($ycrole==3)

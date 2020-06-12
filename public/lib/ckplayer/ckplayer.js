@@ -219,7 +219,7 @@ layui.define('jquery', function(exports) {
 		//全局变量/变量类型：Array/功能：HTML5变速播放的值数组/如果不需要可以设置成null
 		this.playbackRateArr = [
 			//[0.5, '0.5倍'],
-			[1, '正常']
+			//[1, '正常'],
 			//[1.25, '1.25倍'],
 			//[1.5, '1.5倍'],
 			//[2, '2倍速'],

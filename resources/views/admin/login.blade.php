@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 
 <head>
@@ -62,8 +62,8 @@
 </div>
 </body>
 
-</html>
-<!-- <!DOCTYPE html>
+</html> -->
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -85,24 +85,56 @@
             $(".password input").blur(function(){
                 $(this).prev("i").css({"background-image":"url(/loginmodel2/img/password1.png)"});
             });
+            $(".tel input").focus(function(){
+                $(this).prev("i").css({"background-image":"url(/loginmodel2/img/usertel1.png)"});
+            });
+            $(".tel input").blur(function(){
+                $(this).prev("i").css({"background-image":"url(/loginmodel2/img/usertel.png)"});
+            });
         });
     </script>
-</head>s
+    <style type="text/css">
+    	.loading {
+		 position: fixed;
+		 top: 0;
+		 bottom: 0;
+		 right: 0;
+		 left: 0;
+		 background-color: #f6ecec;
+		 opacity: 0.4;
+		 z-index: 1000;
+		}
+		 
+		.loading .gif {
+		 position: fixed;
+		   top :40%;
+		  left: 45%;
+		 margin-left: -16px;
+		 margin-top: -16px;
+		 z-index: 1001;
+		}
+    </style>
+</head>
 <body>
     <div class="container">
+    	<div class="loading hide">
+	 <div class="gif" >
+	 	<img src="/loadimg.gif" width="200px;">
+	 </div>
+	</div>
         <div class="wrap">
-            <header ><em><img src="/loginmodel2/img/hslogo.png" width="100"></em><span>北京翰师问鼎教育科技有限公司</span></header>
+            <header ><em><img src="/loginmodel2/img/hslogo.png" width="45"></em><span>北京翰师问鼎教育科技有限公司</span><span style="margin-left:535px;">翰师KMS备课管理平台</span></header>
             <article>
                 <section>
                     <aside>
                         <em>
-                            <img src="/loginmodel2/img/user.png">
+                            <img src="/loginmodel2/img/loginlogo.png">
                         </em>
                          <form action="" method="post">
-                            <p class="name"><i></i><input type="text" name="userName"  class="userName" placeholder="请输入用户名" style="border:0;"></p> 
-                            <p class="tel"><i></i><input type="text" name="tel"  class="tel" placeholder="请输入手机号" style="border:0;"></p>
-                            <p class="password" ><i></i><input type="password"  class="pwd" placeholder="请输入密码" style="border:0;"></p>
-                            <button>登录</button>
+                            <p class="name"><i></i><input type="text" name="userName" id="uname"  class="userName" placeholder="请输入用户名" style="border:0;" autocomplete="off"></p> 
+                            <p class="tel"><i></i><input type="text" name="tel" id="tel"  class="tel" placeholder="请输入手机号" style="border:0;" autocomplete="off"></p>
+                            <p class="password" ><i></i><input type="password" id="password"  class="pwd" placeholder="请输入密码" style="border:0;"></p>
+                            <button id="btn">登录</button>
                         </form>
                     </aside>
                    
@@ -114,7 +146,7 @@
         </div>
     </div>
 </body>
-</html> -->
+</html>
 
 <script type="text/javascript" src="/alerttc/js/popup.js"></script>
 <script src="/jquery-3.1.1.min.js"></script>
@@ -154,6 +186,8 @@
 				dateType:'json',
 				url: "/loginadd",
 				success:function(msg){
+					debugger
+					console.log(msg)
 					if(msg.code==1) {
 						window.location = '/admin';
 						$('div.loading').hide();

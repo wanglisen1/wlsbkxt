@@ -29,17 +29,19 @@ header,footer,section{
 header{
 	    display: flex;
     align-items: center;
+    height: 45px;
 }
 
-header,footer{
-	height: 100px;
+footer{
+	height: 50px;
 }
 
 /*头部样式*/
 header em{
 	font-size: 50px;
-	height: 100px;
-	line-height: 100px;
+	height: 45px;
+	line-height: 45px;
+	margin-left: 60px;
 }
 header span{
 	font-size: 22px;
@@ -110,10 +112,10 @@ form i{
 	top: 27px;
 }
 .tel i{
-	background-image: url("../img/tel.png");
+	background-image: url("../img/usertel.png");
 	background-repeat: no-repeat;
-	background-size: 22px 27px;
-	left: 10px;
+	background-size: 30px 29px;
+	left: 6px;
 	top: 27px;
 }
 .password i{

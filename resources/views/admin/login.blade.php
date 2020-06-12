@@ -9,7 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
 	
 </head>
-<style type="text/css">
+<body>
+<style type="">
 	.loading {
  position: fixed;
  top: 0;
@@ -30,8 +31,6 @@
  z-index: 1001;
 }
 </style>
-<body>
-
 <div class="content">
 	<div class="loading hide">
 	 <div class="gif" >
@@ -56,15 +55,67 @@
 				<input placeholder="请输入您的密码" type="password"  name="pass" id="password"/>
 			</div>
 			<button type="button" class="logBut" id="btn">登&nbsp;&nbsp;录</button></br></br>
-			<!-- <a class="txt2" href="/updatepwd" style="color:#00BFFF;margin-left:-10px;">
+		<a class="txt2" href="/updatepwd" style="color:#00BFFF;margin-left:-10px;">
 				修改密码
-			</a> -->
 		</div>
 	</div>
 </div>
 </body>
 
 </html>
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>翰师问鼎-备课平台登陆页面</title>
+    <link rel="stylesheet" type="text/css" href="/loginmodel2/css/login.css">
+    <link rel="stylesheet" type="text/css" href="/alerttc/css/popup.css"/>
+    <script type="text/javascript" src="/loginmodel2/js/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $(".name input").focus(function(){
+                $(this).prev("i").css({"background-image":"url(/loginmodel2/img/user2.png)"});
+            });
+            $(".name input").blur(function(){
+                $(this).prev("i").css({"background-image":"url(/loginmodel2/img/user1.png)"});
+            });
+            $(".password input").focus(function(){
+                $(this).prev("i").css({"background-image":"url(/loginmodel2/img/password2.png)"});
+            });
+            $(".password input").blur(function(){
+                $(this).prev("i").css({"background-image":"url(/loginmodel2/img/password1.png)"});
+            });
+        });
+    </script>
+</head>s
+<body>
+    <div class="container">
+        <div class="wrap">
+            <header ><em><img src="/loginmodel2/img/hslogo.png" width="100"></em><span>北京翰师问鼎教育科技有限公司</span></header>
+            <article>
+                <section>
+                    <aside>
+                        <em>
+                            <img src="/loginmodel2/img/user.png">
+                        </em>
+                         <form action="" method="post">
+                            <p class="name"><i></i><input type="text" name="userName"  class="userName" placeholder="请输入用户名" style="border:0;"></p> 
+                            <p class="tel"><i></i><input type="text" name="tel"  class="tel" placeholder="请输入手机号" style="border:0;"></p>
+                            <p class="password" ><i></i><input type="password"  class="pwd" placeholder="请输入密码" style="border:0;"></p>
+                            <button>登录</button>
+                        </form>
+                    </aside>
+                   
+                </section>               
+            </article>
+            <footer>
+                <p style="font-size:20px;">本网站版权归北京翰师问鼎教育科技有限公司所有。</p>
+            </footer>
+        </div>
+    </div>
+</body>
+</html> -->
+
 <script type="text/javascript" src="/alerttc/js/popup.js"></script>
 <script src="/jquery-3.1.1.min.js"></script>
 <script>

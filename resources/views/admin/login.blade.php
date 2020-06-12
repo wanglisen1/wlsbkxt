@@ -186,7 +186,6 @@
 				dateType:'json',
 				url: "/loginadd",
 				success:function(msg){
-					debugger
 					console.log(msg)
 					if(msg.code==1) {
 						window.location = '/admin';

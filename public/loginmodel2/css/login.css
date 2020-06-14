@@ -81,15 +81,15 @@ aside em img{
 	width: 100%;
 	height: auto;
 }
-form {
+.dl {
 	width: 300px;
 	margin: 0 auto;
 }
-form p{
+.dl p{
 	position: relative;
 	margin-top: 10px;
 }
-form input{
+.dl input{
 	padding-left: 50px;
 	width: 250px;
 	height: 40px;
@@ -99,7 +99,7 @@ form input{
 	background-color:rgba(255, 255, 255, 0.82);
 	outline: none;
 }
-form i{
+.dl i{
 	width: 30px;
 	height: 30px;
 	display: inline-block;

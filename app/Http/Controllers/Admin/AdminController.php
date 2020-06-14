@@ -25,10 +25,11 @@ class AdminController extends Controller
         if(empty($_SESSION["uid"])){
             header('Location: /flogin.php');exit;
             }
-        if($_SESSION["username"]=='测试账号'){
-            $pd_time=$_SESSION["cs_time"]+3600;
+        if($_SESSION["username"]=='试用账号'){
+            $res=AdminuserModel::where('u_id',$_SESSION['uid'])->first();
+            $pd_time=$res['addtime']+3600;
             $dq_time=time();
-            if($dq_time>$pd_time){
+            if($dq_time>=$pd_time){
                  if(isset($_SESSION['uid'])){
                     $res=AdminuserModel::where('u_id',$_SESSION['uid'])->update(['is_del'=>4]);
                     $res1=AdminuserModel::where('tzr',$_SESSION['uid'])->update(['is_del'=>4]);
@@ -155,7 +156,9 @@ class AdminController extends Controller
                     session_start();
                     $_SESSION["uid"]=$id;
                     $_SESSION["username"]=$uname;
-                    $_SESSION["cs_time"]=time();   
+                    if($data['username']==='试用账号'){
+                        $res7=AdminuserModel::where('tel',$tel)->where('is_del',1)->update(['addtime'=>time()]);
+                    }
                 return ['code' => 1];
             }else{
                 return ['code' => 2, 'msg' => '密码不正确'];

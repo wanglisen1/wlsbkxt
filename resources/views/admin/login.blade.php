@@ -130,12 +130,12 @@
                         <em>
                             <img src="/loginmodel2/img/loginlogo.png">
                         </em>
-                         <form action="" method="post">
+                         <div class="dl">
                             <p class="name"><i></i><input type="text" name="userName" id="uname"  class="userName" placeholder="请输入用户名" style="border:0;" autocomplete="off"></p> 
                             <p class="tel"><i></i><input type="text" name="tel" id="tel"  class="tel" placeholder="请输入手机号" style="border:0;" autocomplete="off"></p>
                             <p class="password" ><i></i><input type="password" id="password"  class="pwd" placeholder="请输入密码" style="border:0;"></p>
                             <button id="btn">登录</button>
-                        </form>
+                        </div>
                     </aside>
                    
                 </section>               

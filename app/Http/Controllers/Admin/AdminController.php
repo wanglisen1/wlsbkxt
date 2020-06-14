@@ -157,8 +157,8 @@ class AdminController extends Controller
                     $_SESSION["uid"]=$id;
                     $_SESSION["username"]=$uname;
                     if($data['username']==='试用账号'){
-                    	if(empty($data['sy_time'])){
-                    		$res3=AdminuserModel::where('tel',$tel)->where('is_del',1)->insert(['sy_time'=>time()]);
+                    	if($data['sy_time']===1){
+                    		$res3=AdminuserModel::where('tel',$tel)->where('is_del',1)->update(['sy_time'=>time()]);
                     	} 
                     }
                 return ['code' => 1];

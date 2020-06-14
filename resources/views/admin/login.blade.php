@@ -199,5 +199,46 @@
 				}
 			});
 		})
+		$(document).keydown(function(event){
+			 if(event.keyCode == 13){
+ 			 	var uname =$("#uname").val();
+			var tel =$("#tel").val();
+			var pwd =$("#password").val();
+			var reg = /(1[3-9]\d{9}$)/;
+			if(tel==''){
+				Popup.alert('HSKMS提示','手机号不能为空！');
+				return false;
+			}if(pwd==''){
+				Popup.alert('HSKMS提示','密码不能为空！');
+				return false;
+			}if(uname==''){
+				Popup.alert('HSKMS提示','用户名不能为空！');
+				return false;
+			}
+			 if (!reg.test(tel)){
+                Popup.alert('HSKMS提示','请输入正确格式的手机号码！');
+                return false;
+            }
+			 $('div.loading').show();
+			$.ajax({
+				type: 'post',
+				data:{tel:tel,pwd:pwd,uname:uname},
+				dateType:'json',
+				url: "/loginadd",
+				success:function(msg){
+					console.log(msg)
+					if(msg.code==1) {
+						window.location = '/admin';
+						$('div.loading').hide();
+					}else{
+						 $('div.loading').hide();
+						Popup.alert('HSKMS提示',msg.msg);
+						return false;
+
+					}
+				}
+			});
+ 			}
+});
 	})
 </script>

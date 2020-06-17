@@ -2591,7 +2591,7 @@
                         <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>语文全部备课</cite></a></li>
                     </ul>
                 </li>
-                  <li>
+            <li>
                  <a href="javascript:;">
                     <i class="iconfont">&#xe820;</i>
                     <cite>PPT</cite>
@@ -2640,9 +2640,6 @@
                     
                         </ul>
                     </li>
-                    
-                </ul>
-            </li>
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe719;</i>
@@ -2821,9 +2818,6 @@
                   
                         </ul>
                     </li>
-                    
-                </ul>
-            </li>
                 <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe719;</i>
@@ -3108,7 +3102,6 @@
                         </ul>
                     </li>
                     
-                </ul>
                 <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe719;</i>

@@ -1287,11 +1287,6 @@
                         <li><a _href="/gxhlist"><i class="iconfont">&#xe6a7;</i><cite>查看个性化方案</cite></a></li>
                     </ul>
                 </li>
-                <li >
-                    <a href="javascript:;" id="qhnr">
-                        <i class="iconfont">&#xe82a;</i>
-                        <cite>管理员管理</cite>
-                    </a>
                 </li>
             </div>
             <div id="admingl">
@@ -1365,11 +1360,6 @@
             <li><a _href="/classlist"><i class="iconfont">&#xe6a7;</i><cite>课程列表</cite></a></li>
                     </ul>
         </li>
-                <li >
-                    <a href="javascript:;" id="fh">
-                        <i class="iconfont">&#xe6f3;</i>
-                        <cite>返回</cite>
-                    </a>
         </li>
                </div>
     @elseif($role==4)
@@ -2601,6 +2591,58 @@
                         <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>语文全部备课</cite></a></li>
                     </ul>
                 </li>
+                  <li>
+                 <a href="javascript:;">
+                    <i class="iconfont">&#xe820;</i>
+                    <cite>PPT</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe705;</i>
+                            <cite>趣味大语文</cite>
+                            <input type="hidden" name="" id="qwdyw" value="趣味大语文">
+                            <i class="iconfont nav_right">&#xe6a7;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="/pptlist?subject=趣味大语文&grade=三年级">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite id="kcywsan">三年级</cite>
+                                    <input type="hidden" name="" id="ywsan" value="三年级">
+                                </a>
+                            </li >
+                            <li>
+                                <a _href="/pptlist?subject=趣味大语文&grade=四年级">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite id="kcywsi">四年级</cite>
+                                     <input type="hidden" name="" id="ywsi" value="四年级">
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="/pptlist?subject=趣味大语文&grade=五年级">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite id="kcywwu">五年级</cite>
+                                    <input type="hidden" name="" id="ywwu" value="五年级">
+                                </a>
+                            </li >
+                            <li>
+                               <a _href="/pptlist?subject=趣味大语文&grade=六年级">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite id="kcywwu">六年级</cite>
+                                    <input type="hidden" name="" id="ywliu" value="六年级">
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </li>
             <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe719;</i>
@@ -2646,136 +2688,6 @@
                             </li>
                         </ul>
                     </li>
-                     <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe6cb;</i>
-                            <cite id="kcsx">思维培优数学</cite>
-                             <input type="hidden" name="" id="kcsxs" value="思维培优数学">
-                            <i class="iconfont nav_right">&#xe6a7;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="/videolist?subject=思维培优数学&grade=三年级">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>三年级</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                 <a _href="/videolist?subject=思维培优数学&grade=四年级">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>四年级</cite>
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                 <a _href="/videolist?subject=思维培优数学&grade=五年级">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>五年级</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="/videolist?subject=思维培优数学&grade=六年级">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>六年级</cite>
-                                    
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                     <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe74a;</i>
-                            <cite id="kcyy">KB课程</cite>
-                             <input type="hidden" name="" id="kcyys" value="KB课程">
-                            <i class="iconfont nav_right">&#xe6a7;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="/videolist?subject=KB课程&grade=K1">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K1</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K2">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K2</cite>
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K3">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K3</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K4">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K4</cite>
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K5">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K5</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K6">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K6</cite>
-                                    
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                     <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe6c7;</i>
-                            <cite id="kcpd">Phonics自然拼读</cite>
-                             <input type="hidden" name="" id="kcpds" value="Phonics自然拼读">
-                            <i class="iconfont nav_right">&#xe6a7;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                 <a _href="/videolist?subject=Phonics自然拼读&grade=P1">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P1</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="/videolist?subject=Phonics自然拼读&grade=P2">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P2</cite>
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="/videolist?subject=Phonics自然拼读&grade=P3">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P3</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="/videolist?subject=Phonics自然拼读&grade=P4">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P4</cite>
-                                    
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </li>
                 </ul>
             </li> 
               <li>
@@ -2785,12 +2697,12 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li>
+                   <!--  <li>
                         <a _href="/useradd">
                             <i class="iconfont" >&#xe6a7;</i>
                             <cite>教师添加</cite>
                         </a>
-                    </li >
+                    </li > -->
                     <li>
                         <a _href="/userlist">
                             <i class="iconfont" >&#xe6a7;</i>
@@ -2860,6 +2772,58 @@
                         <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>数学全部备课</cite></a></li>
                     </ul>
                 </li>
+                  <li>
+                 <a href="javascript:;">
+                    <i class="iconfont">&#xe820;</i>
+                    <cite>PPT</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
+                     <li>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe6cb;</i>
+                            <cite id="kcsx">思维培优数学</cite>
+                             <input type="hidden" name="" id="kcsxs" value="思维培优数学">
+                            <i class="iconfont nav_right">&#xe6a7;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="/pptlist?subject=思维培优数学&grade=三年级">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>三年级</cite>
+                                    
+                                </a>
+                            </li >
+                            <li>
+                                 <a _href="/pptlist?subject=思维培优数学&grade=四年级">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>四年级</cite>
+                                    
+                                </a>
+                            </li>
+                            <li>
+                                 <a _href="/pptlist?subject=思维培优数学&grade=五年级">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>五年级</cite>
+                                    
+                                </a>
+                            </li >
+                            <li>
+                                <a _href="/pptlist?subject=思维培优数学&grade=六年级">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>六年级</cite>
+                                    
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                  
+                        </ul>
+                    </li>
+                    
+                </ul>
+            </li>
                 <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe719;</i>
@@ -2868,43 +2832,6 @@
                 </a>
                 <ul class="sub-menu">
                     <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe705;</i>
-                            <cite>趣味大语文</cite>
-                            <input type="hidden" name="" id="qwdyw" value="趣味大语文">
-                            <i class="iconfont nav_right">&#xe6a7;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="/videolist?subject=趣味大语文&grade=三年级">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite id="kcywsan">三年级</cite>
-                                    <input type="hidden" name="" id="ywsan" value="三年级">
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="/videolist?subject=趣味大语文&grade=四年级">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite id="kcywsi">四年级</cite>
-                                     <input type="hidden" name="" id="ywsi" value="四年级">
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="/videolist?subject=趣味大语文&grade=五年级">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite id="kcywwu">五年级</cite>
-                                    <input type="hidden" name="" id="ywwu" value="五年级">
-                                </a>
-                            </li >
-                            <li>
-                               <a _href="/videolist?subject=趣味大语文&grade=六年级">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite id="kcywwu">六年级</cite>
-                                    <input type="hidden" name="" id="ywliu" value="六年级">
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe6cb;</i>
@@ -2943,128 +2870,6 @@
                             </li>
                         </ul>
                     </li>
-                     <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe74a;</i>
-                            <cite id="kcyy">KB课程</cite>
-                             <input type="hidden" name="" id="kcyys" value="KB课程">
-                            <i class="iconfont nav_right">&#xe6a7;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                <a _href="/videolist?subject=KB课程&grade=K1">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K1</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K2">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K2</cite>
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K3">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K3</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K4">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K4</cite>
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K5">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K5</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K6">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K6</cite>
-                                    
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                     <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe6c7;</i>
-                            <cite id="kcpd">Phonics自然拼读</cite>
-                             <input type="hidden" name="" id="kcpds" value="Phonics自然拼读">
-                            <i class="iconfont nav_right">&#xe6a7;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                 <a _href="/videolist?subject=Phonics自然拼读&grade=P1">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P1</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="/videolist?subject=Phonics自然拼读&grade=P2">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P2</cite>
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="/videolist?subject=Phonics自然拼读&grade=P3">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P3</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="/videolist?subject=Phonics自然拼读&grade=P4">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P4</cite>
-                                    
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                   <!--  <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe828;</i>
-                            <cite id="kcpd">资源类</cite>
-                             <input type="hidden" name="" id="kcpds" value="资源类">
-                            <i class="iconfont nav_right">&#xe6a7;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                 <a _href="/videolist?subject=资源类&grade=语文">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>语文</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="/videolist?subject=资源类&grade=数学">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>数学</cite>
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="/videolist?subject=资源类&grade=英语">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>英语</cite> 
-                                </a>
-                            </li >
-                        </ul>
-                    </li> -->
                 </ul>
             </li> 
               <li>
@@ -3202,6 +3007,108 @@
                         <li><a _href="/collectlist"><i class="iconfont">&#xe6a7;</i><cite>英语全部备课</cite></a></li>
                     </ul>
                 </li>
+                  <li>
+                 <a href="javascript:;">
+                    <i class="iconfont">&#xe820;</i>
+                    <cite>PPT</cite>
+                    <i class="iconfont nav_right">&#xe6a7;</i>
+                </a>
+                <ul class="sub-menu">
+                    <li>
+                     <li>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe74a;</i>
+                            <cite id="kcyy">KB课程</cite>
+                             <input type="hidden" name="" id="kcyys" value="KB课程">
+                            <i class="iconfont nav_right">&#xe6a7;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                <a _href="/pptlist?subject=KB课程&grade=K1">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>K1</cite>
+                                    
+                                </a>
+                            </li >
+                            <li>
+                                 <a _href="/pptlist?subject=KB课程&grade=K2">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>K2</cite>
+                                    
+                                </a>
+                            </li>
+                            <li>
+                                 <a _href="/pptlist?subject=KB课程&grade=K3">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>K3</cite>
+                                    
+                                </a>
+                            </li >
+                            <li>
+                                 <a _href="/pptlist?subject=KB课程&grade=K4">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>K4</cite>
+                                    
+                                </a>
+                            </li>
+                            <li>
+                                 <a _href="/pptlist?subject=KB课程&grade=K5">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>K5</cite>
+                                    
+                                </a>
+                            </li >
+                            <li>
+                                 <a _href="/pptlist?subject=KB课程&grade=K6">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>K6</cite>
+                                    
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                     <li>
+                        <a href="javascript:;">
+                            <i class="iconfont">&#xe6c7;</i>
+                            <cite id="kcpd">Phonics自然拼读</cite>
+                             <input type="hidden" name="" id="kcpds" value="Phonics自然拼读">
+                            <i class="iconfont nav_right">&#xe6a7;</i>
+                        </a>
+                        <ul class="sub-menu">
+                            <li>
+                                 <a _href="/pptlist?subject=Phonics自然拼读&grade=P1">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>P1</cite>
+                                    
+                                </a>
+                            </li >
+                            <li>
+                                <a _href="/pptlist?subject=Phonics自然拼读&grade=P2">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>P2</cite>
+                                    
+                                </a>
+                            </li>
+                            <li>
+                                <a _href="/pptlist?subject=Phonics自然拼读&grade=P3">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>P3</cite>
+                                    
+                                </a>
+                            </li >
+                            <li>
+                                <a _href="/pptlist?subject=Phonics自然拼读&grade=P4">
+                                    <i class="iconfont">&#xe6a7;</i>
+                                    <cite>P4</cite>
+                                    
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </li>
+                    
+                </ul>
                 <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe719;</i>

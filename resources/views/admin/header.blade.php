@@ -3202,8 +3202,6 @@
                             
                         </ul>
                     </li>
-                </ul>
-            </li> 
               <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
@@ -3211,12 +3209,12 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
-                    <li>
+                   <!--  <li>
                         <a _href="/useradd">
                             <i class="iconfont" >&#xe6a7;</i>
                             <cite>教师添加</cite>
                         </a>
-                    </li >
+                    </li > -->
                     <li>
                         <a _href="/userlist">
                             <i class="iconfont" >&#xe6a7;</i>

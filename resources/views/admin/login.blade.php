@@ -123,7 +123,7 @@
 	 </div>
 	</div>
         <div class="wrap">
-            <header ><em><img src="/loginmodel2/img/hslogo.png" width="45"></em><span>北京翰师问鼎教育科技有限公司</span><span style="margin-left:535px;">翰师KMS备课管理平台</span></header>
+            <header ><em><img src="/loginmodel2/img/hslogo.png" width="45"></em><span>北京翰师问鼎教育科技有限公司</span><span style="margin-left:535px;">KMS校区智能孵化系统</span></header>
             <article>
                 <section>
                     <aside>

@@ -275,7 +275,7 @@
                             
                         </ul>
                     </li>
-                    
+
                 </ul>
             </li>             
                 <li >
@@ -1370,6 +1370,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
+                    @if($data['xz_yw']==1)
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe705;</i>
@@ -1409,6 +1410,9 @@
                             
                         </ul>
                     </li>
+                    @else
+                        @endif
+                        @if($data['xz_sx']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe6cb;</i>
@@ -1448,6 +1452,9 @@
                             
                         </ul>
                     </li>
+                        @else
+                            @endif
+                            @if($data['xz_yy']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
@@ -1540,7 +1547,8 @@
                             
                         </ul>
                     </li>
-                    
+                        @else
+                    @endif
                 </ul>
             </li>
             <li >
@@ -1560,6 +1568,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
+                    @if($data['xz_yw']==1)
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe705;</i>
@@ -1599,6 +1608,9 @@
                             
                         </ul>
                     </li>
+                    @else
+                        @endif
+                        @if($data['xz_sx']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe6cb;</i>
@@ -1638,6 +1650,9 @@
                             
                         </ul>
                     </li>
+                        @else
+                            @endif
+                        @if($data['xz_yy']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
@@ -1730,7 +1745,8 @@
                             
                         </ul>
                     </li>
-                    
+                        @else
+                    @endif
                 </ul>
             </li>             
                 <li>
@@ -1740,6 +1756,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
+                    @if($data['xz_yw']==1)
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe705;</i>
@@ -1778,6 +1795,9 @@
                             </li>
                         </ul>
                     </li>
+                    @else
+                        @endif
+                        @if($data['xz_sx']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe6cb;</i>
@@ -1816,6 +1836,9 @@
                             </li>
                         </ul>
                     </li>
+                        @else
+                            @endif
+                            @if($data['xz_yy']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
@@ -1905,7 +1928,8 @@
                                     
                                 </a>
                             </li>
-                            
+                            @else
+                                @endif
                         </ul>
                     </li> 
                    <!--  <li>
@@ -1971,6 +1995,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
+                    @if($data['tzr_yw']==1)
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe705;</i>
@@ -2010,6 +2035,9 @@
                             
                         </ul>
                     </li>
+                    @else
+                        @endif
+                        @if($data['tzr_sx']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe6cb;</i>
@@ -2049,6 +2077,9 @@
                             
                         </ul>
                     </li>
+                        @else
+                            @endif
+                            @if($data['tzr_yy']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
@@ -2141,7 +2172,8 @@
                             
                         </ul>
                     </li>
-                    
+                        @else
+                    @endif
                 </ul>
             </li>             
                  <li >
@@ -2161,6 +2193,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
+                    @if($data['tzr_yw']==1)
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe705;</i>
@@ -2200,6 +2233,9 @@
                             
                         </ul>
                     </li>
+                    @else
+                        @endif
+                        @if($data['tzr_sx']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe6cb;</i>
@@ -2239,6 +2275,9 @@
                             
                         </ul>
                     </li>
+                        @else
+                            @endif
+                        @if($data['tzr_yy']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
@@ -2331,6 +2370,8 @@
                             
                         </ul>
                     </li>
+                        @else
+                    @endif
                     
                 </ul>
             </li>             
@@ -2341,6 +2382,7 @@
                     <i class="iconfont nav_right">&#xe6a7;</i>
                 </a>
                 <ul class="sub-menu">
+                    @if($data['tzr_yw']==1)
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe705;</i>
@@ -2379,6 +2421,9 @@
                             </li>
                         </ul>
                     </li>
+                    @else
+                        @endif
+                        @if($data['tzr_sx']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe6cb;</i>
@@ -2417,6 +2462,9 @@
                             </li>
                         </ul>
                     </li>
+                        @else
+                            @endif
+                        @if($data['tzr_yy']==1)
                      <li>
                         <a href="javascript:;">
                             <i class="iconfont">&#xe74a;</i>
@@ -2509,6 +2557,8 @@
                             
                         </ul>
                     </li>
+                        @else
+                    @endif
                 </ul>
             </li> 
             <li>
@@ -2908,45 +2958,45 @@
                                 <a _href="/newsousuo?subject=KB课程&grade=K1">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K1</cite>
-                                    
+
                                 </a>
                             </li >
                             <li>
                                  <a _href="/newsousuo?subject=KB课程&grade=K2">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K2</cite>
-                                    
+
                                 </a>
                             </li>
                             <li>
                                  <a _href="/newsousuo?subject=KB课程&grade=K3">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K3</cite>
-                                    
+
                                 </a>
                             </li >
                             <li>
                                  <a _href="/newsousuo?subject=KB课程&grade=K4">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K4</cite>
-                                    
+
                                 </a>
                             </li>
                             <li>
                                  <a _href="/newsousuo?subject=KB课程&grade=K5">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K5</cite>
-                                    
+
                                 </a>
                             </li >
                             <li>
                                  <a _href="/newsousuo?subject=KB课程&grade=K6">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K6</cite>
-                                    
+
                                 </a>
                             </li>
-                            
+
                         </ul>
                     </li>
                      <li>
@@ -2961,34 +3011,34 @@
                                  <a _href="/newsousuo?subject=Phonics自然拼读&grade=P1">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>P1</cite>
-                                    
+
                                 </a>
                             </li >
                             <li>
                                 <a _href="/newsousuo?subject=Phonics自然拼读&grade=P2">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>P2</cite>
-                                    
+
                                 </a>
                             </li>
                             <li>
                                 <a _href="/newsousuo?subject=Phonics自然拼读&grade=P3">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>P3</cite>
-                                    
+
                                 </a>
                             </li >
                             <li>
                                 <a _href="/newsousuo?subject=Phonics自然拼读&grade=P4">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>P4</cite>
-                                    
+
                                 </a>
                             </li>
-                            
+
                         </ul>
                     </li>
-                    
+
                 </ul>
             </li>
             <li >
@@ -3021,45 +3071,45 @@
                                 <a _href="/pptlist?subject=KB课程&grade=K1">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K1</cite>
-                                    
+
                                 </a>
                             </li >
                             <li>
                                  <a _href="/pptlist?subject=KB课程&grade=K2">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K2</cite>
-                                    
+
                                 </a>
                             </li>
                             <li>
                                  <a _href="/pptlist?subject=KB课程&grade=K3">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K3</cite>
-                                    
+
                                 </a>
                             </li >
                             <li>
                                  <a _href="/pptlist?subject=KB课程&grade=K4">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K4</cite>
-                                    
+
                                 </a>
                             </li>
                             <li>
                                  <a _href="/pptlist?subject=KB课程&grade=K5">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K5</cite>
-                                    
+
                                 </a>
                             </li >
                             <li>
                                  <a _href="/pptlist?subject=KB课程&grade=K6">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>K6</cite>
-                                    
+
                                 </a>
                             </li>
-                            
+
                         </ul>
                     </li>
                      <li>
@@ -3074,134 +3124,133 @@
                                  <a _href="/pptlist?subject=Phonics自然拼读&grade=P1">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>P1</cite>
-                                    
+
                                 </a>
                             </li >
                             <li>
                                 <a _href="/pptlist?subject=Phonics自然拼读&grade=P2">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>P2</cite>
-                                    
+
                                 </a>
                             </li>
                             <li>
                                 <a _href="/pptlist?subject=Phonics自然拼读&grade=P3">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>P3</cite>
-                                    
+
                                 </a>
                             </li >
                             <li>
                                 <a _href="/pptlist?subject=Phonics自然拼读&grade=P4">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>P4</cite>
-                                    
+
                                 </a>
                             </li>
-                            
+
                         </ul>
                     </li>
-                    
-                <li>
-                <a href="javascript:;">
-                    <i class="iconfont">&#xe719;</i>
-                    <cite>精选视频</cite>
-                    <i class="iconfont nav_right">&#xe6a7;</i>
-                </a>
-                <ul class="sub-menu">
-		    <li>
-                     <li>
+
+                    <li>
                         <a href="javascript:;">
-                            <i class="iconfont">&#xe74a;</i>
-                            <cite id="kcyy">KB课程</cite>
-                             <input type="hidden" name="" id="kcyys" value="KB课程">
+                            <i class="iconfont">&#xe719;</i>
+                            <cite>精选视频</cite>
                             <i class="iconfont nav_right">&#xe6a7;</i>
                         </a>
                         <ul class="sub-menu">
-                            <li>
-                                <a _href="/videolist?subject=KB课程&grade=K1">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K1</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K2">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K2</cite>
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K3">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K3</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K4">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K4</cite>
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K5">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K5</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                 <a _href="/videolist?subject=KB课程&grade=K6">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>K6</cite>
-                                    
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </li>
-                     <li>
-                        <a href="javascript:;">
-                            <i class="iconfont">&#xe6c7;</i>
-                            <cite id="kcpd">Phonics自然拼读</cite>
-                             <input type="hidden" name="" id="kcpds" value="Phonics自然拼读">
-                            <i class="iconfont nav_right">&#xe6a7;</i>
-                        </a>
-                        <ul class="sub-menu">
-                            <li>
-                                 <a _href="/videolist?subject=Phonics自然拼读&grade=P1">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P1</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="/videolist?subject=Phonics自然拼读&grade=P2">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P2</cite>
-                                    
-                                </a>
-                            </li>
-                            <li>
-                                <a _href="/videolist?subject=Phonics自然拼读&grade=P3">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P3</cite>
-                                    
-                                </a>
-                            </li >
-                            <li>
-                                <a _href="/videolist?subject=Phonics自然拼读&grade=P4">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>P4</cite>
-                                    
-                                </a>
-                            </li>
-                            
-                        </ul>
-                    </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="iconfont">&#xe74a;</i>
+                                        <cite id="kcyy">KB课程</cite>
+                                        <input type="hidden" name="" id="kcyys" value="KB课程">
+                                        <i class="iconfont nav_right">&#xe6a7;</i>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a _href="/videolist?subject=KB课程&grade=K1">
+                                                <i class="iconfont">&#xe6a7;</i>
+                                                <cite>K1</cite>
+
+                                            </a>
+                                        </li >
+                                        <li>
+                                            <a _href="/videolist?subject=KB课程&grade=K2">
+                                                <i class="iconfont">&#xe6a7;</i>
+                                                <cite>K2</cite>
+
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a _href="/videolist?subject=KB课程&grade=K3">
+                                                <i class="iconfont">&#xe6a7;</i>
+                                                <cite>K3</cite>
+
+                                            </a>
+                                        </li >
+                                        <li>
+                                            <a _href="/videolist?subject=KB课程&grade=K4">
+                                                <i class="iconfont">&#xe6a7;</i>
+                                                <cite>K4</cite>
+
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a _href="/videolist?subject=KB课程&grade=K5">
+                                                <i class="iconfont">&#xe6a7;</i>
+                                                <cite>K5</cite>
+
+                                            </a>
+                                        </li >
+                                        <li>
+                                            <a _href="/videolist?subject=KB课程&grade=K6">
+                                                <i class="iconfont">&#xe6a7;</i>
+                                                <cite>K6</cite>
+
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="javascript:;">
+                                        <i class="iconfont">&#xe6c7;</i>
+                                        <cite id="kcpd">Phonics自然拼读</cite>
+                                        <input type="hidden" name="" id="kcpds" value="Phonics自然拼读">
+                                        <i class="iconfont nav_right">&#xe6a7;</i>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            <a _href="/videolist?subject=Phonics自然拼读&grade=P1">
+                                                <i class="iconfont">&#xe6a7;</i>
+                                                <cite>P1</cite>
+
+                                            </a>
+                                        </li >
+                                        <li>
+                                            <a _href="/videolist?subject=Phonics自然拼读&grade=P2">
+                                                <i class="iconfont">&#xe6a7;</i>
+                                                <cite>P2</cite>
+
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a _href="/videolist?subject=Phonics自然拼读&grade=P3">
+                                                <i class="iconfont">&#xe6a7;</i>
+                                                <cite>P3</cite>
+
+                                            </a>
+                                        </li >
+                                        <li>
+                                            <a _href="/videolist?subject=Phonics自然拼读&grade=P4">
+                                                <i class="iconfont">&#xe6a7;</i>
+                                                <cite>P4</cite>
+
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
               <li>
                 <a href="javascript:;">
                     <i class="iconfont">&#xe726;</i>
@@ -3695,7 +3744,6 @@
             })
     </script>
 <script>
-
     $(function(){
         $("#tuichu").click(function(){
              var tc =$(".tc").val();
@@ -3716,6 +3764,45 @@
             text = '您确定退出么？';
             Popup.confirm(title,text,confirmData);
         })
-       
+        //console.log('每隔t秒钟刷新一次');
+    })
+</script>
+<script>
+    $(function(){
+    function setTimer(t){
+        var timer = window.setInterval(function() {
+            $.ajax({
+                type: 'post',
+                url: "/dysession",
+                success: function (msg) {
+                    if (msg.code != 2) {
+                        alert('此账号已在别处登陆，请重新登陆');
+                        clearInterval(timer);
+                        location.href= '/';
+                    }
+                }
+            });
+        },t * 1000);
+        return timer;
+    }
+    setTimer(60)
+    })
+</script>
+<script>
+    $(function(){
+    let currtentTime = new Date().getTime(),
+        lastTime = new Date().getTime(),
+        diff = 3600000;
+    $(document).on('mouseover',function(){
+        lastTime = new Date().getTime();
+    });
+    let timer = setInterval(function(){
+        currentTime = new Date().getTime();
+        if(currentTime - lastTime > diff){
+            alert('长时间未操作，请重新登陆');
+            $(location).attr('href','http://www.hswdjy.com/login');  //跳转到指定目录
+            clearInterval(timer);
+        }
+    },1000);
     })
 </script>

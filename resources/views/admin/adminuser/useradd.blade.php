@@ -104,9 +104,18 @@
         @elseif($roles==28)
         <option value="HS英语">英语</option>
         @else
+            @if($yw==1)
         <option value="趣味大语文">语文</option>
+            @else
+                @endif
+        @if($sx==1)
         <option value="思维培优数学">数学</option>
+                @else
+            @endif
+            @if($yy==1)
         <option value="HS英语">英语</option>
+                @else
+                @endif
         @endif
         </select></br></br>
 </div>
@@ -182,23 +191,40 @@
         </div></br></br></br></br>
     </div>
 <div id="yczgsubject">
+    @if($yw==1)
     <div class="layui-card layui-form" lay-filter="component-form-element" >
             <div class="layui-col-md12">
               <label class="layui-form-label" style="margin-top:-10px;">语文:</label>
               <input type="checkbox"  id="yw" lay-skin="switch"  lay-text="开启|关闭" checked>
           </div>
     </div>
+    @else
+        @endif
+    @if($sx==1)
     <div class="layui-card layui-form" lay-filter="component-form-element" >
             <div class="layui-col-md12">
               <label class="layui-form-label" style="margin-top:-10px;">数学:</label>
               <input type="checkbox"  id="sx" lay-skin="switch"  lay-text="开启|关闭" >
           </div>
     </div>
+        @else
+        @endif
+        @if($yy==1)
     <div class="layui-card layui-form" lay-filter="component-form-element" >
             <div class="layui-col-md12">
               <label class="layui-form-label" style="margin-top:-10px;">英语:</label>
               <input type="checkbox"  id="yy" lay-skin="switch"  lay-text="开启|关闭" >
           </div>
+    </div>
+        @else
+    @endif
+</div>
+<div id="ycsyong">
+    <div class="layui-card layui-form" lay-filter="component-form-element" >
+        <div class="layui-col-md12">
+            <label class="layui-form-label" style="margin-top:-10px;">试用账号:</label>
+            <input type="checkbox"  id="sy" lay-skin="switch"  lay-text="开启|关闭" >
+        </div>
     </div>
 </div>
 <div id="ycgrade">
@@ -254,6 +280,7 @@
           $('#yczgsubject').hide();
           $('#sytzr').hide();
           $('#ycgrade').hide();
+        $('#ycsyong').hide();
           $("#role").change(function(){
              var role = $("#role").val();   
              var roles = $("#roles").val();
@@ -265,23 +292,26 @@
                              $('#yczgsubject').hide();
                              $('#sytzr').hide();
                              $('#ycgrade').hide();
+                        $('#ycsyong').hide();
                     }else if(role==3){
                              $('#ycschool').hide();
                              $('#ycseason').hide();
                              $('#ycsubject').hide();
-                             $('#yczgsubject').hide();
+                             $('#yczgsubject').show();
                              $('#sytzr').hide();
                              $('#ycgrade').hide();
+                        $('#ycsyong').show();
                         $('#ycschool').show();
                         $('#ycseason').show();
                     }else if(role==4){
                              $('#ycschool').hide();
                              $('#ycseason').hide();
                              $('#ycsubject').hide();
-                             $('#yczgsubject').hide();
+                             $('#yczgsubject').show();
                              $('#sytzr').hide();
                              $('#ycgrade').hide();
                         $('#sytzr').show();
+                        $('#ycsyong').hide();
                     }else if(role==5){
                              $('#ycschool').hide();
                              $('#ycseason').hide();
@@ -291,6 +321,7 @@
                              $('#ycgrade').hide();
                         $('#sytzr').show();
                         $('#yczgsubject').show();
+                        $('#ycsyong').hide();
                     }else if(role==6){
                              $('#ycschool').hide();
                              $('#ycseason').hide();
@@ -301,6 +332,7 @@
                         $('#sytzr').show();
                         $('#ycsubject').show();
                         $('#ycgrade').show();
+                        $('#ycsyong').hide();
                     }
                     
 
@@ -314,6 +346,7 @@
                              $('#ycgrade').hide();
                         $('#sytzr').show();
                         $('#yczgsubject').show();
+                        $('#ycsyong').hide();
                     }else if(role==6){
                              $('#ycschool').hide();
                              $('#ycseason').hide();
@@ -324,15 +357,17 @@
                         $('#sytzr').show();
                         $('#ycsubject').show();
                         $('#ycgrade').show();
+                        $('#ycsyong').hide();
                     }
                 }else if(roles==3){
                     if(role==4){
                              $('#ycschool').hide();
                              $('#ycseason').hide();
                              $('#ycsubject').hide();
-                             $('#yczgsubject').hide();
+                             $('#yczgsubject').show();
                              $('#sytzr').hide();
                              $('#ycgrade').hide();
+                        $('#ycsyong').hide();
                     }else if(role==5){
                              $('#ycschool').hide();
                              $('#ycseason').hide();
@@ -341,6 +376,7 @@
                              $('#sytzr').hide();
                              $('#ycgrade').hide();
                         $('#yczgsubject').show();
+                        $('#ycsyong').hide();
                     }else if(role==6){
                              $('#ycschool').hide();
                              $('#ycseason').hide();
@@ -350,6 +386,7 @@
                              $('#ycgrade').hide();
                         $('#ycsubject').show();
                         $('#ycgrade').show();
+                        $('#ycsyong').hide();
                     }
                 }else if(roles==4){
                     if(role==5){
@@ -360,6 +397,7 @@
                              $('#sytzr').hide();
                              $('#ycgrade').hide();
                         $('#yczgsubject').show();
+                        $('#ycsyong').hide();
                     }else if(role==6){
                              $('#ycschool').hide();
                              $('#ycseason').hide();
@@ -369,6 +407,7 @@
                              $('#ycgrade').hide();
                         $('#ycsubject').show();
                         $('#ycgrade').show();
+                        $('#ycsyong').hide();
                     }
                 }else if(roles==5){
                     if(role==6){
@@ -380,6 +419,7 @@
                              $('#ycgrade').hide();
                         $('#ycsubject').show();
                         $('#ycgrade').show();
+                        $('#ycsyong').hide();
                     }
                 }
             
@@ -417,7 +457,9 @@
                     }else{
                         var cold = 2;
                     }
-
+                    var yw = '';
+                    var sx = '';
+                    var yy = '';
                     if($('#yw').is(':checked')) {
                         var yw = 1;
                     }else{
@@ -433,7 +475,21 @@
                     }else{
                         var yy = 2;
                     }
+             if($('#sy').is(':checked')) {
+                 var sy = 2;
+             }else{
+                 var sy = 1;
+             }
 
+                     if(yw==''){
+                         var yw = 2;
+                     }
+                     if(sx==''){
+                         var sx = 2;
+                     }
+                     if(yy==''){
+                         var yy = 2;
+                     }
                 if($('#sangrade').is(':checked')) {
                         var sangrade = 1;
                     }else{
@@ -493,7 +549,7 @@
             $('div.loading').show();
             $.ajax({
                 type: 'post',
-                data:{school:school,tel:tel,username:username,email:email,sex:sex,password:password,role:role,spring:spring,heat:heat,autumn:autumn,cold:cold,xztzr:xztzr,yw:yw,sx:sx,yy:yy,subject:subject,sangrade:sangrade,sigrade:sigrade,wugrade:wugrade,liugrade:liugrade,roles:roles},
+                data:{school:school,tel:tel,username:username,email:email,sex:sex,password:password,role:role,spring:spring,heat:heat,autumn:autumn,cold:cold,xztzr:xztzr,yw:yw,sx:sx,yy:yy,subject:subject,sangrade:sangrade,sigrade:sigrade,wugrade:wugrade,liugrade:liugrade,roles:roles,sy:sy},
                 dateType:'json',
                 url: "/useradds",
                 success:function(msg){

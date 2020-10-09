@@ -552,7 +552,7 @@
 			<spacingTop>0</spacingTop><!--上方预留间距-->
 			<spacingRight>0</spacingRight><!--右方预留间距-->
 			<spacingBottom>0</spacingBottom><!--下方预留间距-->
-			<stretched>1</stretched><!--视频（包括封面图）拉伸方式，0=原始大小，1=自动缩放，2=只有当封面的宽或高大于播放器宽高时才进行缩放，3=参考播放器宽高，4=宽度参考播放器宽、高度自动，5=高度参考播放器高、宽度自动-->
+			<stretched>2</stretched><!--视频（包括封面图）拉伸方式，0=原始大小，1=自动缩放，2=只有当封面的宽或高大于播放器宽高时才进行缩放，3=参考播放器宽高，4=宽度参考播放器宽、高度自动，5=高度参考播放器高、宽度自动-->
 			<align>center</align>
 			<vAlign>middle</vAlign>
 		</reserve>

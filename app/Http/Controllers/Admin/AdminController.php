@@ -18,26 +18,38 @@ use App\Model\XzuserModel;
 use App\Model\ZguserModel;
 use App\Model\JsuserModel;
 use Imagick;
+use DB;
 class AdminController extends Controller
 {
      public function dysession(){
+         date_default_timezone_set('Asia/Shanghai');
         session_start();
-        if(empty($_SESSION["uid"])){
-            header('Location: /flogin.php');exit;
-            }
-        if($_SESSION["username"]=='试用账号'){
-            $res=AdminuserModel::where('u_id',$_SESSION['uid'])->first();
-            $pd_time=$res['sy_time']+3600;
-            $dq_time=time();
-            if($dq_time>=$pd_time){
+         if(empty($_SESSION["uid"])){
+             header('Location: /flogin.php');exit;
+         }else if($_SESSION["syong"]==2){
+             $res=AdminuserModel::where('u_id',$_SESSION['uid'])->first();
+             $pd_time=$res['sy_time']+28800;
+             $dq_time=time();
+             if($dq_time>=$pd_time){
                  if(isset($_SESSION['uid'])){
-                    $res=AdminuserModel::where('u_id',$_SESSION['uid'])->update(['is_del'=>4]);
-                    $res1=AdminuserModel::where('tzr',$_SESSION['uid'])->update(['is_del'=>4]);
+                     $res=AdminuserModel::where('u_id',$_SESSION['uid'])->update(['is_del'=>4]);
+                     $res1=AdminuserModel::where('tzr',$_SESSION['uid'])->update(['is_del'=>4]);
+                     unset($_SESSION['uid']);
+                     echo "<script>alert('试用时间已到，谢谢使用！');location.href= '/';</script>";
+                 }
+             }
+         }
+    if(!empty($_SESSION["uid"])){
+                $res3=AdminuserModel::where('u_id',$_SESSION['uid'])->where('is_del',1)->first();
+                if($res3['logcookie']!= $_SESSION["logcookie"]){
                     unset($_SESSION['uid']);
-                    echo "<script>alert('试用时间已到，谢谢使用！');location.href= '/';</script>";
+                    echo "<script>alert('此账号已在别处登陆，请重新登陆');location.href= '/';</script>";
+                }else{
+                    return ['code' => 2];
                 }
             }
-        }
+
+
     }
     //头部引用
     public function header(){
@@ -72,7 +84,23 @@ class AdminController extends Controller
         $uname=$_SESSION["username"];
         $res=AdminuserModel::where('u_id',$uid)->first()->toArray();
         $role=$res['role'];
-        if($role==5){
+        if($role==3){
+            $res1 = TzruserModel::where('tzr_phone',$res['tel'])->first();
+            $list=[
+                'sid'=>$uid,
+                'sname'=>$uname,
+                'role'=>$role,
+                'data'=>$res1
+            ];
+        }else if($role==4){
+        $res1 = XzuserModel::where('xz_phone',$res['tel'])->first();
+        $list=[
+            'sid'=>$uid,
+            'sname'=>$uname,
+            'role'=>$role,
+            'data'=>$res1
+        ];
+        }else if($role==5){
             $res1 = ZguserModel::where('zg_phone',$res['tel'])->first();
              $list=[
             'sid'=>$uid,
@@ -114,6 +142,9 @@ class AdminController extends Controller
     public function adminwindow(){
        $this->dysession();
         $res5 = AdminuserModel::where('u_id',$_SESSION["uid"])->first();
+        if($res5['syong']==2){
+            //echo "<script>alert('欢迎使用HSKMS备课平台，试用时间为8小时');</script>";
+        }
         $role = $res5['role'];
         $res1 = XzuserModel::where('xz_phone',$res5['tel'])->first();
         if($role==3){
@@ -140,6 +171,7 @@ class AdminController extends Controller
     //登录处理
     public function loginadd(Request $request)
     {
+        date_default_timezone_set('Asia/Shanghai');
         $tel = $request->input('tel');
         $password = $request->input('pwd');
         $loname = $request->input('uname');
@@ -152,12 +184,16 @@ class AdminController extends Controller
             if($data['password'] === $password) {
                 $id = $data['u_id'];
                 $res=AdminuserModel::where('u_id',$id)->first();
-                $uname=$res->username;
+                $uname=$res['username'];
                     session_start();
                     $_SESSION["uid"]=$id;
                     $_SESSION["username"]=$uname;
-                    if($data['username']==='试用账号'){
-                    	if($data['sy_time']===1){
+                    $_SESSION["syong"]=$data['syong'];
+                    $rand = md5(date("Y-m-d H:i:s").rand(0,9999));
+                    $_SESSION["logcookie"]=$rand;
+                    $res4=AdminuserModel::where('tel',$tel)->where('is_del',1)->update(['logcookie'=>$rand]);
+                    if($data['syong']==2){
+                    	if($data['sy_time']==1){
                     		$res3=AdminuserModel::where('tel',$tel)->where('is_del',1)->update(['sy_time'=>time()]);
                     	} 
                     }
@@ -172,7 +208,7 @@ class AdminController extends Controller
         }else if(!empty($data1['tel'])){
             return ['code' => 5, 'msg' => '该账户已被冻结。'];
         }else if(!empty($data2['tel'])){
-             return ['code' => 6, 'msg' => '您的试用时间已到期,请练习管理员。'];
+             return ['code' => 6, 'msg' => '您的试用时间已到,请联系管理员。'];
         }else{
             return ['code' => 0, 'msg' => '电话号码不存在,请重新输入。'];
         }
@@ -237,11 +273,29 @@ class AdminController extends Controller
        $this->dysession();
         $value = $_SESSION["uid"];
         $data=AdminuserModel::where('u_id',$value)->first();
+        if($data['role']==3){
+            $res1 = TzruserModel::where('tzr_phone',$data['tel'])->first();
+            $yw = $res1['tzr_yw'];
+            $sx = $res1['tzr_sx'];
+            $yy = $res1['tzr_yy'];
+        }else if($data['role']>3&&$data['role']<9){
+            $res1 = TzruserModel::where('tzr_id',$data['tzr'])->first();
+            $yw = $res1['tzr_yw'];
+            $sx = $res1['tzr_sx'];
+            $yy = $res1['tzr_yy'];
+        }else{
+            $yw = 1;
+            $sx = 1;
+            $yy = 1;
+        }
         $res = TzruserModel::get();
         $roles=$data['role'];
         $list=[
             'roles' => $roles,
-            'res' => $res
+            'res' => $res,
+            'yw' => $yw,
+            'sx' => $sx,
+            'yy' => $yy
         ];
         return view('admin.adminuser.useradd',$list);
     }
@@ -271,6 +325,7 @@ class AdminController extends Controller
             $yw = $request->input('yw');
             $sx = $request->input('sx');
             $yy = $request->input('yy');
+            $sy = $request->input('sy');
             $subject = $request->input('subject');
             $sangrade = $request->input('sangrade');
             $sigrade = $request->input('sigrade');
@@ -304,6 +359,7 @@ class AdminController extends Controller
                 'sex' => $sex,
                 'role' => $role,
                 'addtime' => date("Y-m-d H:i:s"),
+                    'syong' => $sy
                 ];
              $res = AdminuserModel::insert($data);
               if ($res) {
@@ -318,6 +374,9 @@ class AdminController extends Controller
                 'tzr_role' => $role,
                 'u_id' => $qwe['u_id'],
                 'tzr_phone' => $tel,
+                    'tzr_yw' =>$yw,
+                    'tzr_sx' =>$sx,
+                    'tzr_yy' =>$yy
                 ];
                 $res1 = TzruserModel::insert($data1);
                 if($res1){
@@ -375,7 +434,10 @@ class AdminController extends Controller
                         'xz_han' => $res3['tzr_han'],
                         'xz_role' => $role,
                             'xz_tzr' => $res3['tzr_id'],
-                            'xz_phone' => $tel
+                            'xz_phone' => $tel,
+                                 'xz_yw' =>$yw,
+                                 'xz_sx' =>$sx,
+                                 'xz_yy' =>$yy
                         ];
                         }else{
                              $data1 = [
@@ -386,9 +448,11 @@ class AdminController extends Controller
                         'xz_qiu' => $qiu,
                         'xz_han' => $han,
                         'xz_role' => $role,
-                            'xz_tzr' => $xztzr,
-                            'xz_phone' => $tel
-
+                         'xz_tzr' => $xztzr,
+                         'xz_phone' => $tel,
+                        'xz_yw' =>$yw,
+                        'xz_sx' =>$sx,
+                        'xz_yy' =>$yy
                         ]; 
                         }
                     $res1=XzuserModel::insert($data1);
@@ -2856,4 +2920,292 @@ class AdminController extends Controller
 			            ];
 			return view('admin.pptlistbox',$list);
 		}
+
+		public function pdflist(){
+            return view('admin.pdflist');
+     }
+//  public function delpptkj(){
+//         $sub = "思维培优数学";
+//         $grade = "四年级";
+//         $season = "寒";
+//         $res1 = PptModel::where('ppt_sub',$sub)->where('ppt_grade',$grade)->where('ppt_season',$season)->get()->toArray();
+//         foreach ($res1 as $k => $v){
+//             if(file_exists('/mnt/ppt/'.$v['ppt_content'])){
+//                 unlink('/mnt/ppt/'.$v['ppt_content']);
+//             }else{
+//                 echo "删除失败";
+//             }
+//         }
+//            echo "删除成功4";
+////         $res = PptModel::where('ppt_sub',$sub)->where('ppt_grade',$grade)->where('ppt_season',$season)->update(['ppt_content'=>'']);
+////         if($res){
+////             echo "删除成功5";
+////         }else{
+////             echo "删除失败";
+////         }
+//  }
+
+//生成随机码
+  public function BwshowList(){
+         $arr = array();
+         for($i=1;$i<31;$i++){
+             $arr[$i]['bw_ma'] =  substr(md5(time() . mt_rand(1,100000000)),0,8);
+         }
+         $res = DB::table('million')->insert($arr);
+         if($res){
+             echo '添加成功';
+         }else{
+             echo '添加失败';
+         }
+  }
+
+  //登陆页面
+  public function BwLogin(){
+      return view('admin.millionlog');
+  }
+
+    //随机码登陆处理
+  public function BwLoginCl(Request $request){
+      date_default_timezone_set('Asia/Shanghai');
+         $ma = $request->input('ma');
+          if(empty($ma)){
+              return view('admin.millionlog');
+          }
+         $res = DB::table('million')->where('bw_ma',$ma)->where('bw_del',1)->first();
+        if(empty($res)){
+            return ['code' => 2, 'msg' => '激活码不存在'];
+        }else if($res->bw_del==2){
+            return ['code' => 2, 'msg' => '激活码已过期'];
+        }else{
+            if($res->bw_time==1){
+                $res1 = DB::table('million')->where('bw_ma',$ma)->update(['bw_time'=>time()]);
+            }else{
+                if($res->bw_sub==3){
+                    if($res->bw_time+10800<=time()){
+                        $res1 = DB::table('million')->where('bw_ma',$ma)->update(['bw_del'=>2]);
+                        return ['code' => 2, 'msg' => '激活码已过期'];
+                    }
+                }else{
+                    if($res->bw_time+5184000<=time()){
+                        $res1 = DB::table('million')->where('bw_ma',$ma)->update(['bw_del'=>2]);
+                        return ['code' => 2, 'msg' => '激活码已过期'];
+                    }
+                }
+            }
+            session_start();
+            $_SESSION["ma"]=$ma;
+            $_SESSION["sub"]=$res->bw_sub;
+            $rand = md5(date("Y-m-d H:i:s").rand(0,9999));
+            $_SESSION["bw_cookie"]=$rand;
+            $res4=DB::table('million')->where('bw_id',$res->bw_id)->update(['bw_cookie'=>$rand]);
+            $dqtime = date('Y年m月d日 H时i分s秒',time());
+            if(empty($res->bw_content)){
+                $res5 = DB::table('million')->where('bw_id',$res->bw_id)->update(['bw_content'=>$dqtime]);
+            }else{
+                $content = $res->bw_content.'|'.$dqtime;
+                $res5 = DB::table('million')->where('bw_id',$res->bw_id)->update(['bw_content'=>$content]);
+            }
+            return ['code' => 1, 'msg' => '登陆成功'];
+        }
+  }
+    //展示页面
+  public function Million(Request $request){
+      session_start();
+      if(empty($_SESSION["ma"])){
+          header('Location: /bwlogin');exit;
+      }
+      $list = [
+          'sub' => $_SESSION["sub"],
+      ];
+
+      return view('admin.million', $list);
+  }
+
+    //验证登陆
+  public function YzMillLog(){
+      session_start();
+      if(empty($_SESSION["ma"])){
+          header('Location: /bwlogin');exit;
+      }else{
+          $res3=DB::table('million')->where('bw_ma',$_SESSION['ma'])->where('bw_del',1)->first();
+          if($res3->bw_cookie!= $_SESSION["bw_cookie"]){
+              echo "<script>alert('此号码已在别处登陆，请从新登陆');location.href= '/bwlogin';</script>";
+          }else{
+              return ['code' => 2];
+          }
+
+      }
+  }
+
+  //验证过期
+public function YzPass(){
+    date_default_timezone_set('Asia/Shanghai');
+    session_start();
+    if(empty($_SESSION["ma"])){
+        header('Location: /bwlogin');exit;
+    }else{
+        $res3=DB::table('million')->where('bw_ma',$_SESSION['ma'])->where('bw_del',1)->first();
+        $time = time();
+        if($res3->bw_time+10800<$time){
+            echo "<script>alert('此号码已过期');location.href= '/bwlogin';</script>";
+        }else{
+            return ['code' => 2,];
+        }
+
+    }
 }
+
+//激活码列表
+    public function MillionList(Request $request){
+        $idnum = $request->input('idnum');
+        $school = DB::table('million')->select('bw_school')->distinct()->get();
+
+            foreach($school as $k=>$v){
+            if($v->bw_school==1){
+                $v->school_name = "总部";
+            }
+        }
+        if(!empty($idnum)){
+            $res1 =  DB::table('million')->where('bw_id',$idnum)->get();
+        }else{
+            $res1 = DB::table('million')->get();
+        }
+
+         foreach($res1 as $k=>$v){
+             $v->content = explode("|",$v->bw_content);
+             if($v->bw_sub==1){
+                 $v->subject = "语文";
+             }else if($v->bw_sub==2){
+                 $v->subject = "数学";
+             }else if($v->bw_sub==3){
+                 $v->subject = "运营支持";
+             }
+             if(empty($v->bw_content)){
+                 $v->login_count = 0;
+             }else{
+                 $v->login_count = count($v->content);
+             }
+
+         }
+         $list = [
+             'res1' => $res1,
+             'school' => $school,
+             'bs' => 1,
+             'schold' => '',
+             'subold' => ''
+         ];
+        return view('admin.millionlist', $list);
+    }
+
+    //查看激活时间
+    public function MillionListXq(Request $request){
+        $bw_id = $request->input('bw_id');
+        $res = DB::table('million')->where('bw_id',$bw_id)->first();
+        $timedata = explode("|",$res->bw_content);
+        $curyear = date('Y');
+        $timefl = [];
+        foreach ($timedata as $v) {
+            if ($curyear == substr($v,0,strpos($v, '年'))) {
+                $date =substr($v,0,strpos($v, ' '));
+            } else {
+                $date = substr($v,0,strpos($v, ' '));
+            }
+            $timefl[$date][] = $v;
+        }
+        //print_r($timefl);die;
+        $list = [
+            'data' => $timefl,
+        ];
+        return view('admin.millionlistxq', $list);
+    }
+
+    //筛选校区
+    public function ScreenSch(Request $request){
+        $sch = $request->input('sch');
+        $sub = $request->input('sub');
+        if(!empty($sch)){
+            $subject = DB::table('million')->select('bw_sub')->distinct()->get();
+            foreach($subject as $k=>$v){
+                if($v->bw_sub==1){
+                    $v->subject = "语文";
+                }else if($v->bw_sub==2){
+                    $v->subject = "数学";
+                }else if($v->bw_sub==3){
+                    $v->subject = "运营支持";
+                }
+                if($sub==$v->bw_sub){
+                    unset($subject[$k]);
+                }
+            }
+        }
+
+       if(!empty($sch)&&empty($sub)){
+            $res =  DB::table('million')->where('bw_school',$sch)->get();
+        }else if(!empty($sch)&&!empty($sub)){
+            $res =  DB::table('million')->where('bw_school',$sch)->where('bw_sub',$sub)->get();
+        }else if(empty($sch)&&!empty($sub)){
+            $res =  DB::table('million')->where('bw_sub',$sub)->get();
+
+        }else if(empty($sch)&&empty($sub)){
+            header('Location: /millionlist');exit;
+        }
+        foreach($res as $k=>$v){
+            $v->content = explode("|",$v->bw_content);
+            if($v->bw_sub==1){
+                $v->subject = "语文";
+            }else if($v->bw_sub==2){
+                $v->subject = "数学";
+            }else if($v->bw_sub==3){
+                $v->subject = "运营支持";
+            }
+            if(empty($v->bw_content)){
+                $v->login_count = 0;
+            }else{
+                $v->login_count = count($v->content);
+            }
+        }
+        $school = DB::table('million')->select('bw_school')->distinct()->get();
+        foreach($school as $k=>$v){
+            if($v->bw_school==1){
+                $v->school_name = "总部";
+            }
+            if($sch==$v->bw_school){
+                unset($school[$k]);
+            }
+        }
+        if($sch==1){
+            $scholdname = "总部";
+        }else{
+            $scholdname = '';
+        }
+
+        if($sub==1){
+            $suboldname = "语文";
+        }else if($sub==2){
+            $suboldname = "数学";
+        }else if($sub==3){
+            $suboldname = "运营支持";
+        }else{
+            $suboldname = '';
+        }
+        $list = [
+            'res1' => $res,
+            'school' => $school,
+            'sub' => $subject,
+            'bs' => 2,
+            'schold' => $sch,
+            'subold' => $sub,
+            'scholdname' => $scholdname,
+            'suboldname' => $suboldname
+
+        ];
+        return view('admin.millionlist', $list);
+
+    }
+
+}
+
+
+
+
+
